@@ -1,2 +1,2 @@
-# webos-suklaasukkula
-webos
+# KuuppaOS
+not finished yet

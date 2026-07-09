@@ -28,3 +28,9 @@
     border-radius: 16px;
     flex-direction: column;
 }
+
+.welcomeheader {
+    user-select: none;
+    cursor: grab;
+    width: 256px;
+}

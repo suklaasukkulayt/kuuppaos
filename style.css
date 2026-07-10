@@ -30,9 +30,8 @@
 }
 
 .welcomeheader {
-  flex: 1;
   text-align: center;
-  height: 24px;
+  font-size: 12px;
   cursor: grab;
   user-select: none;
 }

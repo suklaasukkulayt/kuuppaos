@@ -1,6 +1,4 @@
 .closebutton {
-    position: absolute;
-    margin-right: 8px;
     cursor: pointer;
     color: rgb(0, 0, 0);
     border: 1px solid black;
@@ -32,7 +30,6 @@
 }
 
 .welcomeheader {
-  position: absolute;
   text-align: center;
   font-size: 16px;
   height: 16px;

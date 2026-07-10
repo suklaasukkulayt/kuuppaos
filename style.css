@@ -30,6 +30,7 @@
 }
 
 .welcomeheader {
+  position: absolute;
   text-align: center;
   font-size: 16px;
   height: 16px;

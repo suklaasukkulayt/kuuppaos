@@ -95,7 +95,7 @@ function deselectIcon(element) {
 function handleIconTap(element) {
   if (element.classList.contains("selected")) {
     deselectIcon(element)
-    openWindow(welcomeScreen)
+    openWindow(textpadScreen)
   } else {
     selectIcon(element)
   }
@@ -103,9 +103,16 @@ function handleIconTap(element) {
 
 dragElement(document.querySelector("#textpad"))
 
-
 var textpadScreen = document.querySelector("#textpad")
+var textpadIcon = document.querySelector("#textpadicon")
 
 var textpadScreenClose = document.querySelector("#textpadclose")
 
 textpadScreenClose.addEventListener("click", () => closeWindow(textpadScreen));
+
+if (textpadIcon) {
+  textpadIcon.addEventListener("click", () => {
+    selectIcon(textpadIcon);
+    openWindow(textpadScreen);
+  });
+}

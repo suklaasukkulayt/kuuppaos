@@ -62,10 +62,19 @@ function dragElement(element) {
 
 var welcomeScreen = document.querySelector("#welcome")
 function closeWindow(element) {
-  element.style.display = "none"
+  if (element) {
+    element.style.display = "none"
+  }
 }
 function openWindow(element) {
-  element.style.display = "flex"
+  if (element) {
+    element.style.display = "flex"
+  }
+}
+function openAllWindows() {
+  document.querySelectorAll(".welcome").forEach(function(windowElement) {
+    openWindow(windowElement);
+  });
 }
 var welcomeScreenClose = document.querySelector("#welcomeclose")
 
@@ -76,28 +85,37 @@ welcomeScreenClose.addEventListener("click", function() {
 });
 
 welcomeScreenOpen.addEventListener("click", function() {
-  openWindow(welcomeScreen);
+  openAllWindows();
 });
 
 
 var selectedIcon = undefined
 
 function selectIcon(element) {
-  element.classList.add("selected");
-  selectedIcon = element
+  if (element) {
+    element.classList.add("selected");
+    selectedIcon = element
+  }
 } 
 
 function deselectIcon(element) {
-  element.classList.remove("selected");
+  if (element) {
+    element.classList.remove("selected");
+  }
   selectedIcon = undefined
 } 
 
-function handleIconTap(element) {
+function handleIconTap(element, windowElement) {
+  if (!element || !windowElement) {
+    return;
+  }
+
   if (element.classList.contains("selected")) {
-    deselectIcon(element)
-    openWindow(textpadScreen)
+    deselectIcon(element);
+    closeWindow(windowElement);
   } else {
-    selectIcon(element)
+    selectIcon(element);
+    openWindow(windowElement);
   }
 }
 
@@ -112,7 +130,6 @@ textpadScreenClose.addEventListener("click", () => closeWindow(textpadScreen));
 
 if (textpadIcon) {
   textpadIcon.addEventListener("click", () => {
-    selectIcon(textpadIcon);
-    openWindow(textpadScreen);
+    handleIconTap(textpadIcon, textpadScreen);
   });
 }

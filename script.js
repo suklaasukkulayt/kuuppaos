@@ -133,3 +133,22 @@ if (textpadIcon) {
     handleIconTap(textpadIcon, textpadScreen);
   });
 }
+
+var biggestIndex = 1;
+
+function addWindowTapHandling(textpadScreen) {
+  textpadScreen.addEventListener("mousedown", () =>
+    handleWindowTap(textpadScreen)
+  )
+}
+
+function addWindowTapHandling(welcomeScreen) {
+  welcomeScreen.addEventListener("mousedown", () =>
+    handleWindowTap(welcomeScreen)
+  )
+}
+
+function handleWindowTap(element) {
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+}

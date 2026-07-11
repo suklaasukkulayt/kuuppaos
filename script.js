@@ -135,30 +135,29 @@ if (textpadIcon) {
 }
 
 var biggestIndex = 1;
-
-function addWindowTapHandling(textpadScreen) {
-  textpadScreen.addEventListener("mousedown", () =>
-    handleWindowTap(textpadScreen)
-  )
-}
-
-function addWindowTapHandling(welcomeScreen) {
-  welcomeScreen.addEventListener("mousedown", () =>
-    handleWindowTap(welcomeScreen)
-  )
-}
-
-function handleWindowTap(textpadScreen) {
-  biggestIndex++;  // Increment biggestIndex by 1
-  textpadScreen.style.zIndex = biggestIndex;
-  topBar.style.zIndex = biggestIndex + 1;
-}
-
-function openWindow(textpadScreen) {
-  textpadScreen.style.display = "flex";
-  biggestIndex++;  // Increment biggestIndex by 1
-  textpadScreen.style.zIndex = biggestIndex;
-  topBar.style.zIndex = biggestIndex + 1;
-}
-
 var topBar = document.querySelector("#top")
+
+function handleWindowTap(element) {
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+  topBar.style.zIndex = biggestIndex + 1;
+}
+
+function addWindowTapHandling(element) {
+  if (element) {
+    element.addEventListener("mousedown", () => handleWindowTap(element));
+  }
+}
+
+function openWindow(element) {
+  if (element) {
+    element.style.display = "flex";
+    biggestIndex++;  // Increment biggestIndex by 1
+    element.style.zIndex = biggestIndex;
+    topBar.style.zIndex = biggestIndex + 1;
+  }
+}
+
+// Add click handling to bring windows to front
+addWindowTapHandling(welcomeScreen);
+addWindowTapHandling(textpadScreen);

@@ -48,9 +48,17 @@ function dragElement(element) {
     currentY = initialY - e.clientY;
     initialX = e.clientX;
     initialY = e.clientY;
+
+    var nextTop = element.offsetTop - currentY;
+    var nextLeft = element.offsetLeft - currentX;
+    var minTop = element.offsetHeight / 2;
+    var minLeft = element.offsetWidth / 2;
+    var maxTop = window.innerHeight - element.offsetHeight / 2;
+    var maxLeft = window.innerWidth - element.offsetWidth / 2;
+
     // Step 11: Update the element's new position by modifying its `top` and `left` CSS properties.
-    element.style.top = (element.offsetTop - currentY) + "px";
-    element.style.left = (element.offsetLeft - currentX) + "px";
+    element.style.top = Math.max(minTop, Math.min(nextTop, maxTop)) + "px";
+    element.style.left = Math.max(minLeft, Math.min(nextLeft, maxLeft)) + "px";
   }
 
   // Step 12: Define the `stopDragging` function to stop tracking mouse movement by removing the event listeners.
@@ -129,6 +137,22 @@ if (textpadIcon) {
   });
 }
 
+
+dragElement(document.querySelector("#weather"))
+
+var weatherScreen = document.querySelector("#weather")
+var weatherIcon = document.querySelector("#weathericon")
+
+var weatherScreenClose = document.querySelector("#weatherclose")
+
+weatherScreenClose.addEventListener("click", () => closeWindow(weatherScreen));
+
+if (weatherIcon) {
+  weatherIcon.addEventListener("click", () => {
+    handleIconTap(weatherIcon, weatherScreen);
+  });
+}
+
 var biggestIndex = 1;
 var topBar = document.querySelector("#top")
 
@@ -156,7 +180,7 @@ function openWindow(element) {
 // Add click handling to bring windows to front
 addWindowTapHandling(welcomeScreen);
 addWindowTapHandling(textpadScreen);
-
+addWindowTapHandling(weatherScreen);
 
 
 var content = [
@@ -225,3 +249,61 @@ for (let i = 0; i < content.length; i++) {
   addToBottomBar(i);
 }
 
+
+function weatherCodeToText(code) {
+  const weatherCodes = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Fog",
+    48: "Rime fog",
+    51: "Light drizzle",
+    61: "Rain",
+    71: "Snow",
+    95: "Thunderstorm"
+  };
+
+  return weatherCodes[code] || "Unknown";
+}
+
+function showWeather(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      const temp = data.current.temperature_2m;
+      const code = data.current.weather_code;
+      const desc = weatherCodeToText(code);
+
+      document.querySelector("#weathercontent").innerHTML = `
+        <p><strong>Temperature:</strong> ${temp}°C</p>
+        <p><strong>Condition:</strong> ${desc}</p>
+      `;
+    })
+    .catch(() => {
+      document.querySelector("#weathercontent").innerHTML =
+        "<p>Weather could not be loaded.</p>";
+    });
+}
+
+function getUserWeather() {
+  if (!navigator.geolocation) {
+    document.querySelector("#weathercontent").innerHTML =
+      "<p>Geolocation is not supported by this browser.</p>";
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      showWeather(position.coords.latitude, position.coords.longitude);
+    },
+    () => {
+      document.querySelector("#weathercontent").innerHTML =
+        "<p>Location access was denied.</p>";
+    }
+  );
+}
+
+getUserWeather();

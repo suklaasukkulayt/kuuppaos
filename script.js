@@ -302,7 +302,7 @@ function weatherCodeToEmoji(code) {
 }
 
 async function getLocationName(lat, lon) {
-  const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+  const url = `https://photon.komoot.io/reverse?lat=${lat}&lon=${lon}`;
 
   try {
     const response = await fetch(url);
@@ -311,36 +311,17 @@ async function getLocationName(lat, lon) {
     }
 
     const data = await response.json();
-    const administrative = data.localityInfo?.administrative || [];
-    const city = data.city || data.locality || administrative.find((item) => item.adminLevel <= 8 && item.name)?.name || "";
-    const country = data.countryName || administrative.find((item) => item.adminLevel === 2)?.name || "";
+    const feature = data.features && data.features[0];
+    const properties = feature && feature.properties ? feature.properties : {};
+    const city = properties.city || properties.locality || properties.name || "";
+    const country = properties.country || "";
+    const label = city && country ? `${city}, ${country}` : city || country || `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
 
-    if (city && country) {
-      return `${city}, ${country}`;
-    }
-
-    if (city) {
-      return city;
-    }
-
-    if (country) {
-      return country;
-    }
+    return label;
   } catch (error) {
     console.warn("Could not resolve location name", error);
+    return `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
   }
-
-  return `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
-}
-
-function getLocationNameFromTimezone(timezone) {
-  if (!timezone || !timezone.includes("/")) {
-    return "";
-  }
-
-  const parts = timezone.split("/");
-  const city = parts[parts.length - 1].replace(/_/g, " ");
-  return `${city}, ${parts[0]}`;
 }
 
 async function showWeather(lat, lon) {
@@ -353,11 +334,7 @@ async function showWeather(lat, lon) {
     const code = data.current.weather_code;
     const desc = weatherCodeToText(code);
     const icon = weatherCodeToEmoji(code);
-    let locationName = await getLocationName(lat, lon);
-
-    if (!locationName || locationName.includes("lat") || locationName.includes("lon")) {
-      locationName = getLocationNameFromTimezone(data.timezone || "");
-    }
+    const locationName = await getLocationName(lat, lon);
 
     const weatherIcon = document.querySelector("#weather-icon");
 

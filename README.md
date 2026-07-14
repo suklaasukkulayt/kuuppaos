@@ -15,6 +15,6 @@ Weather: shows the weather (location doesn't work on my steam deck but it works 
 Welcome: welcome screen  
 
 <img width="1280" height="663" alt="kuuppaos screenshot" src="https://github.com/user-attachments/assets/8a93dd26-edd8-4fb2-ae91-11ab54451637" />
-Showcase video in github (kuupaos-video.mp4)
-
+Showcase video in github (kuupaos-video.mp4)  
+Github copilot is used to help with features like weather
 Sorry for meaningless commits but I didn't have other ways of testing until now  

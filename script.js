@@ -184,6 +184,21 @@ if (spotifyIcon) {
   });
 }
 
+dragElement(document.querySelector("#youtube"))
+
+var youtubeScreen = document.querySelector("#youtube")
+var youtubeIcon = document.querySelector("#youtubeicon")
+
+var youtubeScreenClose = document.querySelector("#youtubeclose")
+
+youtubeScreenClose.addEventListener("click", () => closeWindow(youtubeScreen));
+
+if (youtubeIcon) {
+  youtubeIcon.addEventListener("click", () => {
+    handleIconTap(youtubeIcon, youtubeScreen);
+  });
+}
+
 var biggestIndex = 1;
 var topBar = document.querySelector("#top")
 
@@ -199,12 +214,26 @@ function addWindowTapHandling(element) {
   }
 }
 
+function startYoutubeVideo() {
+  const youtubeIframe = document.querySelector("#youtube iframe");
+  if (!youtubeIframe) {
+    return;
+  }
+
+  const baseUrl = "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?si=tXG8A6jRPrfr1sIk";
+  youtubeIframe.src = `${baseUrl}&autoplay=1`;
+}
+
 function openWindow(element) {
   if (element) {
     element.style.display = "flex";
     biggestIndex++;  // Increment biggestIndex by 1
     element.style.zIndex = biggestIndex;
     topBar.style.zIndex = biggestIndex + 1;
+
+    if (element.id === "youtube") {
+      startYoutubeVideo();
+    }
   }
 }
 
@@ -214,6 +243,7 @@ addWindowTapHandling(textpadScreen);
 addWindowTapHandling(weatherScreen);
 addWindowTapHandling(clockScreen);
 addWindowTapHandling(spotifyScreen);
+addWindowTapHandling(youtubeScreen);
 
 var content = [
   {

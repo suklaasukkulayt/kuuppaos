@@ -17,7 +17,8 @@ Welcome: welcome screen
 <img width="1280" height="663" alt="kuuppaos screenshot" src="https://github.com/user-attachments/assets/8a93dd26-edd8-4fb2-ae91-11ab54451637" />
 Showcase video in github (kuupaos-video.mp4)   
 
-<img width="983" height="594" alt="YouTube and Spotify screenshot" src="https://github.com/user-attachments/assets/4e561039-eeab-4d8e-b2d7-f46cb03265e6" />
+<img width="903" height="608" alt="YouTube and spotify app showcase" src="https://github.com/user-attachments/assets/aabdbee6-34a3-4fe2-90bf-a28dbb4504b8" />
+
 
 
 

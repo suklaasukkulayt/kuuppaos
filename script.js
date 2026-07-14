@@ -169,6 +169,21 @@ if (clockIcon) {
   });
 }
 
+dragElement(document.querySelector("#spotify"))
+
+var spotifyScreen = document.querySelector("#spotify")
+var spotifyIcon = document.querySelector("#spotifyicon")
+
+var spotifyScreenClose = document.querySelector("#spotifyclose")
+
+spotifyScreenClose.addEventListener("click", () => closeWindow(spotifyScreen));
+
+if (spotifyIcon) {
+  spotifyIcon.addEventListener("click", () => {
+    handleIconTap(spotifyIcon, spotifyScreen);
+  });
+}
+
 var biggestIndex = 1;
 var topBar = document.querySelector("#top")
 
@@ -198,7 +213,7 @@ addWindowTapHandling(welcomeScreen);
 addWindowTapHandling(textpadScreen);
 addWindowTapHandling(weatherScreen);
 addWindowTapHandling(clockScreen);
-
+addWindowTapHandling(spotifyScreen);
 
 var content = [
   {

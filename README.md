@@ -24,5 +24,5 @@ Showcase video in github (kuupaos-video.mp4)
 
 
 
-Github copilot is used to help with features like weather   
+Github copilot is used to help with features like weather and fix some problems   
 Sorry for meaningless commits but I didn't have other ways of testing until now  

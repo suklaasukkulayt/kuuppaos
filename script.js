@@ -199,6 +199,22 @@ if (youtubeIcon) {
   });
 }
 
+
+dragElement(document.querySelector("#terminal"))
+
+var terminalScreen = document.querySelector("#terminal")
+var terminalIcon = document.querySelector("#terminalicon")
+
+var terminalScreenClose = document.querySelector("#terminalclose")
+
+terminalScreenClose.addEventListener("click", () => closeWindow(terminalScreen));
+
+if (terminalIcon) {
+  terminalIcon.addEventListener("click", () => {
+    handleIconTap(terminalIcon, terminalScreen);
+  });
+}
+
 var biggestIndex = 1;
 var topBar = document.querySelector("#top")
 
@@ -461,3 +477,135 @@ date.textContent = currentDate.getDate();
 }
 setInterval(setClock, 10);
 setInterval(getUserWeather, 10 * 60 * 1000);
+
+
+
+
+
+
+const codeOutput = document.getElementById('codeOutput');
+const chunkSize = 5;
+let currentSnippet = '';
+let currentSnippetIndex = 0;
+
+function isTerminalTopmost() {
+  return terminalScreen && Number(terminalScreen.style.zIndex || 0) === biggestIndex;
+}
+
+const codeSnippets = {
+  kernel: [
+    'void init_kernel(void) {',
+    '  printk(KERN_INFO "Initializing kernel module...");',
+    '  setup_interrupts();',
+    '  return 0;',
+    '}',
+    'struct task_struct *task = get_current();',
+    'sudo ./neural_overwrite --target=internal --protocol=raw --stealth=99',
+    'echo "injecting_payload" | nc -u 192.168.0.1 -p 443 --brute-force --silent',
+    './bin/ghost_scan --port=8080 --detect-vulnerabilities --exfiltrate-data --no-log',
+    'ssh root@ghost_net --key-exchange=curve25519 --cipher=aes-256-gcm --bypass-firewall',
+    'curl -X POST -H "Content-Type: application/json" -d \'{"command":"overwrite"}\' http://localhost:3000/api/execute',
+    'python3 exploit.py --target=internal --payload=stealth --protocol=raw --silent',
+    'nc -lvp 4444 -e /bin/bash',
+    'echo "payload_injected" | nc -u 192.168.0.1 -p 443',
+    'xxd -r -p /dev/zero.bin | sed s/00/FF/g | ./mem_corrupt --address=0x4F2A --force',
+    'cat /etc/shadow | ./hash_cracker --algorithm=sha512 --mode=rainbow --threads=16',
+    'dd if=/dev/urandom of=/tmp/rootkit.iso bs=1024 count=666 --no-sync --quiet',
+    'iptables -A INPUT -p tcp --dport 22 -j DROP',
+    'echo "kernel_panic" | nc -u 192.168.0.1 -p 443',
+    'hexdump -C memory_dump.bin | grep "0xDEADBEEF" | ./patch_binary --offset=0x1000',
+    './sql_injector --target=mainframe --payload=DROP_TABLE --unsafe-mode --auto-worm',
+    'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock --privileged evil_container',
+    'grep -r "password" /var/www/html --include="*.php" --recursive --ignore-case | ./dump_db'
+  ]
+};
+let currentStyle = 'kernel';
+
+// Generate random code snippet in small chunks
+function addCodeSnippet() {
+  if (!isTerminalTopmost()) {
+    return;
+  }
+
+  const snippets = codeSnippets[currentStyle];
+
+  if (!currentSnippet || currentSnippetIndex >= currentSnippet.length) {
+    const randomSnippet = snippets[Math.floor(Math.random() * snippets.length)];
+    currentSnippet = randomSnippet + '\n';
+    currentSnippetIndex = 0;
+  }
+
+  const nextChunk = currentSnippet.slice(currentSnippetIndex, currentSnippetIndex + chunkSize);
+  if (!nextChunk) {
+    return;
+  }
+
+  codeOutput.value += nextChunk;
+  currentSnippetIndex += chunkSize;
+  codeOutput.scrollTop = codeOutput.scrollHeight;
+}
+
+// Handle typing
+document.addEventListener('keydown', (e) => {
+  if (!isTerminalTopmost()) {
+    return;
+  }
+
+  e.preventDefault(); // Prevent default textarea behavior
+  addCodeSnippet();
+});
+
+// Focus textarea for immediate typing
+if (isTerminalTopmost()) {
+  codeOutput.focus();
+}
+
+
+const youtubeSearchButton = document.getElementById('youtubeSearchButton');
+if (youtubeSearchButton) {
+  youtubeSearchButton.addEventListener('click', searchYouTube);
+}
+
+function searchYouTube() {
+  const searchBox = document.getElementById('searchBox');
+  const resultsDiv = document.getElementById('searchResults');
+  const query = searchBox?.value?.trim() || '';
+
+  if (!query) {
+    resultsDiv.innerHTML = "<p style='color:red'>Please enter a search term.</p>";
+    return;
+  }
+
+  resultsDiv.innerHTML = "";
+
+  const videoId = query.includes('youtube.com/watch?v=')
+    ? new URL(query).searchParams.get('v')
+    : query;
+
+  if (!videoId || videoId.length < 5) {
+    resultsDiv.innerHTML = "<p style='color:red'>Please enter a valid YouTube video URL or ID.</p>";
+    return;
+  }
+
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}`;
+
+  const iframe = document.createElement('iframe');
+  iframe.src = embedUrl;
+  iframe.title = `YouTube video ${videoId}`;
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+  iframe.style.width = '100%';
+  iframe.style.height = '360px';
+  iframe.style.border = '0';
+  iframe.style.borderRadius = '8px';
+
+  const note = document.createElement('p');
+  note.textContent = 'Paste a YouTube video URL or ID to play it here.';
+  note.style.marginTop = '8px';
+  note.style.fontSize = '14px';
+  note.style.color = '#555';
+
+  resultsDiv.appendChild(iframe);
+  resultsDiv.appendChild(note);
+}

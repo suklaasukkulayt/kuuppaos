@@ -260,6 +260,7 @@ addWindowTapHandling(weatherScreen);
 addWindowTapHandling(clockScreen);
 addWindowTapHandling(spotifyScreen);
 addWindowTapHandling(youtubeScreen);
+addWindowTapHandling(terminalScreen);
 
 var content = [
   {

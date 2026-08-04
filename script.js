@@ -1,7 +1,17 @@
+      var currentTime = "";
+
       function timeUpdate() {
-      var currentTime = new Date().toLocaleString();
+      currentTime = new Date().toLocaleString();
       var timeText = document.querySelector("#timebarElement");
-      timeText.innerHTML = currentTime
+      if (timeText) {
+        timeText.innerHTML = currentTime;
+      }
+
+      var downloadLink = document.querySelector("#downloadLink");
+      if (downloadLink) {
+        var downloadName = "kuuppaos_painting_" + currentTime.replace(/[^a-zA-Z0-9.-]/g, "_") + ".png";
+        downloadLink.setAttribute("download", downloadName);
+      }
       }
       setInterval(timeUpdate, 1000);
 
@@ -74,11 +84,7 @@ function closeWindow(element) {
     element.style.display = "none"
   }
 }
-function openAllWindows() {
-  document.querySelectorAll(".welcome").forEach(function(windowElement) {
-    openWindow(windowElement);
-  });
-}
+
 var welcomeScreenClose = document.querySelector("#welcomeclose")
 
 var welcomeScreenOpen = document.querySelector("#welcomeopen")
@@ -87,9 +93,6 @@ welcomeScreenClose.addEventListener("click", function() {
   closeWindow(welcomeScreen);
 });
 
-welcomeScreenOpen.addEventListener("click", function() {
-  openAllWindows();
-});
 
 
 var selectedIcon = undefined
@@ -115,7 +118,6 @@ function handleIconTap(element, windowElement) {
 
   if (element.classList.contains("selected")) {
     deselectIcon(element);
-    closeWindow(windowElement);
   } else {
     selectIcon(element);
     openWindow(windowElement);
@@ -200,20 +202,39 @@ if (youtubeIcon) {
 }
 
 
-dragElement(document.querySelector("#terminal"))
+  dragElement(document.querySelector("#terminal"))
 
-var terminalScreen = document.querySelector("#terminal")
-var terminalIcon = document.querySelector("#terminalicon")
+  var terminalScreen = document.querySelector("#terminal")
+  var terminalIcon = document.querySelector("#terminalicon")
 
-var terminalScreenClose = document.querySelector("#terminalclose")
+  var terminalScreenClose = document.querySelector("#terminalclose")
 
-terminalScreenClose.addEventListener("click", () => closeWindow(terminalScreen));
+  terminalScreenClose.addEventListener("click", () => closeWindow(terminalScreen));
 
-if (terminalIcon) {
-  terminalIcon.addEventListener("click", () => {
-    handleIconTap(terminalIcon, terminalScreen);
-  });
-}
+  if (terminalIcon) {
+    terminalIcon.addEventListener("click", () => {
+      handleIconTap(terminalIcon, terminalScreen);
+    });
+  }
+
+
+
+  dragElement(document.querySelector("#paint"))
+
+  var paintScreen = document.querySelector("#paint")
+  var paintIcon = document.querySelector("#painticon")
+
+  var paintScreenClose = document.querySelector("#paintclose")
+
+  paintScreenClose.addEventListener("click", () => closeWindow(paintScreen));
+
+  if (paintIcon) {
+    paintIcon.addEventListener("click", () => {
+      handleIconTap(paintIcon, paintScreen);
+    });
+  }
+
+
 
 var biggestIndex = 1;
 var topBar = document.querySelector("#top")
@@ -230,15 +251,6 @@ function addWindowTapHandling(element) {
   }
 }
 
-function startYoutubeVideo() {
-  const youtubeIframe = document.querySelector("#youtube iframe");
-  if (!youtubeIframe) {
-    return;
-  }
-
-  const baseUrl = "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?si=tXG8A6jRPrfr1sIk";
-  youtubeIframe.src = `${baseUrl}&autoplay=1`;
-}
 
 function openWindow(element) {
   if (element) {
@@ -246,10 +258,6 @@ function openWindow(element) {
     biggestIndex++;  // Increment biggestIndex by 1
     element.style.zIndex = biggestIndex;
     topBar.style.zIndex = biggestIndex + 1;
-
-    if (element.id === "youtube") {
-      startYoutubeVideo();
-    }
   }
 }
 
@@ -261,6 +269,7 @@ addWindowTapHandling(clockScreen);
 addWindowTapHandling(spotifyScreen);
 addWindowTapHandling(youtubeScreen);
 addWindowTapHandling(terminalScreen);
+addWindowTapHandling(paintScreen);
 
 var content = [
   {
@@ -603,3 +612,135 @@ function searchYouTube() {
 
   resultsDiv.appendChild(iframe);
 }
+
+
+
+
+//Obtain the canvas and its 2d rendering context
+const canvas =
+	document.getElementById('canvas');
+const ctx =
+	canvas.getContext('2d');
+
+//Get the refernce to HTML elements
+const brushSize =
+	document.getElementById('brush-size');
+const colorPicker =
+	document.getElementById('color-picker');
+const clearCanvas =
+	document.getElementById('clear-canvas');
+let isDrawing = false;
+
+//Initializing the canvas
+canvas.width =
+	window.innerWidth - 40;
+canvas.height =
+	window.innerHeight * 0.85;
+ctx.lineWidth = 5;
+ctx.lineCap = 'round';
+ctx.strokeStyle = 'black';
+
+//start drawing
+function startPosition(e) {
+	isDrawing = true;
+	draw(e);
+}
+
+//end drawing
+function endPosition() {
+	isDrawing = false;
+	ctx.beginPath();
+}
+
+function getCanvasPoint(e) {
+	const rect = canvas.getBoundingClientRect();
+	const x = ((e.clientX - rect.left) / rect.width) * canvas.width;
+	const y = ((e.clientY - rect.top) / rect.height) * canvas.height;
+	return { x, y };
+}
+
+//Function to draw on the Canvas
+function draw(e) {
+	if (!isDrawing) return;
+	const { x, y } = getCanvasPoint(e);
+	ctx.strokeStyle =
+		colorPicker.value; 
+		//pick the color
+	ctx.lineWidth =
+		brushSize.value; 
+		//Select the brush size
+	ctx.lineTo(x, y);
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+}
+
+//event listener for differnt mouse actions
+canvas
+	.addEventListener('mousedown', startPosition);
+canvas
+	.addEventListener('mouseup', endPosition);
+canvas
+	.addEventListener('mousemove', draw);
+clearCanvas
+	.addEventListener('click', () => {
+		ctx.clearRect(
+			0, 0, canvas.width,
+			canvas.height
+		);
+	});
+
+brushSize.addEventListener('input', () => {
+	ctx.lineWidth =
+		brushSize.value;
+	updateBrushSizeLabel(brushSize.value);
+});
+
+function updateBrushSizeLabel(size) {
+	const brushSizeLabel =
+		document.getElementById('brush-size-label');
+	if (brushSizeLabel) {
+		brushSizeLabel.textContent =
+			`Brush Size: ${size}`;
+	}
+}
+
+//Get references to the pen and eraser button
+const penButton =
+	document.getElementById('pen');
+const eraserButton =
+	document.getElementById('eraser');
+
+//switing to pen mode
+function activatePen() {
+	ctx.globalCompositeOperation =
+		'source-over';
+	ctx.strokeStyle =
+		colorPicker.value;
+}
+
+//switching to eraser mode
+function activateEraser() {
+	ctx.globalCompositeOperation =
+		'destination-out';
+	ctx.strokeStyle =
+		'rgba(0, 0, 0, 0)';
+}
+
+penButton
+	.addEventListener('click', () => {
+	activatePen();
+});
+
+eraserButton
+	.addEventListener('click', () => {
+	activateEraser();
+});
+
+
+
+
+var link = document.getElementById('downloadLink');
+  link.addEventListener('click', function() {
+this.href = canvas.toDataURL('image/png');
+}, false);

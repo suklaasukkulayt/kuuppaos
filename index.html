@@ -23,45 +23,52 @@
     <a href="https://stardance.hackclub.com/projects/31853">KuuppaOS project</a>
     </div>
 
-    <div id="top" style="font-family: 'Times New Roman', Times, serif; position: fixed; bottom: 0; display: flex; justify-content: space-between; width: 99%; background-color: rgba(0, 0, 0, 0.25); backdrop-filter: blur(15px); border-radius: 16px;">
+    <div id="top" style="font-family: Courier New, monospace; position: fixed; bottom: 0; display: flex; justify-content: space-between; width: 99%; background-color: rgba(0, 0, 0, 0.25); backdrop-filter: blur(15px); border-radius: 16px;">
         <p style="color:antiquewhite; margin-left: 8px;">
             KuuppaOS
         </p>
-        <p style="color: antiquewhite; margin-right: 24px; cursor: pointer" id="welcomeopen">Open windows</p>
+
 
         <p id="timebarElement" style="color: antiquewhite; margin-right: 8px;">
             Clock not intialized yet...
         </p>
     </div>
 
-      <div id="desktopApps" style="padding-top: 64px; padding-left: 16px;">
-        <div id="textpadicon" style="text-align: center; width: fit-content; cursor: pointer;">
-          <img src="./textpad.png" alt="TeXtpad" style="width: 64px; height: 64px; border-radius: 8px;">
-          <p style="color: white;">TeXtpad</p>
-        </div>  
+      <div id="desktopApps" style="padding-top: 64px; padding-left: 16px;" >
+        <div id="textpadicon" class="desktop-icon">
+          <img src="./textpad.png" alt="TeXtpad">
+          <p class="icon-label">TeXtpad</p>
+        </div>
 
-           <div id="weathericon" style="text-align: center; width: fit-content; cursor: pointer;">
-          <img src="./weather-icon-set-free-vector.png" alt="Weather" style="width: 64px; height: 64px; border-radius: 8px;">
-          <p style="color: white;">Weather</p>
-    </div>
-        <div id="clockicon" style="text-align: center; width: fit-content; cursor: pointer;">
-          <img src="./stock-of-clock-free-vector.png" alt="Clock" style="width: 64px; height: 64px; border-radius: 8px;">
-          <p style="color: white;">Clock</p>
-  </div>
-  <div id="spotifyicon" style="text-align: center; width: 64px; cursor: pointer;">
-          <img src="./kuuppamusic.png" alt="KuuppaMusic" style="width: 64px; height: 64px; border-radius: 8px;">
-          <p style="color: white;">KuuppaMusic</p>
-          </div>
+        <div id="weathericon" class="desktop-icon">
+          <img src="./weather-icon-set-free-vector.png" alt="Weather">
+          <p class="icon-label">Weather</p>
+        </div>
 
-            <div id="youtubeicon" style="text-align: center; width: 64px; cursor: pointer;">
-          <img src="./kuuppavid.png" alt="KuuppaVid" style="width: 64px; height: 64px; border-radius: 8px;">
-          <p style="color: white;">KuuppaVid</p>
-          </div>
+        <div id="clockicon" class="desktop-icon">
+          <img src="./stock-of-clock-free-vector.png" alt="Clock">
+          <p class="icon-label">Clock</p>
+        </div>
 
-                      <div id="terminalicon" style="text-align: center; width: 64px; cursor: pointer;">
-          <img src="./terminal.png" alt="Terminal" style="width: 64px; height: 64px; border-radius: 8px;">
-          <p style="color: white;">Terminal</p>
-          </div>
+        <div id="spotifyicon" class="desktop-icon">
+          <img src="./kuuppamusic.png" alt="KuuppaMusic">
+          <p class="icon-label" style="font-size: 13px;">KuuppaMusic</p>
+        </div>
+
+        <div id="youtubeicon" class="desktop-icon">
+          <img src="./kuuppavid.png" alt="KuuppaVid">
+          <p class="icon-label">KuuppaVid</p>
+        </div>
+
+        <div id="terminalicon" class="desktop-icon">
+          <img src="./terminal.png" alt="Terminal">
+          <p class="icon-label">Terminal</p>
+        </div>
+
+        <div id="painticon" class="desktop-icon">
+          <img src="./kuuppapaint.png" alt="Paint">
+          <p class="icon-label">Paint</p>
+        </div>
   
   <div class="welcome" style="top:55%; left: 30%; display: none;" id="textpad">
     <div style="display:inline-block" class="welcomeheader"> 
@@ -161,7 +168,7 @@
           
           <p class="closetext">X</p>
         </div>
-    <h1 style= "margin: 4px; color: rgb(226, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif"> KuuppaMusic</h1>
+    <h1 style= "margin: 4px; color: rgb(255, 0, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif"> KuuppaMusic</h1>
    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator&si=85178b9d6e3c4577" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     <p style="margin: 0;">Hello <strong>user</strong>! This is the KuuppaMusic (spotify) app.</p>
     <p style="margin: 0;">It plays lofi beats from spotify (because i couldn't think of anything else)</p>
@@ -180,12 +187,11 @@
           
           <p class="closetext">X</p>
         </div>
-    <h1 style= "margin: 4px; color: rgb(226, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif"> KuuppaVid</h1>
+    <h1 style= "margin: 4px; color: rgb(243, 245, 246); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif"> KuuppaVid</h1>
  <input type="text" id="searchBox" placeholder="Search YouTube" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
   <button id="youtubeSearchButton" style="width: 100%; padding: 12px; font-size: 16px; margin-top: 8px; background-color: #ff0000; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Search</button>
   <div id="searchResults" style="margin-top: 20px;"></div>
     <p style="margin: 0;">Enter a youtube URL or a video ID to watch it! Maybe try "dQw4w9WgXcQ"?</p>
-
 </div>
 
 
@@ -200,15 +206,48 @@
           
           <p class="closetext">X</p>
         </div>
-    <h1 style= "margin: 4px; color: rgb(226, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Terminal</h1>
+    <h1 style= "margin: 4px; color: rgb(142, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Terminal</h1>
         <div class="terminal-container">
     <textarea class="textnagen" id="codeOutput" readonly></textarea>
-
-
   </div>
-
 </div>
+
+     <div class="welcome" id="paint" style="top:60%; left: 70%; display: none; width: 500px; height: 500px;">
+    <div style="display:inline-block" class="welcomeheader">
+      <p id="paintheader">
+        Paint
+      </p>
+    </div>
     
+    <div style="display:inline-block" class="closebutton" id="paintclose">
+          
+        <p class="closetext">X</p>
+        </div>
+    <h1 style= "margin: 4px; color: rgb(255, 166, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Paint</h1>
+
+    	<div class="paint-container">
+		<canvas id="canvas"></canvas>
+		<div class="paint-tools">
+			<input type="range"
+				id="brush-size" min="1"
+				max="50" value="5">
+			<input type="color"
+				id="color-picker">
+			<button id="pen">
+				Pen
+			</button>
+			<button id="eraser">
+				Eraser
+			</button>
+			<button id="clear-canvas">
+				Clear
+			</button>
+			<a id="downloadLink" download="kuuppaos_painting.png" class="download">Download</a>
+		</div>
+	</div>
+
+    </div>
+
     
     <script type="module" src="script.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />

@@ -600,12 +600,5 @@ function searchYouTube() {
   iframe.style.border = '0';
   iframe.style.borderRadius = '8px';
 
-  const note = document.createElement('p');
-  note.textContent = 'Paste a YouTube video URL or ID to play it here.';
-  note.style.marginTop = '8px';
-  note.style.fontSize = '14px';
-  note.style.color = '#555';
-
   resultsDiv.appendChild(iframe);
-  resultsDiv.appendChild(note);
 }

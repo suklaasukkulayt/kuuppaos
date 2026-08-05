@@ -87,13 +87,15 @@ function closeWindow(element) {
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")
 
-var welcomeScreenOpen = document.querySelector("#welcomeopen")
+var welcomeScreenOpen = document.querySelector("#settingsButton")
 
 welcomeScreenClose.addEventListener("click", function() {
   closeWindow(welcomeScreen);
 });
 
-
+welcomeScreenOpen.addEventListener("click", function() {
+  openWindow(settingsScreen);
+});
 
 var selectedIcon = undefined
 
@@ -235,6 +237,23 @@ if (youtubeIcon) {
   }
 
 
+  dragElement(document.querySelector("#settings"))
+
+var settingsScreen = document.querySelector("#settings")
+var settingsIcon = document.querySelector("#settingsicon")
+
+var settingsScreenClose = document.querySelector("#settingsclose")
+
+settingsScreenClose.addEventListener("click", () => closeWindow(settingsScreen));
+
+if (settingsIcon) {
+  settingsIcon.addEventListener("click", () => {
+    handleIconTap(settingsIcon, settingsScreen);
+  });
+}
+
+
+
 
 var biggestIndex = 1;
 var topBar = document.querySelector("#top")
@@ -270,7 +289,7 @@ addWindowTapHandling(spotifyScreen);
 addWindowTapHandling(youtubeScreen);
 addWindowTapHandling(terminalScreen);
 addWindowTapHandling(paintScreen);
-
+addWindowTapHandling(settingsScreen);
 var content = [
   {
     title: "TeXtpad is so good!",

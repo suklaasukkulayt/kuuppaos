@@ -79,6 +79,113 @@ function dragElement(element) {
 }
 
 var welcomeScreen = document.querySelector("#welcome")
+var body = document.body;
+var defaultBackgroundImage = body.style.backgroundImage || "";
+var defaultBackgroundColor = body.style.backgroundColor || "antiquewhite";
+var defaultBackgroundSize = body.style.backgroundSize || "cover";
+var defaultBackgroundPosition = body.style.backgroundPosition || "center";
+var fileInput = document.getElementById("bgFile");
+var applyStyleBtn = document.getElementById("applyStyleBtn");
+var resetWallpaperBtn = document.getElementById("resetWallpaperBtn");
+var blurInput = document.getElementById("blurInput");
+var blurValue = document.getElementById("blurValue");
+var transparentInput = document.getElementById("transparentInput");
+var transparentValue = document.getElementById("transparentValue");
+
+function applyWallpaper(imageDataUrl) {
+  if (!body) {
+    return;
+  }
+
+  if (imageDataUrl) {
+    body.style.backgroundImage = `url(${imageDataUrl})`;
+  } else {
+    body.style.backgroundImage = defaultBackgroundImage;
+  }
+
+  body.style.backgroundColor = defaultBackgroundColor;
+  body.style.backgroundSize = "cover";
+  body.style.backgroundPosition = "center";
+}
+
+function resetWallpaper() {
+  if (!body) {
+    return;
+  }
+
+  body.style.backgroundImage = defaultBackgroundImage;
+  body.style.backgroundColor = defaultBackgroundColor;
+  body.style.backgroundSize = defaultBackgroundSize;
+  body.style.backgroundPosition = defaultBackgroundPosition;
+}
+
+function updateBlurDisplay(value) {
+  const blurAmount = Number.isFinite(value) ? value : 0;
+  document.documentElement.style.setProperty("--desktop-blur", `${blurAmount}px`);
+
+  if (blurValue) {
+    blurValue.textContent = `${blurAmount}px`;
+  }
+}
+
+function updateTransparentDisplay(value) {
+  const transparentAmount = Number.isFinite(value) ? value : 0;
+  const alpha = Math.max(0, Math.min(1, transparentAmount / 100));
+  document.documentElement.style.setProperty("--desktop-window-alpha", alpha.toFixed(2));
+
+  if (transparentValue) {
+    transparentValue.textContent = `${Math.round(alpha * 100)}%`;
+  }
+}
+
+if (fileInput) {
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => applyWallpaper(reader.result);
+    reader.readAsDataURL(file);
+  });
+}
+
+if (applyStyleBtn) {
+  applyStyleBtn.addEventListener("click", () => {
+    const file = fileInput && fileInput.files ? fileInput.files[0] : null;
+
+    if (!file) {
+      resetWallpaper();
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => applyWallpaper(reader.result);
+    reader.readAsDataURL(file);
+  });
+}
+
+if (resetWallpaperBtn) {
+  resetWallpaperBtn.addEventListener("click", resetWallpaper);
+}
+
+if (blurInput) {
+  blurInput.addEventListener("input", (event) => {
+    updateBlurDisplay(parseInt(event.target.value, 10));
+  });
+}
+
+updateBlurDisplay(Number(blurInput && blurInput.value ? blurInput.value : 0));
+
+if (transparentInput) {
+  transparentInput.addEventListener("input", (event) => {
+    updateTransparentDisplay(parseInt(event.target.value, 10));
+  });
+}
+
+updateTransparentDisplay(Number(transparentInput && transparentInput.value ? transparentInput.value : 0));
+
 function closeWindow(element) {
   if (element) {
     element.style.display = "none"

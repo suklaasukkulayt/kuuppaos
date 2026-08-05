@@ -248,7 +248,7 @@
 			<a id="downloadLink" download="kuuppaos_painting.png" class="download">Download</a>
 		</div>
 	</div>
-
+</div>
 
        <div class="welcome" id="settings" style="top:60%; left: 70%; display: none; width:fit-content;">
     <div style="display:inline-block" class="welcomeheader">
@@ -261,8 +261,19 @@
           
           <p class="closetext">X</p>
         </div>
-    <h1 style= "margin: 4px; color: rgb(142, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Settings</h1>
-        <div class="settings-container">
+    <h1 style= "margin: 4px; color: rgb(8, 0, 253); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Settings</h1>
+    
+  <label>Custom wallpaper</label><br>
+  <input id="bgFile" type="file" accept="image/*"><br>
+
+  <label>App blur: <span id="blurValue">0px</span></label><br>
+  <input id="blurInput" type="range" min="0" max="30" value="0"><br>
+
+  <label>App transparency: <span id="transparentValue">80%</span></label><br>
+  <input id="transparentInput" type="range" min="0" max="100" value="80"><br>
+
+  <button id="applyStyleBtn" style="margin-top:8px;">Apply</button>
+  <button id="resetWallpaperBtn" style="margin-top:8px; margin-left:4px;">Reset wallpaper</button>
   </div>
 </div>
 

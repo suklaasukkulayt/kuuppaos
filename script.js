@@ -83,7 +83,7 @@ var body = document.body;
 var defaultBackgroundImage = body.style.backgroundImage || "";
 var defaultBackgroundColor = body.style.backgroundColor || "antiquewhite";
 var defaultBackgroundSize = body.style.backgroundSize || "cover";
-var defaultBackgroundPosition = body.style.backgroundPosition || "center";
+var defaultBackgroundPosition = body.style.backgroundPosition || "";
 var fileInput = document.getElementById("bgFile");
 var applyStyleBtn = document.getElementById("applyStyleBtn");
 var resetWallpaperBtn = document.getElementById("resetWallpaperBtn");
@@ -344,6 +344,22 @@ if (youtubeIcon) {
   }
 
 
+  dragElement(document.querySelector("#browser"))
+
+  var browserScreen = document.querySelector("#browser")
+  var browserIcon = document.querySelector("#browsericon")
+
+  var browserScreenClose = document.querySelector("#browserclose")
+
+  browserScreenClose.addEventListener("click", () => closeWindow(browserScreen));
+
+  if (browserIcon) {
+    browserIcon.addEventListener("click", () => {
+      handleIconTap(browserIcon, browserScreen);
+    });
+  }
+
+
   dragElement(document.querySelector("#settings"))
 
 var settingsScreen = document.querySelector("#settings")
@@ -397,6 +413,9 @@ addWindowTapHandling(youtubeScreen);
 addWindowTapHandling(terminalScreen);
 addWindowTapHandling(paintScreen);
 addWindowTapHandling(settingsScreen);
+addWindowTapHandling(browserScreen);
+
+
 var content = [
   {
     title: "TeXtpad is so good!",
@@ -870,3 +889,36 @@ var link = document.getElementById('downloadLink');
   link.addEventListener('click', function() {
 this.href = canvas.toDataURL('image/png');
 }, false);
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const urlInput = document.getElementById('url-input');
+  const loadBtn = document.getElementById('load-btn');
+  const browserWindow = document.getElementById('browser-window');
+
+  // Function to load the website
+  const loadPage = () => {
+    let url = urlInput.value.trim();
+    
+    if (url === "") return;
+
+    // Adding https:// if the user didn't include it
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
+    }
+
+    // Setting the src of the iframe to load the website
+    browserWindow.src = url;
+  };
+
+  // Website is loaded when clicking the button
+  loadBtn.addEventListener('click', loadPage);
+
+  // Website is loaded when pressing Enter in the input field
+  urlInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      loadPage();
+    }
+  });
+});

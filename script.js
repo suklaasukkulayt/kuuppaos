@@ -78,6 +78,43 @@ function dragElement(element) {
   }
 }
 
+
+var STORAGE_BG = "kuuppaos-bg-image";
+var STORAGE_BLUR = "kuuppaos-blur";
+var STORAGE_TRANSPARENT = "kuuppaos-transparent";
+
+function saveSettings(bgImage, blur, transparent) {
+  if (bgImage) {
+    localStorage.setItem(STORAGE_BG, bgImage);
+  }
+  localStorage.setItem(STORAGE_BLUR, String(blur));
+  localStorage.setItem(STORAGE_TRANSPARENT, String(transparent));
+}
+
+function loadSettings() {
+  var savedBg = localStorage.getItem(STORAGE_BG);
+  var savedBlur = localStorage.getItem(STORAGE_BLUR);
+  var savedTransparent = localStorage.getItem(STORAGE_TRANSPARENT);
+
+  if (savedBg) {
+    applyWallpaper(savedBg);
+  }
+
+  if (blurInput && savedBlur !== null) {
+    blurInput.value = savedBlur;
+    updateBlurDisplay(Number(savedBlur));
+  }
+
+  if (transparentInput && savedTransparent !== null) {
+    transparentInput.value = savedTransparent;
+    updateTransparentDisplay(Number(savedTransparent));
+  }
+}
+
+function clearSavedWallpaper() {
+  localStorage.removeItem(STORAGE_BG);
+}
+
 var welcomeScreen = document.querySelector("#welcome")
 var body = document.body;
 var defaultBackgroundImage = body.style.backgroundImage || "";
@@ -157,33 +194,46 @@ if (applyStyleBtn) {
 
     if (!file) {
       resetWallpaper();
+      clearSavedWallpaper();
+      saveSettings(null, Number(blurInput.value), Number(transparentInput.value));
       return;
     }
 
     const reader = new FileReader();
-    reader.onload = () => applyWallpaper(reader.result);
+    reader.onload = () => {
+      applyWallpaper(reader.result);
+      saveSettings(reader.result, Number(blurInput.value), Number(transparentInput.value));
+    };
     reader.readAsDataURL(file);
   });
 }
 
 if (resetWallpaperBtn) {
-  resetWallpaperBtn.addEventListener("click", resetWallpaper);
+  resetWallpaperBtn.addEventListener("click", () => {
+    resetWallpaper();
+    clearSavedWallpaper();
+    saveSettings(null, Number(blurInput.value), Number(transparentInput.value));
+  });
 }
 
 if (blurInput) {
   blurInput.addEventListener("input", (event) => {
-    updateBlurDisplay(parseInt(event.target.value, 10));
+    var value = parseInt(event.target.value, 10);
+    updateBlurDisplay(value);
+    localStorage.setItem(STORAGE_BLUR, String(value));
   });
 }
-
-updateBlurDisplay(Number(blurInput && blurInput.value ? blurInput.value : 0));
 
 if (transparentInput) {
   transparentInput.addEventListener("input", (event) => {
-    updateTransparentDisplay(parseInt(event.target.value, 10));
+    var value = parseInt(event.target.value, 10);
+    updateTransparentDisplay(value);
+    localStorage.setItem(STORAGE_TRANSPARENT, String(value));
   });
 }
 
+loadSettings();
+updateBlurDisplay(Number(blurInput && blurInput.value ? blurInput.value : 0));
 updateTransparentDisplay(Number(transparentInput && transparentInput.value ? transparentInput.value : 0));
 
 function closeWindow(element) {

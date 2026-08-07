@@ -36,9 +36,9 @@
             Settings
         </button>
 
-        <p id="timebarElement" style="color: antiquewhite; margin-right: 8px;">
+        <button id="timebarElement" style="color: antiquewhite; margin-right: 8px; background-color: rgba(0, 0, 0, 0.25); border: none; font-family: Courier New, monospace;">
             Clock not intialized yet...
-        </p>
+        </button>
     </div>
 
       <div id="desktopApps" class="desktop-apps">
@@ -367,6 +367,48 @@
 
   <button id="applyStyleBtn" style="margin-top:8px; margin-left:4px; background-color: #5add5ecf; cursor: pointer; font-family: ADLaM Display">Apply</button>
   <button id="resetWallpaperBtn" style="margin-top:8px; margin-left:4px; background-color: #5add5ecf; cursor: pointer; font-family: ADLaM Display">Reset wallpaper</button>
+  </div>
+</div>
+
+ <div class="welcome" id="calendar" style="position: fixed; bottom: 45px; left: 86%; transform: translateX(-50%); resize: none; display: none; width: 500px; height: 600px; padding: 0px; border-radius: 25px; z-index: 9998;">
+    
+        <div class="calendar" style="width: 80%; height: 100%;">
+      <div class="calendar-header">
+        <span class="month-picker" id="month-picker"> May </span>
+        <div class="year-picker" id="year-picker">
+          <span class="year-change" id="pre-year">
+            <pre><</pre>
+          </span>
+          <span id="year">2026 </span>
+          <span class="year-change" id="next-year">
+            <pre>></pre>
+          </span>
+        </div>
+      </div>
+
+      <div class="calendar-body">
+        <div class="calendar-week-days">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+        <div class="calendar-days">
+        </div>
+      </div>
+      <div class="calendar-footer">
+      </div>
+      <div class="date-time-formate">
+        <div class="day-text-formate"></div>
+        <div class="date-time-value">
+
+        </div>
+      </div>
+      <div class="month-list"></div>
+    </div>
   </div>
 </div>
 

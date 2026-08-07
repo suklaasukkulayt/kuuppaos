@@ -201,9 +201,12 @@ welcomeScreenClose.addEventListener("click", function() {
 });
 
 welcomeScreenOpen.addEventListener("click", function() {
-  openWindow(settingsScreen);
+  if (settingsScreen.style.display === "flex") {
+    closeWindow(settingsScreen);
+  } else {
+    openWindow(settingsScreen);
+  }
 });
-
 var selectedIcon = undefined
 
 function selectIcon(element) {
@@ -376,8 +379,6 @@ if (calculatorIcon) {
 }
 
 
-  dragElement(document.querySelector("#settings"))
-
 var settingsScreen = document.querySelector("#settings")
 var settingsIcon = document.querySelector("#settingsicon")
 
@@ -400,7 +401,7 @@ var topBar = document.querySelector("#top")
 function handleWindowTap(element) {
   biggestIndex++;  // Increment biggestIndex by 1
   element.style.zIndex = biggestIndex;
-  topBar.style.zIndex = biggestIndex + 1;
+  //topBar.style.zIndex = biggestIndex + 1;
 }
 
 function addWindowTapHandling(element) {
@@ -416,6 +417,7 @@ function openWindow(element) {
     biggestIndex++;  // Increment biggestIndex by 1
     element.style.zIndex = biggestIndex;
     topBar.style.zIndex = biggestIndex + 1;
+
   }
 }
 

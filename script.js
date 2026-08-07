@@ -954,7 +954,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				|| event.key == '6' || event.key == '7'
 				|| event.key == '8' || event.key == '9'
 				|| event.key == '+' || event.key == '-'
-				|| event.key == '*' || event.key == '/')
+				|| event.key == '*' || event.key == ':')
 				document.getElementById("result").value += event.key;
 		}
 

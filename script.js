@@ -382,9 +382,6 @@ if (calculatorIcon) {
 var settingsScreen = document.querySelector("#settings")
 var settingsIcon = document.querySelector("#settingsicon")
 
-var settingsScreenClose = document.querySelector("#settingsclose")
-
-settingsScreenClose.addEventListener("click", () => closeWindow(settingsScreen));
 
 if (settingsIcon) {
   settingsIcon.addEventListener("click", () => {
@@ -401,11 +398,12 @@ var topBar = document.querySelector("#top")
 function handleWindowTap(element) {
   biggestIndex++;  // Increment biggestIndex by 1
   element.style.zIndex = biggestIndex;
-  //topBar.style.zIndex = biggestIndex + 1;
+  topBar.style.zIndex = biggestIndex + 1;  
+  settingsScreen.style.zIndex = biggestIndex;  // Ensure settingsScreen is always on top
 }
 
 function addWindowTapHandling(element) {
-  if (element) {
+  if (element !== settingsScreen) {  // Exclude settingsScreen from this handling
     element.addEventListener("mousedown", () => handleWindowTap(element));
   }
 }

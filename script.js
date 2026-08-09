@@ -240,6 +240,14 @@ function closeWindow(element) {
   if (element) {
     element.style.display = "none"
   }
+
+    element.classList.remove("opening");
+    void element.offsetWidth;
+    element.classList.add("closing");
+    setTimeout(function () {
+        element.style.display = "none";
+        element.classList.remove("closing");
+    }, 200);
 }
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")
@@ -498,8 +506,11 @@ function openWindow(element) {
     biggestIndex++;  // Increment biggestIndex by 1
     element.style.zIndex = biggestIndex;
     topBar.style.zIndex = biggestIndex + 1;
-
+    element.classList.remove("closing");
+    void element.offsetWidth;
+    element.classList.add("opening");
   }
+
 }
 
 // Add click handling to bring windows to front

@@ -730,31 +730,6 @@ border: 2px solid black;
 
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
-#gameArea {
-      width: 600px;
-      height: 600px;
-      border: 10px solid #333;
-      position: relative;
-      background-color: white;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-
-.snake {
-      width: 30px;
-      height: 30px;
-      background-color: limegreen;
-      position: absolute;
-      border-radius: 5px;
-    }
-
-.food {
-      width: 30px;
-      height: 30px;
-      background: radial-gradient(circle, tomato, red, darkred);
-      position: absolute;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
 
 #timebarElement:hover{
   background-color: rgba(0, 0, 255, 0.5);
@@ -766,11 +741,11 @@ border: 2px solid black;
   transition: all 0.2s ease-in-out;
 }
 
-.window.opening {
+.welcome.opening {
     animation: windowOpen 0.35s ease forwards;
 }
 
-.window.closing {
+.welcome.closing {
     animation: windowClose 0.35s ease forwards;
 }
 

@@ -1,4 +1,4 @@
-      var currentTime = "";
+var currentTime = "";
 
       function timeUpdate() {
       currentTime = new Date().toLocaleString();
@@ -237,9 +237,7 @@ updateBlurDisplay(Number(blurInput && blurInput.value ? blurInput.value : 0));
 updateTransparentDisplay(Number(transparentInput && transparentInput.value ? transparentInput.value : 0));
 
 function closeWindow(element) {
-  if (element) {
-    element.style.display = "none"
-  }
+  if (!element) return;
 
     element.classList.remove("opening");
     void element.offsetWidth;
@@ -247,7 +245,7 @@ function closeWindow(element) {
     setTimeout(function () {
         element.style.display = "none";
         element.classList.remove("closing");
-    }, 200);
+    }, 350);
 }
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")

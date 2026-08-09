@@ -140,6 +140,22 @@
   .icon-label {
     font-size: 13px;
   }
+
+  #calendar {
+    right: 10px;
+    bottom: 52px;
+    width: calc(100vw - 20px);
+    height: min(520px, calc(100vh - 90px));
+  }
+
+  .calendar {
+    padding: 14px 10px 0;
+  }
+
+  .calendar-days div {
+    max-width: 30px;
+    height: 28px;
+  }
 }
 
 .selected {
@@ -417,13 +433,19 @@ border: 2px solid black;
 
 
 
+#calendar {
+  box-sizing: border-box;
+}
+
 .calendar {
   height: fit-content;
-  width: max-content;
+  width: 100%;
+  max-width: 100%;
   background-color: rgba(135, 133, 133, 0);
   border-radius: 25px;
   overflow: hidden;
   padding: 35px 50px 0px 50px;
+  box-sizing: border-box;
 }
 
 .calendar {
@@ -468,13 +490,14 @@ border: 2px solid black;
 
 .calendar-days {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 2px;
   color: #0A0921;
 }
 
 .calendar-days div {
-  width: 37px;
+  width: 100%;
+  max-width: 37px;
   height: 33px;
   display: flex;
   align-items: center;
@@ -483,6 +506,7 @@ border: 2px solid black;
   position: relative;
   cursor: pointer;
   animation: to-top 1s forwards;
+  box-sizing: border-box;
 }
 
 .month-picker {
@@ -702,4 +726,32 @@ border: 2px solid black;
     transform: translatex(-370%);
     opacity: 1;
   }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+#gameArea {
+      width: 600px;
+      height: 600px;
+      border: 10px solid #333;
+      position: relative;
+      background-color: white;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+.snake {
+      width: 30px;
+      height: 30px;
+      background-color: limegreen;
+      position: absolute;
+      border-radius: 5px;
+    }
+
+.food {
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, tomato, red, darkred);
+      position: absolute;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }

@@ -443,6 +443,24 @@ if (calculatorIcon) {
 }
 
 
+
+dragElement(document.querySelector("#pong"))
+
+var pongScreen = document.querySelector("#pong")
+var pongIcon = document.querySelector("#pongicon")
+
+var pongScreenClose = document.querySelector("#pongclose")
+
+pongScreenClose.addEventListener("click", () => closeWindow(pongScreen));
+
+if (pongIcon) {
+  pongIcon.addEventListener("click", () => {
+    handleIconTap(pongIcon, pongScreen);
+  });
+}
+
+
+
 var settingsScreen = document.querySelector("#settings")
 var settingsIcon = document.querySelector("#settingsicon")
 
@@ -496,6 +514,7 @@ addWindowTapHandling(paintScreen);
 addWindowTapHandling(settingsScreen);
 addWindowTapHandling(browserScreen);
 addWindowTapHandling(calculatorScreen);
+addWindowTapHandling(pongScreen);
 
 
 var content = [
@@ -843,11 +862,11 @@ function searchYouTube() {
 
 
 
-//Obtain the canvas and its 2d rendering context
-const canvas =
+//Obtain the canvas and its 2d rendering context for the paint app
+const paintCanvas =
 	document.getElementById('canvas');
-const ctx =
-	canvas.getContext('2d');
+const paintCtx =
+	paintCanvas.getContext('2d');
 
 //Get the refernce to HTML elements
 const brushSize =
@@ -859,13 +878,13 @@ const clearCanvas =
 let isDrawing = false;
 
 //Initializing the canvas
-canvas.width =
+paintCanvas.width =
 	window.innerWidth - 40;
-canvas.height =
+paintCanvas.height =
 	window.innerHeight * 0.85;
-ctx.lineWidth = 5;
-ctx.lineCap = 'round';
-ctx.strokeStyle = 'black';
+paintCtx.lineWidth = 5;
+paintCtx.lineCap = 'round';
+paintCtx.strokeStyle = 'black';
 
 //start drawing
 function startPosition(e) {
@@ -890,35 +909,35 @@ function getCanvasPoint(e) {
 function draw(e) {
 	if (!isDrawing) return;
 	const { x, y } = getCanvasPoint(e);
-	ctx.strokeStyle =
+	paintCtx.strokeStyle =
 		colorPicker.value; 
 		//pick the color
-	ctx.lineWidth =
+	paintCtx.lineWidth =
 		brushSize.value; 
 		//Select the brush size
-	ctx.lineTo(x, y);
-	ctx.stroke();
-	ctx.beginPath();
-	ctx.moveTo(x, y);
+	paintCtx.lineTo(x, y);
+	paintCtx.stroke();
+	paintCtx.beginPath();
+	paintCtx.moveTo(x, y);
 }
 
 //event listener for differnt mouse actions
-canvas
+paintCanvas
 	.addEventListener('mousedown', startPosition);
-canvas
+paintCanvas
 	.addEventListener('mouseup', endPosition);
-canvas
+paintCanvas
 	.addEventListener('mousemove', draw);
 clearCanvas
 	.addEventListener('click', () => {
-		ctx.clearRect(
-			0, 0, canvas.width,
-			canvas.height
+		paintCtx.clearRect(
+			0, 0, paintCanvas.width,
+			paintCanvas.height
 		);
 	});
 
 brushSize.addEventListener('input', () => {
-	ctx.lineWidth =
+	paintCtx.lineWidth =
 		brushSize.value;
 	updateBrushSizeLabel(brushSize.value);
 });
@@ -940,17 +959,17 @@ const eraserButton =
 
 //switing to pen mode
 function activatePen() {
-	ctx.globalCompositeOperation =
+	paintCtx.globalCompositeOperation =
 		'source-over';
-	ctx.strokeStyle =
+	paintCtx.strokeStyle =
 		colorPicker.value;
 }
 
 //switching to eraser mode
 function activateEraser() {
-	ctx.globalCompositeOperation =
+	paintCtx.globalCompositeOperation =
 		'destination-out';
-	ctx.strokeStyle =
+	paintCtx.strokeStyle =
 		'rgba(0, 0, 0, 0)';
 }
 
@@ -969,7 +988,7 @@ eraserButton
 
 var link = document.getElementById('downloadLink');
   link.addEventListener('click', function() {
-this.href = canvas.toDataURL('image/png');
+this.href = paintCanvas.toDataURL('image/png');
 }, false);
 
 
@@ -1203,3 +1222,120 @@ setInterval(() => {
     )}: ${`${timer.getSeconds()}`.padStart(2, '0')}`;
   todayShowTime.textContent = formateTimer;
 }, 1000);
+
+
+
+  const gameArea = document.getElementById("gameArea");
+    const gameSize = { width: 600, height: 600 };
+    const snakeSize = 30;
+    let snake = [{ x: 150, y: 150 }];
+    let food = { x: 60, y: 60 };
+    let direction = { x: 0, y: 0 };
+
+    function createDiv(type) {
+      let div = document.createElement("div");
+      div.className = type;
+      gameArea.appendChild(div);
+      return div;
+    }
+
+    function drawSnake() {
+      gameArea.innerHTML = "";
+      snake.forEach((segment) => {
+        let snakePart = createDiv("snake");
+        snakePart.style.left = `${segment.x}px`;
+        snakePart.style.top = `${segment.y}px`;
+      });
+      let foodDiv = createDiv("food");
+      foodDiv.style.left = `${food.x}px`;
+      foodDiv.style.top = `${food.y}px`;
+    }
+
+    function moveSnake() {
+      const head = {
+        x: snake[0].x + direction.x * snakeSize,
+        y: snake[0].y + direction.y * snakeSize,
+      };
+
+      snake.unshift(head);
+
+      if (head.x === food.x && head.y === food.y) {
+        placeFood();
+      } else {
+        snake.pop();
+      }
+
+      if (
+        head.x < 0 ||
+        head.x >= gameSize.width ||
+        head.y < 0 ||
+        head.y >= gameSize.height ||
+        snake.some(
+          (segment, index) =>
+            index !== 0 && segment.x === head.x && segment.y === head.y
+        )
+      ) {
+        // Game over
+        snake = [{ x: 150, y: 150 }];
+        direction = { x: 0, y: 0 };
+        alert("Game over");
+      }
+    }
+
+    function placeFood() {
+      food = {
+        x: Math.floor(Math.random() * (gameSize.width / snakeSize)) * snakeSize,
+        y:
+          Math.floor(Math.random() * (gameSize.height / snakeSize)) * snakeSize,
+      };
+    }
+
+    document.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "ArrowDown":
+          if (direction.y === 0) direction = { x: 0, y: 1 };
+          break;
+        case "ArrowUp":
+          if (direction.y === 0) direction = { x: 0, y: -1 };
+          break;
+        case "ArrowRight":
+          if (direction.x === 0) direction = { x: 1, y: 0 };
+          break;
+        case "ArrowLeft":
+          if (direction.x === 0) direction = { x: -1, y: 0 };
+          break;
+      }
+    });
+
+    setInterval(() => {
+      moveSnake();
+      drawSnake();
+    }, 200);
+
+    placeFood();
+    drawSnake();
+
+
+
+let canvas = document.getElementById('pongcanvas'), ctx = document.getElementById('pongcanvas').getContext('2d'), paddles = [0, 0], ball = [0, 0, -0.016, 0], score = [0, 0], cursor = 0, reactionSpeed = 6, reactionDistance = -0.5;
+canvas.addEventListener('mousemove', e => { cursor = e.offsetY / 250 - 1 });
+ctx.textAlign = 'center', ctx.font = '50px "Press Start 2P", Arial, sans-serif', ctx.fillStyle = 'white';
+setInterval(() => {
+    if (Math.abs(ball[0]) >= 1) return (() => { score[ball[0] < 0 ? 1 : 0]++, ball = [0, 0, ball[0] < 0 ? -0.016 : 0.016, 0], reactionDistance = -0.5, reactionSpeed = 6 })();
+    ctx.clearRect(0, 0, 500, 500);
+    if (Math.abs(ball[1]) >= 1) ball[3] = -ball[3];
+    ball[0] += ball[2], ball[1] += ball[3], paddles[0] = cursor;
+    if (ball[0] > reactionDistance && ball[2] > 0) paddles[1] += ball[1] > paddles[1] + 10/250 ? reactionSpeed/250 : ball[1] < paddles[1] - 10/250 ? -reactionSpeed/250 : 0;
+    if (Math.abs(paddles[0]) > 210/250) paddles[0] = paddles[0] / Math.abs(paddles[0]) * 210/250;
+    if (Math.abs(paddles[1]) > 210/250) paddles[1] = paddles[1] / Math.abs(paddles[1]) * 210/250;
+    ctx.fillRect(20, paddles[0] * 250 + 225, 10, 50);
+    ctx.fillRect(470, paddles[1] * 250 + 225, 10, 50);
+    ctx.fillRect(ball[0] * 250 + 245, ball[1] * 250 + 245, 10, 10);
+    ctx.fillText(score[0] + ' : ' + score[1], 250, 100);
+    if ((ball[0] > -220/250 && ball[0] + ball[2] <= -220/250 && Math.abs(paddles[0] - ball[1] - ball[3] * (-220/250 - ball[0]) / ball[2]) <= 30/250) ||
+       (ball[0] < 220/250 && ball[0] + ball[2] >= 220/250 && Math.abs(paddles[1] - ball[1] - ball[3] * (220/250 - ball[0]) / ball[2]) <= 30/250)) {
+        let alpha = (ball[0] < 0 ? 1 : -1) * (7/16 * (Math.atan(ball[3] / -ball[2]) + Math.PI / 2) + 0.004375 * Math.PI * (ball[1] - paddles[ball[0] < 0 ? 0 : 1]) * 500 + 27/64 * Math.PI - Math.atan(ball[3] / -ball[2]) + Math.PI * 3/8);
+        let x = ball[2] * Math.cos(alpha) - ball[3] * Math.sin(alpha), y = ball[2] * Math.sin(alpha) + ball[3] * Math.cos(alpha);
+        ball[2] = x * 1.02, ball[3] = y * 1.02, reactionSpeed = Math.random() * 4.5 + 1.7, reactionDistance = Math.random() * 0.7 - 1;
+    }
+}, 1000/60);

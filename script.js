@@ -1275,3 +1275,47 @@ function stopPong() {
         pongInterval = null;
     }
 }
+
+setupMinimize("#textpad", "#textpadminimize");
+
+var openApps = document.querySelector("#openApps");
+function addTaskbarApp(windowElement, name) {
+    if (document.querySelector("#task-" + windowElement.id)) {
+        return;
+    }
+
+    var button = document.createElement("button");
+
+    button.id = "task-" + windowElement.id;
+    button.className = "openApp";
+    button.innerHTML = name;
+button.title = "Open " + name;
+    button.addEventListener("click", function () {
+        if (windowElement.style.display === "none") {
+            openWindow(windowElement);
+        }
+        bringToFront(windowElement);
+    });
+    openApps.appendChild(button);
+}
+
+function removeTaskbarApp(windowElement) {
+    var button = document.querySelector("#task-" + windowElement.id);
+    if (button) {
+        button.remove();
+    }
+}
+
+function setupMinimize(windowId, buttonId) {
+    var windowElement = document.querySelector(windowId);
+    var minimizeButton = document.querySelector(buttonId);
+
+    minimizeButton.addEventListener("click", function () {
+        void windowElement.offsetWidth;
+        windowElement.classList.add("closing");
+        setTimeout(function () {
+            windowElement.style.display = "none";
+            windowElement.classList.remove("closing");
+        }, 250);
+    });
+}

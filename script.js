@@ -245,6 +245,7 @@ function closeWindow(element) {
     setTimeout(function () {
         element.style.display = "none";
         element.classList.remove("closing");
+        removeTaskbarApp(element);
     }, 350);
 }
 
@@ -1276,7 +1277,11 @@ function stopPong() {
     }
 }
 
-setupMinimize("#textpad", "#textpadminimize");
+setupMinimize("#textpad", "#textpadminimize", "TeXtpad");
+setupMinimize("#clock", "#clockminimize", "Clock");
+setupMinimize("#weather", "#weatherminimize", "Weather");
+setupMinimize("#spotify", "#spotifyminimize", "KuuppaMusic");
+setupMinimize("#youtube", "#youtubeminimize", "KuuppaVid");
 
 var openApps = document.querySelector("#openApps");
 function addTaskbarApp(windowElement, name) {
@@ -1294,7 +1299,8 @@ button.title = "Open " + name;
         if (windowElement.style.display === "none") {
             openWindow(windowElement);
         }
-        bringToFront(windowElement);
+        handleWindowTap(windowElement);
+        removeTaskbarApp(windowElement);
     });
     openApps.appendChild(button);
 }
@@ -1306,7 +1312,7 @@ function removeTaskbarApp(windowElement) {
     }
 }
 
-function setupMinimize(windowId, buttonId) {
+function setupMinimize(windowId, buttonId, appName) {
     var windowElement = document.querySelector(windowId);
     var minimizeButton = document.querySelector(buttonId);
 
@@ -1316,6 +1322,7 @@ function setupMinimize(windowId, buttonId) {
         setTimeout(function () {
             windowElement.style.display = "none";
             windowElement.classList.remove("closing");
+            addTaskbarApp(windowElement, appName || windowElement.id);
         }, 250);
     });
 }

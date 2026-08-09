@@ -422,6 +422,22 @@ cursor: pointer;
     background-color: rgb(17, 192, 205);
 }
 
+#actiong {
+  background-color: #ff0000;
+}
+
+#actiong:hover{
+    background-color: #df0e0e;
+}
+
+#calcact {
+  background-color: #4000ff;
+}
+
+#calcact:hover {
+  background-color: #400ed8;
+}
+
 #result {
 padding: 20px 30px;
 font-size: 24px;
@@ -720,16 +736,6 @@ border: 2px solid black;
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
 
-#timebarElement:hover{
-  background-color: rgba(0, 0, 255, 0.5);
-  transition: all 0.2s ease-in-out;
-}
-
-#settingsButton:hover{
-  background-color: rgba(0, 0, 255, 0.5);
-  transition: all 0.2s ease-in-out;
-}
-
 .welcome.opening {
     animation: windowOpen 0.35s ease forwards;
 }
@@ -760,8 +766,7 @@ border: 2px solid black;
     }
 }
 
-/* #settings and #calendar center themselves differently (translateX only, or not at all),
-   so they need their own keyframes instead of the shared translate(-50%, -50%) ones above. */
+
 #settings.opening {
     animation-name: windowOpenSettings;
 }

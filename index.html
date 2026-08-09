@@ -194,7 +194,7 @@
    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator&si=85178b9d6e3c4577" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     <p style="margin: 0;">Hello <strong>user</strong>! This is the KuuppaMusic (spotify) app.</p>
     <p style="margin: 0;">It plays lofi beats from spotify (because i couldn't think of anything else)</p>
-    <p style="margin: 0;">It doesn't even play the full song so kinda useless :D</p>
+    <p style="margin: 0;">It doesn't even play the full song so kinda useless :O</p>
     </div>
 
 
@@ -309,7 +309,7 @@
   <table id="calcu">
 		<tr>
 			<td colspan="3"><input type="text" id="result"></td>
-			<td><input class="calcbutton" type="button" value="Clear" onclick="clr()" /> </td>
+			<td><input class="calcbutton" type="button" value="Clear" id="calcact" onclick="clr()" /> </td>
 		</tr>
 		<tr>
 			<td><input class="calcbutton" type="button" value="1" onclick="dis('1')"
@@ -318,7 +318,7 @@
 						onkeydown="myFunction(event)"> </td>
 			<td><input class="calcbutton" type="button" value="3" onclick="dis('3')"
 						onkeydown="myFunction(event)"> </td>
-			<td><input class="calcbutton" type="button" value="÷" onclick="dis('/')"
+			<td><input class="calcbutton" type="button" value="÷" id="actiong" onclick="dis('/')"
 						onkeydown="myFunction(event)"> </td>
 		</tr>
 		<tr>
@@ -328,7 +328,7 @@
 						onkeydown="myFunction(event)"> </td>
 			<td><input class="calcbutton" type="button" value="6" onclick="dis('6')"
 						onkeydown="myFunction(event)"> </td>
-			<td><input class="calcbutton" type="button" value="x" onclick="dis('*')"
+			<td><input class="calcbutton" id="actiong" type="button" value="x" onclick="dis('*')"
 						onkeydown="myFunction(event)"> </td>
 		</tr>
 		<tr>
@@ -338,16 +338,16 @@
 						onkeydown="myFunction(event)"> </td>
 			<td><input class="calcbutton" type="button" value="9" onclick="dis('9')"
 						onkeydown="myFunction(event)"> </td>
-			<td><input class="calcbutton" type="button" value="-" onclick="dis('-')"
+			<td><input class="calcbutton" type="button" id="actiong" value="-" onclick="dis('-')"
 						onkeydown="myFunction(event)"> </td>
 		</tr>
 		<tr>
 			<td><input class="calcbutton" type="button" value="0" onclick="dis('0')"
 						onkeydown="myFunction(event)"> </td>
-			<td><input class="calcbutton" type="button" value="." onclick="dis('.')"
+			<td><input class="calcbutton" type="button" id="actiong" value="." onclick="dis('.')"
 						onkeydown="myFunction(event)"> </td>
-			<td><input class="calcbutton" type="button" value="=" onclick="solve()"> </td>
-			<td><input class="calcbutton" type="button" value="+" onclick="dis('+')"
+			<td><input class="calcbutton" type="button" id="calcact" value="=" onclick="solve()"> </td>
+			<td><input class="calcbutton" type="button" id="actiong" value="+" onclick="dis('+')"
         onkeydown="myFunction(event)"> </td>
 		</tr>
 	</table>

@@ -638,13 +638,10 @@ border: 2px solid black;
   position: relative;
   text-align: center;
   padding-left: 5%;
-}
-
-.time-formate {
   font-size: 1.5rem;
 }
 
-.time-formate.hideTime {
+.date-time-value.hideTime {
   animation: hidetime 1.5s forwards;
 }
 
@@ -652,19 +649,11 @@ border: 2px solid black;
   animation: hidetime 1.5s forwards;
 }
 
-.date-formate.hideTime {
-  animation: hidetime 1.5s forwards;
-}
-
 .day-text-formate.showtime {
   animation: showtime 1s forwards;
 }
 
-.time-formate.showtime {
-  animation: showtime 1s forwards;
-}
-
-.date-formate.showtime {
+.date-time-value.showtime {
   animation: showtime 1s forwards;
 }
 
@@ -752,6 +741,63 @@ border: 2px solid black;
 @keyframes windowOpen {
     from {
         opacity: 0;
+        transform: translate(-50%, -50%) scale(0.50) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) translateY(0);
+    }
+}
+
+@keyframes windowClose {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.40) translateY(10px);
+    }
+}
+
+/* #settings and #calendar center themselves differently (translateX only, or not at all),
+   so they need their own keyframes instead of the shared translate(-50%, -50%) ones above. */
+#settings.opening {
+    animation-name: windowOpenSettings;
+}
+#settings.closing {
+    animation-name: windowCloseSettings;
+}
+@keyframes windowOpenSettings {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.50) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) translateY(0);
+    }
+}
+@keyframes windowCloseSettings {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.40) translateY(10px);
+    }
+}
+
+#calendar.opening {
+    animation-name: windowOpenCalendar;
+}
+#calendar.closing {
+    animation-name: windowCloseCalendar;
+}
+@keyframes windowOpenCalendar {
+    from {
+        opacity: 0;
         transform: scale(0.50) translateY(10px);
     }
     to {
@@ -759,8 +805,7 @@ border: 2px solid black;
         transform: scale(1) translateY(0);
     }
 }
-
-@keyframes windowClose {
+@keyframes windowCloseCalendar {
     from {
         opacity: 1;
         transform: scale(1) translateY(0);

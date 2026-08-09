@@ -457,11 +457,20 @@ var pongIcon = document.querySelector("#pongicon")
 
 var pongScreenClose = document.querySelector("#pongclose")
 
-pongScreenClose.addEventListener("click", () => closeWindow(pongScreen));
+pongScreenClose.addEventListener("click", () => {
+  closeWindow(pongScreen);
+  stopPong();
+});
 
 if (pongIcon) {
   pongIcon.addEventListener("click", () => {
+    const wasOpen = pongIcon.classList.contains("selected");
     handleIconTap(pongIcon, pongScreen);
+    if (wasOpen) {
+      stopPong();
+    } else {
+      startPong();
+    }
   });
 }
 
@@ -904,13 +913,13 @@ function startPosition(e) {
 //end drawing
 function endPosition() {
 	isDrawing = false;
-	ctx.beginPath();
+	paintCtx.beginPath();
 }
 
 function getCanvasPoint(e) {
-	const rect = canvas.getBoundingClientRect();
-	const x = ((e.clientX - rect.left) / rect.width) * canvas.width;
-	const y = ((e.clientY - rect.top) / rect.height) * canvas.height;
+	const rect = paintCanvas.getBoundingClientRect();
+	const x = ((e.clientX - rect.left) / rect.width) * paintCanvas.width;
+	const y = ((e.clientY - rect.top) / rect.height) * paintCanvas.height;
 	return { x, y };
 }
 
@@ -1102,8 +1111,7 @@ const month_names = [
   ];
 let month_picker = document.querySelector('#month-picker');
 const dayTextFormate = document.querySelector('.day-text-formate');
-const timeFormate = document.querySelector('.time-formate');
-const dateFormate = document.querySelector('.date-formate');
+const timeFormate = document.querySelector('.date-time-value');
 
 month_picker.onclick = () => {
   month_list.classList.remove('hideonce');
@@ -1113,8 +1121,6 @@ month_picker.onclick = () => {
   dayTextFormate.classList.add('hidetime');
   timeFormate.classList.remove('showtime');
   timeFormate.classList.add('hideTime');
-  dateFormate.classList.remove('showtime');
-  dateFormate.classList.add('hideTime');
 };
 
 const generateCalendar = (month, year) => {
@@ -1177,8 +1183,6 @@ month_names.forEach((e, index) => {
     dayTextFormate.classList.add('showtime');
     timeFormate.classList.remove('hideTime');
     timeFormate.classList.add('showtime');
-    dateFormate.classList.remove('hideTime');
-    dateFormate.classList.add('showtime');
   };
 });
 
@@ -1199,8 +1203,8 @@ let currentMonth = { value: currentDate.getMonth() };
 let currentYear = { value: currentDate.getFullYear() };
 generateCalendar(currentMonth.value, currentYear.value);
 
-const todayShowTime = document.querySelector('.time-formate');
-const todayShowDate = document.querySelector('.date-formate');
+const todayShowTime = document.querySelector('.date-time-value');
+const todayShowDate = document.querySelector('.day-text-formate');
 
 const currshowDate = new Date();
 const showCurrentDateOption = {
@@ -1235,25 +1239,39 @@ setInterval(() => {
 
 
 
-let pongcanvas = document.getElementById('pongcanvas'), ctx = document.getElementById('pongcanvas').getContext('2d'), paddles = [0, 0], ball = [0, 0, -0.016, 0], score = [0, 0], cursor = 0, reactionSpeed = 6, reactionDistance = -0.5;
-pongcanvas.addEventListener('mousemove', e => { cursor = e.offsetY / 250 - 1 });
+let pongcanvas = document.getElementById('pongcanvas'), ctx = document.getElementById('pongcanvas').getContext('2d'), paddles = [0, 0], ball = [0, 0, -0.016, 0], score = [0, 0], cursor = 0, reactionSpeed = 6, reactionDistance = -0.5, pongInterval = null;
+pongcanvas.addEventListener('mousemove', e => {
+    const rect = pongcanvas.getBoundingClientRect();
+    cursor = (e.clientY - rect.top) / rect.height * 2 - 1;
+});
 ctx.textAlign = 'center', ctx.font = '50px "Press Start 2P", Arial, sans-serif', ctx.fillStyle = 'white';
-setInterval(() => {
-    if (Math.abs(ball[0]) >= 1) return (() => { score[ball[0] < 0 ? 1 : 0]++, ball = [0, 0, ball[0] < 0 ? -0.016 : 0.016, 0], reactionDistance = -0.5, reactionSpeed = 6 })();
-    ctx.clearRect(0, 0, 500, 500);
-    if (Math.abs(ball[1]) >= 1) ball[3] = -ball[3];
-    ball[0] += ball[2], ball[1] += ball[3], paddles[0] = cursor;
-    if (ball[0] > reactionDistance && ball[2] > 0) paddles[1] += ball[1] > paddles[1] + 10/250 ? reactionSpeed/250 : ball[1] < paddles[1] - 10/250 ? -reactionSpeed/250 : 0;
-    if (Math.abs(paddles[0]) > 210/250) paddles[0] = paddles[0] / Math.abs(paddles[0]) * 210/250;
-    if (Math.abs(paddles[1]) > 210/250) paddles[1] = paddles[1] / Math.abs(paddles[1]) * 210/250;
-    ctx.fillRect(20, paddles[0] * 250 + 225, 10, 50);
-    ctx.fillRect(470, paddles[1] * 250 + 225, 10, 50);
-    ctx.fillRect(ball[0] * 250 + 245, ball[1] * 250 + 245, 10, 10);
-    ctx.fillText(score[0] + ' : ' + score[1], 250, 100);
-    if ((ball[0] > -220/250 && ball[0] + ball[2] <= -220/250 && Math.abs(paddles[0] - ball[1] - ball[3] * (-220/250 - ball[0]) / ball[2]) <= 30/250) ||
-       (ball[0] < 220/250 && ball[0] + ball[2] >= 220/250 && Math.abs(paddles[1] - ball[1] - ball[3] * (220/250 - ball[0]) / ball[2]) <= 30/250)) {
-        let alpha = (ball[0] < 0 ? 1 : -1) * (7/16 * (Math.atan(ball[3] / -ball[2]) + Math.PI / 2) + 0.004375 * Math.PI * (ball[1] - paddles[ball[0] < 0 ? 0 : 1]) * 500 + 27/64 * Math.PI - Math.atan(ball[3] / -ball[2]) + Math.PI * 3/8);
-        let x = ball[2] * Math.cos(alpha) - ball[3] * Math.sin(alpha), y = ball[2] * Math.sin(alpha) + ball[3] * Math.cos(alpha);
+
+function startPong() {
+    if (pongInterval !== null) return; // already running
+    pongInterval = setInterval(() => {
+        if (Math.abs(ball[0]) >= 1) return (() => { score[ball[0] < 0 ? 1 : 0]++, ball = [0, 0, ball[0] < 0 ? -0.016 : 0.016, 0], reactionDistance = -0.5, reactionSpeed = 6 })();
+        ctx.clearRect(0, 0, 500, 500);
+        if (Math.abs(ball[1]) >= 1) ball[3] = -ball[3];
+        ball[0] += ball[2], ball[1] += ball[3], paddles[0] = cursor;
+        if (ball[0] > reactionDistance && ball[2] > 0) paddles[1] += ball[1] > paddles[1] + 10/250 ? reactionSpeed/250 : ball[1] < paddles[1] - 10/250 ? -reactionSpeed/250 : 0;
+        if (Math.abs(paddles[0]) > 225/250) paddles[0] = paddles[0] / Math.abs(paddles[0]) * 225/250;
+        if (Math.abs(paddles[1]) > 225/250) paddles[1] = paddles[1] / Math.abs(paddles[1]) * 225/250;
+        ctx.fillRect(20, paddles[0] * 250 + 225, 10, 50);
+        ctx.fillRect(470, paddles[1] * 250 + 225, 10, 50);
+        ctx.fillRect(ball[0] * 250 + 245, ball[1] * 250 + 245, 10, 10);
+        ctx.fillText(score[0] + ' : ' + score[1], 250, 100);
+        if ((ball[0] > -220/250 && ball[0] + ball[2] <= -220/250 && Math.abs(paddles[0] - ball[1] - ball[3] * (-220/250 - ball[0]) / ball[2]) <= 30/250) ||
+           (ball[0] < 220/250 && ball[0] + ball[2] >= 220/250 && Math.abs(paddles[1] - ball[1] - ball[3] * (220/250 - ball[0]) / ball[2]) <= 30/250)) {
+            let alpha = (ball[0] < 0 ? 1 : -1) * (7/16 * (Math.atan(ball[3] / -ball[2]) + Math.PI / 2) + 0.004375 * Math.PI * (ball[1] - paddles[ball[0] < 0 ? 0 : 1]) * 500 + 27/64 * Math.PI - Math.atan(ball[3] / -ball[2]) + Math.PI * 3/8);
+            let x = ball[2] * Math.cos(alpha) - ball[3] * Math.sin(alpha), y = ball[2] * Math.sin(alpha) + ball[3] * Math.cos(alpha);
         ball[2] = x * 1.02, ball[3] = y * 1.02, reactionSpeed = Math.random() * 4.5 + 1.7, reactionDistance = Math.random() * 0.7 - 1;
+        }
+    }, 1000/60);
+}
+
+function stopPong() {
+    if (pongInterval !== null) {
+        clearInterval(pongInterval);
+        pongInterval = null;
     }
-}, 1000/60);
+}

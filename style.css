@@ -968,3 +968,12 @@ border: 2px solid black;
     box-shadow:
         inset 0 1px 0 rgba(70, 68, 68, 0.15);
 }
+
+#selection-box {
+  position: absolute;
+  background-color: rgba(0, 120, 215, 0.25); 
+  border: 1px solid rgba(0, 120, 215, 0.8); 
+  pointer-events: none; 
+  display: none;        
+  z-index: -1;
+}

@@ -1352,3 +1352,85 @@ function openWindow(element, appName) {
     addTaskbarApp(element, appName);
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const desktop = document.getElementById("desktop");
+  const selectionBox = document.getElementById("selection-box");
+
+  let isSelecting = false;
+  let startX = 0;
+  let startY = 0;
+
+  // 1. Hiiren painallus: valinnan aloitus
+  desktop.addEventListener("mousedown", (e) => {
+    // Aloitetaan valinta vain kun klikataan suoraan työpöydän taustaa
+    if (e.target !== desktop) return;
+
+    const desktopRect = desktop.getBoundingClientRect();
+    
+    // Tallennetaan aloituspiste suhteessa työpöytään
+    startX = e.clientX - desktopRect.left;
+    startY = e.clientY - desktopRect.top;
+
+    isSelecting = true;
+
+    // Alustetaan laatikon paikka
+    selectionBox.style.left = `${startX}px`;
+    selectionBox.style.top = `${startY}px`;
+    selectionBox.style.width = '0px';
+    selectionBox.style.height = '0px';
+    selectionBox.style.display = 'block';
+
+    // Tyhjennetään aiemmat ikonivalinnat
+    document.querySelectorAll(".desktop-icon").forEach(icon => {
+      icon.classList.remove("selected");
+    });
+  });
+
+  // 2. Hiiren liike: laatikon koon päivitys ja ikonien valinta
+  document.addEventListener("mousemove", (e) => {
+    if (!isSelecting) return;
+
+    const desktopRect = desktop.getBoundingClientRect();
+    const currentX = e.clientX - desktopRect.left;
+    const currentY = e.clientY - desktopRect.top;
+
+    const left = Math.min(startX, currentX);
+    const top = Math.min(startY, currentY);
+    const width = Math.abs(currentX - startX);
+    const height = Math.abs(currentY - startY);
+
+    selectionBox.style.left = `${left}px`;
+    selectionBox.style.top = `${top}px`;
+    selectionBox.style.width = `${width}px`;
+    selectionBox.style.height = `${height}px`;
+
+    const boxRect = selectionBox.getBoundingClientRect();
+    const icons = document.querySelectorAll(".desktop-icon");
+
+    icons.forEach(icon => {
+      const iconRect = icon.getBoundingClientRect();
+
+      const isOverlapping = !(
+        boxRect.right < iconRect.left ||
+        boxRect.left > iconRect.right ||
+        boxRect.bottom < iconRect.top ||
+        boxRect.top > iconRect.bottom
+      );
+
+      if (isOverlapping) {
+        icon.classList.add("selected");
+      } else {
+        icon.classList.remove("selected");
+      }
+    });
+  });
+
+
+  document.addEventListener("mouseup", () => {
+    if (isSelecting) {
+      isSelecting = false;
+      selectionBox.style.display = 'none';
+    }
+  });
+});

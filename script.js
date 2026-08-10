@@ -457,9 +457,14 @@ var pongScreen = document.querySelector("#pong")
 var pongIcon = document.querySelector("#pongicon")
 
 var pongScreenClose = document.querySelector("#pongclose")
+var pongScreenMinimize = document.querySelector("#pongminimize")
 
 pongScreenClose.addEventListener("click", () => {
   closeWindow(pongScreen);
+  stopPong();
+});
+
+pongScreenMinimize.addEventListener("click", () => {
   stopPong();
 });
 
@@ -468,7 +473,7 @@ if (pongIcon) {
     const wasOpen = pongIcon.classList.contains("selected");
     handleIconTap(pongIcon, pongScreen);
     if (wasOpen) {
-      stopPong();
+      
     } else {
       startPong();
     }
@@ -1282,6 +1287,11 @@ setupMinimize("#clock", "#clockminimize", "Clock");
 setupMinimize("#weather", "#weatherminimize", "Weather");
 setupMinimize("#spotify", "#spotifyminimize", "KuuppaMusic");
 setupMinimize("#youtube", "#youtubeminimize", "KuuppaVid");
+setupMinimize("#terminal", "#terminalminimize", "Terminal");
+setupMinimize("#paint", "#paintminimize", "Paint");
+setupMinimize("#browser", "#browserminimize", "KuuppaBrowser");
+setupMinimize("#calculator", "#calculatorminimize", "Calculator");
+setupMinimize("#pong", "#pongminimize", "Pong");
 
 var openApps = document.querySelector("#openApps");
 function addTaskbarApp(windowElement, name) {

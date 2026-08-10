@@ -5,7 +5,7 @@
     <link href='https://fonts.googleapis.com/css?family=ADLaM Display|Afacad Flux|Press+Start+2P' rel='stylesheet'>
   </head>
   
-  <body style="height: 97.5vh; user-select: none; background-image: url(https://static.vecteezy.com/system/resources/previews/028/217/320/non_2x/contemporary-wallpaper-for-interior-design-with-green-leaves-and-desert-inspired-background-and-texture-free-photo.jpg); background-size: cover; font-family:Gill Sans, sans-serif; background-color: antiquewhite;">
+  <body>
     <div class="welcome" id="welcome" style="top:50%; left: 50%;">
     <div style="display:inline-block" class="welcomeheader"> 
       <p id="welcomeheader">
@@ -21,7 +21,7 @@
     <img style="width: 256px; height: 256px; border-radius: 16px; object-fit: cover; " src="./kuuppaos.png"/>
     
     <p>Hello <strong>user</strong>! This is my webOS.</p>
-    <p>It currently has absolutely no purpose :D</p>
+    <p>It has many cool apps :D</p>
 
     <a href="https://stardance.hackclub.com">Stardance Event</a>
     <a href="https://stardance.hackclub.com/projects/31853">KuuppaOS project</a>
@@ -84,7 +84,7 @@
 
          <div id="browsericon" class="desktop-icon">
           <img src="./kuuppabrowser.png" alt="Browser">
-          <p class="icon-label">Browser</p>
+          <p class="icon-label" style="font-size: 12px;">KuuppaBrowser</p>
         </div>
         
          <div id="calculatoricon" class="desktop-icon">
@@ -112,6 +112,7 @@
      <div style="display:inline-block" class="minimizebutton" id="textpadminimize">
         <p class="minimizetext">-</p>
     </div>
+
    <div id="textpadContent" style="display: flex; flex-direction: column; gap: 12px;"></div>
    <div id="bottomBar" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
       <div style="background-color: rgba(255,255,255,0.18); width: 220px; padding: 10px; border-radius: 8px; display: flex; flex-direction: column; gap: 2px;">
@@ -248,6 +249,10 @@
           
           <p class="closetext">X</p>
         </div>
+     <div style="display:inline-block" class="minimizebutton" id="terminalminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
     <h1 style= "margin: 4px; color: rgb(142, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Terminal</h1>
         <div class="terminal-container">
     <textarea class="textnagen" id="codeOutput" readonly></textarea>
@@ -265,6 +270,11 @@
           
         <p class="closetext">X</p>
         </div>
+
+     <div style="display:inline-block" class="minimizebutton" id="paintminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
     <h1 style= "margin: 4px; color: rgb(255, 166, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Paint</h1>
 
     	<div class="paint-container">
@@ -292,7 +302,7 @@
      <div class="welcome" id="browser" style="top:40%; left: 50%; display: none; width:fit-content;">
     <div style="display:inline-block" class="welcomeheader">
       <p id="browserheader">
-        Browser
+        KuuppaBrowser
       </p>
     </div>
     
@@ -300,7 +310,12 @@
           
           <p class="closetext">X</p>
         </div>
-    <h1 style= "margin: 4px; color: rgb(255, 32, 32); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Browser</h1>
+
+     <div style="display:inline-block" class="minimizebutton" id="browserminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
+    <h1 style= "margin: 4px; color: rgb(255, 32, 32); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">KuuppaBrowser</h1>
   <div id="kuuppabrowser-container">
     <div class="browser-header">
       <input type="text" id="url-input" placeholder="Enter URL (e.g., wikipedia.org)" />
@@ -325,6 +340,11 @@
           
           <p class="closetext">X</p>
         </div>
+
+     <div style="display:inline-block" class="minimizebutton" id="calculatorminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
     <h1 style= "margin: 4px; color: rgb(17, 105, 213); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Calculator</h1>
   <table id="calcu">
 		<tr>
@@ -386,6 +406,11 @@
           
           <p class="closetext">X</p>
         </div>
+
+     <div style="display:inline-block" class="minimizebutton" id="pongminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
     <h1 style= "margin: 4px; color: rgb(255, 32, 32); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Pong</h1>
     <canvas id="pongcanvas" width="500" height="500" style="background-color: black"></canvas> 
 </div>

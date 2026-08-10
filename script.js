@@ -1308,6 +1308,11 @@ button.title = "Open " + name;
     button.addEventListener("click", function () {
         if (windowElement.style.display === "none") {
             openWindow(windowElement);
+
+            if(windowElement.id === "pong"){
+              startPong();
+            }
+
         }
         handleWindowTap(windowElement);
         removeTaskbarApp(windowElement);

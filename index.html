@@ -17,6 +17,9 @@
           
           <p class="closetext">X</p>
         </div>
+        <div style="display:inline-block" class="minimizebutton" id="welcomeminimize">
+        <p class="minimizetext">-</p>
+    </div>
     <h1 style= "margin: 4px; color: blue"> Welcome to KuuppaOS!</h1>
     <img style="width: 256px; height: 256px; border-radius: 16px; object-fit: cover; " src="./kuuppaos.png"/>
     
@@ -278,7 +281,7 @@
     <h1 style= "margin: 4px; color: rgb(255, 166, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Paint</h1>
 
     	<div class="paint-container">
-		<canvas id="canvas"></canvas>
+		<canvas id="pcanvas"></canvas>
 		<div class="paint-tools">
 			<input type="range"
 				id="brush-size" min="1"
@@ -395,7 +398,7 @@
   </div>
 </div>
 	
-     <div class="welcome" id="pong" style="top:40%; left: 50%; display: none; width:400px; height:400px;">
+     <div class="welcome" id="pong" style="top:40%; left: 50%; display: none; width:fit-content;">
     <div style="display:inline-block" class="welcomeheader">
       <p id="pongheader">
         Pong

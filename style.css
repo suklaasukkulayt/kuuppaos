@@ -437,11 +437,12 @@ body{
 
 
 
-canvas {
+#pcanvas {
     border: 2px solid black;
     cursor: crosshair;
     width: 100%;
     height: 100%;
+    background-color: rgb(255, 255, 255);
 }
 
 .paint-tools {

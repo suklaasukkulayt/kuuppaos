@@ -3,7 +3,7 @@ var currentTime = "";
       function timeUpdate() {
       currentTime = new Date().toLocaleString();
       var timeText = document.querySelector("#timebarElement");
-      if (timeText) {
+     if (timeText) {
         timeText.innerHTML = currentTime;
       }
 
@@ -247,6 +247,7 @@ function closeWindow(element) {
         element.classList.remove("closing");
         removeTaskbarApp(element);
     }, 350);
+    
 }
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")
@@ -513,18 +514,7 @@ function addWindowTapHandling(element) {
 }
 
 
-function openWindow(element) {
-  if (element) {
-    element.style.display = "flex";
-    biggestIndex++;  // Increment biggestIndex by 1
-    element.style.zIndex = biggestIndex;
-    topBar.style.zIndex = biggestIndex + 1;
-    element.classList.remove("closing");
-    void element.offsetWidth;
-    element.classList.add("opening");
-  }
 
-}
 
 // Add click handling to bring windows to front
 addWindowTapHandling(welcomeScreen);
@@ -888,7 +878,7 @@ function searchYouTube() {
 
 //Obtain the canvas and its 2d rendering context for the paint app
 const paintCanvas =
-	document.getElementById('canvas');
+	document.getElementById('pcanvas');
 const paintCtx =
 	paintCanvas.getContext('2d');
 
@@ -1292,6 +1282,7 @@ setupMinimize("#paint", "#paintminimize", "Paint");
 setupMinimize("#browser", "#browserminimize", "KuuppaBrowser");
 setupMinimize("#calculator", "#calculatorminimize", "Calculator");
 setupMinimize("#pong", "#pongminimize", "Pong");
+setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
 var openApps = document.querySelector("#openApps");
 function addTaskbarApp(windowElement, name) {
@@ -1304,7 +1295,6 @@ function addTaskbarApp(windowElement, name) {
     button.id = "task-" + windowElement.id;
     button.className = "openApp";
     button.innerHTML = name;
-button.title = "Open " + name;
     button.addEventListener("click", function () {
         if (windowElement.style.display === "none") {
             openWindow(windowElement);
@@ -1313,9 +1303,9 @@ button.title = "Open " + name;
               startPong();
             }
 
-        }
+        }            
         handleWindowTap(windowElement);
-        removeTaskbarApp(windowElement);
+        //removeTaskbarApp(windowElement);
     });
     openApps.appendChild(button);
 }
@@ -1340,4 +1330,17 @@ function setupMinimize(windowId, buttonId, appName) {
             addTaskbarApp(windowElement, appName || windowElement.id);
         }, 250);
     });
+}
+
+function openWindow(element, appName) {
+  if (element) {
+    element.style.display = "flex";
+    biggestIndex++;  // Increment biggestIndex by 1
+    element.style.zIndex = biggestIndex;
+    topBar.style.zIndex = biggestIndex + 1;
+    element.classList.remove("closing");
+    void element.offsetWidth;
+    element.classList.add("opening");
+    addTaskbarApp(element, appName);
+  }
 }

@@ -1389,8 +1389,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isSelecting) return;
 
     const desktopRect = desktop.getBoundingClientRect();
-    const currentX = e.clientX - desktopRect.left;
-    const currentY = e.clientY - desktopRect.top;
+    const currentX = Math.max(0, Math.min(e.clientX - desktopRect.left, desktopRect.width));
+    const currentY = Math.max(0, Math.min(e.clientY - desktopRect.top, desktopRect.height));
 
     const left = Math.min(startX, currentX);
     const top = Math.min(startY, currentY);

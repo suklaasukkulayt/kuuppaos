@@ -1321,6 +1321,11 @@ function addTaskbarApp(windowElement, name) {
     openApps.appendChild(button);
 }
 
+// #welcome is visible by default when the page loads (no display:none in its
+// inline style, and no desktop icon opens it), so give it a taskbar entry
+// right away instead of waiting for it to be opened or minimized.
+addTaskbarApp(welcomeScreen, "Welcome");
+
 function removeTaskbarApp(windowElement) {
     var button = document.querySelector("#task-" + windowElement.id);
     if (button) {
@@ -1361,33 +1366,27 @@ document.addEventListener("DOMContentLoaded", () => {
   let startX = 0;
   let startY = 0;
 
-  // 1. Hiiren painallus: valinnan aloitus
   desktop.addEventListener("mousedown", (e) => {
-    // Aloitetaan valinta vain kun klikataan suoraan työpöydän taustaa
     if (e.target !== desktop) return;
 
     const desktopRect = desktop.getBoundingClientRect();
     
-    // Tallennetaan aloituspiste suhteessa työpöytään
     startX = e.clientX - desktopRect.left;
     startY = e.clientY - desktopRect.top;
 
     isSelecting = true;
 
-    // Alustetaan laatikon paikka
     selectionBox.style.left = `${startX}px`;
     selectionBox.style.top = `${startY}px`;
     selectionBox.style.width = '0px';
     selectionBox.style.height = '0px';
     selectionBox.style.display = 'block';
 
-    // Tyhjennetään aiemmat ikonivalinnat
     document.querySelectorAll(".desktop-icon").forEach(icon => {
       icon.classList.remove("selected");
     });
   });
 
-  // 2. Hiiren liike: laatikon koon päivitys ja ikonien valinta
   document.addEventListener("mousemove", (e) => {
     if (!isSelecting) return;
 

@@ -1321,9 +1321,7 @@ function addTaskbarApp(windowElement, name) {
     openApps.appendChild(button);
 }
 
-// #welcome is visible by default when the page loads (no display:none in its
-// inline style, and no desktop icon opens it), so give it a taskbar entry
-// right away instead of waiting for it to be opened or minimized.
+
 addTaskbarApp(welcomeScreen, "Welcome");
 
 function removeTaskbarApp(windowElement) {

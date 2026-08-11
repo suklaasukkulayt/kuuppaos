@@ -1296,7 +1296,13 @@ function minimizeWindow(windowElement) {
 
 var openApps = document.querySelector("#openApps");
 function addTaskbarApp(windowElement, name) {
-    if (document.querySelector("#task-" + windowElement.id)) {
+    if (windowElement.id === "settings") {
+      return;
+    } else if (windowElement.id === "calendar"){
+      return;
+    }
+
+      else if(document.querySelector("#task-" + windowElement.id)) {
         return;
     }
 

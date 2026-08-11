@@ -386,6 +386,21 @@ if (youtubeIcon) {
 }
 
 
+  dragElement(document.querySelector("#cterminal"))
+
+  var cterminalScreen = document.querySelector("#cterminal")
+  var cterminalIcon = document.querySelector("#cterminalicon")
+
+  var cterminalScreenClose = document.querySelector("#cterminalclose")
+
+  cterminalScreenClose.addEventListener("click", () => closeWindow(cterminalScreen));
+
+  if (cterminalIcon) {
+    cterminalIcon.addEventListener("click", () => {
+      handleIconTap(cterminalIcon, cterminalScreen, "HackCMD");
+    });
+  }
+
   dragElement(document.querySelector("#terminal"))
 
   var terminalScreen = document.querySelector("#terminal")
@@ -523,6 +538,7 @@ addWindowTapHandling(weatherScreen);
 addWindowTapHandling(clockScreen);
 addWindowTapHandling(spotifyScreen);
 addWindowTapHandling(youtubeScreen);
+addWindowTapHandling(cterminalScreen);
 addWindowTapHandling(terminalScreen);
 addWindowTapHandling(paintScreen);
 addWindowTapHandling(settingsScreen);
@@ -759,7 +775,7 @@ let currentSnippet = '';
 let currentSnippetIndex = 0;
 
 function isTerminalTopmost() {
-  return terminalScreen && Number(terminalScreen.style.zIndex || 0) === biggestIndex;
+  return cterminalScreen && Number(cterminalScreen.style.zIndex || 0) === biggestIndex;
 }
 
 const codeSnippets = {
@@ -1278,6 +1294,7 @@ setupMinimize("#weather", "#weatherminimize", "Weather");
 setupMinimize("#spotify", "#spotifyminimize", "KuuppaMusic");
 setupMinimize("#youtube", "#youtubeminimize", "KuuppaVid");
 setupMinimize("#terminal", "#terminalminimize", "Terminal");
+setupMinimize("#cterminal", "#cterminalminimize", "HackCMD");
 setupMinimize("#paint", "#paintminimize", "Paint");
 setupMinimize("#browser", "#browserminimize", "KuuppaBrowser");
 setupMinimize("#calculator", "#calculatorminimize", "Calculator");
@@ -1437,3 +1454,167 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+
+var cmdInput = document.querySelector("#cmdInput");
+var cmdOutput = document.querySelector("#cmdOutput");
+
+function addCommand(text) {
+    var line = document.createElement("div");
+    line.textContent = text;
+    cmdOutput.appendChild(line);
+    cmdOutput.scrollTop = cmdOutput.scrollHeight;
+}
+
+
+var commandHistory = [];
+var historyIndex = -1;
+
+cmdInput.addEventListener("keydown", function (e) {
+
+    if (e.key === "Enter") {
+
+        var command = cmdInput.value.trim();
+
+        if (command === "") {
+            return;
+        }
+
+        commandHistory.push(command);
+        historyIndex = commandHistory.length;
+
+        addCommand("> " + command);
+
+        runCommand(command);
+
+        cmdInput.value = "";
+    }
+
+    if (e.key === "ArrowUp") {
+
+        if (historyIndex > 0) {
+            historyIndex--;
+            cmdInput.value = commandHistory[historyIndex];
+        }
+
+        e.preventDefault();
+    }
+
+    if (e.key === "ArrowDown") {
+
+        if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            cmdInput.value = commandHistory[historyIndex];
+        } else {
+            historyIndex = commandHistory.length;
+            cmdInput.value = "";
+        }
+
+        e.preventDefault();
+    }
+
+});
+
+function runCommand(command) {
+
+    var parts = command.split(" ");
+    var mainCommand = parts[0].toLowerCase();
+
+    if (mainCommand === "help") {
+
+        addCommand("");
+        addCommand("KuuppaOS commands:");
+        addCommand("");
+        addCommand("help       Show this list");
+        addCommand("clear      Clear terminal");
+        addCommand("time       Show current time and date");
+        addCommand("apps       Show installed apps");
+        addCommand("about      About KuuppaOS");
+        addCommand("print      Print text");
+        addCommand("");
+
+    }
+
+    else if (mainCommand === "clear") {
+
+        cmdOutput.innerHTML = "";
+
+    }
+
+    else if (mainCommand === "time") {
+
+        var time = new Date().toLocaleTimeString();
+        var date = new Date().toLocaleDateString();
+        addCommand(time);
+        addCommand(date);
+
+    }
+
+
+    else if (mainCommand === "apps") {
+
+        addCommand("");
+        addCommand("Installed apps:");
+        addCommand("");
+        addCommand("Welcome");
+        addCommand("TeXtpad");
+        addCommand("Weather");
+        addCommand("Clock");
+        addCommand("KuuppaVid");
+        addCommand("KuuppaMusic");
+        addCommand("HackCMD");
+        addCommand("Terminal");
+        addCommand("Paint");
+        addCommand("KuuppaBrowser");
+        addCommand("Calculator");
+        addCommand("Pong");
+        addCommand("");
+
+    }
+
+
+
+    else if (mainCommand === "print") {
+
+        var text = command.substring(5);
+
+        addCommand(text);
+
+    }
+
+    else if (mainCommand === "about") {
+
+        var username = localStorage.getItem("blur");
+
+        if (!username) {
+            username = "user";
+        }
+
+        var theme = localStorage.getItem("wallpaper");
+
+        if (!theme) {
+            theme = "lucky";
+        }
+
+        addCommand("================================");
+addCommand("          KuuppaOS");
+addCommand("================================");
+addCommand("System: WebOS");
+addCommand("User: Kuuppa");
+addCommand("================================");
+addCommand("");
+
+    }
+
+    else {
+
+        addCommand(
+            "Command not found: " + mainCommand
+        );
+
+        addCommand(
+            "Type 'help' for available commands."
+        );
+    }
+}

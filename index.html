@@ -75,6 +75,11 @@
           <p class="icon-label">KuuppaVid</p>
         </div>
 
+        <div id="cterminalicon" class="desktop-icon">
+          <img src="./terminal.png" alt="HackCMD">
+          <p class="icon-label">HackCMD</p>
+        </div>
+
         <div id="terminalicon" class="desktop-icon">
           <img src="./terminal.png" alt="Terminal">
           <p class="icon-label">Terminal</p>
@@ -141,7 +146,7 @@
     
     <div style="display:inline-block" class="closebutton" id="weatherclose">
           
-          <p class="closetext">X</p>
+          <p class="closetext"mm>X</p>
         </div>
 
         <div style="display:inline-block" class="minimizebutton" id="weatherminimize">
@@ -248,10 +253,32 @@
 </div>
 
 
+     <div class="welcome" id="cterminal" style="top:50%; left: 30%; display: none; width:500px;">
+    <div style="display:inline-block" class="welcomeheader">
+      <p id="cterminalheader">
+        HackCMD
+      </p>
+    </div>
+    
+    <div style="display:inline-block" class="closebutton" id="cterminalclose">
+          
+          <p class="closetext">X</p>
+        </div>
+     <div style="display:inline-block" class="minimizebutton" id="cterminalminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
+    <h1 style= "margin: 4px; color: rgb(142, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">HackCMD</h1>
+        <div class="terminal-container">
+    <textarea class="textnagen" id="codeOutput" readonly></textarea>
+  </div>
+</div>
+
+
      <div class="welcome" id="terminal" style="top:50%; left: 30%; display: none; width:500px;">
     <div style="display:inline-block" class="welcomeheader">
       <p id="terminalheader">
-        Hacking Terminal
+        Terminal
       </p>
     </div>
     
@@ -264,10 +291,26 @@
     </div>
     
     <h1 style= "margin: 4px; color: rgb(142, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Terminal</h1>
-        <div class="terminal-container">
-    <textarea class="textnagen" id="codeOutput" readonly></textarea>
-  </div>
+    <div class="cmdContent">
+        <div id="cmdOutput">
+            <div>KuuppaOS Terminal</div>
+            <div>Type <span class="cmdGreen">help</span> for a list of commands.</div>
+            <br>
+        </div>
+        <div class="cmdInputLine">
+            <span class="cmdPrompt">Kuuppa@KuuppaOS:~$</span>
+
+            <input
+                id="cmdInput"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+            >
+        </div>
+    </div>
 </div>
+</div>
+
 
      <div class="welcome" id="paint" style="top:70%; left: 30%; display: none; width: 500px; height: 500px;">
     <div style="display:inline-block" class="welcomeheader">

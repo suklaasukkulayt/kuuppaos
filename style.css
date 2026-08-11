@@ -146,7 +146,6 @@ body{
 
 .terminal-container {
   width: 90%;
-  margin: 0 auto;
   text-align: center;
   font-family: 'Courier New', monospace;
   padding: 20px;
@@ -192,8 +191,11 @@ body{
   min-height: 16px;
   cursor: grab;
   user-select: none;
-  padding-right: 24px;
-  margin: 0 0 8px 0;
+  padding: 8px 24px 8px 8px;
+  margin: -16px -16px 8px -16px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 16px 16px 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .desktop-apps {
@@ -975,4 +977,60 @@ border: 2px solid black;
   pointer-events: none; 
   display: none;        
   z-index: -1;
+}
+
+#terminal {
+    width: 600px;
+    min-width: 450px;
+    height: 400px;
+    background: rgba(8, 8, 12, 0.92);
+}
+
+.cmdContent {
+    height: calc(100% - 46px);
+    box-sizing: border-box;
+    padding: 15px;
+    overflow-y: auto;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    color: #eeeeee;
+}
+
+#cmdOutput {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.cmdInputLine {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.cmdPrompt {
+    color: #7cff8a;
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+#cmdInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+}
+
+.cmdGreen {
+    color: #7cff8a;
+}
+
+.cmdBlue {
+    color: #72a7ff;
+}
+
+.cmdRed {
+    color: #ff7070;
 }

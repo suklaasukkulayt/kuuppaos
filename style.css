@@ -186,6 +186,7 @@ body{
 }
 
 .welcomeheader {
+  display: block;
   text-align: center;
   font-size: 12px;
   min-height: 16px;
@@ -983,7 +984,7 @@ border: 2px solid black;
     width: 600px;
     min-width: 450px;
     height: 400px;
-    background: rgba(8, 8, 12, 0.92);
+    
 }
 
 .cmdContent {
@@ -994,6 +995,7 @@ border: 2px solid black;
     font-family: Consolas, "Courier New", monospace;
     font-size: 14px;
     color: #eeeeee;
+    background: rgb(8, 8, 12);
 }
 
 #cmdOutput {

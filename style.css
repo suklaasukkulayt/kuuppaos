@@ -187,6 +187,7 @@ body{
 
 .welcomeheader {
   display: block;
+  align-self: stretch;
   text-align: center;
   font-size: 12px;
   min-height: 16px;

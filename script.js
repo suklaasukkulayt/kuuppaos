@@ -1632,12 +1632,14 @@ addCommand("kuuppa");
         if (blura === "null") {
             blure = "0";
         }
+
+      
         if (wallpa === "null") {
             wallpa = "Default";
-        }
-        if (wallpa !== "null") {
+        }else if (wallpa !== "null") {
             wallpa = "Custom";
         }
+        
 
 
 

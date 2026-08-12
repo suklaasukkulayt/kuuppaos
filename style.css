@@ -981,6 +981,7 @@ border: 2px solid black;
   position: absolute;
   background-color: rgba(0, 120, 215, 0.25); 
   border: 1px solid rgba(0, 120, 215, 0.8); 
+  border-radius: 6px;
   pointer-events: none; 
   display: none;        
   z-index: -1;

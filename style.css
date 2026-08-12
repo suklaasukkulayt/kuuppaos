@@ -173,7 +173,7 @@ body{
     background-color: rgba(0, 255, 0, var(--desktop-window-alpha));
     position: absolute;
     transform: translate(-50%, -50%);
-    padding: 16px;
+    padding: 41px 16px 16px 16px;
     border: dashed black;
     width: 256px;
     border-radius: 16px;
@@ -186,15 +186,20 @@ body{
 }
 
 .welcomeheader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
   display: block;
-  align-self: stretch;
   text-align: center;
   font-size: 12px;
   min-height: 16px;
+  line-height: 1px;
   cursor: grab;
   user-select: none;
   padding: 8px 24px 8px 8px;
-  margin: -16px -16px 8px -16px;
+  margin: 0 0 8px 0;
   background-color: rgba(0, 0, 0, 0.15);
   border-radius: 16px 16px 0 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);

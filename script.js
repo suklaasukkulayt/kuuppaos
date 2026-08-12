@@ -1460,12 +1460,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 var cmdInput = document.querySelector("#cmdInput");
 var cmdOutput = document.querySelector("#cmdOutput");
+var cmdContent = cmdOutput.closest(".cmdContent");
 
-function addCommand(text) {
+function addCommand(text, color) {
     var line = document.createElement("div");
     line.textContent = text;
+    if (color) {
+        line.style.color = color;
+    }
     cmdOutput.appendChild(line);
-    cmdOutput.scrollTop = cmdOutput.scrollHeight;
+    cmdContent.scrollTop = cmdContent.scrollHeight;
 }
 
 
@@ -1485,7 +1489,7 @@ cmdInput.addEventListener("keydown", function (e) {
         commandHistory.push(command);
         historyIndex = commandHistory.length;
 
-        addCommand("Kuuppa@KuuppaOS:~$ " + command);
+        addCommand("Kuuppa@KuuppaOS:~$ " + command , "#7cff8a");
 
         runCommand(command);
 
@@ -1525,7 +1529,7 @@ function runCommand(command) {
     if (mainCommand === "help") {
 
         addCommand("");
-        addCommand("KuuppaOS commands:");
+        addCommand("KuuppaOS commands:", "#7cff8a");
         addCommand("");
         addCommand("help       Show this list");
         addCommand("clear      Clear terminal");
@@ -1596,7 +1600,7 @@ addCommand("kuuppa");
     else if (mainCommand === "apps") {
 
         addCommand("");
-        addCommand("Installed apps:");
+        addCommand("Installed apps:", "#7cff8a");
         addCommand("");
         addCommand("Welcome");
         addCommand("TeXtpad");
@@ -1629,34 +1633,37 @@ addCommand("kuuppa");
         var blura = localStorage.getItem(STORAGE_BLUR);
         var wallpa = localStorage.getItem(STORAGE_BG);
         var transa = localStorage.getItem(STORAGE_TRANSPARENT);
-        if (blura === "null") {
-            blure = "0";
+        if (blura === null) {
+            blura = "0";
         }
 
-      
-        if (wallpa === "null") {
+        if (transa === null) {
+            transa = "0";
+        }
+
+        if (wallpa === null) {
             wallpa = "Default";
-        }else if (wallpa !== "null") {
+        } else {
             wallpa = "Custom";
         }
         
 
 
 
-addCommand("================================");
-addCommand("          KuuppaOS");
-addCommand("================================");
+addCommand("================================", "#7cff8a");
+addCommand("          KuuppaOS", "#7cff8a");
+addCommand("================================", "#7cff8a");
 addCommand("User: Kuuppa");
 addCommand("Blur: " + blura + "px");
 addCommand("Transparency: " + transa + "%");
 addCommand("Wallpaper: " + wallpa);
-addCommand("================================");
-addCommand("         About KuuppaOS");
-addCommand("================================");
+addCommand("================================", "#7cff8a");
+addCommand("         About KuuppaOS", "#7cff8a");
+addCommand("================================", "#7cff8a");
 addCommand("KuuppaOS is a WebOS");
 addCommand("Made by @suklaasukkulayt");
 addCommand("Languages: HTML, CSS, JS");
-addCommand("================================");
+addCommand("================================", "#7cff8a");
 addCommand("");
 
     }

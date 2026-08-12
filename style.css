@@ -996,6 +996,7 @@ border: 2px solid black;
     font-size: 14px;
     color: #eeeeee;
     background: rgb(8, 8, 12);
+    border-radius: 16px;
 }
 
 #cmdOutput {
@@ -1023,16 +1024,4 @@ border: 2px solid black;
     color: white;
     font-family: Consolas, "Courier New", monospace;
     font-size: 14px;
-}
-
-.cmdGreen {
-    color: #7cff8a;
-}
-
-.cmdBlue {
-    color: #72a7ff;
-}
-
-.cmdRed {
-    color: #ff7070;
 }

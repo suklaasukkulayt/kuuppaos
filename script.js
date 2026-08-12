@@ -595,7 +595,7 @@ function addToBottomBar(index) {
 
   var note = content[index];
   var newDiv = document.createElement("div");
-  newDiv.style.cssText = "background-color: rgb(231, 25, 25); width: 220px; padding: 10px; border-radius: 8px; cursor: pointer;";
+  newDiv.style.cssText = "background-color: rgb(231, 25, 25); width: 220px; padding: 10px; border-radius: 8px;";
   newDiv.innerHTML = `
     <p style="margin: 0px;">${note.title}</p>
     <p style="font-size: 12px; margin: 0px;">${note.date}</p>
@@ -1457,6 +1457,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 var cmdInput = document.querySelector("#cmdInput");
 var cmdOutput = document.querySelector("#cmdOutput");
 
@@ -1484,7 +1485,7 @@ cmdInput.addEventListener("keydown", function (e) {
         commandHistory.push(command);
         historyIndex = commandHistory.length;
 
-        addCommand("> " + command);
+        addCommand("Kuuppa@KuuppaOS:~$ " + command);
 
         runCommand(command);
 
@@ -1542,6 +1543,46 @@ function runCommand(command) {
 
     }
 
+    else if (mainCommand === "kuuppa") {
+
+        addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+addCommand("kuuppa");
+
+    }
+
     else if (mainCommand === "time") {
 
         var time = new Date().toLocaleTimeString();
@@ -1585,23 +1626,27 @@ function runCommand(command) {
 
     else if (mainCommand === "about") {
 
-        var username = localStorage.getItem("blur");
+        var blura = localStorage.getItem(STORAGE_BLUR);
 
-        if (!username) {
-            username = "user";
+        var transa = localStorage.getItem(STORAGE_TRANSPARENT);
+        if (blura === "null") {
+            blure = "0";
         }
 
-        var theme = localStorage.getItem("wallpaper");
 
-        if (!theme) {
-            theme = "lucky";
-        }
 
-        addCommand("================================");
+addCommand("================================");
 addCommand("          KuuppaOS");
 addCommand("================================");
-addCommand("System: WebOS");
 addCommand("User: Kuuppa");
+addCommand("Blur: " + blura + "px");
+addCommand("Transparency: " + transa + "%");
+addCommand("================================");
+addCommand("          About KuuppaOS");
+addCommand("================================");
+addCommand("KuuppaOS is a WebOS");
+addCommand("Made by @suklaasukkulayt");
+addCommand("Languages: HTML, CSS, JS");
 addCommand("================================");
 addCommand("");
 

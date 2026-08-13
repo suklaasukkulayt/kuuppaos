@@ -1627,8 +1627,20 @@ addCommand("kuuppa");
         addCommand(text);
 
     }
+    else if (mainCommand === "about_textpad") {
+      addCommand("About TeXtpad", "#7cff8a");
+      addCommand("You can save info to TeXtpad, but it only has one textbox.")
+      addCommand("You can use it for small thoughts that you don't want to forget yet.")
+      addCommand("It's basically like notepad, but with only one note.")
+    }
+    else if (mainCommand === "about_weather") {
+      addCommand("About Weather", "#7cff8a");
+      addCommand("This app shows you your local weather!")
+      addCommand("It shows temperature, condition (with text and an emoji) and your location.")
+      addCommand("Make sure you have enabled location services for this to work.")
+    }
 
-    else if (mainCommand === "about") {
+  else if (mainCommand === "about") {
 
         var blura = localStorage.getItem(STORAGE_BLUR);
         var wallpa = localStorage.getItem(STORAGE_BG);
@@ -1667,6 +1679,8 @@ addCommand("================================", "#7cff8a");
 addCommand("");
 
     }
+
+    
 
     else {
 

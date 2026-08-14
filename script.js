@@ -359,14 +359,22 @@ dragElement(document.querySelector("#spotify"))
 
 var spotifyScreen = document.querySelector("#spotify")
 var spotifyIcon = document.querySelector("#spotifyicon")
+var spotifyIframe = spotifyScreen.querySelector("iframe")
+var spotifyIframeSrc = spotifyIframe.getAttribute("src")
 
 var spotifyScreenClose = document.querySelector("#spotifyclose")
 
-spotifyScreenClose.addEventListener("click", () => closeWindow(spotifyScreen));
+spotifyScreenClose.addEventListener("click", () => {
+  closeWindow(spotifyScreen);
+  spotifyIframe.removeAttribute("src"); // stop playback by tearing down the embed
+});
 
 if (spotifyIcon) {
   spotifyIcon.addEventListener("click", () => {
     handleIconTap(spotifyIcon, spotifyScreen, "KuuppaMusic");
+    if (!spotifyIframe.getAttribute("src")) {
+      spotifyIframe.src = spotifyIframeSrc; // restore embed if it was closed
+    }
   });
 }
 
@@ -377,7 +385,11 @@ var youtubeIcon = document.querySelector("#youtubeicon")
 
 var youtubeScreenClose = document.querySelector("#youtubeclose")
 
-youtubeScreenClose.addEventListener("click", () => closeWindow(youtubeScreen));
+youtubeScreenClose.addEventListener("click", () => {
+  closeWindow(youtubeScreen);
+  const resultsDiv = document.getElementById('searchResults');
+  if (resultsDiv) resultsDiv.innerHTML = ""; // remove iframe to stop playback
+});
 
 if (youtubeIcon) {
   youtubeIcon.addEventListener("click", () => {
@@ -494,10 +506,7 @@ var pongScreenMinimize = document.querySelector("#pongminimize")
 pongScreenClose.addEventListener("click", () => {
   closeWindow(pongScreen);
   stopPong();
-});
-
-pongScreenMinimize.addEventListener("click", () => {
-  stopPong();
+  resetPong();
 });
 
 if (pongIcon) {
@@ -1303,6 +1312,16 @@ function stopPong() {
         clearInterval(pongInterval);
         pongInterval = null;
     }
+}
+
+function resetPong() {
+    paddles = [0, 0];
+    ball = [0, 0, -0.016, 0];
+    score = [0, 0];
+    cursor = 0;
+    reactionSpeed = 6;
+    reactionDistance = -0.5;
+    ctx.clearRect(0, 0, 500, 500);
 }
 
 setupMinimize("#textpad", "#textpadminimize", "TeXtpad");

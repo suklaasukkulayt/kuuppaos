@@ -1627,6 +1627,11 @@ addCommand("kuuppa");
         addCommand(text);
 
     }
+
+    else if (mainCommand === "welcome") {
+      addCommand("About Welcome", "#7cff8a");
+      addCommand("This is just the welcome screen with some links.")
+    }
     else if (mainCommand === "about_textpad") {
       addCommand("About TeXtpad", "#7cff8a");
       addCommand("You can save info to TeXtpad, but it only has one textbox.")

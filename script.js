@@ -466,6 +466,22 @@ if (calculatorIcon) {
 }
 
 
+dragElement(document.querySelector("#camera"))
+
+var cameraScreen = document.querySelector("#camera")
+var cameraIcon = document.querySelector("#cameraicon")
+
+var cameraScreenClose = document.querySelector("#cameraclose")
+
+cameraScreenClose.addEventListener("click", () => closeWindow(cameraScreen));
+
+if (cameraIcon) {
+  cameraIcon.addEventListener("click", () => {
+    handleIconTap(cameraIcon, cameraScreen, "Camera");
+  });
+}
+
+
 
 dragElement(document.querySelector("#pong"))
 
@@ -545,6 +561,7 @@ addWindowTapHandling(settingsScreen);
 addWindowTapHandling(browserScreen);
 addWindowTapHandling(calculatorScreen);
 addWindowTapHandling(pongScreen);
+addWindowTapHandling(cameraScreen);
 
 
 var content = [
@@ -1299,6 +1316,7 @@ setupMinimize("#paint", "#paintminimize", "Paint");
 setupMinimize("#browser", "#browserminimize", "KuuppaBrowser");
 setupMinimize("#calculator", "#calculatorminimize", "Calculator");
 setupMinimize("#pong", "#pongminimize", "Pong");
+setupMinimize("#camera", "#cameraminimize", "Camera");
 setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
 function minimizeWindow(windowElement) {
@@ -1535,8 +1553,8 @@ function runCommand(command) {
         addCommand("clear      Clear terminal");
         addCommand("time       Show current time and date");
         addCommand("apps       Show installed apps");
-        addCommand("about      About KuuppaOS");
-        addCommand("print      Print text");
+        addCommand("about      About KuuppaOS (or 'about_appname' (appname is fully lowercase (like 'about_textpad')");
+        addCommand("print      Print text (like 'print kuuppa')");
         addCommand("");
 
     }
@@ -1614,6 +1632,7 @@ addCommand("kuuppa");
         addCommand("KuuppaBrowser");
         addCommand("Calculator");
         addCommand("Pong");
+        addCommand("Camera");
         addCommand("");
 
     }
@@ -1747,4 +1766,65 @@ addCommand("");
             "Type 'help' for available commands."
         );
     }
+}
+
+const width = 320; // We will scale the photo width to this
+let height = 0; // This will be computed based on the input stream
+
+let streaming = false;
+
+const video = document.getElementById("video");
+const cameracanvas = document.getElementById("cameracanvas");
+const photo = document.getElementById("photo");
+const startButton = document.getElementById("start-button");
+const allowButton = document.getElementById("permissions-button");
+allowButton.addEventListener("click", () => {
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: false })
+    .then((stream) => {
+      video.srcObject = stream;
+      video.play();
+    })
+    .catch((err) => {
+      alert(`An error occurred: ${err}`)
+      console.error(`An error occurred: ${err}`);
+    });
+});
+video.addEventListener("canplay", (ev) => {
+  if (!streaming) {
+    height = video.videoHeight / (video.videoWidth / width);
+
+    video.setAttribute("width", width);
+    video.setAttribute("height", height);
+    cameracanvas.setAttribute("width", width);
+    cameracanvas.setAttribute("height", height);
+    streaming = true;
+  }
+});
+startButton.addEventListener("click", (ev) => {
+  takePicture();
+  ev.preventDefault();
+});
+function clearPhoto() {
+  const context = cameracanvas.getContext("2d");
+  context.fillStyle = "#aaaaaa";
+  context.fillRect(0, 0, cameracanvas.width, cameracanvas.height);
+
+  const data = cameracanvas.toDataURL("image/png");
+  photo.setAttribute("src", data);
+}
+
+clearPhoto();
+function takePicture() {
+  const context = cameracanvas.getContext("2d");
+  if (width && height) {
+    cameracanvas.width = width;
+    cameracanvas.height = height;
+    context.drawImage(video, 0, 0, width, height);
+
+    const data = canvas.toDataURL("image/png");
+    photo.setAttribute("src", data);
+  } else {
+    clearPhoto();
+  }
 }

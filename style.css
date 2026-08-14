@@ -1032,3 +1032,54 @@ border: 2px solid black;
     font-family: Consolas, "Courier New", monospace;
     font-size: 14px;
 }
+
+
+
+#camera-container {
+  font:
+    1rem "Lucida Grande",
+    "Arial",
+    sans-serif;
+  padding: 0.8rem;
+}
+
+#permissions-button {
+  display: block;
+  margin-block: 1rem;
+}
+
+#start-button {
+  position: relative;
+  margin: auto;
+  bottom: 32px;
+  background-color: rgb(0 150 0 / 50%);
+  border: 1px solid rgb(255 255 255 / 70%);
+  box-shadow: 0px 0px 1px 2px rgb(0 0 0 / 20%);
+  font-size: 14px;
+  color: white;
+  display: block;
+ 
+}
+
+#video,
+#photo {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  width: 100%;
+  height: auto;
+}
+
+#cameracanvas {
+  display: none;
+}
+
+.camera,
+.output {
+  width: 49%;
+  height: auto;
+  display: inline-block;
+}
+
+.output {
+  vertical-align: top;
+}

@@ -105,6 +105,11 @@
           <img src="./icons/pong.png" alt="Pong">
           <p class="icon-label">Pong</p>
         </div>
+
+        <div id="cameraicon" class="desktop-icon" title="Take photos in KuuppaOS!">
+          <img src="./icons/camera.png" alt="Camera">
+          <p class="icon-label">Camera</p>
+        </div>
   
 
         <div id="selection-box"></div>
@@ -468,6 +473,38 @@
     
     <h1 style= "margin: 4px; color: rgb(255, 42, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Pong</h1>
     <canvas id="pongcanvas" width="500" height="500" style="background-color: black"></canvas> 
+</div>
+
+
+     <div class="welcome" id="camera" style="top:40%; left: 30%; display: none; width: 500px;">
+    <div class="welcomeheader" id="cameraheader">
+      <p>
+        Camera
+      </p>
+    </div>
+    
+    <div   class="closebutton" id="cameraclose">
+          
+          <p class="closetext">X</p>
+        </div>
+
+     <div   class="minimizebutton" id="cameraminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
+    <h1 style= "margin: 4px; color: rgb(218, 105, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Camera</h1>
+    <div id="camera-container">
+      <button id="permissions-button">Allow camera</button>
+<div class="camera">
+  <video id="video">Video stream not available.</video>
+  <button id="start-button">Capture photo</button>
+</div>
+<canvas id="cameracanvas"></canvas>
+<div class="output">
+  <img id="photo" src="" alt="The screen capture will appear in this box." />
+</div>
+    </div>
+  <p>Also try <a href="https://stardance.hackclub.com/projects/30620">KuuppaCam</a>!</p>
 </div>
 
 

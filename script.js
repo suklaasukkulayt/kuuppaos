@@ -1635,7 +1635,7 @@ addCommand("kuuppa");
     else if (mainCommand === "about_textpad") {
       addCommand("About TeXtpad", "#7cff8a");
       addCommand("You can save info to TeXtpad, but it only has one textbox.")
-      addCommand("You can use it for small thoughts that you don't want to forget yet.")
+      addCommand("You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!)")
       addCommand("It's basically like notepad, but with only one note.")
     }
     else if (mainCommand === "about_weather") {
@@ -1643,6 +1643,56 @@ addCommand("kuuppa");
       addCommand("This app shows you your local weather!")
       addCommand("It shows temperature, condition (with text and an emoji) and your location.")
       addCommand("Make sure you have enabled location services for this to work.")
+    }
+    else if (mainCommand === "about_clock") {
+      addCommand("About Clock", "#7cff8a");
+      addCommand("This app tells you the time.")
+      addCommand("There is nothing special about this, it's just an analog clock.")
+    }
+    else if (mainCommand === "about_kuuppamusic") {
+      addCommand("About KuuppaMusic", "#7cff8a");
+      addCommand("You can listen to spotify's lofi beats playlist.")
+      addCommand("All the songs only play for 30 seconds, so this is kind of useless.")
+      addCommand("New version coming...")
+    }
+    else if (mainCommand === "about_kuuppavid") {
+      addCommand("About KuuppaVid", "#7cff8a");
+      addCommand("You can watch any YouTube video with this!")
+      addCommand("You only have to know the video id...")
+    }
+    else if (mainCommand === "about_hackcmd") {
+      addCommand("About HackCMD", "#7cff8a");
+      addCommand("With this app you can seem like you are hacking!")
+      addCommand("Just type anything in the terminal window!")
+    }
+    else if (mainCommand === "about_terminal") {
+      addCommand("About Terminal", "#7cff8a");
+      addCommand("This is the app you're using right now.")
+      addCommand("This is just a basic terminal.")
+      addCommand("Type 'help' to see all available commands.")
+    }
+    else if (mainCommand === "about_paint") {
+      addCommand("About Paint", "#7cff8a");
+      addCommand("You can paint anything you want!")
+      addCommand("You can change color and size, and also use the eraser or clear the whole canvas.")
+      addCommand("After you're done, just press the Download button!")
+    }
+    else if (mainCommand === "about_kuuppabrowser") {
+      addCommand("About KuuppaBrowser", "#7cff8a");
+      addCommand("You can browse all websites that allow being in an iframe.")
+      addCommand("Just type in the URL (like 'wikipedia.org') and press load!")
+      addCommand("You can even have KuuppaOS in KuuppaOS.")
+    }
+    else if (mainCommand === "about_calculator") {
+      addCommand("About Calculator", "#7cff8a");
+      addCommand("This is just a basic calculator.")
+      addCommand("Use the buttons or just type your numbers in the textarea and press solve!")
+    }
+    else if (mainCommand === "about_pong") {
+      addCommand("About Pong", "#7cff8a");
+      addCommand("You can play pong.")
+      addCommand("Use your mouse to move. It's that simple!")
+      addCommand("You can pause by minimizing the app.")
     }
 
   else if (mainCommand === "about") {

@@ -1743,7 +1743,13 @@ addCommand("kuuppa");
       addCommand("About Pong", "#7cff8a");
       addCommand("You can play pong.")
       addCommand("Use your mouse to move. It's that simple!")
-      addCommand("You can pause by minimizing the app.")
+      addCommand("You can pause by minimizing the app. Reset by closing it.")
+    }
+    else if (mainCommand === "about_camera") {
+      addCommand("About Camera", "#7cff8a");
+      addCommand("Take pictures inside KuuppaOS.")
+      addCommand("Just press the Take Photo button!")
+      addCommand("Then you will see the photo for a few seconds and then your download will start.")
     }
 
   else if (mainCommand === "about") {

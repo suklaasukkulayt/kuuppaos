@@ -485,7 +485,10 @@ var cameraIcon = document.querySelector("#cameraicon")
 
 var cameraScreenClose = document.querySelector("#cameraclose")
 
-cameraScreenClose.addEventListener("click", () => closeWindow(cameraScreen));
+cameraScreenClose.addEventListener("click", () => {
+  closeWindow(cameraScreen);
+  stopCamera();
+});
 
 if (cameraIcon) {
   cameraIcon.addEventListener("click", () => {
@@ -1376,6 +1379,9 @@ function addTaskbarApp(windowElement, name) {
             handleWindowTap(windowElement);
         } else {
             minimizeWindow(windowElement);
+            if(windowElement.id === "camera"){
+              stopCamera();
+            }
         }
     });
     openApps.appendChild(button);
@@ -1400,6 +1406,9 @@ function setupMinimize(windowId, buttonId, appName) {
         if(windowElement.id === "pong"){
               stopPong();
             }
+        if(windowElement.id === "camera"){
+              stopCamera();
+            }
     });
 }
 
@@ -1413,6 +1422,10 @@ function openWindow(element, appName) {
     void element.offsetWidth;
     element.classList.add("opening");
     addTaskbarApp(element, appName);
+
+    if (element.id === "camera") {
+      startCamera();
+    }
   }
 }
 
@@ -1787,28 +1800,56 @@ addCommand("");
     }
 }
 
-const width = 320; // We will scale the photo width to this
+const width = 1280; // We will scale the photo width to this (720p)
 let height = 0; // This will be computed based on the input stream
 
 let streaming = false;
+let cameraStream = null;
 
 const video = document.getElementById("video");
 const cameracanvas = document.getElementById("cameracanvas");
 const photo = document.getElementById("photo");
 const startButton = document.getElementById("start-button");
 const allowButton = document.getElementById("permissions-button");
-allowButton.addEventListener("click", () => {
+const cameraError = document.getElementById("camera-error");
+
+function startCamera() {
+  if (cameraStream) return; // already running
   navigator.mediaDevices
-    .getUserMedia({ video: true, audio: false })
+    .getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false })
     .then((stream) => {
+      cameraStream = stream;
       video.srcObject = stream;
       video.play();
+      if (cameraError) {
+        cameraError.textContent = "";
+        cameraError.style.display = "none";
+      }
     })
     .catch((err) => {
-      alert(`An error occurred: ${err}`)
-      console.error(`An error occurred: ${err}`);
+      const message = `Camera error: ${err.message || err}`;
+      if (cameraError) {
+        cameraError.textContent = message;
+        cameraError.style.display = "block";
+      } else {
+        alert(message);
+      }
+      console.error(message);
     });
-});
+}
+
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach((track) => track.stop());
+    cameraStream = null;
+  }
+  video.srcObject = null;
+  streaming = false;
+}
+
+if (allowButton) {
+  allowButton.addEventListener("click", startCamera);
+}
 video.addEventListener("canplay", (ev) => {
   if (!streaming) {
     height = video.videoHeight / (video.videoWidth / width);
@@ -1833,6 +1874,9 @@ function clearPhoto() {
   photo.setAttribute("src", data);
 }
 
+const outputOverlay = document.querySelector(".output");
+let photoRevealTimeout = null;
+
 clearPhoto();
 function takePicture() {
   const context = cameracanvas.getContext("2d");
@@ -1843,7 +1887,40 @@ function takePicture() {
 
     const data = cameracanvas.toDataURL('image/png');
     photo.setAttribute("src", data);
+
+    if (photoRevealTimeout) {
+      clearTimeout(photoRevealTimeout);
+    }
+
+    if (outputOverlay) {
+      outputOverlay.classList.add("visible");
+    }
+
+    photoRevealTimeout = setTimeout(() => {
+      if (outputOverlay) {
+        outputOverlay.classList.remove("visible");
+      }
+      downloadPhoto(data);
+      photoRevealTimeout = null;
+    }, 2000);
   } else {
     clearPhoto();
   }
+}
+
+function getPhotoFilename() {
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  const datePart = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  const timePart = `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+  return `kuuppaos_photo_${datePart}_${timePart}.png`;
+}
+
+function downloadPhoto(dataUrl) {
+  const link = document.createElement("a");
+  link.href = dataUrl;
+  link.download = getPhotoFilename();
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }

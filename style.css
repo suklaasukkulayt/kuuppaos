@@ -1043,11 +1043,6 @@ border: 2px solid black;
   padding: 0.8rem;
 }
 
-#permissions-button {
-  display: block;
-  margin-block: 1rem;
-}
-
 #start-button {
   position: relative;
   margin: auto;
@@ -1067,19 +1062,36 @@ border: 2px solid black;
   box-shadow: 2px 2px 3px black;
   width: 100%;
   height: auto;
+  display: block;
 }
 
 #cameracanvas {
   display: none;
 }
 
-.camera,
-.output {
-  width: 49%;
+.camera {
+  position: relative;
+  width: 100%;
   height: auto;
-  display: inline-block;
 }
 
 .output {
-  vertical-align: top;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.output.visible {
+  opacity: 1;
+}
+
+.output #photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

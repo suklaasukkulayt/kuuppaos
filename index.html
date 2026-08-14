@@ -494,15 +494,15 @@
     
     <h1 style= "margin: 4px; color: rgb(218, 105, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Camera</h1>
     <div id="camera-container">
-      <button id="permissions-button">Allow camera</button>
+      <div id="camera-error" style="display:none; color: #ff5555; font-weight: bold; margin-bottom: 8px;"></div>
 <div class="camera">
   <video id="video">Video stream not available.</video>
-  <button id="start-button" download="kuuppaos_photo.png">Capture photo</button>
+  <div class="output">
+    <img id="photo" src="" alt="The screen capture will appear in this box." />
+  </div>
+  <button id="start-button">Capture photo</button>
 </div>
 <canvas id="cameracanvas"></canvas>
-<div class="output">
-  <img id="photo" src="" alt="The screen capture will appear in this box." />
-</div>
     </div>
   <p>Also try <a href="https://stardance.hackclub.com/projects/30620">KuuppaCam</a>!</p>
 </div>

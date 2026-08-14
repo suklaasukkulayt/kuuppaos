@@ -1822,7 +1822,7 @@ function takePicture() {
     cameracanvas.height = height;
     context.drawImage(video, 0, 0, width, height);
 
-    const data = canvas.toDataURL("image/png");
+    const data = cameracanvas.toDataURL('image/png');
     photo.setAttribute("src", data);
   } else {
     clearPhoto();

@@ -553,9 +553,9 @@ var content = [
     date: "- nobody",
     content: `
         <h1 style="margin: 2px; color: rgb(243, 219, 5)">TeXtpad</h1>
-        <img style="width: 64px; height: 64px; border-radius: 16px; object-fit: cover;" src="./icons/textpad.png"/>
-        <p>Hello <strong>user</strong>! This is a simple text editor, like notepad, but in KuuppaOS (except it doesn't support multiple notes)</p>
-        <textarea style="width: 256px; height: 128px; resize: none;" id="textarea" autofocus spellcheck="false"></textarea>
+        
+        <textarea style="width: 256px; height: 128px; resize: auto;" id="textarea" autofocus spellcheck="true"></textarea>
+        <p>Note saves to your browser's local storage.</p>
       `
   }
 

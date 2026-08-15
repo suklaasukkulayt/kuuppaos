@@ -1047,13 +1047,21 @@ border: 2px solid black;
   position: relative;
   margin: auto;
   bottom: 32px;
-  background-color: rgb(0 150 0 / 50%);
+  background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgb(255 255 255 / 70%);
   box-shadow: 0px 0px 1px 2px rgb(0 0 0 / 20%);
   font-size: 14px;
   color: white;
   display: block;
- 
+  border-radius: 80%;
+}
+
+#start-button:hover {
+  background-color: rgba(163, 34, 34, 0.5);
+}
+
+#start-button:active {
+  background-color: rgba(0, 255, 21, 0.8);
 }
 
 #video,

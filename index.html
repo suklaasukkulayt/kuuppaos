@@ -3,7 +3,7 @@
   <head>
     <title>KuuppaOS</title>
     <link rel="icon" type="image/x-icon" href="./favicon.png">
-    <link href='https://fonts.googleapis.com/css?family=ADLaM Display|Afacad Flux|Press+Start+2P' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=ADLaM Display|Afacad Flux|Press+Start+2P|Ubuntu' rel='stylesheet'>
   </head>
   
   <body id="desktop">
@@ -14,14 +14,13 @@
       </p>
     </div>
     
-    <div   class="closebutton" id="welcomeclose">
-          
+    <div class="closebutton" id="welcomeclose">
           <p class="closetext">X</p>
         </div>
-        <div   class="minimizebutton" id="welcomeminimize">
+        <div class="minimizebutton" id="welcomeminimize">
         <p class="minimizetext">-</p>
     </div>
-    <h1 style= "margin: 4px; color: blue"> Welcome to KuuppaOS!</h1>
+    <h1 class="ubuntu-regular" style="margin: 4px; color: blue;"> Welcome to KuuppaOS!</h1>
     <img style="width: 256px; height: 256px; border-radius: 16px; object-fit: cover;" src="./kuuppaos.png"/>
     
     <p>Hello <strong>user</strong>! This is my webOS.</p>
@@ -136,7 +135,6 @@
 
    <div id="textpadContent" style="display: flex; flex-direction: column; gap: 12px;"></div>
    <div id="bottomBar" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
-      <div style="background-color: rgba(255,255,255,0.18); width: 220px; padding: 10px; border-radius: 8px; display: flex; flex-direction: column; gap: 2px;">
       </div>
     </div>
     </div>
@@ -150,15 +148,15 @@
       </p>
     </div>
     
-    <div   class="closebutton" id="weatherclose">
+    <div class="closebutton" id="weatherclose">
           
           <p class="closetext"mm>X</p>
         </div>
 
-        <div   class="minimizebutton" id="weatherminimize">
+        <div class="minimizebutton" id="weatherminimize">
         <p class="minimizetext">-</p>
     </div>
-    <h1 style= "margin: 4px; color: rgb(226, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Weather</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(226, 39, 233);">Weather</h1>
     <div id="weather-icon" aria-label="Weather icon" style="font-size: 64px; line-height: 1; margin: 8px 0;">🌤️</div>
     
     
@@ -227,10 +225,10 @@
           
           <p class="closetext">X</p>
         </div>
-        <div   class="minimizebutton" id="spotifyminimize">
+        <div class="minimizebutton" id="spotifyminimize">
         <p class="minimizetext">-</p>
     </div>
-    <h1 style= "margin: 4px; color: rgb(255, 0, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">KuuppaMusic</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(255, 0, 0);">KuuppaMusic</h1>
    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator&si=85178b9d6e3c4577" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
     <p style="margin: 0;">Hello <strong>user</strong>! This is the KuuppaMusic (spotify) app.</p>
     <p style="margin: 0;">It plays lofi beats from spotify (because I couldn't think of anything else)</p>
@@ -245,14 +243,14 @@
       </p>
     </div>
     
-    <div   class="closebutton" id="youtubeclose">
+    <div class="closebutton" id="youtubeclose">
           
           <p class="closetext">X</p>
         </div>
-        <div   class="minimizebutton" id="youtubeminimize">
+        <div class="minimizebutton" id="youtubeminimize">
         <p class="minimizetext">-</p>
     </div>
-    <h1 style= "margin: 4px; color: rgb(243, 245, 246); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif"> KuuppaVid</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(243, 245, 246);"> KuuppaVid</h1>
  <input type="text" id="searchBox" placeholder="Search YouTube" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
   <button id="youtubeSearchButton" style="width: 100%; padding: 12px; font-size: 16px; margin-top: 8px; background-color: #ff0000; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Search</button>
   <div id="searchResults" style="margin-top: 20px;"></div>
@@ -267,15 +265,15 @@
       </p>
     </div>
     
-    <div   class="closebutton" id="cterminalclose">
+    <div class="closebutton" id="cterminalclose">
           
           <p class="closetext">X</p>
         </div>
-     <div   class="minimizebutton" id="cterminalminimize">
+     <div class="minimizebutton" id="cterminalminimize">
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 style= "margin: 4px; color: rgb(142, 39, 233); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">HackCMD</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(142, 39, 233);">HackCMD</h1>
         <div class="terminal-container">
     <textarea class="textnagen" id="codeOutput" readonly></textarea>
   </div>
@@ -289,15 +287,15 @@
       </p>
     </div>
     
-    <div   class="closebutton" id="terminalclose">
+    <div class="closebutton" id="terminalclose">
           
           <p class="closetext">X</p>
         </div>
-     <div   class="minimizebutton" id="terminalminimize">
+     <div class="minimizebutton" id="terminalminimize">
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 style= "margin: 4px; color: rgb(97, 0, 182); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Terminal</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(97, 0, 182);">Terminal</h1>
     <div class="cmdContent">
         <div id="cmdOutput">
             <div>KuuppaOS Terminal</div>
@@ -326,17 +324,16 @@
       </p>
     </div>
     
-    <div   class="closebutton" id="paintclose">
+    <div class="closebutton" id="paintclose">
           
         <p class="closetext">X</p>
         </div>
 
-     <div   class="minimizebutton" id="paintminimize">
+     <div class="minimizebutton" id="paintminimize">
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 style= "margin: 4px; color: rgb(255, 166, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Paint</h1>
-
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(255, 166, 0);">Paint</h1>
     	<div class="paint-container">
 		<canvas id="pcanvas"></canvas>
 		<div class="paint-tools">
@@ -359,6 +356,7 @@
 	</div>
 </div>
 
+
      <div class="welcome" id="browser" style="top:40%; left: 50%; display: none; width:fit-content;">
     <div class="welcomeheader" id="browserheader">
       <p>
@@ -367,21 +365,20 @@
     </div>
     
     <div class="closebutton" id="browserclose">
-          
           <p class="closetext">X</p>
         </div>
 
-     <div   class="minimizebutton" id="browserminimize">
+     <div class="minimizebutton" id="browserminimize">
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 style= "margin: 4px; color: rgb(255, 32, 32); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">KuuppaBrowser</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(255, 32, 32);">KuuppaBrowser</h1>
   <div id="kuuppabrowser-container">
     <div class="browser-header">
       <input type="text" id="url-input" placeholder="Enter URL (e.g., wikipedia.org)" />
       <button id="load-btn" style="background-color: antiquewhite; cursor: pointer; font-family: Afacad Flux">Load</button>
     </div>
-    <iframe id="browser-window" src="about:blank" style="width: 100%; height: 85%;"></iframe>
+    <iframe id="browser-window" src="about:blank" style="width: 100%; height: 85%;" allow="encrypted-media; fullscreen"></iframe>
     <p>This browser can only load websites that are accessible from iframes. <br> So google.com won't work, but wikipedia.org will.</p>
   </div>
   </div>
@@ -396,7 +393,7 @@
       </p>
     </div>
     
-    <div   class="closebutton" id="calculatorclose">
+    <div class="closebutton" id="calculatorclose">
           
           <p class="closetext">X</p>
         </div>
@@ -405,11 +402,11 @@
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 style= "margin: 4px; color: rgb(17, 105, 213); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Calculator</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(17, 105, 213);">Calculator</h1>
   <table id="calcu">
 		<tr>
 			<td colspan="3"><input type="text" id="result"></td>
-			<td><input class="calcbutton" type="button" value="Clear" id="calcact" onclick="clr()" /> </td>
+			<td><input class="calcbutton" type="button" value="Clear" id="calcact" onclick="clr()"/> </td>
 		</tr>
 		<tr>
 			<td><input class="calcbutton" type="button" value="1" onclick="dis('1')"
@@ -471,7 +468,7 @@
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 style= "margin: 4px; color: rgb(255, 42, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Pong</h1>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(255, 42, 0);  ">Pong</h1>
     <canvas id="pongcanvas" width="500" height="500" style="background-color: black"></canvas> 
 </div>
 
@@ -492,7 +489,7 @@
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 style= "margin: 4px; color: rgb(218, 105, 0); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Camera</h1>
+    <h1 class="ubuntu-regular" style="margin: 4px; color: rgb(218, 105, 0);">Camera</h1>
     <div id="camera-container">
       <div id="camera-error" style="display:none; color: #ff5555; font-weight: bold; margin-bottom: 8px;"></div>
 <div class="camera">
@@ -511,7 +508,7 @@
 
  <div class="welcome" id="settings" style="position: fixed; bottom: 40px; left: 47%; transform: translateX(-50%); resize: none; display: none; width: fit-content; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9998;">
     
-    <h1 style= "margin: 4px; color: rgb(8, 0, 253); font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">KuuppaSettings</h1>
+    <h1 style= "margin: 4px; color: rgb(8, 0, 253);  ">KuuppaSettings</h1>
     
   <label style="font-family: ADLaM Display; text-shadow: 3px 3px 3px #ababab;">Custom wallpaper</label><br>
   <input id="bgFile" type="file" accept="image/*"><br>

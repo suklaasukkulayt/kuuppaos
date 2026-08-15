@@ -581,10 +581,9 @@ var content = [
     title: "TeXtpad is so good!",
     date: "- nobody",
     content: `
-        <h1 style="margin: 2px; color: rgb(243, 219, 5)">TeXtpad</h1>
-        
+        <h1 class="ubuntu-regular" style="margin: 2px; color: rgb(243, 219, 5)">TeXtpad</h1>
         <textarea style="width: 256px; height: 128px; resize: auto;" id="textarea" autofocus spellcheck="true"></textarea>
-        <p>Note saves to your browser's local storage.</p>
+        <p style="margin: 0px;">Note saves to your browser's local storage.</p>
       `
   }
 

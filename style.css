@@ -1103,3 +1103,9 @@ border: 2px solid black;
   height: 100%;
   object-fit: cover;
 }
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

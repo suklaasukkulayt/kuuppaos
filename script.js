@@ -477,6 +477,25 @@ if (calculatorIcon) {
   });
 }
 
+  dragElement(document.querySelector("#ghost"))
+
+var ghostScreen = document.querySelector("#ghost")
+var ghostIcon = document.querySelector("#ghosticon")
+const ghostWindow = document.getElementById('ghostG');
+var ghostScreenClose = document.querySelector("#ghostclose")
+
+ghostScreenClose.addEventListener("click", () => {
+  closeWindow(ghostScreen);
+  ghostWindow.src = 'about:blank';
+});
+  
+
+if (ghostIcon) {
+  ghostIcon.addEventListener("click", () => {
+    ghostWindow.src = 'https://suklaasukkulayt.github.io/ghost-game/';
+    handleIconTap(ghostIcon, ghostScreen, "Ghost game");
+  });
+}
 
 dragElement(document.querySelector("#camera"))
 
@@ -574,6 +593,7 @@ addWindowTapHandling(browserScreen);
 addWindowTapHandling(calculatorScreen);
 addWindowTapHandling(pongScreen);
 addWindowTapHandling(cameraScreen);
+addWindowTapHandling(ghostScreen);
 
 
 var content = [
@@ -1338,6 +1358,7 @@ setupMinimize("#browser", "#browserminimize", "KuuppaBrowser");
 setupMinimize("#calculator", "#calculatorminimize", "Calculator");
 setupMinimize("#pong", "#pongminimize", "Pong");
 setupMinimize("#camera", "#cameraminimize", "Camera");
+setupMinimize("#ghost", "#ghostminimize", "Ghost game");
 setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
 function minimizeWindow(windowElement) {

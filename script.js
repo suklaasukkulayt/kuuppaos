@@ -1722,111 +1722,125 @@ addCommand("kuuppa");
 
     else if (mainCommand === "print") {
 
-        var text = command.substring(5);
+        var printMatch = command.match(/^print\s+"(.*)"\s*$/i);
 
-        addCommand(text);
+        if (printMatch) {
+            addCommand(printMatch[1]);
+        } else {
+            addCommand("Usage: print \"text here\"", "#ff0000");
+        }
 
     }
 
-    else if (mainCommand === "delete_system32") {
+    else if (mainCommand === "delete_system32" || command.toLowerCase() === "delete system32") {
       function sleep(ms) {
           return new Promise(resolve => setTimeout(resolve, ms));
         }
+      (async function () {
         addCommand("Deleting System32...", "#ff0000");
-        sleep(200).then(() => { addCommand("Deleted file: 'kuuppeli.sys'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'style.css'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'kuuppaos-driver-wlan.drive'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'settings.sys'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'kuuppaos-driver-camera.drive'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'kuuppaos-driver-location.drive'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'main.c'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'desktop-q.sys'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'webos.html'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'kuuppa32.32'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'gamma.g'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'kuuppa.sgv'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'script.js'...", "#ff0000"); });
-        sleep(200).then(() => { addCommand("Deleted file: 'index.html'...", "#ff0000"); });
-        sleep(1000).then(() => { body.style.display = "none"; });
+        await sleep(200); addCommand("Deleted file: 'kuuppeli.sys'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'style.css'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'kuuppaos-driver-wlan.drive'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'settings.sys'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'kuuppaos-driver-camera.drive'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'kuuppaos-driver-location.drive'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'main.c'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'desktop-q.sys'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'webos.html'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'kuuppa32.32'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'gamma.g'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'kuuppa.sgv'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'script.js'...", "#ff0000");
+        await sleep(200); addCommand("Deleted file: 'index.html'...", "#ff0000");
+        await sleep(1000); body.style.display = "none";
+      })();
     }
 
     else if (mainCommand === "welcome") {
       addCommand("About Welcome", "#7cff8a");
       addCommand("This is just the welcome screen with some links.")
     }
-    else if (mainCommand === "about_textpad") {
-      addCommand("About TeXtpad", "#7cff8a");
-      addCommand("You can save info to TeXtpad, but it only has one textbox.")
-      addCommand("You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!)")
-      addCommand("It's basically like notepad, but with only one note.")
-    }
-    else if (mainCommand === "about_weather") {
-      addCommand("About Weather", "#7cff8a");
-      addCommand("This app shows you your local weather!")
-      addCommand("It shows temperature, condition (with text and an emoji) and your location.")
-      addCommand("Make sure you have enabled location services for this to work.")
-    }
-    else if (mainCommand === "about_clock") {
-      addCommand("About Clock", "#7cff8a");
-      addCommand("This app tells you the time.")
-      addCommand("There is nothing special about this, it's just an analog clock.")
-    }
-    else if (mainCommand === "about_kuuppamusic") {
-      addCommand("About KuuppaMusic", "#7cff8a");
-      addCommand("You can listen to spotify's lofi beats playlist.")
-      addCommand("All the songs only play for 30 seconds, so this is kind of useless.")
-      addCommand("New version coming...")
-    }
-    else if (mainCommand === "about_kuuppavid") {
-      addCommand("About KuuppaVid", "#7cff8a");
-      addCommand("You can watch any YouTube video with this!")
-      addCommand("You only have to know the video id...")
-    }
-    else if (mainCommand === "about_hackcmd") {
-      addCommand("About HackCMD", "#7cff8a");
-      addCommand("With this app you can seem like you are hacking!")
-      addCommand("Just type anything in the terminal window!")
-    }
-    else if (mainCommand === "about_terminal") {
-      addCommand("About Terminal", "#7cff8a");
-      addCommand("This is the app you're using right now.")
-      addCommand("This is just a basic terminal.")
-      addCommand("Type 'help' to see all available commands.")
-    }
-    else if (mainCommand === "about_paint") {
-      addCommand("About Paint", "#7cff8a");
-      addCommand("You can paint anything you want!")
-      addCommand("You can change color and size, and also use the eraser or clear the whole canvas.")
-      addCommand("After you're done, just press the Download button!")
-    }
-    else if (mainCommand === "about_kuuppabrowser") {
-      addCommand("About KuuppaBrowser", "#7cff8a");
-      addCommand("You can browse all websites that allow being in an iframe.")
-      addCommand("Just type in the URL (like 'wikipedia.org') and press load!")
-      addCommand("You can even have KuuppaOS in KuuppaOS.")
-    }
-    else if (mainCommand === "about_calculator") {
-      addCommand("About Calculator", "#7cff8a");
-      addCommand("This is just a basic calculator.")
-      addCommand("Use the buttons or just type your numbers in the textarea and press solve!")
-    }
-    else if (mainCommand === "about_pong") {
-      addCommand("About Pong", "#7cff8a");
-      addCommand("You can play pong.")
-      addCommand("Use your mouse to move. It's that simple!")
-      addCommand("You can pause by minimizing the app. Reset by closing it.")
-    }
-    else if (mainCommand === "about_camera") {
-      addCommand("About Camera", "#7cff8a");
-      addCommand("Take pictures inside KuuppaOS.")
-      addCommand("Just press the Take Photo button!")
-      addCommand("Then you will see the photo for a few seconds and then your download will start.")
-    }
-    else if (mainCommand === "about_ghostgame") {
-      addCommand("About Ghost game", "#7cff8a");
-      addCommand("Pacman like game where you try to eat all the ghosts.")
-      addCommand("Also everyone can see the best score if you get it!")
-      addCommand("I made this a while back in a coding class.")
+    else if (mainCommand === "about" && parts.length > 1) {
+      var aboutTarget = parts.slice(1).join(" ").toLowerCase();
+
+      if (aboutTarget === "textpad") {
+        addCommand("About TeXtpad", "#7cff8a");
+        addCommand("You can save info to TeXtpad, but it only has one textbox.")
+        addCommand("You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!)")
+        addCommand("It's basically like notepad, but with only one note.")
+      }
+      else if (aboutTarget === "weather") {
+        addCommand("About Weather", "#7cff8a");
+        addCommand("This app shows you your local weather!")
+        addCommand("It shows temperature, condition (with text and an emoji) and your location.")
+        addCommand("Make sure you have enabled location services for this to work.")
+      }
+      else if (aboutTarget === "clock") {
+        addCommand("About Clock", "#7cff8a");
+        addCommand("This app tells you the time.")
+        addCommand("There is nothing special about this, it's just an analog clock.")
+      }
+      else if (aboutTarget === "kuuppamusic") {
+        addCommand("About KuuppaMusic", "#7cff8a");
+        addCommand("You can listen to spotify's lofi beats playlist.")
+        addCommand("All the songs only play for 30 seconds, so this is kind of useless.")
+        addCommand("New version coming...")
+      }
+      else if (aboutTarget === "kuuppavid") {
+        addCommand("About KuuppaVid", "#7cff8a");
+        addCommand("You can watch any YouTube video with this!")
+        addCommand("You only have to know the video id...")
+      }
+      else if (aboutTarget === "hackcmd") {
+        addCommand("About HackCMD", "#7cff8a");
+        addCommand("With this app you can seem like you are hacking!")
+        addCommand("Just type anything in the terminal window!")
+      }
+      else if (aboutTarget === "terminal") {
+        addCommand("About Terminal", "#7cff8a");
+        addCommand("This is the app you're using right now.")
+        addCommand("This is just a basic terminal.")
+        addCommand("Type 'help' to see all available commands.")
+      }
+      else if (aboutTarget === "paint") {
+        addCommand("About Paint", "#7cff8a");
+        addCommand("You can paint anything you want!")
+        addCommand("You can change color and size, and also use the eraser or clear the whole canvas.")
+        addCommand("After you're done, just press the Download button!")
+      }
+      else if (aboutTarget === "kuuppabrowser") {
+        addCommand("About KuuppaBrowser", "#7cff8a");
+        addCommand("You can browse all websites that allow being in an iframe.")
+        addCommand("Just type in the URL (like 'wikipedia.org') and press load!")
+        addCommand("You can even have KuuppaOS in KuuppaOS.")
+      }
+      else if (aboutTarget === "calculator") {
+        addCommand("About Calculator", "#7cff8a");
+        addCommand("This is just a basic calculator.")
+        addCommand("Use the buttons or just type your numbers in the textarea and press solve!")
+      }
+      else if (aboutTarget === "pong") {
+        addCommand("About Pong", "#7cff8a");
+        addCommand("You can play pong.")
+        addCommand("Use your mouse to move. It's that simple!")
+        addCommand("You can pause by minimizing the app. Reset by closing it.")
+      }
+      else if (aboutTarget === "camera") {
+        addCommand("About Camera", "#7cff8a");
+        addCommand("Take pictures inside KuuppaOS.")
+        addCommand("Just press the Take Photo button!")
+        addCommand("Then you will see the photo for a few seconds and then your download will start.")
+      }
+      else if (aboutTarget === "ghostgame") {
+        addCommand("About Ghost game", "#7cff8a");
+        addCommand("Pacman like game where you try to eat all the ghosts.")
+        addCommand("Also everyone can see the best score if you get it!")
+        addCommand("I made this a while back in a coding class.")
+      }
+      else {
+        addCommand("No app named '" + aboutTarget + "' found.");
+        addCommand("Type 'about' for general info, or 'help' for available commands.");
+      }
     }
 
   else if (mainCommand === "about") {

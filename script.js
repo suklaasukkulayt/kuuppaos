@@ -1728,6 +1728,28 @@ addCommand("kuuppa");
 
     }
 
+    else if (mainCommand === "delete_system32") {
+      function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        addCommand("Deleting System32...", "#ff0000");
+        sleep(200).then(() => { addCommand("Deleted file: 'kuuppeli.sys'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'style.css'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'kuuppaos-driver-wlan.drive'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'settings.sys'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'kuuppaos-driver-camera.drive'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'kuuppaos-driver-location.drive'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'main.c'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'desktop-q.sys'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'webos.html'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'kuuppa32.32'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'gamma.g'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'kuuppa.sgv'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'script.js'...", "#ff0000"); });
+        sleep(200).then(() => { addCommand("Deleted file: 'index.html'...", "#ff0000"); });
+        sleep(1000).then(() => { body.style.display = "none"; });
+    }
+
     else if (mainCommand === "welcome") {
       addCommand("About Welcome", "#7cff8a");
       addCommand("This is just the welcome screen with some links.")

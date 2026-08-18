@@ -1443,6 +1443,16 @@ function openWindow(element, appName) {
     element.classList.add("opening");
     addTaskbarApp(element, appName);
 
+    // Clamp the window's opening position so it never appears above the top
+    // edge or beyond the side edges of the viewport, same rule dragElement
+    // already enforces while dragging.
+    var minTop = element.offsetHeight / 2;
+    var minLeft = element.offsetWidth / 2;
+    var maxTop = window.innerHeight - element.offsetHeight / 2;
+    var maxLeft = window.innerWidth - element.offsetWidth / 2;
+    element.style.top = Math.max(minTop, Math.min(element.offsetTop, maxTop)) + "px";
+    element.style.left = Math.max(minLeft, Math.min(element.offsetLeft, maxLeft)) + "px";
+
     if (element.id === "camera") {
       startCamera();
     }

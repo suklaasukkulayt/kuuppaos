@@ -76,6 +76,25 @@ function dragElement(element) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+
+  // Step 13: Keep the window's position clamped to the viewport whenever its
+  // size changes (e.g. the user dragging the native CSS `resize: both` handle
+  // in a corner), the same rule used above for dragging and in openWindow()
+  // for the initial position. Without this, resizing from a corner can push
+  // the opposite edge off-screen because the element stays centered on its
+  // top/left anchor point via transform: translate(-50%, -50%).
+  if (window.ResizeObserver) {
+    var resizeObserver = new ResizeObserver(function () {
+      if (element.style.display === "none") return;
+      var minTop = element.offsetHeight / 2;
+      var minLeft = element.offsetWidth / 2;
+      var maxTop = window.innerHeight - element.offsetHeight / 2;
+      var maxLeft = window.innerWidth - element.offsetWidth / 2;
+      element.style.top = Math.max(minTop, Math.min(element.offsetTop, maxTop)) + "px";
+      element.style.left = Math.max(minLeft, Math.min(element.offsetLeft, maxLeft)) + "px";
+    });
+    resizeObserver.observe(element);
+  }
 }
 
 
@@ -1780,6 +1799,12 @@ addCommand("kuuppa");
       addCommand("Take pictures inside KuuppaOS.")
       addCommand("Just press the Take Photo button!")
       addCommand("Then you will see the photo for a few seconds and then your download will start.")
+    }
+    else if (mainCommand === "about_ghostgame") {
+      addCommand("About Ghost game", "#7cff8a");
+      addCommand("Pacman like game where you try to eat all the ghosts.")
+      addCommand("Also everyone can see the best score if you get it!")
+      addCommand("I made this a while back in a coding class.")
     }
 
   else if (mainCommand === "about") {

@@ -1634,8 +1634,9 @@ function runCommand(command) {
         addCommand("clear      Clear terminal");
         addCommand("time       Show current time and date");
         addCommand("apps       Show installed apps");
-        addCommand("about      About KuuppaOS (or 'about_appname' (appname is fully lowercase (like 'about_textpad')");
-        addCommand("print      Print text (like 'print kuuppa')");
+        addCommand("about      About KuuppaOS or apps)");
+        addCommand("print      Print text");
+        addCommand("usage      How to use commands");
         addCommand("");
 
     }
@@ -1714,19 +1715,8 @@ addCommand("kuuppa");
         addCommand("Calculator");
         addCommand("Pong");
         addCommand("Camera");
-        addCommand("Ghost game");
         addCommand("");
 
-    }
-
-     else if (mainCommand === "usage" && parts.length > 1) {
-      var usageTarget = parts.slice(1).join(" ").toLowerCase();
-
-      if (usageTarget === "about") {
-        addCommand("Usage: about", "#7cff8a");
-        addCommand("'about' for general info, 'about appname' for info about an app.")
-        addCommand("App's name is all lowercase.")
-      }
     }
 
 

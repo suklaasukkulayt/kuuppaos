@@ -239,7 +239,7 @@
     </div>
 
 
-     <div class="welcome" id="youtube" style="top:60%; left: 60%; display: none; width: 500px;">
+     <div class="welcome" id="youtube" style="top:60%; left: 20%; display: none; width: 700px;">
     <div class="welcomeheader" id="youtubeheader">
       <p>
         KuuppaVid
@@ -254,10 +254,18 @@
         <p class="minimizetext">-</p>
     </div>
     <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(243, 245, 246);"> KuuppaVid</h1>
- <input type="text" id="searchBox" placeholder="Search YouTube" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-  <button id="youtubeSearchButton" style="width: 100%; padding: 12px; font-size: 16px; margin-top: 8px; background-color: #ff0000; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Search</button>
-  <div id="searchResults" style="margin-top: 20px;"></div>
-    <p style="margin: 0; user-select: text;">Enter a youtube URL or a video ID to watch it! Maybe try "dQw4w9WgXcQ"?</p>
+    <div class="vidcontainer">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search from YouTube...">
+            <button class="vidbutton" onclick="searchYouTube()">Search</button>
+        </div>
+
+        <div id="player-container">
+            <div id="youtube-player"></div>
+        </div>
+
+        <div id="results"></div>
+    </div>
 </div>
 
 
@@ -360,7 +368,7 @@
 </div>
 
 
-     <div class="welcome" id="browser" style="top:40%; left: 50%; display: none; width:fit-content;">
+     <div class="welcome" id="browser" style="top:40%; left: 50%; display: none; width: 500px;">
     <div class="welcomeheader" id="browserheader">
       <p>
         KuuppaBrowser
@@ -608,6 +616,6 @@
 "sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
 		crossorigin="anonymous"
 		referrerpolicy="no-referrer"></script>
-
+<script src="https://www.youtube.com/iframe_api"></script>
   </body>
 </html>

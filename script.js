@@ -923,46 +923,78 @@ if (isTerminalTopmost()) {
 }
 
 
-const youtubeSearchButton = document.getElementById('youtubeSearchButton');
-if (youtubeSearchButton) {
-  youtubeSearchButton.addEventListener('click', searchYouTube);
+const API_KEY = 'AIzaSyAHCbUf3EHTFg1L84i3Hu2T4L1tzz968n8';
+let player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+        height: '500px',
+        width: '100%',
+        videoId: '', 
+        playerVars: {
+            'playsinline': 1,
+            'autoplay': 1
+        }
+    });
 }
 
-function searchYouTube() {
-  const searchBox = document.getElementById('searchBox');
-  const resultsDiv = document.getElementById('searchResults');
-  const query = searchBox?.value?.trim() || '';
+async function searchYouTube() {
+    const query = document.getElementById('searchInput').value;
+    if (!query) return;
 
-  if (!query) {
-    resultsDiv.innerHTML = "<p style='color:red'>Please enter a search term.</p>";
-    return;
-  }
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = 'Searching...';
 
-  resultsDiv.innerHTML = "";
+    try {
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=8&q=${encodeURIComponent(query)}&type=video,playlist&key=${API_KEY}`;
+        const response = await fetch(url);
+        const data = await response.json();
 
-  const videoId = query.includes('youtube.com/watch?v=')
-    ? new URL(query).searchParams.get('v')
-    : query;
+        resultsDiv.innerHTML = '';
 
-  if (!videoId || videoId.length < 5) {
-    resultsDiv.innerHTML = "<p style='color:red'>Please enter a valid YouTube video URL or ID.</p>";
-    return;
-  }
+        if (!data.items || data.items.length === 0) {
+            resultsDiv.innerHTML = 'No results.';
+            return;
+        }
 
-  const embedUrl = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}`;
+        data.items.forEach(item => {
+            const isPlaylist = item.id.kind === 'youtube#playlist';
+            const id = isPlaylist ? item.id.playlistId : item.id.videoId;
+            const title = item.snippet.title;
+            const thumbnail = item.snippet.thumbnails.default.url;
 
-  const iframe = document.createElement('iframe');
-  iframe.src = embedUrl;
-  iframe.title = `YouTube video ${videoId}`;
-  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-  iframe.allowFullscreen = true;
-  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-  iframe.style.width = '100%';
-  iframe.style.height = '360px';
-  iframe.style.border = '0';
-  iframe.style.borderRadius = '8px';
+            const div = document.createElement('div');
+            div.className = 'result-item';
+            
+            const temp = document.createElement('div');
+            temp.innerHTML = title;
+            
+            div.innerHTML = `
+                <img src="${thumbnail}" alt="thumbnail">
+                <div class="info">
+                    <span class="badge ${isPlaylist ? 'playlist' : 'video'}">
+                        ${isPlaylist ? 'Playlist' : 'Video'}
+                    </span>
+                    <span>${temp.innerText}</span>
+                </div>
+            `;
+            
+            div.onclick = () => {
+                if (isPlaylist) {
+                    player.loadPlaylist({list: id});
+                } else {
+                    player.loadVideoById(id);
+                }
+                document.getElementById('player-container').scrollIntoView({ behavior: 'smooth' });
+            };
 
-  resultsDiv.appendChild(iframe);
+            resultsDiv.appendChild(div);
+        });
+
+    } catch (error) {
+        console.error(error);
+        resultsDiv.innerHTML = 'Error searching.';
+    }
 }
 
 

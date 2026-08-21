@@ -84,7 +84,16 @@ function dragElement(element) {
   // the opposite edge off-screen because the element stays centered on its
   // top/left anchor point via transform: translate(-50%, -50%).
   if (window.ResizeObserver) {
+    var isFirstResizeObservation = true;
     var resizeObserver = new ResizeObserver(function () {
+      // ResizeObserver always fires once immediately after observe() just to
+      // report the starting size — that's not a real user-driven resize, and
+      // acting on it can clamp the window based on a size measured before
+      // images/fonts inside it have finished loading. Skip that first call.
+      if (isFirstResizeObservation) {
+        isFirstResizeObservation = false;
+        return;
+      }
       if (element.style.display === "none") return;
       var minTop = element.offsetHeight / 2;
       var minLeft = element.offsetWidth / 2;

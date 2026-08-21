@@ -415,8 +415,8 @@ var youtubeScreenClose = document.querySelector("#youtubeclose")
 
 youtubeScreenClose.addEventListener("click", () => {
   closeWindow(youtubeScreen);
-  const resultsDiv = document.getElementById('searchResults');
-  if (resultsDiv) resultsDiv.innerHTML = ""; // remove iframe to stop playback
+  const tubeDiv = document.getElementById('player-container');
+  if (tubeDiv) tubeDiv.innerHTML = ""; 
 });
 
 if (youtubeIcon) {
@@ -928,7 +928,7 @@ let player;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {
-        height: '500px',
+        height: '300px',
         width: '100%',
         videoId: '', 
         playerVars: {
@@ -955,6 +955,8 @@ async function searchYouTube() {
         if (!data.items || data.items.length === 0) {
             resultsDiv.innerHTML = 'No results.';
             return;
+        }else{
+          data.items.length = 5;
         }
 
         data.items.forEach(item => {

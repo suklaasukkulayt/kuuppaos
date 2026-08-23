@@ -409,22 +409,21 @@ dragElement(document.querySelector("#youtube"))
 
 var youtubeScreen = document.querySelector("#youtube")
 var youtubeIcon = document.querySelector("#youtubeicon")
-var tubeDiv = youtubeScreen.querySelector("youtube-player")
-var tubeDivSrc = tubeDiv.getAttribute("src")
 var youtubeScreenClose = document.querySelector("#youtubeclose")
 
 youtubeScreenClose.addEventListener("click", () => {
   closeWindow(youtubeScreen);
-  if (tubeDiv) tubeDiv.src = ""; 
+  if (player && typeof player.stopVideo === "function") {
+    player.stopVideo();
+  }
 });
 
 if (youtubeIcon) {
   youtubeIcon.addEventListener("click", () => {
     handleIconTap(youtubeIcon, youtubeScreen, "KuuppaVid");
-    if (!tubeDiv.getAttribute("src")) {
-      tubeDiv.src = tubeDivSrc;
+  });
 }
-})};
+
 
   dragElement(document.querySelector("#cterminal"))
 
@@ -921,7 +920,7 @@ if (isTerminalTopmost()) {
 
 
 const API_KEY = 'AIzaSyAHCbUf3EHTFg1L84i3Hu2T4L1tzz968n8';
-let player;
+let player = null;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {

@@ -1122,7 +1122,7 @@ border: 2px solid black;
     border-radius: 10px;
     height: fit-content;
     width: 90%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    align-self: center;
 }
 
 .search-box {
@@ -1153,6 +1153,7 @@ border: 2px solid black;
 }
 
 .result-item {
+    color: white;
     padding: 10px;
     border-bottom: 1px solid #444;
     cursor: pointer;

@@ -171,6 +171,7 @@ body{
 
 .welcome {
     background-color: rgba(0, 255, 0, var(--desktop-window-alpha));
+    max-height: 70%;
     position: absolute;
     transform: translate(-50%, -50%);
     padding: 41px 16px 16px 16px;
@@ -184,6 +185,10 @@ body{
     -webkit-backdrop-filter: blur(var(--desktop-blur));
     transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
 }
+
+.welcome[style*="height"] {
+  max-height: unset; 
+} 
 
 .welcomeheader {
   position: absolute;

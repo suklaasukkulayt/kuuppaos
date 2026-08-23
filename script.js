@@ -409,8 +409,8 @@ dragElement(document.querySelector("#youtube"))
 
 var youtubeScreen = document.querySelector("#youtube")
 var youtubeIcon = document.querySelector("#youtubeicon")
-var tubeDiv = document.querySelector("youtube-player")
-var tubeDivSrc = document.getAttribute("src")
+var tubeDiv = youtubeScreen.querySelector("youtube-player")
+var tubeDivSrc = tubeDiv.getAttribute("src")
 var youtubeScreenClose = document.querySelector("#youtubeclose")
 
 youtubeScreenClose.addEventListener("click", () => {

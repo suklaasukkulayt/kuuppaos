@@ -389,7 +389,6 @@ var spotifyScreen = document.querySelector("#spotify")
 var spotifyIcon = document.querySelector("#spotifyicon")
 var spotifyIframe = spotifyScreen.querySelector("iframe")
 var spotifyIframeSrc = spotifyIframe.getAttribute("src")
-
 var spotifyScreenClose = document.querySelector("#spotifyclose")
 
 spotifyScreenClose.addEventListener("click", () => {
@@ -410,21 +409,22 @@ dragElement(document.querySelector("#youtube"))
 
 var youtubeScreen = document.querySelector("#youtube")
 var youtubeIcon = document.querySelector("#youtubeicon")
-
+var tubeDiv = document.querySelector("youtube-player")
+var tubeDivSrc = document.getAttribute("src")
 var youtubeScreenClose = document.querySelector("#youtubeclose")
 
 youtubeScreenClose.addEventListener("click", () => {
   closeWindow(youtubeScreen);
-  const tubeDiv = document.getElementById('player-container');
-  if (tubeDiv) tubeDiv.innerHTML = ""; 
+  if (tubeDiv) tubeDiv.src = ""; 
 });
 
 if (youtubeIcon) {
   youtubeIcon.addEventListener("click", () => {
     handleIconTap(youtubeIcon, youtubeScreen, "KuuppaVid");
-  });
+    if (!tubeDiv.getAttribute("src")) {
+      tubeDiv.src = tubeDivSrc;
 }
-
+})};
 
   dragElement(document.querySelector("#cterminal"))
 
@@ -807,9 +807,6 @@ function getUserWeather() {
 }
 
 getUserWeather();
-
-
-
 
 
 

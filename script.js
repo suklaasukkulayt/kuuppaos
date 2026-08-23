@@ -88,6 +88,11 @@ function dragElement(element) {
         return;
       }
       if (element.style.display === "none") return;
+      if (element.id === "youtube") {
+        resizeYouTubePlayer();
+      }
+
+      var minTop = element.offsetHeight / 2;
       var minTop = element.offsetHeight / 2;
       var minLeft = element.offsetWidth / 2;
       var maxTop = window.innerHeight - element.offsetHeight / 2;
@@ -917,14 +922,27 @@ let player = null;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {
-        height: '300px',
-        width: '100%',
+        height: '390',
+        width: '640',
         videoId: '', 
         playerVars: {
             'playsinline': 1,
             'autoplay': 1
+        },
+        events: {
+            'onReady': resizeYouTubePlayer
         }
     });
+}
+
+function resizeYouTubePlayer() {
+    if (!player || typeof player.setSize !== "function") return;
+    var container = document.getElementById("youtube-player");
+    if (!container) return;
+    var wrapper = container.parentElement;
+    var width = wrapper.clientWidth;
+    var height = Math.round(width * 9 / 16);
+    player.setSize(width, height);
 }
 
 async function searchYouTube() {

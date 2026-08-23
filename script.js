@@ -87,9 +87,6 @@ function dragElement(element) {
         isFirstResizeObservation = false;
         return;
       }
-      if(windowId === youtube){
-        element.style.max-height === "100%"
-      }
       if (element.style.display === "none") return;
       var minTop = element.offsetHeight / 2;
       var minLeft = element.offsetWidth / 2;

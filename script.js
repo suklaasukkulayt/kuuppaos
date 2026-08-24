@@ -2130,7 +2130,6 @@ audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
   }
 });
 
-//turn 128 seconds into 2:08
 function getTimeCodeFromNum(num) {
   let seconds = parseInt(num);
   let minutes = parseInt(seconds / 60);
@@ -2143,3 +2142,23 @@ function getTimeCodeFromNum(num) {
     seconds % 60
   ).padStart(2, 0)}`;
 }
+
+const API_URL = 'https://xfm.ee/wp-json/xfm/v1/nowplaying?';
+const trackTitleEl = document.getElementById('track-title');
+
+async function fetchNowPlaying() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Network error');
+        
+        const data = await response.json();
+        const titleText = data.title || 'Unknown song';
+
+        trackTitleEl.textContent = titleText + " - XFM";
+      } catch (err) {
+        console.error('Song search failed:', err);
+      }
+    }
+
+    fetchNowPlaying();
+    setInterval(fetchNowPlaying, 60000);

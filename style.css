@@ -1203,6 +1203,11 @@ border: 2px solid black;
 
   display: grid;
   grid-template-rows: 6px auto;
+  .name{
+    position: absolute;
+    left: 33%;
+    align-self: center;
+    }
   .timeline {
     background: rgb(255, 217, 0);
     width: 100%;
@@ -1226,11 +1231,9 @@ border: 2px solid black;
       justify-content: center;
       align-items: center;
     }
-    .name{
-    position: absolute;
-    left: 40%;
-    align-self: center;
-    }
+    
+    
+    
     .toggle-play {
       &.play {
         cursor: pointer;

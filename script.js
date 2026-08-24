@@ -389,6 +389,9 @@ var spotifyScreenClose = document.querySelector("#spotifyclose")
 
 spotifyScreenClose.addEventListener("click", () => {
   closeWindow(spotifyScreen);
+  audio.pause();
+  playBtn.classList.remove("pause");
+  playBtn.classList.add("play");
 });
 
 if (spotifyIcon) {

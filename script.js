@@ -385,21 +385,15 @@ dragElement(document.querySelector("#spotify"))
 
 var spotifyScreen = document.querySelector("#spotify")
 var spotifyIcon = document.querySelector("#spotifyicon")
-var spotifyIframe = spotifyScreen.querySelector("iframe")
-var spotifyIframeSrc = spotifyIframe.getAttribute("src")
 var spotifyScreenClose = document.querySelector("#spotifyclose")
 
 spotifyScreenClose.addEventListener("click", () => {
   closeWindow(spotifyScreen);
-  spotifyIframe.removeAttribute("src"); // stop playback by tearing down the embed
 });
 
 if (spotifyIcon) {
   spotifyIcon.addEventListener("click", () => {
     handleIconTap(spotifyIcon, spotifyScreen, "KuuppaMusic");
-    if (!spotifyIframe.getAttribute("src")) {
-      spotifyIframe.src = spotifyIframeSrc; // restore embed if it was closed
-    }
   });
 }
 
@@ -2071,4 +2065,81 @@ function downloadPhoto(dataUrl) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+const audioPlayer = document.querySelector(".audio-player");
+const audio = new Audio(
+  "https://stream1.rcast.net/73328"
+);
+
+console.dir(audio);
+
+audio.addEventListener(
+  "loadeddata",
+  () => {
+    audio.volume = .75;
+  },
+  false
+);
+
+
+
+//click volume slider to change volume
+const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
+volumeSlider.addEventListener('click', e => {
+  const sliderWidth = window.getComputedStyle(volumeSlider).width;
+  const newVolume = e.offsetX / parseInt(sliderWidth);
+  audio.volume = newVolume;
+  audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
+}, false)
+
+//check audio percentage and update time accordingly
+setInterval(() => {
+  audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
+    audio.currentTime
+  );
+}, 500);
+
+//toggle between playing and pausing on button click
+const playBtn = audioPlayer.querySelector(".controls .toggle-play");
+playBtn.addEventListener(
+  "click",
+  () => {
+    if (audio.paused) {
+      playBtn.classList.remove("play");
+      playBtn.classList.add("pause");
+      audio.play();
+    } else {
+      playBtn.classList.remove("pause");
+      playBtn.classList.add("play");
+      audio.pause();
+    }
+  },
+  false
+);
+
+audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
+  const volumeEl = audioPlayer.querySelector(".volume-container .volume");
+  audio.muted = !audio.muted;
+  if (audio.muted) {
+    volumeEl.classList.remove("icono-volumeMedium");
+    volumeEl.classList.add("icono-volumeMute");
+  } else {
+    volumeEl.classList.add("icono-volumeMedium");
+    volumeEl.classList.remove("icono-volumeMute");
+  }
+});
+
+//turn 128 seconds into 2:08
+function getTimeCodeFromNum(num) {
+  let seconds = parseInt(num);
+  let minutes = parseInt(seconds / 60);
+  seconds -= minutes * 60;
+  const hours = parseInt(minutes / 60);
+  minutes -= hours * 60;
+
+  if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+  return `${String(hours).padStart(2, 0)}:${minutes}:${String(
+    seconds % 60
+  ).padStart(2, 0)}`;
 }

@@ -4,6 +4,7 @@
     <title>KuuppaOS</title>
     <link rel="icon" type="image/x-icon" href="./favicon.png">
     <link href='https://fonts.googleapis.com/css?family=ADLaM Display|Afacad Flux|Press+Start+2P|Ubuntu' rel='stylesheet'>
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
   </head>
   
   <body id="desktop">
@@ -217,25 +218,43 @@
     </div>
 
 
-    <div class="welcome" id="spotify" style="top:60%; left: 70%; display: none;">
+    <div class="welcome" id="spotify" style="top:60%; left: 70%; display: none; width: 400px;">
     <div class="welcomeheader" id="spotifyheader">
       <p>
         KuuppaMusic
       </p>
     </div>
     
-    <div   class="closebutton" id="spotifyclose">
-          
+    <div class="closebutton" id="spotifyclose">
           <p class="closetext">X</p>
         </div>
         <div class="minimizebutton" id="spotifyminimize">
         <p class="minimizetext">-</p>
     </div>
+
     <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(255, 0, 0);">KuuppaMusic</h1>
-   <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator&si=85178b9d6e3c4577" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
-    <p style="margin: 0;">Hello <strong>user</strong>! This is the KuuppaMusic (spotify) app.</p>
-    <p style="margin: 0;">It plays lofi beats from spotify (because I couldn't think of anything else)</p>
-    <p style="margin: 0;">It doesn't even play the full song so kinda useless :D</p>
+<div class="audio-player">
+    <div class="timeline"></div>
+  <div class="controls">
+    <div class="play-container">
+      <div class="toggle-play play">
+    </div>
+    </div>
+    <div class="time">
+      <div class="current">0:00</div>
+    </div>
+    <div class="name">XFM - Live from Estonia :D</div>
+    <div class="volume-container">
+      <div class="volume-button">
+        <div class="volume icono-volumeMedium"></div>
+      </div>
+      
+      <div class="volume-slider">
+        <div class="volume-percentage"></div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
 
 

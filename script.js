@@ -499,6 +499,21 @@ if (calculatorIcon) {
   });
 }
 
+dragElement(document.querySelector("#info"))
+
+var infoScreen = document.querySelector("#info")
+var infoIcon = document.querySelector("#infoicon")
+
+var infoScreenClose = document.querySelector("#infoclose")
+
+infoScreenClose.addEventListener("click", () => closeWindow(infoScreen));
+
+if (infoIcon) {
+  infoIcon.addEventListener("click", () => {
+    handleIconTap(infoIcon, infoScreen, "Info");
+  });
+}
+
   dragElement(document.querySelector("#ghost"))
 
 var ghostScreen = document.querySelector("#ghost")
@@ -616,6 +631,7 @@ addWindowTapHandling(calculatorScreen);
 addWindowTapHandling(pongScreen);
 addWindowTapHandling(cameraScreen);
 addWindowTapHandling(ghostScreen);
+addWindowTapHandling(infoScreen);
 
 
 var content = [
@@ -1425,6 +1441,7 @@ setupMinimize("#calculator", "#calculatorminimize", "Calculator");
 setupMinimize("#pong", "#pongminimize", "Pong");
 setupMinimize("#camera", "#cameraminimize", "Camera");
 setupMinimize("#ghost", "#ghostminimize", "Ghost game");
+setupMinimize("#info", "#infominimize", "Info");
 setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
 function minimizeWindow(windowElement) {

@@ -1735,58 +1735,17 @@ function runCommand(command) {
         addCommand("about      About KuuppaOS or apps)");
         addCommand("print      Print text");
         addCommand("usage      How to use commands");
+        addCommand("delete     delete system32");
         addCommand("");
 
     }
 
     else if (mainCommand === "clear") {
-
         cmdOutput.innerHTML = "";
-
     }
 
-    else if (mainCommand === "kuuppa") {
-
-        addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-addCommand("kuuppa");
-
-    }
 
     else if (mainCommand === "time") {
-
         var time = new Date().toLocaleTimeString();
         var date = new Date().toLocaleDateString();
         addCommand(time);
@@ -1813,6 +1772,8 @@ addCommand("kuuppa");
         addCommand("Calculator");
         addCommand("Pong");
         addCommand("Camera");
+        addCommand("Ghost game");
+        addCommand("Info");
         addCommand("");
 
     }
@@ -1945,6 +1906,52 @@ addCommand("kuuppa");
       }
     }
 
+    else if (mainCommand === "usage" && parts.length > 1) {
+      var usageTarget = parts.slice(1).join(" ").toLowerCase();
+
+      if (usageTarget === "about") {
+        addCommand("Usage 'about'", "#7cff8a");
+        addCommand("'about' for KuuppaOS info, 'about appname' for app info (no spaces, all lowercase).")
+      }
+      else if (usageTarget === "usage") {
+        addCommand("Usage 'usage'", "#7cff8a");
+        addCommand("'usage command'")
+      }
+      else if (usageTarget === "print") {
+        addCommand("Usage 'print'", "#7cff8a");
+        addCommand(`'print "some words"'`)
+      }
+      else if (usageTarget === "time") {
+        addCommand("Usage 'time'", "#7cff8a");
+        addCommand("'time'")
+      }
+      else if (usageTarget === "help") {
+        addCommand("Usage 'help'", "#7cff8a");
+        addCommand("'help'")
+      }
+      else if (usageTarget === "clear") {
+        addCommand("Usage 'clear'", "#7cff8a");
+        addCommand("'clear'")
+      }
+      else if (usageTarget === "apps") {
+        addCommand("Usage 'apps'", "#7cff8a");
+        addCommand("'apps'")
+      }
+      else if (usageTarget === "delete") {
+        addCommand("Usage 'delete'", "#7cff8a");
+        addCommand("'delete system32'")
+      }
+      else {
+        addCommand("Usage 'usage'", "#7cff8a");
+        addCommand("'usage command'")
+      }
+    }
+
+    else if (mainCommand === "usage"){
+      addCommand("Usage 'usage'", "#7cff8a");
+      addCommand("'usage command'")
+    }
+
   else if (mainCommand === "about") {
 
         var blura = localStorage.getItem(STORAGE_BLUR);
@@ -1963,8 +1970,6 @@ addCommand("kuuppa");
         } else {
             wallpa = "Custom";
         }
-        
-
 
 
 addCommand("================================", "#7cff8a");
@@ -1982,10 +1987,61 @@ addCommand("Made by @suklaasukkulayt");
 addCommand("Languages: HTML, CSS, JS");
 addCommand("================================", "#7cff8a");
 addCommand("");
-
     }
-
-    
+        else if (mainCommand === "kuuppa") {
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+      addCommand("kuuppa");
+    }
 
     else {
 

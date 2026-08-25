@@ -383,13 +383,14 @@ if (clockIcon) {
 
 dragElement(document.querySelector("#spotify"))
 
-var spotifyScreen = document.querySelector("#spotify")
+var spotifyScreen = document.querySelector("#spotify") 
 var spotifyIcon = document.querySelector("#spotifyicon")
 var spotifyScreenClose = document.querySelector("#spotifyclose")
 
 spotifyScreenClose.addEventListener("click", () => {
   closeWindow(spotifyScreen);
   audio.pause();
+  audio.src = '';
   playBtn.classList.remove("pause");
   playBtn.classList.add("play");
   radioimg.src = "./icons/radio.png"
@@ -2128,6 +2129,7 @@ playBtn.addEventListener(
   "click",
   () => {
     if (audio.paused) {
+      audio.src = 'https://stream1.rcast.net/73328';
       playBtn.classList.remove("play");
       playBtn.classList.add("pause");
       audio.play();
@@ -2137,6 +2139,7 @@ playBtn.addEventListener(
       playBtn.classList.add("play");
       audio.pause();
       radioimg.src = "./icons/radio.png"
+      audio.src = ''
     }
   },
   false

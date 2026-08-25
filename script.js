@@ -392,6 +392,7 @@ spotifyScreenClose.addEventListener("click", () => {
   audio.pause();
   playBtn.classList.remove("pause");
   playBtn.classList.add("play");
+  radioimg.src = "./icons/radio.png"
 });
 
 if (spotifyIcon) {
@@ -2122,6 +2123,7 @@ setInterval(() => {
 
 //toggle between playing and pausing on button click
 const playBtn = audioPlayer.querySelector(".controls .toggle-play");
+const radioimg = document.getElementById('radioimg');
 playBtn.addEventListener(
   "click",
   () => {
@@ -2129,10 +2131,12 @@ playBtn.addEventListener(
       playBtn.classList.remove("play");
       playBtn.classList.add("pause");
       audio.play();
+      radioimg.src = "./icons/radio-animation.gif"
     } else {
       playBtn.classList.remove("pause");
       playBtn.classList.add("play");
       audio.pause();
+      radioimg.src = "./icons/radio.png"
     }
   },
   false

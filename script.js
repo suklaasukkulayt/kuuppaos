@@ -1430,6 +1430,29 @@ function resetPong() {
     ctx.clearRect(0, 0, 500, 500);
 }
 
+
+const API_URL = 'https://xfm.ee/wp-json/xfm/v1/nowplaying?';
+const trackTitleEl = document.getElementById('track-title');
+const trackminimize = document.getElementById('trackminimize');
+
+async function fetchNowPlaying() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Network error');
+        
+        const data = await response.json();
+        const titleText = data.title || 'Unknown song';
+
+        trackTitleEl.textContent = titleText + " - XFM";
+        trackminimize.textContent = titleText;
+      } catch (err) {
+        console.error('Song search failed:', err);
+      }
+    }
+
+    fetchNowPlaying();
+    setInterval(fetchNowPlaying, 60000);
+
 setupMinimize("#textpad", "#textpadminimize", "TeXtpad");
 setupMinimize("#clock", "#clockminimize", "Clock");
 setupMinimize("#weather", "#weatherminimize", "Weather");
@@ -1514,6 +1537,11 @@ function setupMinimize(windowId, buttonId, appName) {
         if(windowElement.id === "camera"){
               stopCamera();
             }
+        if(windowElement.id === "spotify"){
+              trackt = trackminimize.textContent;
+              removeTaskbarApp(spotifyScreen);
+              addTaskbarApp(spotifyScreen, trackt);
+            }
     });
 }
 
@@ -1540,6 +1568,10 @@ function openWindow(element, appName) {
 
     if (element.id === "camera") {
       startCamera();
+    }
+    if (element.id === "spotify"){
+      removeTaskbarApp(spotifyScreen);
+      addTaskbarApp(spotifyScreen, "KuuppaMusic");
     }
   }
 }
@@ -2170,22 +2202,3 @@ function getTimeCodeFromNum(num) {
   ).padStart(2, 0)}`;
 }
 
-const API_URL = 'https://xfm.ee/wp-json/xfm/v1/nowplaying?';
-const trackTitleEl = document.getElementById('track-title');
-
-async function fetchNowPlaying() {
-      try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error('Network error');
-        
-        const data = await response.json();
-        const titleText = data.title || 'Unknown song';
-
-        trackTitleEl.textContent = titleText + " - XFM";
-      } catch (err) {
-        console.error('Song search failed:', err);
-      }
-    }
-
-    fetchNowPlaying();
-    setInterval(fetchNowPlaying, 60000);

@@ -15,45 +15,32 @@ var currentTime = "";
       }
       setInterval(timeUpdate, 1000);
 
-// Make the DIV element draggable:
 dragElement(document.getElementById("welcome"));
 
-// Step 1: Define a function called `dragElement` that makes an HTML element draggable.
 function dragElement(element) {
-  // Step 2: Set up variables to keep track of the element's position.
   var initialX = 0;
   var initialY = 0;
   var currentX = 0;
   var currentY = 0;
 
-  // Step 3: Check if there is a special header element associated with the draggable element.
   if (document.getElementById(element.id + "header")) {
-    // Step 4: If present, assign the `dragMouseDown` function to the header's `onmousedown` event.
-    // This allows you to drag the window around by its header.
     document.getElementById(element.id + "header").onmousedown = startDragging;
   } else {
-    // Step 5: If not present, assign the function directly to the draggable element's `onmousedown` event.
-    // This allows you to drag the window by holding down anywhere on the window.
     element.onmousedown = startDragging;
   }
 
-  // Step 6: Define the `startDragging` function to capture the initial mouse position and set up event listeners.
   function startDragging(e) {
     e = e || window.event;
     e.preventDefault();
-    // Step 7: Get the mouse cursor position at startup.
     initialX = e.clientX;
     initialY = e.clientY;
-    // Step 8: Set up event listeners for mouse movement (`elementDrag`) and mouse button release (`closeDragElement`).
     document.onmouseup = stopDragging;
     document.onmousemove = dragElement;
   }
 
-  // Step 9: Define the `elementDrag` function to calculate the new position of the element based on mouse movement.
   function dragElement(e) {
     e = e || window.event;
     e.preventDefault();
-    // Step 10: Calculate the new cursor position.
     currentX = initialX - e.clientX;
     currentY = initialY - e.clientY;
     initialX = e.clientX;
@@ -66,19 +53,15 @@ function dragElement(element) {
     var maxTop = window.innerHeight - element.offsetHeight / 2;
     var maxLeft = window.innerWidth - element.offsetWidth / 2;
 
-    // Step 11: Update the element's new position by modifying its `top` and `left` CSS properties.
     element.style.top = Math.max(minTop, Math.min(nextTop, maxTop)) + "px";
     element.style.left = Math.max(minLeft, Math.min(nextLeft, maxLeft)) + "px";
   }
 
-  // Step 12: Define the `stopDragging` function to stop tracking mouse movement by removing the event listeners.
   function stopDragging() {
     document.onmouseup = null;
     document.onmousemove = null;
   }
 
-  // Step 13: Keep the window's position clamped to the viewport whenever its
-  // size changes
   if (window.ResizeObserver) {
 
     var isFirstResizeObservation = true;
@@ -601,7 +584,7 @@ var biggestIndex = 1;
 var topBar = document.querySelector("#top")
 
 function handleWindowTap(element) {
-  biggestIndex++;  // Increment biggestIndex by 1
+  biggestIndex++;
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;  
   settingsScreen.style.zIndex = biggestIndex;
@@ -609,7 +592,7 @@ function handleWindowTap(element) {
 }
 
 function addWindowTapHandling(element) {
-  if (element !== settingsScreen) {  // Exclude settingsScreen from this handling
+  if (element !== settingsScreen) {
     element.addEventListener("mousedown", () => handleWindowTap(element));
   }
 }
@@ -617,7 +600,6 @@ function addWindowTapHandling(element) {
 
 
 
-// Add click handling to bring windows to front
 addWindowTapHandling(welcomeScreen);
 addWindowTapHandling(textpadScreen);
 addWindowTapHandling(weatherScreen);
@@ -892,7 +874,6 @@ const codeSnippets = {
 };
 let currentStyle = 'kernel';
 
-// Generate random code snippet in small chunks
 function addCodeSnippet() {
   if (!isTerminalTopmost()) {
     return;
@@ -916,17 +897,15 @@ function addCodeSnippet() {
   codeOutput.scrollTop = codeOutput.scrollHeight;
 }
 
-// Handle typing
 document.addEventListener('keydown', (e) => {
   if (!isTerminalTopmost()) {
     return;
   }
 
-  e.preventDefault(); // Prevent default textarea behavior
+  e.preventDefault();
   addCodeSnippet();
 });
 
-// Focus textarea for immediate typing
 if (isTerminalTopmost()) {
   codeOutput.focus();
 }
@@ -1024,13 +1003,11 @@ async function searchYouTube() {
 
 
 
-//Obtain the canvas and its 2d rendering context for the paint app
 const paintCanvas =
 	document.getElementById('pcanvas');
 const paintCtx =
 	paintCanvas.getContext('2d');
 
-//Get the refernce to HTML elements
 const brushSize =
 	document.getElementById('brush-size');
 const colorPicker =
@@ -1039,7 +1016,6 @@ const clearCanvas =
 	document.getElementById('clear-canvas');
 let isDrawing = false;
 
-//Initializing the canvas
 paintCanvas.width =
 	window.innerWidth - 40;
 paintCanvas.height =
@@ -1048,13 +1024,11 @@ paintCtx.lineWidth = 5;
 paintCtx.lineCap = 'round';
 paintCtx.strokeStyle = 'black';
 
-//start drawing
 function startPosition(e) {
 	isDrawing = true;
 	draw(e);
 }
 
-//end drawing
 function endPosition() {
 	isDrawing = false;
 	paintCtx.beginPath();
@@ -1067,23 +1041,19 @@ function getCanvasPoint(e) {
 	return { x, y };
 }
 
-//Function to draw on the Canvas
 function draw(e) {
 	if (!isDrawing) return;
 	const { x, y } = getCanvasPoint(e);
 	paintCtx.strokeStyle =
 		colorPicker.value; 
-		//pick the color
 	paintCtx.lineWidth =
 		brushSize.value; 
-		//Select the brush size
 	paintCtx.lineTo(x, y);
 	paintCtx.stroke();
 	paintCtx.beginPath();
 	paintCtx.moveTo(x, y);
 }
 
-//event listener for differnt mouse actions
 paintCanvas
 	.addEventListener('mousedown', startPosition);
 paintCanvas
@@ -1113,13 +1083,11 @@ function updateBrushSizeLabel(size) {
 	}
 }
 
-//Get references to the pen and eraser button
 const penButton =
 	document.getElementById('pen');
 const eraserButton =
 	document.getElementById('eraser');
 
-//switing to pen mode
 function activatePen() {
 	paintCtx.globalCompositeOperation =
 		'source-over';
@@ -1127,7 +1095,6 @@ function activatePen() {
 		colorPicker.value;
 }
 
-//switching to eraser mode
 function activateEraser() {
 	paintCtx.globalCompositeOperation =
 		'destination-out';
@@ -1160,25 +1127,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadBtn = document.getElementById('load-btn');
   const browserWindow = document.getElementById('browser-window');
 
-  // Function to load the website
   const loadPage = () => {
     let url = urlInput.value.trim();
     
     if (url === "") return;
 
-    // Adding https:// if the user didn't include it
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
       url = 'https://' + url;
     }
 
-    // Setting the src of the iframe to load the website
     browserWindow.src = url;
   };
 
-  // Website is loaded when clicking the button
   loadBtn.addEventListener('click', loadPage);
 
-  // Website is loaded when pressing Enter in the input field
   urlInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       loadPage();
@@ -1188,7 +1150,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-		// Function that display value
 		function dis(val) {
 			document.getElementById("result").value += val
 		}
@@ -1214,14 +1175,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		// Function that evaluates the digit and return result
 		function solve() {
 			let x = document.getElementById("result").value
 			let y = math.evaluate(x)
 			document.getElementById("result").value = y
 		}
 
-		// Function that clear the display
 		function clr() {
 			document.getElementById("result").value = ""
 		}
@@ -1391,7 +1350,7 @@ pongcanvas.addEventListener('mousemove', e => {
 ctx.textAlign = 'center', ctx.font = '50px "Press Start 2P", Arial, sans-serif', ctx.fillStyle = 'white';
 
 function startPong() {
-    if (pongInterval !== null) return; // already running
+    if (pongInterval !== null) return;
     pongInterval = setInterval(() => {
         if (Math.abs(ball[0]) >= 1) return (() => { score[ball[0] < 0 ? 1 : 0]++, ball = [0, 0, ball[0] < 0 ? -0.016 : 0.016, 0], reactionDistance = -0.5, reactionSpeed = 6 })();
         ctx.clearRect(0, 0, 500, 500);
@@ -1548,7 +1507,7 @@ function setupMinimize(windowId, buttonId, appName) {
 function openWindow(element, appName) {
   if (element) {
     element.style.display = "flex";
-    biggestIndex++;  // Increment biggestIndex by 1
+    biggestIndex++;
     element.style.zIndex = biggestIndex;
     topBar.style.zIndex = biggestIndex + 1;
     element.classList.remove("closing");
@@ -1556,9 +1515,6 @@ function openWindow(element, appName) {
     element.classList.add("opening");
     addTaskbarApp(element, appName);
 
-    // Clamp the window's opening position so it never appears above the top
-    // edge or beyond the side edges of the viewport, same rule dragElement
-    // already enforces while dragging.
     var minTop = element.offsetHeight / 2;
     var minLeft = element.offsetWidth / 2;
     var maxTop = window.innerHeight - element.offsetHeight / 2;
@@ -1792,10 +1748,12 @@ function runCommand(command) {
 
     }
 
-    else if (mainCommand === "delete_system32" || command.toLowerCase() === "delete system32") {
+    else if (mainCommand === "delete" && parts.length > 1) {
+      var deleteTarget = parts.slice(1).join(" ").toLowerCase();
       function sleep(ms) {
           return new Promise(resolve => setTimeout(resolve, ms));
         }
+      if (deleteTarget === "system32") {
       (async function () {
         addCommand("Deleting System32...", "#ff0000");
         await sleep(200); addCommand("Deleted file: 'kuuppeli.sys'...", "#ff0000");
@@ -1817,12 +1775,17 @@ function runCommand(command) {
         await sleep(200); addCommand("Deleted file: 'index.html'...", "#ff0000");
         await sleep(1000); body.style.display = "none";
       })();
-    }
+    }else {
+        addCommand("Usage 'delete'", "#7cff8a");
+        addCommand("'delete system32'")
+      }}
 
-    else if (mainCommand === "welcome") {
-      addCommand("About Welcome", "#7cff8a");
-      addCommand("This is just the welcome screen with some links.")
-    }
+      else if (mainCommand === "delete") {
+        addCommand("Usage 'delete'", "#7cff8a");
+        addCommand("'delete system32'")
+      }
+
+   
     else if (mainCommand === "about" && parts.length > 1) {
       var aboutTarget = parts.slice(1).join(" ").toLowerCase();
 
@@ -1832,6 +1795,10 @@ function runCommand(command) {
         addCommand("You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!)")
         addCommand("It's basically like notepad, but with only one note.")
       }
+      else if (aboutTarget === "welcome") {
+      addCommand("About Welcome", "#7cff8a");
+      addCommand("This is just the welcome screen with some links.")
+    }
       else if (aboutTarget === "weather") {
         addCommand("About Weather", "#7cff8a");
         addCommand("This app shows you your local weather!")
@@ -2055,8 +2022,8 @@ addCommand("");
     }
 }
 
-const width = 1280; // We will scale the photo width to this (720p)
-let height = 0; // This will be computed based on the input stream
+const width = 1280;
+let height = 0;
 
 let streaming = false;
 let cameraStream = null;
@@ -2069,7 +2036,7 @@ const allowButton = document.getElementById("permissions-button");
 const cameraError = document.getElementById("camera-error");
 
 function startCamera() {
-  if (cameraStream) return; // already running
+  if (cameraStream) return;
   navigator.mediaDevices
     .getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false })
     .then((stream) => {
@@ -2197,7 +2164,6 @@ audio.addEventListener(
 
 
 
-//click volume slider to change volume
 const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
 volumeSlider.addEventListener('click', e => {
   const sliderWidth = window.getComputedStyle(volumeSlider).width;
@@ -2206,14 +2172,12 @@ volumeSlider.addEventListener('click', e => {
   audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
 }, false)
 
-//check audio percentage and update time accordingly
 setInterval(() => {
   audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
     audio.currentTime
   );
 }, 500);
 
-//toggle between playing and pausing on button click
 const playBtn = audioPlayer.querySelector(".controls .toggle-play");
 const radioimg = document.getElementById('radioimg');
 playBtn.addEventListener(

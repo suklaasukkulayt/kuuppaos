@@ -1438,6 +1438,12 @@ function minimizeWindow(windowElement) {
     }, 250);
 }
 
+function changeTrackMinimize(){
+        trackt = trackminimize.textContent;
+        removeTaskbarApp(spotifyScreen);
+        addTaskbarApp(spotifyScreen, trackt);
+}
+
 var openApps = document.querySelector("#openApps");
 function addTaskbarApp(windowElement, name) {
     if (windowElement.id === "settings") {
@@ -1469,6 +1475,16 @@ function addTaskbarApp(windowElement, name) {
             if(windowElement.id === "camera"){
               stopCamera();
             }
+            if(windowElement.id === "spotify"){
+
+          if(audio.paused === false){
+          changeTrackMinimize();
+          setInterval(changeTrackMinimize, 60000);
+          }else{
+            clearInterval(changeTrackMinimize);
+          }
+
+          }
         }
     });
     openApps.appendChild(button);
@@ -1497,16 +1513,13 @@ function setupMinimize(windowId, buttonId, appName) {
               stopCamera();
             }
         if(windowElement.id === "spotify"){
-          function changeTrackMinimize(){
-            trackt = trackminimize.textContent;
-            removeTaskbarApp(spotifyScreen);
-            addTaskbarApp(spotifyScreen, trackt);
-          }
+          
           if(audio.paused === false){
           changeTrackMinimize();
           setInterval(changeTrackMinimize, 60000);
+          }else{
+            clearInterval(changeTrackMinimize);
           }
-          
             }
     });
 }
@@ -1535,6 +1548,7 @@ function openWindow(element, appName) {
     if (element.id === "spotify"){
       removeTaskbarApp(spotifyScreen);
       addTaskbarApp(spotifyScreen, "KuuppaMusic");
+      clearInterval(changeTrackMinimize);
     }
   }
 }

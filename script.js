@@ -2246,3 +2246,17 @@ function getTimeCodeFromNum(num) {
   ).padStart(2, 0)}`;
 }
 
+var textpadButton = document.getElementById('textpadButton')
+var textpadInfo = document.getElementById('textpadInfo')
+function showAppInfo(windowNamed){
+  if(windowNamed === 'textpad'){
+    if(textpadInfo.style.display === 'none'){
+    textpadInfo.style.display = 'flex';
+  }else{
+    textpadInfo.style.display = 'none';
+  }
+}
+}
+ textpadButton.addEventListener("click", () => {
+  showAppInfo('textpad');
+ })

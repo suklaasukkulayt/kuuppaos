@@ -1497,9 +1497,16 @@ function setupMinimize(windowId, buttonId, appName) {
               stopCamera();
             }
         if(windowElement.id === "spotify"){
-              trackt = trackminimize.textContent;
-              removeTaskbarApp(spotifyScreen);
-              addTaskbarApp(spotifyScreen, trackt);
+          function changeTrackMinimize(){
+            trackt = trackminimize.textContent;
+            removeTaskbarApp(spotifyScreen);
+            addTaskbarApp(spotifyScreen, trackt);
+          }
+          if(audio.paused === false){
+          changeTrackMinimize();
+          setInterval(changeTrackMinimize, 60000);
+          }
+          
             }
     });
 }

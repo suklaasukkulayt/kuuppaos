@@ -116,9 +116,9 @@
           <p class="icon-label">Ghost game</p>
         </div>
 
-        <div id="infoicon" class="desktop-icon" title="Info about the apps in KuuppaOS!">
-          <img src="./icons/info.png" alt="Info">
-          <p class="icon-label">Info</p>
+        <div id="infoicon" class="desktop-icon" title="About the apps in KuuppaOS!">
+          <img src="./icons/info.png" alt="About">
+          <p class="icon-label">About</p>
         </div>
   
 
@@ -563,10 +563,10 @@
 </div>
 
 
-<div class="welcome" id="info" style="top:50%; left: 60%; display: none; width:fit-content;">
+<div class="welcome" id="info" style="top:50%; left: 60%; display: none; width: 350px;">
     <div class="welcomeheader" id="infoheader">
       <p>
-        Info
+        About
       </p>
     </div>
     
@@ -578,12 +578,29 @@
         <p class="minimizetext">-</p>
     </div>
     
-    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(91, 45, 207);">Info</h1>
-    <p>This app has info about the apps in KuuppaOS! Coming soon...</p>
-    <button id="textpadButton">TeXtpad info</button>
-    <p id="textpadInfo" style="display: none;">TeXtpad info <br>You can save info to TeXtpad, but it only has one textbox. <br>You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!) <br>It's basically like notepad, but with only one note.</p>
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(91, 45, 207);">About</h1>
+    <p>This app has info about the apps in KuuppaOS!</p>
+    <button id="textpadButton" onclick="showAppInfo('textpad');">About TeXtpad</button>
+    <p id="textpadInfoTitle" class="infoTitle">About TeXtpad</p>
+    <p id="textpadInfo" style="display: none;">You can save info to TeXtpad, but it only has one textbox. <br>You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!) <br>It's basically like notepad, but with only one note.</p>
      
-</div>
+    <button id="weatherButton" onclick="showAppInfo('weather');">About Weather</button>
+     <p id="weatherInfoTitle" class="infoTitle">About Weather</p>
+    <p id="weatherInfo" style="display: none;">This app shows you your local weather! <br>It shows temperature, condition (with text and an emoji) and your location. <br>Make sure you have enabled location services for this to work.</p>
+
+    <button id="clockButton" onclick="showAppInfo('clock');">About Clock</button>
+     <p id="clockInfoTitle" class="infoTitle">About Clock</p>
+    <p id="clockInfo" style="display: none;">This app tells you the time. <br>There is nothing special about this, it's just an analog clock.</p>
+
+  <button id="kuuppamusicButton" onclick="showAppInfo('kuuppamusic');">About KuuppaMusic</button>
+     <p id="kuuppamusicInfoTitle" class="infoTitle">About KuuppaMusic</p>
+    <p id="kuuppamusicInfo" style="display: none;">Listen to XFM radio stream :D <br>Song title updates every minute. <br>When you minimize this app when music is playing, the song title shows in the taskbar.</p>
+
+  <button id="kuuppavidButton" onclick="showAppInfo('kuuppavid');">About KuuppaVid</button>
+     <p id="kuuppavidInfoTitle" class="infoTitle">About KuuppaVid</p>
+    <p id="kuuppaVidInfo" style="display: none;">You can watch any YouTube video with this! <br></p>
+
+  </div>
 
 
 

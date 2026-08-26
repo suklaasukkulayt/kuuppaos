@@ -1833,14 +1833,14 @@ function runCommand(command) {
       }
       else if (aboutTarget === "kuuppamusic") {
         addCommand("About KuuppaMusic", "#7cff8a");
-        addCommand("You can listen to spotify's lofi beats playlist.")
-        addCommand("All the songs only play for 30 seconds, so this is kind of useless.")
-        addCommand("New version coming...")
+        addCommand("Listen to XFM radio stream :D")
+        addCommand("Song title updates every minute.")
+        addCommand("When you minimize this app when music is playing, the song title shows in the taskbar.")
       }
       else if (aboutTarget === "kuuppavid") {
         addCommand("About KuuppaVid", "#7cff8a");
         addCommand("You can watch any YouTube video with this!")
-        addCommand("You only have to know the video id...")
+        addCommand("Just type in the video's title!")
       }
       else if (aboutTarget === "hackcmd") {
         addCommand("About HackCMD", "#7cff8a");
@@ -1887,6 +1887,10 @@ function runCommand(command) {
         addCommand("Pacman like game where you try to eat all the ghosts.")
         addCommand("Also everyone can see the best score if you get it!")
         addCommand("I made this a while back in a coding class.")
+      }
+      else if (aboutTarget === "About") {
+        addCommand("About About", "#7cff8a");
+        addCommand("You can see info about the apps in KuuppaOS!")
       }
       else {
         addCommand("No app named '" + aboutTarget + "' found.");
@@ -2246,17 +2250,18 @@ function getTimeCodeFromNum(num) {
   ).padStart(2, 0)}`;
 }
 
-var textpadButton = document.getElementById('textpadButton')
-var textpadInfo = document.getElementById('textpadInfo')
+var appInfoName = 'null'
+
 function showAppInfo(windowNamed){
-  if(windowNamed === 'textpad'){
-    if(textpadInfo.style.display === 'none'){
-    textpadInfo.style.display = 'flex';
+  appInfoName = windowNamed;
+  var appInfo = document.getElementById(appInfoName + 'Info')
+  var appInfoTitle = document.getElementById(appInfoName + 'InfoTitle')
+    if(appInfo.style.display === 'none'){
+    appInfo.style.display = 'flex';
+    appInfoTitle.style.display = 'flex';
   }else{
-    textpadInfo.style.display = 'none';
+    appInfo.style.display = 'none';
+    appInfoTitle.style.display = 'none';
   }
+
 }
-}
- textpadButton.addEventListener("click", () => {
-  showAppInfo('textpad');
- })

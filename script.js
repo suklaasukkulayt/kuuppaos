@@ -1851,7 +1851,7 @@ function runCommand(command) {
         addCommand("About Terminal", "#7cff8a");
         addCommand("This is the app you're using right now.")
         addCommand("This is just a basic terminal.")
-        addCommand("Type 'help' to see all available commands.")
+        addCommand("Type 'help' to see all available commands. (also don't type 'kuuppa' (secret))")
       }
       else if (aboutTarget === "paint") {
         addCommand("About Paint", "#7cff8a");
@@ -1863,7 +1863,7 @@ function runCommand(command) {
         addCommand("About KuuppaBrowser", "#7cff8a");
         addCommand("You can browse all websites that allow being in an iframe.")
         addCommand("Just type in the URL (like 'wikipedia.org') and press load!")
-        addCommand("You can even have KuuppaOS in KuuppaOS.")
+        addCommand("You can even have KuuppaOS in KuuppaOS!")
       }
       else if (aboutTarget === "calculator") {
         addCommand("About Calculator", "#7cff8a");

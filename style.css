@@ -1381,5 +1381,15 @@ border: 2px solid black;
   text-align: center;
   font-family: Afacad Flux;
   color: #ff5555;
-  font-size: 15px;
+  font-size: 20px;
+}
+
+.infoInfo{
+  font-family: ADLaM Display;
+  font-weight: lighter;
+  font-size: 12;
+}
+
+.infoButton{
+  border-radius: 16px;
 }

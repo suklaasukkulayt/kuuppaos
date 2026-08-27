@@ -2253,15 +2253,18 @@ function getTimeCodeFromNum(num) {
 var appInfoName = 'null'
 
 function showAppInfo(windowNamed){
+  console.log('kaivuri');
   appInfoName = windowNamed;
   var appInfo = document.getElementById(appInfoName + 'Info')
   var appInfoTitle = document.getElementById(appInfoName + 'InfoTitle')
     if(appInfo.style.display === 'none'){
     appInfo.style.display = 'flex';
     appInfoTitle.style.display = 'flex';
+    console.log('kaivuriF');
   }else{
     appInfo.style.display = 'none';
     appInfoTitle.style.display = 'none';
+    console.log('kaivuriN');
   }
 
 }

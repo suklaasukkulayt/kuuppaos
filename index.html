@@ -580,41 +580,65 @@
     
     <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(91, 45, 207);">About</h1>
     <p>This app has info about the apps in KuuppaOS!</p>
-    <button id="textpadButton" onclick="showAppInfo('textpad');">About TeXtpad</button>
+    <button id="textpadButton" onclick="showAppInfo('textpad');" class="infoButton">About TeXtpad</button>
     <p id="textpadInfoTitle" class="infoTitle">About TeXtpad</p>
-    <p id="textpadInfo" style="display: none;">You can save info to TeXtpad, but it only has one textbox. <br>You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!) <br>It's basically like notepad, but with only one note.</p>
+    <p id="textpadInfo" class="infoInfo" style="display: none;">You can save info to TeXtpad, but it only has one textbox. <br>You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!) <br>It's basically like notepad, but with only one note.</p>
      
-    <button id="weatherButton" onclick="showAppInfo('weather');">About Weather</button>
+    <button id="weatherButton" onclick="showAppInfo('weather');" class="infoButton">About Weather</button>
      <p id="weatherInfoTitle" class="infoTitle">About Weather</p>
-    <p id="weatherInfo" style="display: none;">This app shows you your local weather! <br>It shows temperature, condition (with text and an emoji) and your location. <br>Make sure you have enabled location services for this to work.</p>
+    <p id="weatherInfo" class="infoInfo" style="display: none;">This app shows you your local weather! <br>It shows temperature, condition (with text and an emoji) and your location. <br>Make sure you have enabled location services for this to work.</p>
 
-    <button id="clockButton" onclick="showAppInfo('clock');">About Clock</button>
+    <button id="clockButton" onclick="showAppInfo('clock');" class="infoButton">About Clock</button>
      <p id="clockInfoTitle" class="infoTitle">About Clock</p>
-    <p id="clockInfo" style="display: none;">This app tells you the time. <br>There is nothing special about this, it's just an analog clock.</p>
+    <p id="clockInfo" class="infoInfo" style="display: none;">This app tells you the time. <br>There is nothing special about this, it's just an analog clock.</p>
 
-  <button id="kuuppamusicButton" onclick="showAppInfo('kuuppamusic');">About KuuppaMusic</button>
+  <button id="kuuppamusicButton" onclick="showAppInfo('kuuppamusic');" class="infoButton">About KuuppaMusic</button>
      <p id="kuuppamusicInfoTitle" class="infoTitle">About KuuppaMusic</p>
-    <p id="kuuppamusicInfo" style="display: none;">Listen to XFM radio stream :D <br>Song title updates every minute. <br>When you minimize this app when music is playing, the song title shows in the taskbar.</p>
+    <p id="kuuppamusicInfo" class="infoInfo" style="display: none;">Listen to XFM radio stream :D <br>Song title updates every minute. <br>When you minimize this app when music is playing, the song title shows in the taskbar.</p>
 
-  <button id="kuuppavidButton" onclick="showAppInfo('kuuppavid');">About KuuppaVid</button>
+  <button id="kuuppavidButton" onclick="showAppInfo('kuuppavid');" class="infoButton">About KuuppaVid</button>
      <p id="kuuppavidInfoTitle" class="infoTitle">About KuuppaVid</p>
-    <p id="kuuppavidInfo" style="display: none;">You can watch any YouTube video with this! <br>Just type in the video's title!</p>
+    <p id="kuuppavidInfo" class="infoInfo" style="display: none;">You can watch any YouTube video with this! <br>Just type in the video's title!</p>
 
-  <button id="hackcmdButton" onclick="showAppInfo('hackcmd');">About HackCMD</button>
+  <button id="hackcmdButton" onclick="showAppInfo('hackcmd');" class="infoButton">About HackCMD</button>
      <p id="hackcmdInfoTitle" class="infoTitle">About HackCMD</p>
-    <p id="hackcmdInfo" style="display: none;">With this app you can seem like you are hacking! <br>Just type anything in the terminal window!</p>
+    <p id="hackcmdInfo" class="infoInfo" style="display: none;">With this app you can seem like you are hacking! <br>Just type anything in the terminal window!</p>
 
-    <button id="terminalButton" onclick="showAppInfo('terminal');">About Terminal</button>
+    <button id="terminalButton" onclick="showAppInfo('terminal');" class="infoButton">About Terminal</button>
      <p id="terminalInfoTitle" class="infoTitle">About Terminal</p>
-    <p id="terminalInfo" style="display: none;">This is just a basic terminal. <br>Type 'help' to see all available commands.</p>
+    <p id="terminalInfo" class="infoInfo" style="display: none;">This is just a basic terminal. <br>Type 'help' to see all available commands.</p>
 
-    <button id="paintButton" onclick="showAppInfo('paint');">About Paint</button>
+    <button id="paintButton" onclick="showAppInfo('paint');" class="infoButton">About Paint</button>
      <p id="paintInfoTitle" class="infoTitle">About Paint</p>
-    <p id="paintInfo" style="display: none;">You can paint anything you want! <br>You can change color and size, and also use the eraser or clear the whole canvas. <br>After you're done, just press the Download button!</p>
+    <p id="paintInfo" class="infoInfo" style="display: none;">You can paint anything you want! <br>You can change color and size, and also use the eraser or clear the whole canvas. <br>After you're done, just press the Download button!</p>
 
-    <button id="kuuppabrowserButton" onclick="showAppInfo('kuuppabrowser');">About KuuppaBrowser</button>
+    <button id="kuuppabrowserButton" onclick="showAppInfo('kuuppabrowser');" class="infoButton">About KuuppaBrowser</button>
      <p id="kuuppabrowserInfoTitle" class="infoTitle">About KuuppaBrowser</p>
-    <p id="kuuppabrowserInfo" style="display: none;">You can browse all websites that allow being in an iframe. <br>Just type in the URL (like 'wikipedia.org') and press load! <br>You can even have KuuppaOS in KuuppaOS!</p>
+    <p id="kuuppabrowserInfo" class="infoInfo" style="display: none;">You can browse all websites that allow being in an iframe. <br>Just type in the URL (like 'wikipedia.org') and press load! <br>You can even have KuuppaOS in KuuppaOS!</p>
+
+    <button id="calculatorButton" onclick="showAppInfo('calculator');" class="infoButton">About Calculator</button>
+     <p id="calculatorInfoTitle" class="infoTitle">About Calculator</p>
+    <p id="calculatorInfo" class="infoInfo" style="display: none;">This is just a basic calculator. <br>Use the buttons or just type your numbers in the textarea and press solve!</p>
+
+    <button id="pongButton" onclick="showAppInfo('pong');" class="infoButton">About Pong</button>
+     <p id="pongInfoTitle" class="infoTitle">About Pong</p>
+    <p id="pongInfo" class="infoInfo" style="display: none;">You can play pong. <br>Use your mouse to move. It's that simple! <br>You can pause by minimizing the app. Reset by closing it.</p>
+
+    <button id="cameraButton" onclick="showAppInfo('camera');" class="infoButton">About Camera</button>
+     <p id="cameraInfoTitle" class="infoTitle">About Camera</p>
+    <p id="cameraInfo" class="infoInfo" style="display: none;">Take pictures inside KuuppaOS. <br>Just press the Take Photo button! <br>Then you will see the photo for a few seconds and then your download will start.</p>
+
+    <button id="ghostgameButton" onclick="showAppInfo('ghostgame');" class="infoButton">About Ghost game</button>
+     <p id="ghostgameInfoTitle" class="infoTitle">About Ghost game</p>
+    <p id="ghostgameInfo" class="infoInfo" style="display: none;">Pacman like game where you try to eat all the ghosts. <br>Also everyone can see the best score if you get it! <br>I made this a while back in a coding class.</p>
+
+    <button id="aboutButton" onclick="showAppInfo('about');" class="infoButton">About About</button>
+     <p id="aboutInfoTitle" class="infoTitle">About About</p>
+    <p id="aboutInfo" class="infoInfo" style="display: none;">You can see info about the apps in KuuppaOS!</p>
+
+    <button id="welcomeButton" onclick="showAppInfo('welcome');" class="infoButton">About Welcome</button>
+     <p id="welcomeInfoTitle" class="infoTitle">About Welcome</p>
+    <p id="welcomeInfo" class="infoInfo" style="display: none;">This is just the welcome screen with some links.</p>
 
   </div>
 

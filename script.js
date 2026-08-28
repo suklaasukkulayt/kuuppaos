@@ -831,6 +831,17 @@ date.textContent = currentDate.getDate();
 setInterval(setClock, 10);
 setInterval(getUserWeather, 10 * 60 * 1000);
 
+const clockWindowEl = document.querySelector("#clock");
+const clockFaceContainer = clockWindowEl ? clockWindowEl.querySelector(".container") : null;
+if (clockWindowEl && clockFaceContainer && window.ResizeObserver) {
+  const clockResizeObserver = new ResizeObserver(function () {
+    var available = Math.min(clockFaceContainer.clientWidth, clockFaceContainer.clientHeight);
+    var newSize = Math.max(80, available - 20);
+    clockWindowEl.style.setProperty("--clock-size", newSize + "px");
+  });
+  clockResizeObserver.observe(clockFaceContainer);
+}
+
 
 
 
@@ -1438,10 +1449,27 @@ function minimizeWindow(windowElement) {
     }, 250);
 }
 
+var trackMinimizeInterval = null;
+
 function changeTrackMinimize(){
         trackt = trackminimize.textContent;
         removeTaskbarApp(spotifyScreen);
         addTaskbarApp(spotifyScreen, trackt);
+}
+
+function startTrackMinimizeUpdates(){
+  clearInterval(trackMinimizeInterval);
+  changeTrackMinimize();
+  trackMinimizeInterval = setInterval(changeTrackMinimize, 60000);
+}
+
+function stopTrackMinimizeUpdates(){
+  clearInterval(trackMinimizeInterval);
+  trackMinimizeInterval = null;
+  if (spotifyScreen && spotifyScreen.style.display === "none") {
+    removeTaskbarApp(spotifyScreen);
+    addTaskbarApp(spotifyScreen, "KuuppaMusic");
+  }
 }
 
 var openApps = document.querySelector("#openApps");
@@ -1478,10 +1506,9 @@ function addTaskbarApp(windowElement, name) {
             if(windowElement.id === "spotify"){
 
           if(audio.paused === false){
-          changeTrackMinimize();
-          setInterval(changeTrackMinimize, 60000);
+          startTrackMinimizeUpdates();
           }else{
-            clearInterval(changeTrackMinimize);
+            stopTrackMinimizeUpdates();
           }
 
           }
@@ -1515,10 +1542,9 @@ function setupMinimize(windowId, buttonId, appName) {
         if(windowElement.id === "spotify"){
           
           if(audio.paused === false){
-          changeTrackMinimize();
-          setInterval(changeTrackMinimize, 60000);
+          startTrackMinimizeUpdates();
           }else{
-            clearInterval(changeTrackMinimize);
+            stopTrackMinimizeUpdates();
           }
             }
     });
@@ -1546,9 +1572,7 @@ function openWindow(element, appName) {
       startCamera();
     }
     if (element.id === "spotify"){
-      removeTaskbarApp(spotifyScreen);
-      addTaskbarApp(spotifyScreen, "KuuppaMusic");
-      clearInterval(changeTrackMinimize);
+      stopTrackMinimizeUpdates();
     }
   }
 }
@@ -2214,12 +2238,16 @@ playBtn.addEventListener(
       playBtn.classList.add("pause");
       audio.play();
       radioimg.src = "./icons/radio-animation.gif"
+      if (spotifyScreen && spotifyScreen.style.display === "none") {
+        startTrackMinimizeUpdates();
+      }
     } else {
       playBtn.classList.remove("pause");
       playBtn.classList.add("play");
       audio.pause();
       radioimg.src = "./icons/radio.png"
       audio.src = ''
+      stopTrackMinimizeUpdates();
     }
   },
   false
@@ -2260,11 +2288,9 @@ function showAppInfo(windowNamed){
     if(appInfo.style.display === 'none'){
     appInfo.style.display = 'flex';
     appInfoTitle.style.display = 'flex';
-    console.log('kaivuriF');
   }else{
     appInfo.style.display = 'none';
     appInfoTitle.style.display = 'none';
-    console.log('kaivuriN');
   }
 
 }

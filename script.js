@@ -1438,27 +1438,10 @@ function minimizeWindow(windowElement) {
     }, 250);
 }
 
-var trackMinimizeInterval = null;
-
 function changeTrackMinimize(){
         trackt = trackminimize.textContent;
         removeTaskbarApp(spotifyScreen);
         addTaskbarApp(spotifyScreen, trackt);
-}
-
-function startTrackMinimizeUpdates(){
-  clearInterval(trackMinimizeInterval);
-  changeTrackMinimize();
-  trackMinimizeInterval = setInterval(changeTrackMinimize, 60000);
-}
-
-function stopTrackMinimizeUpdates(){
-  clearInterval(trackMinimizeInterval);
-  trackMinimizeInterval = null;
-  removeTaskbarApp(spotifyScreen);
-  if (spotifyScreen && spotifyScreen.style.display === "none") {
-    addTaskbarApp(spotifyScreen, "KuuppaMusic");
-  }
 }
 
 var openApps = document.querySelector("#openApps");
@@ -1495,9 +1478,10 @@ function addTaskbarApp(windowElement, name) {
             if(windowElement.id === "spotify"){
 
           if(audio.paused === false){
-          startTrackMinimizeUpdates();
+          changeTrackMinimize();
+          setInterval(changeTrackMinimize, 60000);
           }else{
-            stopTrackMinimizeUpdates();
+            clearInterval(changeTrackMinimize);
           }
 
           }
@@ -1531,9 +1515,10 @@ function setupMinimize(windowId, buttonId, appName) {
         if(windowElement.id === "spotify"){
           
           if(audio.paused === false){
-          startTrackMinimizeUpdates();
+          changeTrackMinimize();
+          setInterval(changeTrackMinimize, 60000);
           }else{
-            stopTrackMinimizeUpdates();
+            clearInterval(changeTrackMinimize);
           }
             }
     });
@@ -1561,7 +1546,9 @@ function openWindow(element, appName) {
       startCamera();
     }
     if (element.id === "spotify"){
-      stopTrackMinimizeUpdates();
+      removeTaskbarApp(spotifyScreen);
+      addTaskbarApp(spotifyScreen, "KuuppaMusic");
+      clearInterval(changeTrackMinimize);
     }
   }
 }
@@ -2227,16 +2214,12 @@ playBtn.addEventListener(
       playBtn.classList.add("pause");
       audio.play();
       radioimg.src = "./icons/radio-animation.gif"
-      if (spotifyScreen && spotifyScreen.style.display === "none") {
-        startTrackMinimizeUpdates();
-      }
     } else {
       playBtn.classList.remove("pause");
       playBtn.classList.add("play");
       audio.pause();
       radioimg.src = "./icons/radio.png"
       audio.src = ''
-      stopTrackMinimizeUpdates();
     }
   },
   false
@@ -2270,18 +2253,15 @@ function getTimeCodeFromNum(num) {
 var appInfoName = 'null'
 
 function showAppInfo(windowNamed){
-  console.log('kaivuri');
   appInfoName = windowNamed;
   var appInfo = document.getElementById(appInfoName + 'Info')
   var appInfoTitle = document.getElementById(appInfoName + 'InfoTitle')
     if(appInfo.style.display === 'none'){
     appInfo.style.display = 'flex';
     appInfoTitle.style.display = 'flex';
-    console.log('kaivuriF');
   }else{
     appInfo.style.display = 'none';
     appInfoTitle.style.display = 'none';
-    console.log('kaivuriN');
   }
 
 }

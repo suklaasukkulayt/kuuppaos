@@ -1397,4 +1397,5 @@ border: 2px solid black;
 .infoButton{
   border-radius: 16px;
   font-family: ADLaM Display;
+  background-color: rgb(79, 251, 139);
 }

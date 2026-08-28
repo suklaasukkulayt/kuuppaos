@@ -1455,8 +1455,8 @@ function startTrackMinimizeUpdates(){
 function stopTrackMinimizeUpdates(){
   clearInterval(trackMinimizeInterval);
   trackMinimizeInterval = null;
+  removeTaskbarApp(spotifyScreen);
   if (spotifyScreen && spotifyScreen.style.display === "none") {
-    removeTaskbarApp(spotifyScreen);
     addTaskbarApp(spotifyScreen, "KuuppaMusic");
   }
 }

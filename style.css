@@ -182,6 +182,7 @@ body{
     flex-direction: column;
     resize: both;
     overflow: auto;
+    scrollbar-gutter: stable;
     backdrop-filter: blur(var(--desktop-blur));
     -webkit-backdrop-filter: blur(var(--desktop-blur));
     transition: background-color 0.2s ease, backdrop-filter 0.2s ease;

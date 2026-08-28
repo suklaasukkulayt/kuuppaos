@@ -145,7 +145,7 @@ body{
 }
 
 .terminal-container {
-  align-self: center;
+  display: block;
   width: 90%;
   margin: 0 auto;
   text-align: center;
@@ -303,7 +303,6 @@ body{
 
 
 #clock {
-  --clock-size: 220px;
   width: 300px;
   max-width: calc(100vw - 32px);
   min-height: 280px;
@@ -311,7 +310,7 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 12px 12px;
+  padding: 41px 16px 16px 16px;
   box-sizing: border-box;
 }
 
@@ -320,9 +319,8 @@ body{
  display: flex;
  justify-content: center;
  align-items: center;
- width: 100%;
- height: 100%;
- flex: 1 1 auto;
+ width: 256px;
+ height: 256px;
  background: transparent;
  margin-top: 0;
 }
@@ -337,8 +335,8 @@ body{
  background: transparent;
 }
 .clock {
- width: var(--clock-size);
- height: var(--clock-size);
+ width: 220px;
+ height: 220px;
  border: 2px solid black;
  border-radius: 50%;
  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -352,7 +350,7 @@ body{
  position: absolute;
  inset: 0;
  text-align: center;
- font-size: calc(var(--clock-size) / 22);
+ font-size: 1rem;
 }
 .clock .hand {
  --rotation: 10;
@@ -372,8 +370,8 @@ body{
 }
 #small-circle {
  position: absolute;
- width: calc(var(--clock-size) / 15.7);
- height: calc(var(--clock-size) / 15.7);
+ width: 14px;
+ height: 14px;
  border-radius: 50%;
  background-color: red;
  left: 50%;
@@ -396,17 +394,17 @@ body{
  left: 66%;
  border: 2px solid black;
  border-radius: 10px;
- width: calc(var(--clock-size) / 3.93);
- height: calc(var(--clock-size) / 6.47);
- font-size: calc(var(--clock-size) / 24.4);
+ width: 56px;
+ height: 34px;
+ font-size: 0.9rem;
 }
 .container-2 #date {
  display: flex;
  justify-content: center;
  align-items: center;
  border-right: 1px solid black;
- width: calc(var(--clock-size) / 7.86);
- height: 100%;
+ width: 28px;
+ height: 34px;
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .container-2 #month {
@@ -414,7 +412,7 @@ body{
  justify-content: center;
  align-items: center;
  width: fit-content;
- height: 100%;
+ height: 34px;
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .number1 {

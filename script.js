@@ -831,17 +831,6 @@ date.textContent = currentDate.getDate();
 setInterval(setClock, 10);
 setInterval(getUserWeather, 10 * 60 * 1000);
 
-const clockWindowEl = document.querySelector("#clock");
-const clockFaceContainer = clockWindowEl ? clockWindowEl.querySelector(".container") : null;
-if (clockWindowEl && clockFaceContainer && window.ResizeObserver) {
-  const clockResizeObserver = new ResizeObserver(function () {
-    var available = Math.min(clockFaceContainer.clientWidth, clockFaceContainer.clientHeight);
-    var newSize = Math.max(80, available - 20);
-    clockWindowEl.style.setProperty("--clock-size", newSize + "px");
-  });
-  clockResizeObserver.observe(clockFaceContainer);
-}
-
 
 
 
@@ -2288,9 +2277,11 @@ function showAppInfo(windowNamed){
     if(appInfo.style.display === 'none'){
     appInfo.style.display = 'flex';
     appInfoTitle.style.display = 'flex';
+    console.log('kaivuriF');
   }else{
     appInfo.style.display = 'none';
     appInfoTitle.style.display = 'none';
+    console.log('kaivuriN');
   }
 
 }

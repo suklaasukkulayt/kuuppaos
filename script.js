@@ -91,19 +91,22 @@ function dragElement(element) {
 var STORAGE_BG = "kuuppaos-bg-image";
 var STORAGE_BLUR = "kuuppaos-blur";
 var STORAGE_TRANSPARENT = "kuuppaos-transparent";
+var STORAGE_TRANSPARENT = "kuuppaos-bgcolor";
 
-function saveSettings(bgImage, blur, transparent) {
+function saveSettings(bgImage, blur, transparent, bgcolor) {
   if (bgImage) {
     localStorage.setItem(STORAGE_BG, bgImage);
   }
   localStorage.setItem(STORAGE_BLUR, String(blur));
   localStorage.setItem(STORAGE_TRANSPARENT, String(transparent));
+  localStorage.setItem(STORAGE_BGCOLOR, String(bgcolor));
 }
 
 function loadSettings() {
   var savedBg = localStorage.getItem(STORAGE_BG);
   var savedBlur = localStorage.getItem(STORAGE_BLUR);
   var savedTransparent = localStorage.getItem(STORAGE_TRANSPARENT);
+  var savedBgcolor = localStorage.getItem(STORAGE_BGCOLOR);
 
   if (savedBg) {
     applyWallpaper(savedBg);
@@ -117,6 +120,11 @@ function loadSettings() {
   if (transparentInput && savedTransparent !== null) {
     transparentInput.value = savedTransparent;
     updateTransparentDisplay(Number(savedTransparent));
+  }
+
+  if (bgcolorInput && savedBgcolor !== null) {
+    bgcolorInput.value = savedBgcolor;
+    updateBgcolorDisplay(Number(savedBgcolor));
   }
 }
 
@@ -137,6 +145,8 @@ var blurInput = document.getElementById("blurInput");
 var blurValue = document.getElementById("blurValue");
 var transparentInput = document.getElementById("transparentInput");
 var transparentValue = document.getElementById("transparentValue");
+var bgcolorInput = document.getElementById("bgcolorInput");
+var bgcolorValue = document.getElementById("bgcolorValue");
 
 function applyWallpaper(imageDataUrl) {
   if (!body) {
@@ -184,6 +194,15 @@ function updateTransparentDisplay(value) {
   }
 }
 
+function updateBgcolorDisplay(value) {
+  const bgcolorAmount = Number.isFinite(value) ? value : 0;
+  document.documentElement.style.setProperty("--welcome-hue", `${bgcolorAmount}`);
+
+  if (bgcolorValue) {
+    bgcolorValue.textContent = `${bgcolorAmount}`;
+  }
+}
+
 if (fileInput) {
   fileInput.addEventListener("change", (event) => {
     const file = event.target.files && event.target.files[0];
@@ -204,14 +223,14 @@ if (applyStyleBtn) {
     if (!file) {
       resetWallpaper();
       clearSavedWallpaper();
-      saveSettings(null, Number(blurInput.value), Number(transparentInput.value));
+      saveSettings(null, Number(blurInput.value), Number(transparentInput.value), Number(bgcolorInput.value));
       return;
     }
 
     const reader = new FileReader();
     reader.onload = () => {
       applyWallpaper(reader.result);
-      saveSettings(reader.result, Number(blurInput.value), Number(transparentInput.value));
+      saveSettings(reader.result, Number(blurInput.value), Number(transparentInput.value), Number(bgcolorInput.value));
     };
     reader.readAsDataURL(file);
   });
@@ -221,7 +240,7 @@ if (resetWallpaperBtn) {
   resetWallpaperBtn.addEventListener("click", () => {
     resetWallpaper();
     clearSavedWallpaper();
-    saveSettings(null, Number(blurInput.value), Number(transparentInput.value));
+    saveSettings(null, Number(blurInput.value), Number(transparentInput.value), Number(bgcolorInput.value));
   });
 }
 
@@ -241,8 +260,17 @@ if (transparentInput) {
   });
 }
 
+if (bgcolorInput) {
+  bgcolorInput.addEventListener("input", (event) => {
+    var value = parseInt(event.target.value, 10);
+    updateBgcolorDisplay(value);
+    localStorage.setItem(STORAGE_BGCOLOR, String(value));
+  });
+}
+
 loadSettings();
 updateBlurDisplay(Number(blurInput && blurInput.value ? blurInput.value : 0));
+updateBgcolorDisplay(Number(bgcolorInput && bgcolorInput.value ? bgcolorInput.value : 0));
 updateTransparentDisplay(Number(transparentInput && transparentInput.value ? transparentInput.value : 0));
 
 function closeWindow(element) {

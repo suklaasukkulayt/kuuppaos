@@ -171,7 +171,7 @@ body{
 }
 
 .welcome {
-    background-color: rgba(0, 255, 0, var(--desktop-window-alpha));
+    background-color: hsla(var(--welcome-hue, 120), 100%, 50%, var(--desktop-window-alpha));
     max-height: 70%;
     position: absolute;
     transform: translate(-50%, -50%);

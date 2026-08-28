@@ -91,7 +91,7 @@ function dragElement(element) {
 var STORAGE_BG = "kuuppaos-bg-image";
 var STORAGE_BLUR = "kuuppaos-blur";
 var STORAGE_TRANSPARENT = "kuuppaos-transparent";
-var STORAGE_TRANSPARENT = "kuuppaos-bgcolor";
+var STORAGE_BGCOLOR = "kuuppaos-bgcolor";
 
 function saveSettings(bgImage, blur, transparent, bgcolor) {
   if (bgImage) {

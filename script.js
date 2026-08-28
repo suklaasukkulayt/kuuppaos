@@ -2058,7 +2058,7 @@ const cameraError = document.getElementById("camera-error");
 function startCamera() {
   if (cameraStream) return;
   navigator.mediaDevices
-    .getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false })
+    .getUserMedia({ video: { width: { ideal: 3840 }, height: { ideal: 2160 } }, audio: false })
     .then((stream) => {
       cameraStream = stream;
       video.srcObject = stream;

@@ -1717,6 +1717,27 @@ function addCommand(text, color) {
     cmdContent.scrollTop = cmdContent.scrollHeight;
 }
 
+const cmdColors = {
+    "0": "#000000",
+    "1": "#000080",
+    "2": "#008000",
+    "3": "#008080",
+    "4": "#800000",
+    "5": "#800080",
+    "6": "#808000",
+    "7": "#c0c0c0",
+    "8": "#808080",
+    "9": "#0000ff",
+    "A": "#00ff00",
+    "B": "#00ffff",
+    "C": "#ff0000",
+    "D": "#ff00ff",
+    "E": "#ffff00",
+    "F": "#ffffff"
+};
+
+let cmdBackgroundColor = "#08080c";
+let cmdTextColor = "#eeeeee";
 
 var commandHistory = [];
 var historyIndex = -1;
@@ -1783,9 +1804,49 @@ function runCommand(command) {
         addCommand("about      About KuuppaOS or apps)");
         addCommand("print      Print text");
         addCommand("usage      How to use commands");
+        addCommand("color      Change terminal colors");
         addCommand("delete     delete system32");
         addCommand("");
 
+    }
+
+        else if (mainCommand === "color") {
+
+        if (parts.length === 1 || parts[1] === "") {
+            addCommand(
+                "Current color: " +
+                cmdBackgroundColor +
+                " background, " +
+                cmdTextColor +
+                " text"
+            );
+            return;
+        }
+
+        var colorCode = parts[1].toUpperCase();
+
+        if (!/^[0-9A-F]{2}$/.test(colorCode)) {
+            addCommand("Invalid color attribute.", "#ff0000");
+            addCommand("Usage: color [background][text]", "#7cff8a");
+            addCommand("Example: color 0A", "#7cff8a");
+            return;
+        }
+
+        var bgCode = colorCode[0];
+        var textCode = colorCode[1];
+
+        cmdBackgroundColor = cmdColors[bgCode];
+        cmdTextColor = cmdColors[textCode];
+
+        cmdContent.style.backgroundColor = cmdBackgroundColor;
+        cmdOutput.style.color = cmdTextColor;
+        cmdInput.style.color = cmdTextColor;
+        cmdPrompt.style.color = cmdTextColor;
+
+        addCommand(
+            "Color changed to " + colorCode,
+            cmdTextColor
+        );
     }
 
     else if (mainCommand === "clear") {
@@ -2009,6 +2070,12 @@ function runCommand(command) {
         addCommand("Usage 'delete'", "#7cff8a");
         addCommand("'delete system32'")
       }
+      else if (usageTarget === "color") {
+    addCommand("Usage 'color'", "#7cff8a");
+    addCommand("'color 0A'");
+    addCommand("First character = background color");
+    addCommand("Second character = text color");
+}
       else {
         addCommand("Usage 'usage'", "#7cff8a");
         addCommand("'usage command'")

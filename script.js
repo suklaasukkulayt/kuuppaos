@@ -602,6 +602,24 @@ if (recorderIcon) {
   });
 }
 
+  dragElement(document.querySelector("#dogg"))
+
+var doggScreen = document.querySelector("#dogg")
+var doggIcon = document.querySelector("#doggicon")
+var doggScreenClose = document.querySelector("#doggclose")
+
+doggScreenClose.addEventListener("click", () => {
+  closeWindow(doggScreen);
+});
+  
+if (doggIcon) {
+  doggIcon.addEventListener("click", () => {
+    handleIconTap(doggIcon, doggScreen, "Dog Gallery");
+    console.log("Also try LuckyOS! https://makkonenhugo.github.io/LuckyOS/")
+  });
+}
+
+
 dragElement(document.querySelector("#camera"))
 
 var cameraScreen = document.querySelector("#camera")
@@ -700,6 +718,7 @@ addWindowTapHandling(cameraScreen);
 addWindowTapHandling(ghostScreen);
 addWindowTapHandling(infoScreen);
 addWindowTapHandling(recorderScreen);
+addWindowTapHandling(doggScreen);
 
 
 var content = [
@@ -1511,6 +1530,7 @@ setupMinimize("#camera", "#cameraminimize", "Camera");
 setupMinimize("#ghost", "#ghostminimize", "Ghost game");
 setupMinimize("#info", "#infominimize", "Info");
 setupMinimize("#recorder", "#recorderminimize", "Recorder");
+setupMinimize("#dogg", "#doggminimize", "Dog Gallery");
 setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
 function minimizeWindow(windowElement) {

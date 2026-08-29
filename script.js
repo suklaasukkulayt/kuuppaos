@@ -1959,6 +1959,11 @@ function runCommand(command) {
         addCommand("Also everyone can see the best score if you get it!")
         addCommand("I made this a while back in a coding class.")
       }
+      else if (aboutTarget === "recorder") {
+        addCommand("About Recorder", "#7cff8a");
+        addCommand("Record audio in KuuppaOS.")
+        addCommand("After recording, press 'Download Audio' to download it.")
+      }
       else if (aboutTarget === "About") {
         addCommand("About About", "#7cff8a");
         addCommand("You can see info about the apps in KuuppaOS!")
@@ -2404,6 +2409,14 @@ function stopTimer() {
   clearInterval(timerInterval);
 }
 
+function getAudioFilename() {
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  const datePart = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  const timePart = `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+  return `kuuppaos_recording_${datePart}_${timePart}.webm`;
+}
+
 startBtn.addEventListener("click", async () => {
   rdownloadLink.style.display = "none";
   try {
@@ -2420,7 +2433,7 @@ startBtn.addEventListener("click", async () => {
       const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
       const audioUrl = URL.createObjectURL(audioBlob);
       rdownloadLink.href = audioUrl;
-      rdownloadLink.download = "recording.webm";
+      rdownloadLink.download = getAudioFilename();
       rdownloadLink.style.display = "block";
       stopTimer();
       stream.getTracks().forEach(function(track) {

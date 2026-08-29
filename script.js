@@ -34,6 +34,15 @@ var currentTime = "";
       }
       setInterval(timeUpdate, 1000);
 
+const buttons = document.querySelectorAll('.filterbutton');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  });
+});
+
 dragElement(document.getElementById("welcome"));
 
 function dragElement(element) {

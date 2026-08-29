@@ -571,6 +571,23 @@ if (ghostIcon) {
   });
 }
 
+  dragElement(document.querySelector("#recorder"))
+
+var recorderScreen = document.querySelector("#recorder")
+var recorderIcon = document.querySelector("#recordericon")
+var recorderScreenClose = document.querySelector("#recorderclose")
+
+recorderScreenClose.addEventListener("click", () => {
+  closeWindow(recorderScreen);
+});
+  
+
+if (recorderIcon) {
+  recorderIcon.addEventListener("click", () => {
+    handleIconTap(recorderIcon, recorderScreen, "Recorder");
+  });
+}
+
 dragElement(document.querySelector("#camera"))
 
 var cameraScreen = document.querySelector("#camera")
@@ -668,6 +685,7 @@ addWindowTapHandling(pongScreen);
 addWindowTapHandling(cameraScreen);
 addWindowTapHandling(ghostScreen);
 addWindowTapHandling(infoScreen);
+addWindowTapHandling(recorderScreen);
 
 
 var content = [
@@ -1478,6 +1496,7 @@ setupMinimize("#pong", "#pongminimize", "Pong");
 setupMinimize("#camera", "#cameraminimize", "Camera");
 setupMinimize("#ghost", "#ghostminimize", "Ghost game");
 setupMinimize("#info", "#infominimize", "Info");
+setupMinimize("#recorder", "#recorderminimize", "Recorder");
 setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
 function minimizeWindow(windowElement) {

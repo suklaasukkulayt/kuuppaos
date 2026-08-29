@@ -1,5 +1,24 @@
-var currentTime = "";
+window.addEventListener("load", () => {
+  function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+const loaderA = document.querySelector(".loader");
+sleep(2000).then(() => { loaderA.style.filter = "opacity(95%)"; });
+sleep(2100).then(() => { loaderA.style.filter = "opacity(85%)"; });
+sleep(2200).then(() => { loaderA.style.filter = "opacity(75%)"; });
+sleep(2300).then(() => { loaderA.style.filter = "opacity(65%)"; });
+sleep(2400).then(() => { loaderA.style.filter = "opacity(55%)"; });
+sleep(2500).then(() => { loaderA.style.filter = "opacity(45%)"; });
+sleep(2600).then(() => { loaderA.style.filter = "opacity(35%)"; });
+sleep(2700).then(() => { loaderA.style.filter = "opacity(25%)"; });
+sleep(2800).then(() => { loaderA.style.filter = "opacity(15%)"; });
+sleep(2900).then(() => { loaderA.style.filter = "opacity(5%)"; });
 
+sleep(3000).then(() => { document.querySelector(".loader").classList.remove("loader-active"); });
+});
+
+
+var currentTime = "";
       function timeUpdate() {
       currentTime = new Date().toLocaleString();
       var timeText = document.querySelector("#timebarElement");

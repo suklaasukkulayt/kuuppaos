@@ -1706,6 +1706,7 @@ document.addEventListener("DOMContentLoaded", () => {
 var cmdInput = document.querySelector("#cmdInput");
 var cmdOutput = document.querySelector("#cmdOutput");
 var cmdContent = cmdOutput.closest(".cmdContent");
+var cmdPrompt = document.querySelector(".cmdPrompt");
 
 function addCommand(text, color) {
     var line = document.createElement("div");

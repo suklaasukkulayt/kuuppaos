@@ -175,6 +175,12 @@ function resetWallpaper() {
   body.style.backgroundPosition = defaultBackgroundPosition;
 }
 
+function resetToDefaults() {
+  document.documentElement.style.setProperty("--desktop-window-alpha", 100);
+  document.documentElement.style.setProperty("--desktop-blur", `0px`);
+  document.documentElement.style.setProperty("--welcome-hue", `120`);
+}
+
 function updateBlurDisplay(value) {
   const blurAmount = Number.isFinite(value) ? value : 0;
   document.documentElement.style.setProperty("--desktop-blur", `${blurAmount}px`);
@@ -221,8 +227,6 @@ if (applyStyleBtn) {
     const file = fileInput && fileInput.files ? fileInput.files[0] : null;
 
     if (!file) {
-      resetWallpaper();
-      clearSavedWallpaper();
       saveSettings(null, Number(blurInput.value), Number(transparentInput.value), Number(bgcolorInput.value));
       return;
     }
@@ -240,7 +244,8 @@ if (resetWallpaperBtn) {
   resetWallpaperBtn.addEventListener("click", () => {
     resetWallpaper();
     clearSavedWallpaper();
-    saveSettings(null, Number(blurInput.value), Number(transparentInput.value), Number(bgcolorInput.value));
+    resetToDefaults()
+    saveSettings(null, Number(0), Number(100), Number(120));
   });
 }
 

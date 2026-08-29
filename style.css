@@ -1493,3 +1493,53 @@ border: 2px solid black;
     border-radius: 0%;
   }
 }
+
+.recordercontainer{
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #00ff77;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  height: 100%;
+}
+
+#startBtn {
+  background-color: #4caf50;
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+#stopBtn {
+  background-color: #f44336;
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.timer {
+  font-size: 24px;
+  color: #ff5722;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#rdownloadLink{
+  display: none;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-decoration: none;
+  background-color: #2301ff;
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}

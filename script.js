@@ -2373,3 +2373,67 @@ function showAppInfo(windowNamed){
   }
 
 }
+
+
+let mediaRecorder;
+let audioChunks = [];
+let timerInterval;
+let secondsElapsed = 0;
+
+const startBtn = document.getElementById("startBtn");
+const stopBtn = document.getElementById("stopBtn");
+const rdownloadLink = document.getElementById("rdownloadLink");
+const timerElement = document.getElementById("timer");
+
+function startTimer() {
+  secondsElapsed = 0;
+  timerElement.textContent = "00:00";
+  timerInterval = setInterval(() => {
+    secondsElapsed++;
+    timerElement.textContent = new Date(secondsElapsed * 1000).toISOString().substr(14, 5);
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+startBtn.addEventListener("click", async () => {
+  rdownloadLink.style.display = "none";
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = (event) => {
+      audioChunks.push(event.data);
+    };
+
+    mediaRecorder.onstop = () => {
+      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      rdownloadLink.href = audioUrl;
+      rdownloadLink.download = "recording.webm";
+      rdownloadLink.style.display = "block";
+      stopTimer();
+      stream.getTracks().forEach(function(track) {
+  track.stop();
+});
+    };
+
+    mediaRecorder.start();
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    startTimer();
+  } catch (error) {
+    alert("Microphone access is required for recording.");
+  }
+});
+
+stopBtn.addEventListener("click", () => {
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    mediaRecorder.stop();
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  }
+});

@@ -369,6 +369,7 @@ function handleIconTap(element, windowElement, appName) {
   }
 }
 
+
 dragElement(document.querySelector("#textpad"))
 
 var textpadScreen = document.querySelector("#textpad")
@@ -579,7 +580,11 @@ var recorderScreenClose = document.querySelector("#recorderclose")
 
 recorderScreenClose.addEventListener("click", () => {
   closeWindow(recorderScreen);
-});
+  if(typeof audioStream !== 'undefined' && audioStream){
+  audioStream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+}});
   
 
 if (recorderIcon) {
@@ -2375,6 +2380,7 @@ function showAppInfo(windowNamed){
 }
 
 
+
 let mediaRecorder;
 let audioChunks = [];
 let timerInterval;
@@ -2403,6 +2409,7 @@ startBtn.addEventListener("click", async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream);
+    audioStream = stream;
     audioChunks = [];
 
     mediaRecorder.ondataavailable = (event) => {
@@ -2417,8 +2424,8 @@ startBtn.addEventListener("click", async () => {
       rdownloadLink.style.display = "block";
       stopTimer();
       stream.getTracks().forEach(function(track) {
-  track.stop();
-});
+      track.stop();
+    });
     };
 
     mediaRecorder.start();

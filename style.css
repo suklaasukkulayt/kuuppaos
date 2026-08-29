@@ -1063,6 +1063,7 @@ border: 2px solid black;
   color: white;
   display: block;
   border-radius: 80%;
+  cursor: pointer;
 }
 
 #start-button:hover {
@@ -1452,4 +1453,5 @@ border: 2px solid black;
 .filterbutton{ 
   background-color: #0073ff;
   border-radius: 8px;
+  cursor: pointer;
 }

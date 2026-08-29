@@ -2124,11 +2124,20 @@ function startCamera() {
       cameraStream = stream;
       video.srcObject = stream;
       video.play();
+      const track = stream.getVideoTracks()[0];
+      if (track) {
+        const settings = track.getSettings();
+        const resText = document.getElementById("cameraResolution");
+        if (resText) {
+          resText.textContent = `Resolution: ${settings.width} x ${settings.height}`;
+        }
+      }
       if (cameraError) {
         cameraError.textContent = "";
         cameraError.style.display = "none";
       }
     })
+    
     .catch((err) => {
       const message = `Camera error: ${err.message || err}`;
       if (cameraError) {

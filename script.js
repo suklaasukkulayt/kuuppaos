@@ -2075,7 +2075,7 @@ addCommand("");
     }
 }
 
-const width = 1280;
+const width = 3840;
 let height = 0;
 
 let streaming = false;
@@ -2087,6 +2087,34 @@ const photo = document.getElementById("photo");
 const startButton = document.getElementById("start-button");
 const allowButton = document.getElementById("permissions-button");
 const cameraError = document.getElementById("camera-error");
+
+function applyFilter(filterName){
+  if (filterName === 'grayscale'){
+  video.style.filter = "grayscale(100%)";
+  } else if (filterName === "contrast"){
+  video.style.filter = "contrast(200%)";
+  } else if (filterName === "normal"){
+  video.style.filter = "none";
+  } else if (filterName === "blur"){
+  video.style.filter = "blur(3px)";
+  } else if (filterName === "huerotate90"){
+  video.style.filter = "hue-rotate(90deg)";
+  } else if (filterName === "huerotate180"){
+  video.style.filter = "hue-rotate(180deg)";
+  } else if (filterName === "huerotate270"){
+  video.style.filter = "hue-rotate(270deg)";
+  } else if (filterName === "invert"){
+  video.style.filter = "invert(100%)";
+  } else if (filterName === "brightness"){
+  video.style.filter = "brightness(0.2)";
+  } else if (filterName === "opacity"){
+  video.style.filter = "opacity(50%)";
+  } else if (filterName === "saturate"){
+  video.style.filter = "saturate(500%)";
+  } else if (filterName === "sepia"){
+  video.style.filter = "sepia(100%)";
+  }
+}
 
 function startCamera() {
   if (cameraStream) return;
@@ -2158,6 +2186,11 @@ function takePicture() {
   if (width && height) {
     cameracanvas.width = width;
     cameracanvas.height = height;
+
+    const videoStyles = window.getComputedStyle(video);
+    const filterValue = videoStyles.getPropertyValue("filter");
+
+    context.filter = filterValue !== "none" ? filterValue : "none";
     context.drawImage(video, 0, 0, width, height);
 
     const data = cameracanvas.toDataURL('image/png');

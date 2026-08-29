@@ -2102,12 +2102,17 @@ function runCommand(command) {
         var blura = localStorage.getItem(STORAGE_BLUR);
         var wallpa = localStorage.getItem(STORAGE_BG);
         var transa = localStorage.getItem(STORAGE_TRANSPARENT);
+        var bgcolora = localStorage.getItem(STORAGE_BGCOLOR);
         if (blura === null) {
             blura = "0";
         }
 
         if (transa === null) {
             transa = "0";
+        }
+
+        if (bgcolora === null) {
+            blura = "120";
         }
 
         if (wallpa === null) {
@@ -2123,6 +2128,7 @@ addCommand("================================", "#7cff8a");
 addCommand("User: Kuuppa");
 addCommand("Blur: " + blura + "px");
 addCommand("Transparency: " + transa + "%");
+addCommand("App BG Color: " + bgcolora);
 addCommand("Wallpaper: " + wallpa);
 addCommand("================================", "#7cff8a");
 addCommand("         About KuuppaOS", "#7cff8a");

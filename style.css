@@ -1393,7 +1393,7 @@ border: 2px solid black;
 
 .infoInfo{
   font-family: Outfit;
-  font-size: 12;
+  font-size: 14px;
 }
 
 .infoButton{
@@ -1552,4 +1552,25 @@ border: 2px solid black;
   border-radius: 8px;
   cursor: pointer;
   color: #fff;
+}
+
+#camera-select {
+  background-color: #0073ff;
+  color: #111;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#camera-select:hover {
+  background-color: #0073ff9a;
+}
+
+#camera-select option {
+  background-color: white;
+  color: #111;
+}
+
+#camera-select option:checked {
+  background-color: #d8ffd8;
+  color: #111;
 }

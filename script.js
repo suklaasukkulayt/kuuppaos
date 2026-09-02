@@ -2238,6 +2238,8 @@ const photo = document.getElementById("photo");
 const startButton = document.getElementById("start-button");
 const allowButton = document.getElementById("permissions-button");
 const cameraError = document.getElementById("camera-error");
+const cameraSelect = document.getElementById("camera-select");
+let selectedCameraId = null;
 
 function applyFilter(filterName){
   if (filterName === 'grayscale'){
@@ -2267,14 +2269,58 @@ function applyFilter(filterName){
   }
 }
 
+async function refreshCameraList() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
+
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  const videoInputs = devices.filter(device => device.kind === "videoinput");
+
+  if (!cameraSelect) return;
+
+  cameraSelect.innerHTML = "";
+
+  if (!videoInputs.length) {
+    cameraSelect.innerHTML = '<option value="">No camera found</option>';
+    return;
+  }
+
+  videoInputs.forEach((device, index) => {
+    const option = document.createElement("option");
+    option.value = device.deviceId;
+    option.textContent = device.label || `Camera ${index + 1}`;
+    cameraSelect.appendChild(option);
+  });
+
+  if (selectedCameraId) {
+    cameraSelect.value = selectedCameraId;
+  } else {
+    selectedCameraId = videoInputs[0].deviceId;
+    cameraSelect.value = selectedCameraId;
+  }
+}
+
 function startCamera() {
   if (cameraStream) return;
+
+  const constraints = {
+    video: {
+      width: { ideal: 3840 },
+      height: { ideal: 2160 }
+    },
+    audio: false
+  };
+
+  if (selectedCameraId) {
+    constraints.video.deviceId = { exact: selectedCameraId };
+  }
+
   navigator.mediaDevices
-    .getUserMedia({ video: { width: { ideal: 3840 }, height: { ideal: 2160 } }, audio: false })
+    .getUserMedia(constraints)
     .then((stream) => {
       cameraStream = stream;
       video.srcObject = stream;
       video.play();
+
       const track = stream.getVideoTracks()[0];
       if (track) {
         const settings = track.getSettings();
@@ -2283,12 +2329,12 @@ function startCamera() {
           resText.textContent = `Resolution: ${settings.width} x ${settings.height}`;
         }
       }
+
       if (cameraError) {
         cameraError.textContent = "";
         cameraError.style.display = "none";
       }
     })
-    
     .catch((err) => {
       const message = `Camera error: ${err.message || err}`;
       if (cameraError) {
@@ -2299,6 +2345,21 @@ function startCamera() {
       }
       console.error(message);
     });
+}
+
+if (cameraSelect) {
+  cameraSelect.addEventListener("change", () => {
+    selectedCameraId = cameraSelect.value;
+
+    if (cameraStream) {
+      stopCamera();
+      startCamera();
+    }
+  });
+}
+
+if (cameraSelect) {
+  refreshCameraList();
 }
 
 function stopCamera() {

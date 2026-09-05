@@ -2621,3 +2621,30 @@ stopBtn.addEventListener("click", () => {
     stopBtn.disabled = true;
   }
 });
+
+function showMarttaPhotos() {
+  const marttaPhotos = document.getElementById("marttaPhotos");
+  if (marttaPhotos.style.display === "flex") {
+    marttaPhotos.style.display = "none";
+  } else {
+    marttaPhotos.style.display = "flex";
+  }
+}
+
+function showNuutiPhotos() {
+  const nuutiPhotos = document.getElementById("nuutiPhotos");
+  if (nuutiPhotos.style.display === "flex") {
+    nuutiPhotos.style.display = "none";
+  } else {
+    nuutiPhotos.style.display = "flex";
+  }
+}
+
+function showOthersPhotos() {
+  const othersPhotos = document.getElementById("othersPhotos");
+  if (othersPhotos.style.display === "flex") {
+    othersPhotos.style.display = "none";
+  } else {
+    othersPhotos.style.display = "flex";
+  }
+}

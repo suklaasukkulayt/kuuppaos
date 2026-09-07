@@ -2346,8 +2346,15 @@ function startCamera() {
     .catch((err) => {
       const message = `Camera error: ${err.message || err}`;
       if (cameraError) {
+        if (message === "Camera error: Requested device not found") {
+        cameraError.textContent = "No camera found!";
+        cameraError.style.display = "block";
+        } else{
         cameraError.textContent = message;
         cameraError.style.display = "block";
+        console.log(message);
+        }
+        
       } else {
         alert(message);
       }

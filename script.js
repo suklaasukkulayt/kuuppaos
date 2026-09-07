@@ -796,7 +796,11 @@ function weatherCodeToText(code) {
     45: "Fog",
     48: "Rime fog",
     51: "Light drizzle",
+    53: "Moderate drizzle",
+    55: "Dense drizzle",
     61: "Rain",
+    63: "Moderate rain",
+    65: "Heavy rain",
     71: "Snow",
     95: "Thunderstorm"
   };
@@ -813,7 +817,11 @@ function weatherCodeToEmoji(code) {
     45: "🌫️",
     48: "🌫️",
     51: "🌦️",
+    53: "☔",
+    55: "☔",
     61: "🌧️",
+    63: "🌧️",
+    65: "🌧️",
     71: "🌨️",
     95: "⛈️"
   };

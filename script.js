@@ -1670,7 +1670,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let startY = 0;
 
   desktop.addEventListener("mousedown", (e) => {
-    if (e.target !== desktop) return;
+   if (
+  e.target.closest(".desktop-icon") ||
+  e.target.closest(".welcome") ||
+  e.target.closest("#top")
+) {
+  return;
+}
 
     const desktopRect = desktop.getBoundingClientRect();
     

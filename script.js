@@ -2087,6 +2087,76 @@ function runCommand(command) {
       }
     }
 
+     else if (mainCommand === "install" && parts.length > 1) {
+      var installTarget = parts.slice(1).join(" ").toLowerCase();
+
+      if (installTarget === "textpad") {
+        addCommand("Installing TeXtpad", "#08d3ee");
+        installApp('textpad', true);
+      }
+      else if (installTarget === "weather") {
+        addCommand("Installing Weather", "#08d3ee");
+        installApp('weather', true);
+      }
+      else if (installTarget === "clock") {
+        addCommand("Installing Clock", "#08d3ee");
+        installApp('clock', true);
+      }
+      else if (installTarget === "kuuppamusic") {
+        addCommand("Installing KuuppaMusic", "#08d3ee");
+        installApp('spotify', true);
+      }
+      else if (installTarget === "kuuppavid") {
+        addCommand("Installing KuuppaVid", "#08d3ee");
+        installApp('youtube', true);
+      }
+      else if (installTarget === "hackcmd") {
+        addCommand("Installing HackCMD", "#08d3ee");
+        installApp('cterminal', true);
+      }
+      else if (installTarget === "paint") {
+        addCommand("Installing Paint", "#08d3ee");
+        installApp('paint', true);
+      }
+      else if (installTarget === "kuuppabrowser") {
+        addCommand("Installing KuuppaBrowser", "#08d3ee");
+        installApp('browser', true);
+      }
+      else if (installTarget === "calculator") {
+        addCommand("Installing Calculator", "#08d3ee");
+        installApp('calculator', true);
+      }
+      else if (installTarget === "pong") {
+        addCommand("Installing Pong", "#08d3ee");
+        installApp('pong', true);
+      }
+      else if (installTarget === "camera") {
+        addCommand("Installing Camera", "#08d3ee");
+        installApp('camera', true);
+      }
+      else if (installTarget === "ghostgame") {
+        addCommand("Installing Ghost game", "#08d3ee");
+        installApp('ghost', true);
+      }
+      else if (installTarget === "recorder") {
+        addCommand("Installing Recorder", "#08d3ee");
+        installApp('recorder', true);
+      }
+      else if (installTarget === "doggallery") {
+        addCommand("Installing Dog Gallery", "#08d3ee");
+        installApp('doggallery', true);
+      }
+
+      else if (installTarget === "about") {
+        addCommand("Installing About", "#08d3ee");
+        installApp('info', true);
+      }
+      else {
+        addCommand("No app named '" + installTarget + "' found.");
+        addCommand("Maybe use the App Store to find it?");
+      }
+    }
+
     else if (mainCommand === "usage" && parts.length > 1) {
       var usageTarget = parts.slice(1).join(" ").toLowerCase();
 
@@ -2699,7 +2769,7 @@ function saveInstalledApps(installedApps) {
   );
 }
 
-function installApp(appName) {
+function installApp(appName, isTerminal) {
   const icon = document.getElementById(appName + "icon");
   const button = document.getElementById(appName + "Button");
 
@@ -2727,14 +2797,24 @@ function installApp(appName) {
       clearInterval(progressTimer);
 
       if (appIsInstalled) {
+        if (isTerminal) {
+          icon.style.display = "none";
+          saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
+        } else {
         icon.style.display = "none";
         button.textContent = "Install";
         saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
+      }
       } else {
+        if (isTerminal) {
+          icon.style.display = "flex";
+          saveInstalledApps([...installedApps, appName]);
+        } else {
         icon.style.display = "flex";
         button.textContent = "Remove";
         saveInstalledApps([...installedApps, appName]);
       }
+    }
       button.disabled = false;
     }
   }, 100);

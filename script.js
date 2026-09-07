@@ -1,22 +1,13 @@
 window.addEventListener("load", () => {
-  function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-const loaderA = document.querySelector(".loader");
-sleep(2000).then(() => { loaderA.style.filter = "opacity(95%)"; });
-sleep(2100).then(() => { loaderA.style.filter = "opacity(85%)"; });
-sleep(2200).then(() => { loaderA.style.filter = "opacity(75%)"; });
-sleep(2300).then(() => { loaderA.style.filter = "opacity(65%)"; });
-sleep(2400).then(() => { loaderA.style.filter = "opacity(55%)"; });
-sleep(2500).then(() => { loaderA.style.filter = "opacity(45%)"; });
-sleep(2600).then(() => { loaderA.style.filter = "opacity(35%)"; });
-sleep(2700).then(() => { loaderA.style.filter = "opacity(25%)"; });
-sleep(2800).then(() => { loaderA.style.filter = "opacity(15%)"; });
-sleep(2900).then(() => { loaderA.style.filter = "opacity(5%)"; });
+  const loader = document.querySelector(".loader");
+  setTimeout(() => {
+    loader.classList.add("loader-fading");
 
-sleep(3000).then(() => { document.querySelector(".loader").classList.remove("loader-active"); });
+    setTimeout(() => {
+      loader.classList.remove("loader-active");
+    }, 800);
+  }, 2000);
 });
-
 
 var currentTime = "";
       function timeUpdate() {
@@ -558,6 +549,22 @@ infoScreenClose.addEventListener("click", () => closeWindow(infoScreen));
 if (infoIcon) {
   infoIcon.addEventListener("click", () => {
     handleIconTap(infoIcon, infoScreen, "Info");
+  });
+}
+
+
+dragElement(document.querySelector("#apps"))
+
+var appsScreen = document.querySelector("#apps")
+var appsIcon = document.querySelector("#appsicon")
+
+var appsScreenClose = document.querySelector("#appsclose")
+
+appsScreenClose.addEventListener("click", () => closeWindow(appsScreen));
+
+if (appsIcon) {
+  appsIcon.addEventListener("click", () => {
+    handleIconTap(appsIcon, appsScreen, "App Store");
   });
 }
 
@@ -1539,6 +1546,7 @@ setupMinimize("#ghost", "#ghostminimize", "Ghost game");
 setupMinimize("#info", "#infominimize", "Info");
 setupMinimize("#recorder", "#recorderminimize", "Recorder");
 setupMinimize("#dogg", "#doggminimize", "Dog Gallery");
+setupMinimize("#apps", "#appsminimize", "App Store");
 setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
 function minimizeWindow(windowElement) {
@@ -2669,3 +2677,85 @@ function showOthersPhotos() {
     othersPhotos.style.display = "flex";
   }
 }
+
+
+
+const INSTALLED_APPS_STORAGE_KEY = "installedApps";
+
+function getInstalledApps() {
+  try {
+    return JSON.parse(
+      localStorage.getItem(INSTALLED_APPS_STORAGE_KEY)
+    ) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveInstalledApps(installedApps) {
+  localStorage.setItem(
+    INSTALLED_APPS_STORAGE_KEY,
+    JSON.stringify(installedApps)
+  );
+}
+
+function installApp(appName) {
+  const icon = document.getElementById(appName + "icon");
+  const button = document.getElementById(appName + "Button");
+
+  if (!icon || !button) {
+    return;
+  }
+
+  const installedApps = getInstalledApps();
+  const appIsInstalled = installedApps.includes(appName);
+  const actionText = appIsInstalled ? "Removing" : "Downloading";
+  const duration = 3000;
+  const startTime = Date.now();
+  button.disabled = true;
+  button.textContent = `${actionText} 0%`;
+
+  const progressTimer = setInterval(() => {
+    const elapsedTime = Date.now() - startTime;
+    const progress = Math.min(
+      100,
+      Math.round((elapsedTime / duration) * 100)
+    );
+    button.textContent = `${actionText} ${progress}%`;
+
+    if (progress >= 100) {
+      clearInterval(progressTimer);
+
+      if (appIsInstalled) {
+        icon.style.display = "none";
+        button.textContent = "Install";
+        saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
+      } else {
+        icon.style.display = "flex";
+        button.textContent = "Remove";
+        saveInstalledApps([...installedApps, appName]);
+      }
+      button.disabled = false;
+    }
+  }, 100);
+}
+
+function restoreInstalledApps() {
+  const installedApps = getInstalledApps();
+
+  document.querySelectorAll(".appstorebutton").forEach((button) => {
+    const appName = button.id.replace("Button", "");
+    const icon = document.getElementById(appName + "icon");
+
+    if (!icon) {
+      return;
+    }
+
+    const appIsInstalled = installedApps.includes(appName);
+
+    icon.style.display = appIsInstalled ? "flex" : "none";
+    button.textContent = appIsInstalled ? "Remove" : "Install";
+  });
+}
+
+restoreInstalledApps();

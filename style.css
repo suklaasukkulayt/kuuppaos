@@ -1,3 +1,47 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(29, 171, 29);
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.loader-active {
+  display: flex;
+}
+
+.loader-fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader::after{
+  content: "";
+  width: 50px;
+  height: 50px;
+  background-color: aquamarine;
+  animation: loader 1s infinite;
+  animation-direction: alternate;
+}
+
+@keyframes loader {
+  from {
+    transform: translateY(-50px) scale(0.5);
+    border-radius: 50%;
+  }
+
+  to {
+    transform: translateY(+50px) scale(1);
+    border-radius: 0%;
+  }
+}
+
 :root {
   --desktop-blur: 0px;
   --desktop-window-alpha: 0.8;
@@ -1403,7 +1447,7 @@ border: 2px solid black;
 }
 
 ::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1463,45 +1507,6 @@ border: 2px solid black;
 
 .filterbutton.active {
   background-color: rgba(0, 255, 21, 0.8);
-}
-
-.loader{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background-color:  rgb(29, 171, 29);
-  z-index: 10000;
-  filter: opacity(100%);
-}
-
-.loader-active{
-  display: flex;
-}
-
-.loader::after{
-  content: "";
-  width: 50px;
-  height: 50px;
-  background-color: aquamarine;
-  animation: loader 1s infinite;
-  animation-direction: alternate;
-}
-
-@keyframes loader {
-  from {
-    transform: translateY(-50px) scale(0.5);
-    border-radius: 50%;
-  }
-
-  to {
-    transform: translateY(+50px) scale(1);
-    border-radius: 0%;
-  }
 }
 
 .recordercontainer{
@@ -1615,4 +1620,43 @@ border: 2px solid black;
   text-align: center;
   font-family: AdLaM Display;
   font-size: 16px;
+}
+
+.appstoreitem {
+  border: 2px solid #0073ff;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  width: 280px;
+  background-color: rgba(20, 92, 66, 0.811);
+}
+
+.appstoretop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.appstoretitle {
+  margin: 0;
+}
+
+.appstoredescription {
+  margin: 8px 0 0;
+}
+
+.appstorebutton {
+  background-color: #0073ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.appstorebutton:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }

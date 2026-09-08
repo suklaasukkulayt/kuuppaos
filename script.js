@@ -414,9 +414,39 @@ function installApp(appName, isTerminal) {
     if (isTerminal) {
       if (progress === 4 || progress === 3) {
       if (appIsInstalled) {
-        addCommand(appName + " is already installed. Removing...", "#1008ee");
+        if (appName === "spotify"){
+            addCommand(`kuuppamusic is already installed. Removing...`, "#1008ee");
+          } else if (appName === "youtube"){
+            addCommand(`kuuppavid is already installed. Removing...`, "#1008ee");
+          } else if (appName === "browser"){
+            addCommand(`kuuppabrowser is already installed. Removing...`, "#1008ee");
+          } else if (appName === "cterminal"){
+            addCommand(`hackcmd is already installed. Removing...`, "#1008ee");
+          } else if (appName === "info"){
+            addCommand(`about is already installed. Removing...`, "#1008ee");
+          } else if (appName === "dogg"){
+            addCommand(`doggallery is already installed. Removing...`, "#1008ee");
+          } else {
+            addCommand(appName + " is already installed. Removing...", "#1008ee");
+          }
+        
       }}
-      addCommand(`${actionText} ${appName}: ${progress}%`, "#08d3ee");
+      if (appName === "spotify"){
+            addCommand(`${actionText} kuuppamusic: ${progress}%`, "#08d3ee");
+          } else if (appName === "youtube"){
+            addCommand(`${actionText} kuuppavid: ${progress}%`, "#08d3ee");
+          } else if (appName === "browser"){
+            addCommand(`${actionText} kuuppabrowser: ${progress}%`, "#08d3ee");
+          } else if (appName === "cterminal"){
+            addCommand(`${actionText} hackcmd: ${progress}%`, "#08d3ee");
+          } else if (appName === "info"){
+            addCommand(`${actionText} about: ${progress}%`, "#08d3ee");
+          } else if (appName === "dogg"){
+            addCommand(`${actionText} doggallery: ${progress}%`, "#08d3ee");
+          } else {
+             addCommand(`${actionText} ${appName}: ${progress}%`, "#08d3ee");
+          }
+     
     }
 
     if (progress >= 100) {
@@ -425,7 +455,23 @@ function installApp(appName, isTerminal) {
 
       if (appIsInstalled) {
         if (isTerminal) {
-          addCommand(`Removed ${appName} successfully!`, "#ee1408");
+          if (appName === "spotify"){
+            addCommand(`Removed kuuppamusic successfully!`, "#ee1408");
+          } else if (appName === "youtube"){
+            addCommand(`Removed kuuppavid successfully!`, "#ee1408");
+          } else if (appName === "browser"){
+            addCommand(`Removed kuuppabrowser successfully!`, "#ee1408");
+          } else if (appName === "cterminal"){
+            addCommand(`Removed hackcmd successfully!`, "#ee1408");
+          } else if (appName === "info"){
+            addCommand(`Removed about successfully!`, "#ee1408");
+          } else if (appName === "dogg"){
+            addCommand(`Removed doggallery successfully!`, "#ee1408");
+          } 
+          else{
+            addCommand(`Removed ${appName} successfully!`, "#ee1408");
+          }
+          
           icon.style.display = "none";
           saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
         } else {
@@ -435,7 +481,22 @@ function installApp(appName, isTerminal) {
       }
       } else {
         if (isTerminal) {
-          addCommand(`Installed ${appName} successfully!`, "#ee1408");
+          if (appName === "spotify"){
+            addCommand(`Installed kuuppamusic successfully!`, "#ee1408");
+          } else if (appName === "youtube"){
+            addCommand(`Installed kuuppavid successfully!`, "#ee1408");
+          } else if (appName === "browser"){
+            addCommand(`Installed kuuppabrowser successfully!`, "#ee1408");
+          } else if (appName === "cterminal"){
+            addCommand(`Installed hackcmd successfully!`, "#ee1408");
+          } else if (appName === "info"){
+            addCommand(`Installed about successfully!`, "#ee1408");
+          } else if (appName === "dogg"){
+            addCommand(`Installed doggallery successfully!`, "#ee1408");
+          }
+          else {
+            addCommand(`Installed ${appName} successfully!`, "#ee1408");
+          }
           icon.style.display = "flex";
           saveInstalledApps([...installedApps, appName]);
         } else {
@@ -2262,7 +2323,7 @@ function runCommand(command) {
         installApp('recorder', true);
       }
       else if (installTarget === "doggallery") {
-        installApp('doggallery', true);
+        installApp('dogg', true);
       }
 
       else if (installTarget === "about") {
@@ -2313,6 +2374,10 @@ function runCommand(command) {
         addCommand("Usage 'delete'", "#7cff8a");
         addCommand("'delete system32'")
       }
+      else if (usageTarget === "install") {
+        addCommand("Usage 'install'", "#7cff8a");
+        addCommand("'install appname' (all lowercase, no spaces)")
+      }
       else if (usageTarget === "color") {
     addCommand("Usage 'color'", "#7cff8a");
     addCommand("'color 0A'");
@@ -2345,7 +2410,7 @@ function runCommand(command) {
         }
 
         if (bgcolora === null) {
-            blura = "120";
+            bgcolora = "120";
         }
 
         if (wallpa === null) {

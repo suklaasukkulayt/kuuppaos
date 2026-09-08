@@ -369,6 +369,106 @@ function handleIconTap(element, windowElement, appName) {
   }
 }
 
+const INSTALLED_APPS_STORAGE_KEY = "installedApps";
+
+function getInstalledApps() {
+  try {
+    return JSON.parse(
+      localStorage.getItem(INSTALLED_APPS_STORAGE_KEY)
+    ) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveInstalledApps(installedApps) {
+  localStorage.setItem(
+    INSTALLED_APPS_STORAGE_KEY,
+    JSON.stringify(installedApps)
+  );
+}
+
+function installApp(appName, isTerminal) {
+  const icon = document.getElementById(appName + "icon");
+  const button = document.getElementById(appName + "Button");
+
+  if (!icon || !button) {
+    return;
+  }
+
+  const installedApps = getInstalledApps();
+  const appIsInstalled = installedApps.includes(appName);
+  const actionText = appIsInstalled ? "Removing" : "Downloading";
+  const duration = 3000;
+  const startTime = Date.now();
+  button.disabled = true;
+  button.textContent = `${actionText} 0%`;
+
+  const progressTimer = setInterval(() => {
+    const elapsedTime = Date.now() - startTime;
+    let progress = Math.min(
+      100,
+      Math.round((elapsedTime / duration) * 100)
+    );
+    button.textContent = `${actionText} ${progress}%`;
+    if (isTerminal) {
+      if (progress === 4 || progress === 3) {
+      if (appIsInstalled) {
+        addCommand(appName + " is already installed. Removing...", "#1008ee");
+      }}
+      addCommand(`${actionText} ${appName}: ${progress}%`, "#08d3ee");
+    }
+
+    if (progress >= 100) {
+      clearInterval(progressTimer);
+      progress = 0;
+
+      if (appIsInstalled) {
+        if (isTerminal) {
+          addCommand(`Removed ${appName} successfully!`, "#ee1408");
+          icon.style.display = "none";
+          saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
+        } else {
+        icon.style.display = "none";
+        button.textContent = "Install";
+        saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
+      }
+      } else {
+        if (isTerminal) {
+          addCommand(`Installed ${appName} successfully!`, "#ee1408");
+          icon.style.display = "flex";
+          saveInstalledApps([...installedApps, appName]);
+        } else {
+        icon.style.display = "flex";
+        button.textContent = "Remove";
+        saveInstalledApps([...installedApps, appName]);
+      }
+    }
+      button.disabled = false;
+    }
+  }, 100);
+}
+
+function restoreInstalledApps() {
+  const installedApps = getInstalledApps();
+
+  document.querySelectorAll(".appstorebutton").forEach((button) => {
+    const appName = button.id.replace("Button", "");
+    const icon = document.getElementById(appName + "icon");
+
+    if (!icon) {
+      return;
+    }
+
+    const appIsInstalled = installedApps.includes(appName);
+
+    icon.style.display = appIsInstalled ? "flex" : "none";
+    button.textContent = appIsInstalled ? "Remove" : "Install";
+  });
+}
+
+restoreInstalledApps();
+
 
 dragElement(document.querySelector("#textpad"))
 
@@ -1858,6 +1958,7 @@ function runCommand(command) {
         addCommand("usage      How to use commands");
         addCommand("color      Change terminal colors");
         addCommand("delete     delete system32");
+        addCommand("install    Install or remove apps");
         addCommand("");
 
     }
@@ -1916,27 +2017,58 @@ function runCommand(command) {
 
 
     else if (mainCommand === "apps") {
-
+    const ainstalledApps = getInstalledApps();
         addCommand("");
-        addCommand("Installed apps:", "#7cff8a");
+        addCommand("Installed apps:", "#e9ff7c");
         addCommand("");
         addCommand("Welcome");
+       if (ainstalledApps.includes("textpad")) {
         addCommand("TeXtpad");
+       }
+       if (ainstalledApps.includes("weather")) {
         addCommand("Weather");
+       }
+       if (ainstalledApps.includes("clock")) {
         addCommand("Clock");
-        addCommand("KuuppaVid");
-        addCommand("KuuppaMusic");
-        addCommand("HackCMD");
+       }
+      if (ainstalledApps.includes("spotify")) {
+            addCommand("KuuppaMusic");
+        }
+      if  (ainstalledApps.includes("youtube")) {
+            addCommand("KuuppaVid");
+        }
+      if  (ainstalledApps.includes("cterminal")) {
+            addCommand("HackCMD");
+        }
+      if  (ainstalledApps.includes("paint")) {
+            addCommand("Paint");
+        }
+      if  (ainstalledApps.includes("browser")) {
+            addCommand("KuuppaBrowser");
+        }
+      if  (ainstalledApps.includes("calculator")) {
+            addCommand("Calculator");
+        }
+      if  (ainstalledApps.includes("pong")) {
+            addCommand("Pong");
+        }
+      if  (ainstalledApps.includes("camera")) {
+            addCommand("Camera");
+        }
+      if  (ainstalledApps.includes("ghost")) {
+            addCommand("Ghost game");
+        }
+      if  (ainstalledApps.includes("info")) {
+            addCommand("About");
+        }
+      if  (ainstalledApps.includes("recorder")) {
+            addCommand("Recorder");
+        }
+      if  (ainstalledApps.includes("dogg")) {
+            addCommand("Dog Gallery");
+        }
         addCommand("Terminal");
-        addCommand("Paint");
-        addCommand("KuuppaBrowser");
-        addCommand("Calculator");
-        addCommand("Pong");
-        addCommand("Camera");
-        addCommand("Ghost game");
-        addCommand("Info");
-        addCommand("");
-
+        addCommand("App Store");
     }
 
 
@@ -2091,64 +2223,49 @@ function runCommand(command) {
       var installTarget = parts.slice(1).join(" ").toLowerCase();
 
       if (installTarget === "textpad") {
-        addCommand("Installing TeXtpad", "#08d3ee");
         installApp('textpad', true);
       }
       else if (installTarget === "weather") {
-        addCommand("Installing Weather", "#08d3ee");
         installApp('weather', true);
       }
       else if (installTarget === "clock") {
-        addCommand("Installing Clock", "#08d3ee");
         installApp('clock', true);
       }
       else if (installTarget === "kuuppamusic") {
-        addCommand("Installing KuuppaMusic", "#08d3ee");
         installApp('spotify', true);
       }
       else if (installTarget === "kuuppavid") {
-        addCommand("Installing KuuppaVid", "#08d3ee");
         installApp('youtube', true);
       }
       else if (installTarget === "hackcmd") {
-        addCommand("Installing HackCMD", "#08d3ee");
         installApp('cterminal', true);
       }
       else if (installTarget === "paint") {
-        addCommand("Installing Paint", "#08d3ee");
         installApp('paint', true);
       }
       else if (installTarget === "kuuppabrowser") {
-        addCommand("Installing KuuppaBrowser", "#08d3ee");
         installApp('browser', true);
       }
       else if (installTarget === "calculator") {
-        addCommand("Installing Calculator", "#08d3ee");
         installApp('calculator', true);
       }
       else if (installTarget === "pong") {
-        addCommand("Installing Pong", "#08d3ee");
         installApp('pong', true);
       }
       else if (installTarget === "camera") {
-        addCommand("Installing Camera", "#08d3ee");
         installApp('camera', true);
       }
       else if (installTarget === "ghostgame") {
-        addCommand("Installing Ghost game", "#08d3ee");
         installApp('ghost', true);
       }
       else if (installTarget === "recorder") {
-        addCommand("Installing Recorder", "#08d3ee");
         installApp('recorder', true);
       }
       else if (installTarget === "doggallery") {
-        addCommand("Installing Dog Gallery", "#08d3ee");
         installApp('doggallery', true);
       }
 
       else if (installTarget === "about") {
-        addCommand("Installing About", "#08d3ee");
         installApp('info', true);
       }
       else {
@@ -2156,6 +2273,10 @@ function runCommand(command) {
         addCommand("Maybe use the App Store to find it?");
       }
     }
+    else if (mainCommand === "install") {
+        addCommand("Usage 'install'", "#7cff8a");
+        addCommand("'install appname' (all lowercase, no spaces)")
+      }
 
     else if (mainCommand === "usage" && parts.length > 1) {
       var usageTarget = parts.slice(1).join(" ").toLowerCase();
@@ -2747,95 +2868,3 @@ function showOthersPhotos() {
     othersPhotos.style.display = "flex";
   }
 }
-
-
-
-const INSTALLED_APPS_STORAGE_KEY = "installedApps";
-
-function getInstalledApps() {
-  try {
-    return JSON.parse(
-      localStorage.getItem(INSTALLED_APPS_STORAGE_KEY)
-    ) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveInstalledApps(installedApps) {
-  localStorage.setItem(
-    INSTALLED_APPS_STORAGE_KEY,
-    JSON.stringify(installedApps)
-  );
-}
-
-function installApp(appName, isTerminal) {
-  const icon = document.getElementById(appName + "icon");
-  const button = document.getElementById(appName + "Button");
-
-  if (!icon || !button) {
-    return;
-  }
-
-  const installedApps = getInstalledApps();
-  const appIsInstalled = installedApps.includes(appName);
-  const actionText = appIsInstalled ? "Removing" : "Downloading";
-  const duration = 3000;
-  const startTime = Date.now();
-  button.disabled = true;
-  button.textContent = `${actionText} 0%`;
-
-  const progressTimer = setInterval(() => {
-    const elapsedTime = Date.now() - startTime;
-    const progress = Math.min(
-      100,
-      Math.round((elapsedTime / duration) * 100)
-    );
-    button.textContent = `${actionText} ${progress}%`;
-
-    if (progress >= 100) {
-      clearInterval(progressTimer);
-
-      if (appIsInstalled) {
-        if (isTerminal) {
-          icon.style.display = "none";
-          saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
-        } else {
-        icon.style.display = "none";
-        button.textContent = "Install";
-        saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
-      }
-      } else {
-        if (isTerminal) {
-          icon.style.display = "flex";
-          saveInstalledApps([...installedApps, appName]);
-        } else {
-        icon.style.display = "flex";
-        button.textContent = "Remove";
-        saveInstalledApps([...installedApps, appName]);
-      }
-    }
-      button.disabled = false;
-    }
-  }, 100);
-}
-
-function restoreInstalledApps() {
-  const installedApps = getInstalledApps();
-
-  document.querySelectorAll(".appstorebutton").forEach((button) => {
-    const appName = button.id.replace("Button", "");
-    const icon = document.getElementById(appName + "icon");
-
-    if (!icon) {
-      return;
-    }
-
-    const appIsInstalled = installedApps.includes(appName);
-
-    icon.style.display = appIsInstalled ? "flex" : "none";
-    button.textContent = appIsInstalled ? "Remove" : "Install";
-  });
-}
-
-restoreInstalledApps();

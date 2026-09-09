@@ -5,26 +5,36 @@
 # KuuppaOS
 
 WebOS made for Stardance competition  
-It doesn't really have any purpose, I made it just for fun and I also wanted to learn HTML.
+I made it to learn HTML and just for fun.
 
-Working clock in the bottom bar, draggable, resizable and closable windows  
+Taskbar has a working clock that opens calendar, and a customization menu button. Open and minimzed apps also show in the taskbar  
 
-Four apps:  
+17 apps:  
 TeXtpad: you can type text and it saves locally to your browser  
-Clock: analog clock   
-Weather: shows the weather DOESN'T WORK WITH HELIUM BROWSER for some reason (location doesn't work on my steam deck but it works on my phone)  
-Welcome: welcome screen  
-KuuppaVid (youtube): plays never gonna give you up when opened
-KuuppaMusic (spotify): you can listen to the spotify lofi beats playlist (30s from every song because it's just an embed)
+Clock: analog clock  
+Weather: shows the weather (DOESN'T WORK WITH HELIUM BROWSER for some reason)  
+KuuppaVid: plays any youtube video you want  
+KuuppaMusic: listen to XFM's live radio stream :D  
+HackCMD: pretend like you're hacking  
+Paint: paint anything  
+KuuppaBrowser: browse all websites (that support being in an iframe)  
+Calculator: do simple calculations  
+Pong: play pong against an AI  
+Camera: take photos and use filters  
+Ghost game: play a pac-man like ghost hunting game  
+Recorder: record audio from your microphone  
+Dog gallery: view photos of my dogs
+About: info about the apps in KuuppaOS
+Terminal: run commands
+App store: install all these apps
 
-<img width="1280" height="669" alt="kuuppaos-screenshot" src="https://github.com/user-attachments/assets/580ad953-0419-4865-93eb-47d5f1d05e6a" />
-
+**VIDEO AND SCREENSHOT ARE OUTDATED**
+<img width="1280" height="669" alt="kuuppaos-screenshot" src="https://github.com/user-attachments/assets/580ad953-0419-4865-93eb-47d5f1d05e6a"/>
 Showcase video in github (kuupaos-video.mp4)   
 
-Made in github codespaces(vs code) with HTML, CSS, JS  
+Made in GitHub codespaces and VSCode with HTML, CSS and JS.  
 Images made with online resources and Pixlr Express  
-Resources I used: webos 1 jam, online resources(for example embeds and analog clock) and help from github copilot(for example weather app and function starting autoplay when kuuppavid is opened)  
+Resources I used: WebOS 1 Jam(Hack Club), online resources(for some apps and help with some stuff) and help from AI (for some javascript)  
 
-Github copilot is used to help with features like weather and fix some problems   
 
-Sorry for meaningless commits but I didn't have other ways of testing until now  
+First commits are meaningless, because I didn't have live server in my codespace so I had to test with github pages.  

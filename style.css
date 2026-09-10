@@ -1629,6 +1629,8 @@ border: 2px solid black;
   margin-bottom: 8px;
   width: 280px;
   background-color: rgba(20, 92, 66, 0.811);
+  position: relative;
+  padding-left: 68px;
 }
 
 .appstoretop {
@@ -1684,4 +1686,14 @@ border: 2px solid black;
 
 #microphone-label{
   font-family: Outfit;
+}
+
+.appstoreicon {
+  position: absolute;
+  top: 15px;
+  left: 8px;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
 }

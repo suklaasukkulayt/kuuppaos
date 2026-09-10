@@ -887,6 +887,7 @@ addWindowTapHandling(ghostScreen);
 addWindowTapHandling(infoScreen);
 addWindowTapHandling(recorderScreen);
 addWindowTapHandling(doggScreen);
+addWindowTapHandling(appsScreen);
 
 
 var content = [

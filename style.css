@@ -1660,3 +1660,28 @@ border: 2px solid black;
   opacity: 0.7;
   cursor: wait;
 }
+
+#microphone-select {
+  background-color: #00ff6e;
+  color: #111;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#microphone-select:hover {
+  background-color: #00ff009a;
+}
+
+#microphone-select option {
+  background-color: white;
+  color: #111;
+}
+
+#microphone-select option:checked {
+  background-color: #d8ffd8;
+  color: #111;
+}
+
+#microphone-label{
+  font-family: Outfit;
+}

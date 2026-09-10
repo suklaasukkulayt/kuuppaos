@@ -2851,6 +2851,42 @@ const stopBtn = document.getElementById("stopBtn");
 const rdownloadLink = document.getElementById("rdownloadLink");
 const timerElement = document.getElementById("timer");
 
+let audioStream = null;
+let selectedMicrophoneId = null;
+
+const microphoneSelect = document.getElementById("microphone-select");
+
+async function refreshMicrophoneList() {
+  if (!navigator.mediaDevices?.enumerateDevices()) return;
+
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  const microphones = devices.filter(
+    device => device.kind === "audioinput"
+  );
+
+  microphoneSelect.innerHTML = "";
+
+  microphones.forEach((device, index) => {
+    const option = document.createElement("option");
+    option.value = device.deviceId;
+    option.textContent = device.label || `Microphone ${index + 1}`;
+    microphoneSelect.appendChild(option);
+  });
+
+  if (selectedMicrophoneId) {
+    microphoneSelect.value = selectedMicrophoneId;
+  } else if (microphones.length) {
+    selectedMicrophoneId = microphones[0].deviceId;
+    microphoneSelect.value = selectedMicrophoneId;
+  }
+}
+
+microphoneSelect.addEventListener("change", () => {
+  selectedMicrophoneId = microphoneSelect.value;
+});
+
+refreshMicrophoneList();
+
 function startTimer() {
   secondsElapsed = 0;
   timerElement.textContent = "00:00";
@@ -2875,7 +2911,11 @@ function getAudioFilename() {
 startBtn.addEventListener("click", async () => {
   rdownloadLink.style.display = "none";
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: selectedMicrophoneId ? { deviceId: { exact: selectedMicrophoneId } } : true 
+    });
+
+audioStream = stream;
+await refreshMicrophoneList();
     mediaRecorder = new MediaRecorder(stream);
     audioStream = stream;
     audioChunks = [];
@@ -2893,6 +2933,7 @@ startBtn.addEventListener("click", async () => {
       stopTimer();
       stream.getTracks().forEach(function(track) {
       track.stop();
+      audioStream = null;
     });
     };
 

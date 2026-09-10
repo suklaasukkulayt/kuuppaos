@@ -2257,7 +2257,7 @@ function runCommand(command) {
       else if (aboutTarget === "camera") {
         addCommand("About Camera", "#7cff8a");
         addCommand("Take pictures inside KuuppaOS.")
-        addCommand("Just press the Take Photo button!")
+        addCommand("Press the Take Photo button or apply filters.")
         addCommand("Then you will see the photo for a few seconds and then your download will start.")
       }
       else if (aboutTarget === "ghostgame") {
@@ -2270,6 +2270,11 @@ function runCommand(command) {
         addCommand("About Recorder", "#7cff8a");
         addCommand("Record audio in KuuppaOS.")
         addCommand("After recording, press 'Download Audio' to download it.")
+      }
+      else if (aboutTarget === "doggallery") {
+        addCommand("About Dog Gallery", "#7cff8a");
+        addCommand("View pictures of my dogs.")
+        addCommand("Select the dog you want to see photos of.")
       }
       else if (aboutTarget === "About") {
         addCommand("About About", "#7cff8a");

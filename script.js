@@ -2156,7 +2156,8 @@ function runCommand(command) {
         addCommand("Deleting System32...", "#ff0000");
         await sleep(200); addCommand("Deleted file: 'kuuppeli.sys'...", "#ff0000");
         await sleep(200); addCommand("Deleted file: 'style.css'...", "#ff0000");
-        document.getElementById("welcome").style.display = "none";
+        document.querySelectorAll(".welcome").forEach((element) => { element.style.display = "none"; });
+        document.getElementById("terminal").style.display = "flex";
         await sleep(200); addCommand("Deleted file: 'kuuppaos-driver-wlan.drive'...", "#ff0000");
         await sleep(200); addCommand("Deleted file: 'settings.sys'...", "#ff0000");
         await sleep(200); addCommand("Deleted file: 'kuuppaos-driver-camera.drive'...", "#ff0000");

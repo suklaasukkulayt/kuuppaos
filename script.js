@@ -2035,6 +2035,8 @@ function runCommand(command) {
         addCommand("color      Change terminal colors");
         addCommand("delete     delete system32");
         addCommand("install    Install or remove apps");
+        addCommand("shutdown   Shuts down your KuuppaOS system");
+        addCommand("reboot     Reboots your KuuppaOS system");
         addCommand("");
 
     }
@@ -2158,6 +2160,30 @@ function runCommand(command) {
         } else {
             addCommand("Usage: print \"text here\"", "#ff0000");
         }
+
+    }
+
+    else if (mainCommand === "shutdown") {
+      const sleep = ms => new Promise(res => setTimeout(res, ms));
+      async function nagennn() {
+        addCommand("Shutting down...", "#ff0000");
+        await sleep(2000);
+        document.body.style.display = "none";
+      }
+      
+      nagennn();
+
+    }
+
+    else if (mainCommand === "reboot") {
+      const sleep = ms => new Promise(res => setTimeout(res, ms));
+      async function nagenn() {
+        addCommand("Rebooting...", "#ff0000");
+        await sleep(2000);
+        location.reload();
+      }
+      
+      nagenn();
 
     }
 
@@ -2398,6 +2424,14 @@ function runCommand(command) {
       else if (usageTarget === "install") {
         addCommand("Usage 'install'", "#7cff8a");
         addCommand("'install appname' (all lowercase, no spaces)")
+      }
+      else if (usageTarget === "shutdown") {
+        addCommand("Usage 'shutdown'", "#7cff8a");
+        addCommand("'shutdown'")
+      }
+      else if (usageTarget === "reboot") {
+        addCommand("Usage 'reboot'", "#7cff8a");
+        addCommand("'reboot'")
       }
       else if (usageTarget === "color") {
     addCommand("Usage 'color'", "#7cff8a");

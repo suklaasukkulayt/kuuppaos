@@ -388,6 +388,20 @@ function saveInstalledApps(installedApps) {
   );
 }
 
+function saveVisibleApps() {
+  const visibleApps = [...document.querySelectorAll(".appstorebutton")]
+    .map((button) => button.id.replace("Button", ""))
+    .filter((appName) => {
+      const icon = document.getElementById(appName + "icon");
+
+      return icon && getComputedStyle(icon).display === "flex";
+    });
+
+  saveInstalledApps([...new Set(visibleApps)]);
+  document.getElementById("saveAppsBTN").textContent = "Saved!";
+  setTimeout(() => document.getElementById("saveAppsBTN").textContent = "Save installed", 2000);
+}
+
 function installApp(appName, isTerminal) {
   const icon = document.getElementById(appName + "icon");
   const button = document.getElementById(appName + "Button");

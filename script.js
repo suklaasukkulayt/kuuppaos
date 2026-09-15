@@ -466,6 +466,7 @@ function installApp(appName, isTerminal) {
     if (progress >= 100) {
       clearInterval(progressTimer);
       progress = 0;
+      enableNewCmd();
 
       if (appIsInstalled) {
         if (isTerminal) {
@@ -1966,6 +1967,7 @@ const cmdColors = {
 
 let cmdBackgroundColor = "#08080c";
 let cmdTextColor = "#eeeeee";
+let readonlyy = false;
 
 var commandHistory = [];
 var historyIndex = -1;
@@ -1990,7 +1992,7 @@ cmdInput.addEventListener("keydown", function (e) {
         cmdInput.value = "";
     }
 
-    if (e.key === "ArrowUp") {
+    if (e.key === "ArrowUp" && readonlyy === false) {
 
         if (historyIndex > 0) {
             historyIndex--;
@@ -2000,7 +2002,7 @@ cmdInput.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 
-    if (e.key === "ArrowDown") {
+    if (e.key === "ArrowDown" && readonlyy === false) {
 
         if (historyIndex < commandHistory.length - 1) {
             historyIndex++;
@@ -2014,6 +2016,16 @@ cmdInput.addEventListener("keydown", function (e) {
     }
 
 });
+
+function disableNewCmd(){
+  cmdInput.readOnly = true;
+  readonlyy = true;
+
+}
+function enableNewCmd(){
+  cmdInput.readOnly = false;
+  readonlyy = false;
+}
 
 function runCommand(command) {
 
@@ -2164,27 +2176,28 @@ function runCommand(command) {
     }
 
     else if (mainCommand === "shutdown") {
+      disableNewCmd();
       const sleep = ms => new Promise(res => setTimeout(res, ms));
       async function nagennn() {
         addCommand("Shutting down...", "#ff0000");
         await sleep(2000);
         document.body.style.display = "none";
+        enableNewCmd();
       }
       
       nagennn();
-
     }
 
     else if (mainCommand === "reboot") {
+      disableNewCmd();
       const sleep = ms => new Promise(res => setTimeout(res, ms));
       async function nagenn() {
         addCommand("Rebooting...", "#ff0000");
         await sleep(2000);
         location.reload();
+        enableNewCmd();
       }
-      
       nagenn();
-
     }
 
     else if (mainCommand === "delete" && parts.length > 1) {
@@ -2193,6 +2206,7 @@ function runCommand(command) {
           return new Promise(resolve => setTimeout(resolve, ms));
         }
       if (deleteTarget === "system32") {
+        disableNewCmd();
       (async function () {
         addCommand("Deleting System32...", "#ff0000");
         await sleep(200); addCommand("Deleted file: 'kuuppeli.sys'...", "#ff0000");
@@ -2214,6 +2228,7 @@ function runCommand(command) {
         await sleep(200); addCommand("Deleted file: 'script.js'...", "#ff0000");
         await sleep(200); addCommand("Deleted file: 'index.html'...", "#ff0000");
         await sleep(1000); body.style.display = "none";
+        enableNewCmd();
       })();
     }else {
         addCommand("Usage 'delete'", "#7cff8a");
@@ -2329,51 +2344,65 @@ function runCommand(command) {
 
      else if (mainCommand === "install" && parts.length > 1) {
       var installTarget = parts.slice(1).join(" ").toLowerCase();
-
       if (installTarget === "textpad") {
+        disableNewCmd();
         installApp('textpad', true);
-      }
+            }
       else if (installTarget === "weather") {
+        disableNewCmd();
         installApp('weather', true);
       }
       else if (installTarget === "clock") {
+        disableNewCmd();
         installApp('clock', true);
       }
       else if (installTarget === "kuuppamusic") {
+        disableNewCmd();
         installApp('spotify', true);
       }
       else if (installTarget === "kuuppavid") {
+        disableNewCmd();
         installApp('youtube', true);
       }
       else if (installTarget === "hackcmd") {
+        disableNewCmd();
         installApp('cterminal', true);
       }
       else if (installTarget === "paint") {
+        disableNewCmd();
         installApp('paint', true);
       }
       else if (installTarget === "kuuppabrowser") {
+        disableNewCmd();
         installApp('browser', true);
       }
       else if (installTarget === "calculator") {
+        disableNewCmd();
         installApp('calculator', true);
       }
       else if (installTarget === "pong") {
+        disableNewCmd();
         installApp('pong', true);
       }
       else if (installTarget === "camera") {
+        disableNewCmd();
         installApp('camera', true);
       }
       else if (installTarget === "ghostgame") {
+        disableNewCmd();
         installApp('ghost', true);
       }
       else if (installTarget === "recorder") {
+        disableNewCmd();
         installApp('recorder', true);
       }
       else if (installTarget === "doggallery") {
+        disableNewCmd();
         installApp('dogg', true);
       }
 
       else if (installTarget === "about") {
+        disableNewCmd();
         installApp('info', true);
       }
       else {

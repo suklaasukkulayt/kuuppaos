@@ -312,20 +312,35 @@ function closeWindow(element) {
 }
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")
-
+var welcomeScreenOpon = document.querySelector("#welcomeOpenBtn")
 var welcomeScreenOpen = document.querySelector("#settingsButton")
 var calendarScreen = document.querySelector("#calendar")
 var calendarScreenOpen = document.querySelector("#timebarElement")
+var startScreen = document.querySelector("#startmenu")
+var startScreenOpen = document.querySelector("#startMenu")
+
 
 welcomeScreenClose.addEventListener("click", function() {
   closeWindow(welcomeScreen);
 });
+
+welcomeScreenOpon.addEventListener("click", function(){
+  openWindow(welcomeScreen);
+})
 
 welcomeScreenOpen.addEventListener("click", function() {
   if (settingsScreen.style.display === "flex") {
     closeWindow(settingsScreen);
   } else {
     openWindow(settingsScreen);
+  }
+});
+
+startScreenOpen.addEventListener("click", function() {
+  if (startScreen.style.display === "flex") {
+    closeWindow(startScreen);
+  } else {
+    openWindow(startScreen);
   }
 });
 
@@ -1753,6 +1768,8 @@ function addTaskbarApp(windowElement, name) {
       return;
     } else if (windowElement.id === "calendar"){
       return;
+    } else if (windowElement.id === "startmenu"){
+      return;
     }
 
       else if(document.querySelector("#task-" + windowElement.id)) {
@@ -3057,4 +3074,16 @@ function showOthersPhotos() {
   } else {
     othersPhotos.style.display = "flex";
   }
+}
+
+function shutdownBTN(){
+  document.getElementById("rebootBtn").disabled = true;
+  runCommand('shutdown');
+  document.getElementById("shutdownText").style.display = "flex";
+}
+
+function rebootBTN(){
+  document.getElementById("shutdownBtn").disabled = true;
+  runCommand('reboot');
+  document.getElementById("rebootText").style.display = "flex";
 }

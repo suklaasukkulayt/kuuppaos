@@ -37,16 +37,15 @@
     </div>
 
     <div id="top">
-        <p style="color:antiquewhite; margin-left: 8px;">
+      <button id="startMenu">
             KuuppaOS
-        </p>
+        </button>
 
        <div id="openApps"></div>
 
         <button id="settingsButton">
             Settings
         </button>
-
 
         <button id="timebarElement">
             Clock not intialized yet...
@@ -985,7 +984,7 @@
 
 
  <div class="welcome" id="settings" style="position: fixed; bottom: 40px; left: 47%; transform: translateX(-50%); resize: none; display: none; width: fit-content; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9998;">
-  <h1 style="margin: 4px; color: rgb(8, 0, 253);">KuuppaSettings</h1>
+  <h1 style="margin: 4px; color: rgb(8, 0, 253); font-family: Ubuntu;">KuuppaSettings</h1>
     
   <label style="font-family: ADLaM Display; text-shadow: 3px 3px 3px #ababab;">Custom wallpaper</label><br>
   <input id="bgFile" type="file" accept="image/*"><br>
@@ -1001,6 +1000,19 @@
 
   <button id="applyStyleBtn" style="margin-top:8px; margin-left:4px; background-color: #5add5ecf; cursor: pointer; font-family: ADLaM Display">Save to local storage</button>
   <button id="resetWallpaperBtn" style="margin-top:8px; margin-left:4px; background-color: #5add5ecf; cursor: pointer; font-family: ADLaM Display">Reset to defaults</button>
+  </div>
+</div>
+
+ <div class="welcome" id="startmenu" style="position: fixed; bottom: -23px; left: 8%; transform: translateX(-50%); resize: none; display: none; width: fit-content; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9998;">
+  <h1 style="margin: 4px; margin-left: -10px; margin-top: -40px; color: rgb(0, 253, 30); font-family: Ubuntu; font-size: 30px;">KuuppaOS</h1>
+    <div style="display:flex; gap:8px;">
+  <button id="shutdownBtn" onclick="shutdownBTN();">Shutdown</button>
+  <button id="rebootBtn" onclick="rebootBTN();">Reboot</button>
+  </div>
+  <p class="rebootshutdownText" id="shutdownText">Shutting down...</p>
+
+  <p class="rebootshutdownText" id="rebootText">Rebooting...</p>
+  <button id="welcomeOpenBtn">Open Welcome screen</button>
   </div>
 </div>
 

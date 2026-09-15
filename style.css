@@ -1708,3 +1708,63 @@ border: 2px solid black;
   border-radius: 8px;
   object-fit: cover;
 }
+
+#startMenu {
+  color:antiquewhite;
+  margin-left: 0px;
+  padding-left: 8px;
+  height: 50px;
+  cursor: pointer; 
+  background-color: rgba(0, 0, 0, 0.25); 
+  border: none; 
+  font-family: Courier New, monospace;
+  border-radius: 16px;
+
+      transition:
+        background 0.18s ease,
+        transform 0.18s ease
+}
+
+.rebootshutdownText{
+  color: red;
+  display: none;
+  text-align: center;
+  margin: 3px;
+  font-family: Outfit;
+}
+
+#shutdownBtn {
+  width: 50%;
+  background-color: red;
+  display: inline-block;
+  border: 2px dotted #ffa200;
+  border-radius: 8px;
+  font-family: Outfit;
+}
+
+#rebootBtn {
+  background-color: red;
+  width: 50%;
+  display: inline-block;
+  border: 2px dotted #ffa200;
+  border-radius: 8px;
+  font-family: Outfit;
+}
+
+#welcomeOpenBtn {
+  background-color: yellow;
+  border: 2px dotted #00ff04;
+  border-radius: 8px;
+  font-family: Outfit;
+}
+
+#startMenu:hover{
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-1px);
+}
+
+#startMenu:active {
+    transform: scale(0.96);
+    box-shadow:
+        inset 0 1px 0 rgba(70, 68, 68, 0.15);
+}

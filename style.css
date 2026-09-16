@@ -1771,6 +1771,24 @@ border: 2px solid black;
   border-radius: 8px;
   font-family: Outfit;
 }
+ 
+#rebootBtn:hover,
+#shutdownBtn:hover {
+  background-color: rgb(209, 26, 26);
+}
+
+#welcomeOpenBtn:hover {
+  background-color: rgb(211, 211, 32);
+}
+
+#rebootBtn:active,
+#shutdownBtn:active {
+  background-color: rgb(164, 42, 42);
+}
+
+#welcomeOpenBtn:active {
+  background-color: rgb(151, 151, 41);
+}
 
 #startMenu:hover{
     background: rgba(255, 255, 255, 0.16);
@@ -1783,3 +1801,11 @@ border: 2px solid black;
         inset 0 1px 0 rgba(70, 68, 68, 0.15);
 }
 
+.mediaDiv {
+  background-color: rgb(157, 190, 219);
+  width: auto;
+  height: fit-content;
+  border-radius: 8px;
+  border: 2px solid aquamarine;
+  margin-top: 10px;
+}

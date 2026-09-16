@@ -1703,6 +1703,7 @@ function resetPong() {
 const API_URL = 'https://xfm.ee/wp-json/xfm/v1/nowplaying?';
 const trackTitleEl = document.getElementById('track-title');
 const trackminimize = document.getElementById('trackminimize');
+const nowplayingTitle = document.getElementById('nowplayingTitle');
 
 async function fetchNowPlaying() {
       try {
@@ -1714,6 +1715,16 @@ async function fetchNowPlaying() {
 
         trackTitleEl.textContent = titleText + " - XFM";
         trackminimize.textContent = titleText;
+        if(!audio.paused){
+          nowplayingTitle.textContent = titleText;
+        }
+      audio.addEventListener('play', () => {
+        nowplayingTitle.textContent = titleText;
+      });
+      audio.addEventListener('emptied', () => {
+        nowplayingTitle.textContent = "Nothing playing...";
+      });
+        
       } catch (err) {
         console.error('Song search failed:', err);
       }

@@ -1234,7 +1234,8 @@ function onYouTubeIframeAPIReady() {
             'autoplay': 1
         },
         events: {
-            'onReady': resizeYouTubePlayer
+            'onReady': resizeYouTubePlayer,
+            'onStateChange': onPlayerStateChange
         }
     });
 }
@@ -1249,6 +1250,8 @@ function resizeYouTubePlayer() {
     player.setSize(width, height);
 }
 
+
+let currentTubeTitle = "Nothing playing..."
 async function searchYouTube() {
     const query = document.getElementById('searchInput').value;
     if (!query) return;
@@ -1295,8 +1298,10 @@ async function searchYouTube() {
             div.onclick = () => {
                 if (isPlaylist) {
                     player.loadPlaylist({list: id});
+                    currentTubeTitle = temp.innerHTML;
                 } else {
                     player.loadVideoById(id);
+                    currentTubeTitle = temp.innerHTML;
                 }
                 document.getElementById('player-container').scrollIntoView({ behavior: 'smooth' });
             };
@@ -1304,13 +1309,26 @@ async function searchYouTube() {
             resultsDiv.appendChild(div);
         });
 
+      
+
     } catch (error) {
         console.error(error);
         resultsDiv.innerHTML = 'Error searching.';
     }
 }
 
-
+function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.PAUSED) {
+          nowplayingTitle.textContent = "Nothing playing...";
+          nowplayingImg.src = "./icons/kuuppamusic.png";
+      }  else if (event.data === YT.PlayerState.PLAYING){
+      function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+  }
+      nowplayingTitle.textContent = currentTubeTitle;
+      nowplayingImg.src = "./icons/kuuppavid.png";
+    }
+}
 
 
 const paintCanvas =

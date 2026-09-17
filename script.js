@@ -1704,6 +1704,7 @@ const API_URL = 'https://xfm.ee/wp-json/xfm/v1/nowplaying?';
 const trackTitleEl = document.getElementById('track-title');
 const trackminimize = document.getElementById('trackminimize');
 const nowplayingTitle = document.getElementById('nowplayingTitle');
+const nowplayingImg = document.getElementById('nowplayingImg');
 
 async function fetchNowPlaying() {
       try {
@@ -1720,9 +1721,11 @@ async function fetchNowPlaying() {
         }
       audio.addEventListener('play', () => {
         nowplayingTitle.textContent = titleText;
+        nowplayingImg.src = "./icons/kuuppamusic-radio.png"
       });
       audio.addEventListener('emptied', () => {
         nowplayingTitle.textContent = "Nothing playing...";
+        nowplayingImg.src = "./icons/kuuppamusic.png"
       });
         
       } catch (err) {

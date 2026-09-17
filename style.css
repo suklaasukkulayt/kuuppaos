@@ -48,7 +48,7 @@
 }
 
 body{
-  height: 97.5vh;
+  height: 97.4vh;
   user-select: none; 
   background-image: url(https://static.vecteezy.com/system/resources/previews/028/217/320/non_2x/contemporary-wallpaper-for-interior-design-with-green-leaves-and-desert-inspired-background-and-texture-free-photo.jpg); 
   background-size: cover; 
@@ -1805,7 +1805,11 @@ border: 2px solid black;
   background-color: rgb(157, 190, 219);
   width: auto;
   height: fit-content;
+  padding: 3px;
   border-radius: 8px;
   border: 2px solid aquamarine;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

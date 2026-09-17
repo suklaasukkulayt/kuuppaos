@@ -10,6 +10,7 @@
   <body id="desktop">
     <div class="loader loader-active">
       <h1 style="display: flex; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%);">Logging in to KuuppaOS...</h1>
+    <p style="display: none; position: absolute; top: 75%; left: 50%; transform: translate(-50%, -50%); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;" id="loaderText">PÖÖÖ</p>
     </div>
 
 
@@ -1005,7 +1006,7 @@
 
  <div class="welcome" id="startmenu" style="position: fixed; bottom: -27px; left: 10%; transform: translateX(-50%); resize: none; display: none; width: 250px; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9998; height: max-content;">
   <h1 style="margin: 4px; margin-left: -10px; margin-top: -40px; color: rgb(0, 253, 30); font-family: Ubuntu; font-size: 30px;">KuuppaOS</h1>
-    <div style="display:flex; gap:8px;">
+    <div style="display: flex; gap: 8px;">
   <button id="shutdownBtn" onclick="shutdownBTN();">Shutdown</button>
   <button id="rebootBtn" onclick="rebootBTN();">Reboot</button>
   </div>
@@ -1014,7 +1015,8 @@
   <button id="welcomeOpenBtn">Open Welcome screen</button>
 
  <div id="mediaDiv" class="mediaDiv">
-  <p id="nowplayingTitle" class="infoInfo" style="margin-top: 2px; margin: 0; text-align: center;">Nothing playing...</p>
+  <img src="./icons/kuuppamusic.png" style="width: 25px; height: 25px;" id="nowplayingImg">
+  <p id="nowplayingTitle" class="infoInfo" style="margin-top: 2px; margin: 0;">Nothing playing...</p>
  </div>
   </div>
 </div>

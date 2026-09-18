@@ -876,6 +876,7 @@ if (settingsIcon) {
   });
 }
 
+var startmenuScreen = document.querySelector("#startmenu")
 
 
 
@@ -888,6 +889,7 @@ function handleWindowTap(element) {
   topBar.style.zIndex = biggestIndex + 1;  
   settingsScreen.style.zIndex = biggestIndex;
   calendarScreen.style.zIndex = biggestIndex;
+  startmenuScreen.style.zIndex = biggestIndex;
 }
 
 function addWindowTapHandling(element) {
@@ -1878,12 +1880,21 @@ function openWindow(element, appName) {
     element.classList.add("opening");
     addTaskbarApp(element, appName);
 
+  if (element.id === "startmenu") {
+    //element.classList.remove("opening");
+    element.style.left = "10px";
+    element.style.bottom = "40px";
+    element.style.top = "auto";
+    element.style.transform = "none";
+  } else {
     var minTop = element.offsetHeight / 2;
     var minLeft = element.offsetWidth / 2;
     var maxTop = window.innerHeight - element.offsetHeight / 2;
     var maxLeft = window.innerWidth - element.offsetWidth / 2;
+
     element.style.top = Math.max(minTop, Math.min(element.offsetTop, maxTop)) + "px";
     element.style.left = Math.max(minLeft, Math.min(element.offsetLeft, maxLeft)) + "px";
+  }
 
     if (element.id === "camera") {
       startCamera();

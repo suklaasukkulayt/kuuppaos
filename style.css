@@ -141,6 +141,13 @@ body{
         transform 0.18s ease
 }
 
+#kuuppasettingsText {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+  margin-left: 0 !important; 
+  margin-top: 0 !important;
+}
+
 #timebarElement{
   cursor: pointer; 
   color: antiquewhite; 
@@ -981,21 +988,21 @@ border: 2px solid black;
 @keyframes windowOpenSettings {
     from {
         opacity: 0;
-        transform: translateX(-50%) scale(0.50) translateY(10px);
+        transform: translateX(-50%) translateY(50px);
     }
     to {
         opacity: 1;
-        transform: translateX(-50%) scale(1) translateY(0);
+        transform: translateX(-50%) translateY(0);
     }
 }
 @keyframes windowCloseSettings {
     from {
         opacity: 1;
-        transform: translateX(-50%) scale(1) translateY(0);
+        transform: translateX(-50%) translateY(0);
     }
     to {
         opacity: 0;
-        transform: translateX(-50%) scale(0.40) translateY(10px);
+        transform: translateX(-50%) translateY(50px);
     }
 }
 
@@ -1008,21 +1015,21 @@ border: 2px solid black;
 @keyframes windowOpenCalendar {
     from {
         opacity: 0;
-        transform: scale(0.50) translateY(10px);
+        transform: translateY(50px);
     }
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translateY(0);
     }
 }
 @keyframes windowCloseCalendar {
     from {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translateY(0);
     }
     to {
         opacity: 0;
-        transform: scale(0.40) translateY(10px);
+        transform: translateY(50px);
     }
 }
 
@@ -1758,15 +1765,14 @@ border: 2px solid black;
         transform 0.18s ease
 }
 
-#startMenu {
-  left: 30px !important;
-  bottom: 45px !important;
-  transform: none !important;
+#startmenu {
   padding: 0 !important;
 }
 
-#startMenu h1 {
+#startmenu h1 {
   margin: 0 !important;
+  margin-bottom: 4px !important;
+  margin-left: 3px !important;
 }
 
 .rebootshutdownText{

@@ -1331,12 +1331,18 @@ function onPlayerStateChange(event) {
         if (event.data === YT.PlayerState.PAUSED) {
           nowplayingTitle.textContent = "Nothing playing...";
           nowplayingImg.src = "./icons/kuuppamusic.png";
+          nowplayBtn.style.cursor = "default";
+          nowplayBtn.style.borderLeft = "13px solid gray";
+          nowplayBtn.classList.remove("pause");
+          nowplayBtn.classList.add("play");
+
       }  else if (event.data === YT.PlayerState.PLAYING){
-      function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-  }
       nowplayingTitle.textContent = currentTubeTitle;
       nowplayingImg.src = "./icons/kuuppavid.png";
+      nowplayBtn.classList.remove("play");
+      nowplayBtn.classList.add("pause");
+      nowplayBtn.style.cursor = "pointer";
+      nowplayBtn.style.borderLeft = "";
     }
 }
 
@@ -2979,7 +2985,14 @@ nowplayBtn.addEventListener(
       nowplayBtn.style.cursor = "default";
       nowplayBtn.style.borderLeft = "13px solid gray";
     }
-  }},
+  } else if (player && typeof player.pauseVideo === "function") {
+    player.pauseVideo();
+    nowplayBtn.style.cursor = "default";
+    nowplayBtn.style.borderLeft = "13px solid gray";
+    nowplayBtn.classList.remove("pause");
+    nowplayBtn.classList.add("play");
+  }
+},
   false
 );
 

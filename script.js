@@ -613,9 +613,17 @@ dragElement(document.querySelector("#spotify"))
 var spotifyScreen = document.querySelector("#spotify") 
 var spotifyIcon = document.querySelector("#spotifyicon")
 var spotifyScreenClose = document.querySelector("#spotifyclose")
+const nowplayBtn = document.getElementById("nowplayPlay");
+let isKuuppaMusicOn = false;
+
+nowplayBtn.style.cursor = "default";
+nowplayBtn.style.borderLeft = "13px solid gray";
 
 spotifyScreenClose.addEventListener("click", () => {
   closeWindow(spotifyScreen);
+  isKuuppaMusicOn = false;
+  nowplayBtn.style.cursor = "default";
+  nowplayBtn.style.borderLeft = "13px solid gray";
   audio.pause();
   audio.src = '';
   playBtn.classList.remove("pause");
@@ -1883,7 +1891,7 @@ function openWindow(element, appName) {
   if (element.id === "startmenu") {
     //element.classList.remove("opening");
     element.style.left = "10px";
-    element.style.bottom = "40px";
+    element.style.bottom = "50px";
     element.style.top = "auto";
     element.style.transform = "none";
   } else {
@@ -2923,18 +2931,58 @@ playBtn.addEventListener(
       audio.src = 'https://stream1.rcast.net/73328';
       playBtn.classList.remove("play");
       playBtn.classList.add("pause");
+      nowplayBtn.classList.remove("play");
+      nowplayBtn.classList.add("pause");
       audio.play();
+      isKuuppaMusicOn = true;
+      nowplayBtn.style.cursor = "pointer";
+      nowplayBtn.style.borderLeft = "";
       radioimg.src = "./icons/radio-animation.gif"
     } else {
+      nowplayBtn.classList.remove("pause");
+      nowplayBtn.classList.add("play");
       playBtn.classList.remove("pause");
       playBtn.classList.add("play");
       audio.pause();
       radioimg.src = "./icons/radio.png"
+      isKuuppaMusicOn = false;
+      nowplayBtn.style.cursor = "default";
+      nowplayBtn.style.borderLeft = "13px solid gray";
       audio.src = ''
     }
   },
   false
 );
+
+
+nowplayBtn.addEventListener(
+  "click",
+  () => {
+    if (isKuuppaMusicOn){
+    if (audio.paused) {
+      audio.src = 'https://stream1.rcast.net/73328';
+      playBtn.classList.remove("play");
+      playBtn.classList.add("pause");
+      nowplayBtn.classList.remove("play");
+      nowplayBtn.classList.add("pause");
+      audio.play();
+      radioimg.src = "./icons/radio-animation.gif"
+    } else {
+      nowplayBtn.classList.remove("pause");
+      nowplayBtn.classList.add("play");
+      playBtn.classList.remove("pause");
+      playBtn.classList.add("play");
+      audio.pause();
+      radioimg.src = "./icons/radio.png"
+      audio.src = ''
+      isKuuppaMusicOn = false;
+      nowplayBtn.style.cursor = "default";
+      nowplayBtn.style.borderLeft = "13px solid gray";
+    }
+  }},
+  false
+);
+
 
 audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
   const volumeEl = audioPlayer.querySelector(".volume-container .volume");

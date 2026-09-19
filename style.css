@@ -1863,3 +1863,60 @@ border: 2px solid black;
   align-items: center;
   gap: 5px;
 }
+
+#startmenu .mediaDiv .controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#startmenu .mediaDiv .play-container {
+  flex: 0 0 auto;
+  width: 22px;
+  min-width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#startmenu .mediaDiv .toggle-play.play {
+  cursor: pointer;
+  position: relative;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-left: 13px solid white;
+  margin-left: 4px;
+}
+
+#startmenu .mediaDiv .toggle-play.pause {
+  
+  position: relative;
+  width: 20px;
+  height: 15px;
+}
+
+#startmenu .mediaDiv .toggle-play.pause::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1px;
+  width: 4px;
+  height: 15px;
+  background: white;
+}
+
+#startmenu .mediaDiv .toggle-play.pause::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 1px;
+  width: 4px;
+  height: 15px;
+  background: white;
+}
+
+#nowplayingTitle {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

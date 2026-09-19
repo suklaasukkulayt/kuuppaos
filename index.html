@@ -1005,7 +1005,7 @@
   </div>
 </div>
 
- <div class="welcome" id="startmenu" style="position: fixed; resize: none; display: none; width: 270px; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9999; height: 170px;">
+ <div class="welcome" id="startmenu" style="position: fixed; resize: none; display: none; width: 270px; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9999; height: fit-content;">
   <h1 style="margin: 4px; margin-left: 0px; margin-top: 0px; color: rgb(0, 253, 30); font-family: Ubuntu; font-size: 30px;">KuuppaOS</h1>
     <div style="display: flex; gap: 8px;">
   <button id="shutdownBtn" onclick="shutdownBTN();">Shutdown</button>
@@ -1018,6 +1018,12 @@
  <div id="mediaDiv" class="mediaDiv">
   <img src="./icons/kuuppamusic.png" style="width: 25px; height: 25px;" id="nowplayingImg">
   <p id="nowplayingTitle" class="infoInfo" style="margin-top: 2px; margin: 0;">Nothing playing...</p>
+  <div class="controls">
+  <div class="play-container">
+    <div id="nowplayPlay" class="toggle-play play" aria-label="Play or pause"></div>
+  </div>
+</div>
+
  </div>
   </div>
 </div>

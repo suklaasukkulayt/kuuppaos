@@ -125,22 +125,6 @@ body{
   z-index: 9999;
 }
 
-#settingsButton{
-  position: absolute; 
-  right: 51%; 
-  height: 100%; 
-  background-color: rgba(0, 0, 0, 0.485); 
-  border: none; 
-  color: antiquewhite; 
-  padding: 8px 16px; 
-  border-radius: 8px; 
-  cursor: pointer;
-
-      transition:
-        background 0.18s ease,
-        transform 0.18s ease
-}
-
 #kuuppasettingsText {
   margin: 0 !important;
   margin-bottom: 10px !important;
@@ -162,20 +146,9 @@ body{
         transform 0.18s ease
 }
 
-#settingsButton:hover{
-    background: rgba(255, 255, 255, 0.16);
-    transform: translateY(-1px);
-}
-
 #timebarElement:hover{
     background: rgba(255, 255, 255, 0.16);
     transform: translateY(-1px);
-}
-
-#settingsButton:active {
-    transform: scale(0.96);
-    box-shadow:
-        inset 0 1px 0 rgba(70, 68, 68, 0.15);
 }
 
 #timebarElement:active {
@@ -1816,6 +1789,15 @@ border: 2px solid black;
 }
 
 #welcomeOpenBtn {
+  width: 50%;
+  background-color: yellow;
+  border: 2px dotted #00ff04;
+  border-radius: 8px;
+  font-family: Outfit;
+}
+
+#settingsButton {
+  width: 50%;
   background-color: yellow;
   border: 2px dotted #00ff04;
   border-radius: 8px;
@@ -1831,6 +1813,10 @@ border: 2px solid black;
   background-color: rgb(211, 211, 32);
 }
 
+#settingsButton:hover {
+  background-color: rgb(211, 211, 32);
+}
+
 #rebootBtn:active,
 #shutdownBtn:active {
   background-color: rgb(164, 42, 42);
@@ -1839,6 +1825,11 @@ border: 2px solid black;
 #welcomeOpenBtn:active {
   background-color: rgb(151, 151, 41);
 }
+
+#settingsButton:active {
+  background-color: rgb(151, 151, 41);
+}
+
 
 #startMenu:hover{
     background: rgba(255, 255, 255, 0.16);

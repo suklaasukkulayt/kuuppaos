@@ -45,10 +45,6 @@
 
        <div id="openApps"></div>
 
-        <button id="settingsButton">
-            Settings
-        </button>
-
         <button id="timebarElement">
             Clock not intialized yet...
         </button>
@@ -985,7 +981,7 @@
 
 
 
- <div class="welcome" id="settings" style="position: fixed; bottom: 40px; left: 47%; transform: translateX(-50%); resize: none; display: none; width: fit-content; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9998; padding-top: 0 !important;">
+ <div class="welcome" id="settings" style="position: fixed; bottom: 40px; left: 47%; transform: translateX(-50%); resize: none; display: none; width: fit-content; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9998; padding-top: 0 !important; height: fit-content;">
   <h1 style="color: rgb(8, 0, 253); font-family: Ubuntu;" id="kuuppasettingsText">KuuppaSettings</h1>
     
   <label style="font-family: ADLaM Display; text-shadow: 3px 3px 3px #ababab;">Custom wallpaper</label><br>
@@ -1013,7 +1009,10 @@
   </div>
   <p class="rebootshutdownText" id="shutdownText">Shutting down...</p>
   <p class="rebootshutdownText" id="rebootText">Rebooting...</p>
-  <button id="welcomeOpenBtn">Open Welcome screen</button>
+  <div style="display: flex; gap: 8px;">
+    <button id="welcomeOpenBtn">Open Welcome screen</button>
+    <button id="settingsButton" >Open Settings</button>
+  </div>
 
  <div id="mediaDiv" class="mediaDiv">
   <img src="./icons/kuuppamusic.png" style="width: 25px; height: 25px;" id="nowplayingImg">

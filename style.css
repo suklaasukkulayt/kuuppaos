@@ -1918,3 +1918,14 @@ border: 2px solid black;
   background-color: rgb(43, 157, 43);
   font-family: Outfit;
 }
+
+.doggText, .dogphotos {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.doggText.show, .dogphotos.show {
+  opacity: 1;
+  transform: translateY(0);
+}

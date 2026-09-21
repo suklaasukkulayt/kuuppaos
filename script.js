@@ -3154,30 +3154,74 @@ stopBtn.addEventListener("click", () => {
   }
 });
 
-function showMarttaPhotos() {
-  const marttaPhotos = document.getElementById("marttaPhotos");
-  if (marttaPhotos.style.display === "flex") {
-    marttaPhotos.style.display = "none";
+function showNuutiPhotos() {
+  const container = document.getElementById("nuutiPhotos");
+
+  if (container.style.display === "flex") {
+    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
-    marttaPhotos.style.display = "flex";
+    container.style.display = "flex";
+    const items = container.querySelectorAll('.doggText, .dogphotos');
+    
+    items.forEach((item, index) => {
+      if (item.classList.contains('dogphotos')) {
+        const realSource = item.getAttribute('data-src');
+        if (realSource && !item.getAttribute('src')) {
+          item.setAttribute('src', realSource);
+        }
+      }
+      
+      setTimeout(() => {
+        item.classList.add('show');
+      }, index * 80);
+    });
   }
 }
 
-function showNuutiPhotos() {
-  const nuutiPhotos = document.getElementById("nuutiPhotos");
-  if (nuutiPhotos.style.display === "flex") {
-    nuutiPhotos.style.display = "none";
+function showMarttaPhotos() {
+  const container = document.getElementById("marttaPhotos");
+  if (container.style.display === "flex") {
+    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
-    nuutiPhotos.style.display = "flex";
+    container.style.display = "flex";
+    const items = container.querySelectorAll('.doggText, .dogphotos');
+    
+    items.forEach((item, index) => {
+      if (item.classList.contains('dogphotos')) {
+        const realSource = item.getAttribute('data-src');
+        if (realSource && !item.getAttribute('src')) {
+          item.setAttribute('src', realSource);
+        }
+      }
+      setTimeout(() => {
+        item.classList.add('show');
+      }, index * 80);
+    });
   }
 }
 
 function showOthersPhotos() {
-  const othersPhotos = document.getElementById("othersPhotos");
-  if (othersPhotos.style.display === "flex") {
-    othersPhotos.style.display = "none";
+  const container = document.getElementById("othersPhotos");
+  if (container.style.display === "flex") {
+    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
-    othersPhotos.style.display = "flex";
+    container.style.display = "flex";
+    const items = container.querySelectorAll('.doggText, .dogphotos');
+    
+    items.forEach((item, index) => {
+      if (item.classList.contains('dogphotos')) {
+        const realSource = item.getAttribute('data-src');
+        if (realSource && !item.getAttribute('src')) {
+          item.setAttribute('src', realSource);
+        }
+      }
+      setTimeout(() => {
+        item.classList.add('show');
+      }, index * 80);
+    });
   }
 }
 

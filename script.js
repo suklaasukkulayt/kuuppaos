@@ -936,8 +936,9 @@ var content = [
     date: "- nobody",
     content: `
         <h1 class="ubuntu-regular" style="margin: 2px; color: rgb(243, 219, 5)">TeXtpad</h1>
-        <textarea style="width: 256px; height: 128px; resize: auto;" id="textarea" autofocus spellcheck="true"></textarea>
-        <p style="margin: 0px;">Note saves to your browser's local storage.</p>
+        <textarea style="width: 100%; height: 128px; resize: auto;" id="textarea" autofocus spellcheck="true"></textarea>
+        <button onclick="saveTextAsFile()" class="txtDownloadBtn">Export as .txt</button>
+        <p style="margin: 0px; font-family: Outfit; font-size: 16px;">Note saves to your browser's local storage.</p>
       `
   }
 
@@ -977,7 +978,7 @@ function addToBottomBar(index) {
 
   var note = content[index];
   var newDiv = document.createElement("div");
-  newDiv.style.cssText = "background-color: rgb(231, 25, 25); width: 220px; padding: 10px; border-radius: 8px;";
+  newDiv.style.cssText = "background-color: rgb(231, 25, 25); padding: 10px; border-radius: 8px; width: 95%;";
   newDiv.innerHTML = `
     <p style="margin: 0px;">${note.title}</p>
     <p style="font-size: 12px; margin: 0px;">${note.date}</p>
@@ -3191,3 +3192,25 @@ function rebootBTN(){
   runCommand('reboot');
   document.getElementById("rebootText").style.display = "flex";
 }
+
+function saveTextAsFile(){
+
+      var textarea = document.getElementById("textarea");
+      if (!textarea) {
+        return;
+      }
+      var textToWrite = textarea.value;
+      
+      if (textarea.value === "") {
+        alert("TeXtpad is empty!")
+        return;
+      }
+
+      var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+      var fileNameToSaveAs = "kuuppaos_textpad_" + currentTime.replace(/[^a-zA-Z0-9.-]/g, "_") + ".txt";
+      var downloadLink = document.createElement("a");
+      downloadLink.download = fileNameToSaveAs;
+      downloadLink.innerHTML = "Download File";
+      downloadLink.href = URL.createObjectURL(textFileAsBlob);
+      downloadLink.click();
+};

@@ -318,6 +318,8 @@ var calendarScreen = document.querySelector("#calendar")
 var calendarScreenOpen = document.querySelector("#timebarElement")
 var startScreen = document.querySelector("#startmenu")
 var startScreenOpen = document.querySelector("#startMenu")
+var weatherScreen = document.querySelector("#weather")
+var weatherScreenOpen = document.querySelector("#weathericon")
 
 
 welcomeScreenClose.addEventListener("click", function() {

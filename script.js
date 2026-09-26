@@ -3312,6 +3312,7 @@ sleep(2000).then(() => {
     const talkingBoutU = lowerText.includes("you");
     const isveryKuuppa = lowerText.includes("kuuppa");
     const shouldIsnailCheck = lowerText.includes("snail");
+    const isUserSorry = lowerText.includes("sorry");
     
 
     if (matchesGreeting) {
@@ -3322,8 +3323,9 @@ sleep(2000).then(() => {
       botMessage.textContent = "KUUPPA YOU SAID KUUPPA, OH they are my favorites i'm so happy I have never been so Kuuppa-like in my life :)";
     } else if (shouldIsnailCheck) {
       botMessage.textContent = "Snail check: \n Snail 1: Doing kuuppa things \n Snail 2: Doing nothing (weird) \n Snail 3: Still going (good) \n Snail 4: Checking out the cute dog images (just like you should in dog gallery) \n Snail 5: snailing \n Is this what you wanted or do you want it more Kuuppa??";
-    } 
-    else if (talkingBoutU) {
+    } else if (isUserSorry) {
+      botMessage.textContent = "That's okay, I forgive you, maybe we could do something more Kuuppa-like together??"
+    } else if (talkingBoutU) {
       botMessage.textContent = "Oh what about me?";
     } else {
       botMessage.textContent = "I didn't get it sorry. Maybe try again? OR just keep Kuuppaing.";

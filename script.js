@@ -3304,19 +3304,24 @@ sendBtn.addEventListener('click', (e) => {
 botMessage.textContent = "Thinking...";
 sleep(2000).then(() => { 
   const lowerText = text.toLowerCase(); 
-  const greetings = ["hello", "hi", "hey", "howdy", "hola", "greetings", "sup", "yo", "hipsdaad", "salutatio", "kukkudaa"];
+  const greetings = ["hello", "hi", "hey", "howdy", "hola", "greetings", "sup", "yo"];
   const noudont = ["no", "don", "can't", "not", "won't", "never", "aren"];
+  const salutations = ["hipsdaad", "salutatio", "kukkudaa"];
 
     const matchesGreeting = greetings.some(word => new RegExp(`\\b${word}\\b`).test(lowerText));
     const matchesNo = noudont.some(word => new RegExp(`\\b${word}\\b`).test(lowerText));
+    const matchesSalutations = salutations.some(word => new RegExp(`\\b${word}\\b`).test(lowerText));
     const talkingBoutU = lowerText.includes("you");
     const isveryKuuppa = lowerText.includes("kuuppa");
     const shouldIsnailCheck = lowerText.includes("snail");
     const isUserSorry = lowerText.includes("sorry");
+    const doINeedToHelp = lowerText.includes("help");
     
 
     if (matchesGreeting) {
       botMessage.textContent = "Hi there! How's your day going? Is it very Kuuppa like?";
+    } else if(matchesSalutations) {
+      botMessage.textContent = "HIPSDAADI SALUTATIONS Kuuppa! How is it going!!!";
     } else if(matchesNo) {
       botMessage.textContent = "Okay okay I will stop then, let's do something more Kuuppa then.";
     } else if (isveryKuuppa) {
@@ -3325,6 +3330,8 @@ sleep(2000).then(() => {
       botMessage.textContent = "Snail check: \n Snail 1: Doing kuuppa things \n Snail 2: Doing nothing (weird) \n Snail 3: Still going (good) \n Snail 4: Checking out the cute dog images (just like you should in dog gallery) \n Snail 5: snailing \n Is this what you wanted or do you want it more Kuuppa??";
     } else if (isUserSorry) {
       botMessage.textContent = "That's okay, I forgive you, maybe we could do something more Kuuppa-like together??"
+    } else if (doINeedToHelp) {
+      botMessage.textContent = "Oh YOU wan't ME to help YOU?!? I WOULD NEVER DO THAT YOU KUUPPA DON'T ASK ME FOR THAT EVER AGAIN or else I'm gonna go crazy!!!"
     } else if (talkingBoutU) {
       botMessage.textContent = "Oh what about me?";
     } else {

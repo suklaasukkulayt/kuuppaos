@@ -455,6 +455,8 @@ function installApp(appName, isTerminal) {
             addCommand(`about is already installed. Removing...`, "#1008ee");
           } else if (appName === "dogg"){
             addCommand(`doggallery is already installed. Removing...`, "#1008ee");
+          } else if (appName === "kai"){
+            addCommand(`kuuppaai is already installed. Removing...`, "#1008ee");
           } else {
             addCommand(appName + " is already installed. Removing...", "#1008ee");
           }
@@ -472,6 +474,8 @@ function installApp(appName, isTerminal) {
             addCommand(`${actionText} about: ${progress}%`, "#08d3ee");
           } else if (appName === "dogg"){
             addCommand(`${actionText} doggallery: ${progress}%`, "#08d3ee");
+          } else if (appName === "kai"){
+            addCommand(`${actionText} kuuppaai: ${progress}%`, "#08d3ee");
           } else {
              addCommand(`${actionText} ${appName}: ${progress}%`, "#08d3ee");
           }
@@ -497,8 +501,9 @@ function installApp(appName, isTerminal) {
             addCommand(`Removed about successfully!`, "#ee1408");
           } else if (appName === "dogg"){
             addCommand(`Removed doggallery successfully!`, "#ee1408");
-          } 
-          else{
+          } else if (appName === "kai"){
+            addCommand(`Removed kuuppaai successfully!`, "#ee1408");
+          } else{
             addCommand(`Removed ${appName} successfully!`, "#ee1408");
           }
           
@@ -523,8 +528,9 @@ function installApp(appName, isTerminal) {
             addCommand(`Installed about successfully!`, "#ee1408");
           } else if (appName === "dogg"){
             addCommand(`Installed doggallery successfully!`, "#ee1408");
-          }
-          else {
+          }else if (appName === "kai"){
+            addCommand(`Removed kuuppaai successfully!`, "#ee1408");
+          } else {
             addCommand(`Installed ${appName} successfully!`, "#ee1408");
           }
           icon.style.display = "flex";
@@ -1109,7 +1115,7 @@ async function showWeather(lat, lon) {
       weatherIcon.textContent = icon;
     }
 
-    document.querySelector("#weathericon").textContent =  icon + `${temp}°C`;
+    document.querySelector("#weathericon").textContent =  icon + ` ${temp}°C`;
 
     document.querySelector("#weathercontent").innerHTML = `
       <p><strong>Location:</strong> ${locationName || "Your location"}</p>

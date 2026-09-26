@@ -937,6 +937,14 @@ border: 2px solid black;
   animation: closeMenu 0.35s ease forwards;
 }
 
+#weather.opening {
+  animation: openMenu 0.35s ease forwards;
+}
+
+#weather.closing {
+  animation: closeMenu 0.35s ease forwards;
+}
+
 @keyframes windowOpen {
     from {
         opacity: 0;
@@ -989,6 +997,7 @@ border: 2px solid black;
 #settings.closing {
     animation-name: windowCloseSettings;
 }
+
 @keyframes windowOpenSettings {
     from {
         opacity: 0;
@@ -1774,6 +1783,16 @@ border: 2px solid black;
 }
 
 #startmenu h1 {
+  margin: 0 !important;
+  margin-bottom: 4px !important;
+  margin-left: 3px !important;
+}
+
+#weather {
+  padding: 0 !important;
+}
+
+#weather h1 {
   margin: 0 !important;
   margin-bottom: 4px !important;
   margin-left: 3px !important;

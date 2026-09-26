@@ -1931,8 +1931,12 @@ function openWindow(element, appName) {
     addTaskbarApp(element, appName);
 
   if (element.id === "startmenu") {
-    //element.classList.remove("opening");
     element.style.left = "10px";
+    element.style.bottom = "50px";
+    element.style.top = "auto";
+    element.style.transform = "none";
+  } else if (element.id === "weather") {
+    element.style.right = "10px";
     element.style.bottom = "50px";
     element.style.top = "auto";
     element.style.transform = "none";

@@ -1109,6 +1109,8 @@ async function showWeather(lat, lon) {
       weatherIcon.textContent = icon;
     }
 
+    document.querySelector("#weathericon").textContent =  icon + `${temp}°C`;
+
     document.querySelector("#weathercontent").innerHTML = `
       <p><strong>Location:</strong> ${locationName || "Your location"}</p>
       <p><strong>Temperature:</strong> ${temp}°C</p>
@@ -1132,6 +1134,7 @@ function getUserWeather() {
       showWeather(position.coords.latitude, position.coords.longitude);
     },
     () => {
+      document.querySelector("#weathericon").style.display = "none"
       document.querySelector("#weathercontent").innerHTML =
         "<p>Location access was denied.</p>";
     }

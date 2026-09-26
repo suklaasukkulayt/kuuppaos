@@ -844,6 +844,23 @@ if (cameraIcon) {
   });
 }
 
+dragElement(document.querySelector("#kai"))
+
+var kaiScreen = document.querySelector("#kai")
+var kaiIcon = document.querySelector("#kaiicon")
+
+var kaiScreenClose = document.querySelector("#kaiclose")
+
+kaiScreenClose.addEventListener("click", () => {
+  closeWindow(kaiScreen);
+});
+
+if (kaiIcon) {
+  kaiIcon.addEventListener("click", () => {
+    handleIconTap(kaiIcon, kaiScreen, "KuuppaAI");
+  });
+}
+
 
 
 dragElement(document.querySelector("#pong"))
@@ -1787,6 +1804,7 @@ setupMinimize("#ghost", "#ghostminimize", "Ghost game");
 setupMinimize("#info", "#infominimize", "Info");
 setupMinimize("#recorder", "#recorderminimize", "Recorder");
 setupMinimize("#dogg", "#doggminimize", "Dog Gallery");
+setupMinimize("#kai", "#kaiminimize", "KuuppaAI");
 setupMinimize("#apps", "#appsminimize", "App Store");
 setupMinimize("#welcome", "#welcomeminimize", "Welcome");
 
@@ -3258,3 +3276,63 @@ function saveTextAsFile(){
       downloadLink.href = URL.createObjectURL(textFileAsBlob);
       downloadLink.click();
 };
+
+const chatBox = document.querySelector('.chat-box');
+const sendBtn = document.getElementById('sendBtn');
+const userInput = document.getElementById('userInput');
+const chatBody = document.querySelector('.chat-box-body');
+
+sendBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  sendBtn.disabled = true;
+  const text = userInput.value.trim();
+  if (!text) return;
+  
+  const userMessage = document.createElement('div');
+  userMessage.classList.add('message', 'user');
+  userMessage.textContent = text;
+  chatBody.appendChild(userMessage);
+
+  userInput.value = '';
+  
+  const botMessage = document.createElement('div');
+  botMessage.classList.add('message', 'bot');
+  function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+botMessage.textContent = "Thinking...";
+sleep(2000).then(() => { 
+  const lowerText = text.toLowerCase(); 
+  const greetings = ["hello", "hi", "hey", "howdy", "hola", "greetings", "sup", "yo", "hipsdaad", "salutatio", "kukkudaa"];
+  const noudont = ["no", "don", "can't", "not", "won't", "never", "aren"];
+
+    const matchesGreeting = greetings.some(word => new RegExp(`\\b${word}\\b`).test(lowerText));
+    const matchesNo = noudont.some(word => new RegExp(`\\b${word}\\b`).test(lowerText));
+    const talkingBoutU = lowerText.includes("you");
+    const isveryKuuppa = lowerText.includes("kuuppa");
+    const shouldIsnailCheck = lowerText.includes("snail");
+    
+
+    if (matchesGreeting) {
+      botMessage.textContent = "Hi there! How's your day going? Is it very Kuuppa like?";
+    } else if(matchesNo) {
+      botMessage.textContent = "Okay okay I will stop then, let's do something more Kuuppa then.";
+    } else if (isveryKuuppa) {
+      botMessage.textContent = "KUUPPA YOU SAID KUUPPA, OH they are my favorites i'm so happy I have never been so Kuuppa-like in my life :)";
+    } else if (shouldIsnailCheck) {
+      botMessage.textContent = "Snail check: \n Snail 1: Doing kuuppa things \n Snail 2: Doing nothing (weird) \n Snail 3: Still going (good) \n Snail 4: Checking out the cute dog images (just like you should in dog gallery) \n Snail 5: snailing \n Is this what you wanted or do you want it more Kuuppa??";
+    } 
+    else if (talkingBoutU) {
+      botMessage.textContent = "Oh what about me?";
+    } else {
+      botMessage.textContent = "I didn't get it sorry. Maybe try again? OR just keep Kuuppaing.";
+    }
+    
+});
+
+  chatBody.appendChild(botMessage);
+    sendBtn.disabled = false;
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+});

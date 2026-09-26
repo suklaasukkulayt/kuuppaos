@@ -125,6 +125,11 @@
           <p class="icon-label">Dog Gallery</p>
         </div>
 
+        <div id="kaiicon" class="desktop-icon" title="Chat with the Kuuppaest chatbot ever in KuuppaOS!" style="display: none;">
+          <img src="./icons/kuuppaai.png" alt="KuuppaAI">
+          <p class="icon-label">KuuppaAI</p>
+        </div>
+
         <div id="infoicon" class="desktop-icon" title="Info about the apps in KuuppaOS!" style="display: none;">
           <img src="./icons/info.png" alt="About">
           <p class="icon-label">About</p>
@@ -734,6 +739,40 @@
   </div>
 
 
+  <div class="welcome" id="kai" style="top:40%; left: 70%; display: none; width:fit-content;">
+    <div class="welcomeheader" id="kaiheader">
+      <p>
+        KuuppaAI
+      </p>
+    </div>
+    
+    <div class="closebutton" id="kaiclose">
+          <p class="closetext">X</p>
+        </div>
+
+     <div class="minimizebutton" id="kaiminimize">
+        <p class="minimizetext">-</p>
+    </div>
+    
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(85, 55, 134);">KuuppaAI</h1>
+    <div id="kaibox">
+    <div class="chat-box-body">
+      <div class="message bot">Hello! How can I KuuppaHelp you today?</div>
+    </div>
+    <div class="chat-box-footer">
+      <form>
+        <input id="userInput" type="text" placeholder="Type your message...">
+        <input type="submit" id="sendBtn" value="Send" />
+      </form>
+    </div>
+  </div>
+  </div>
+    </div>
+
+
+
+
+
        <div class="welcome" id="apps" style="top:40%; left: 70%; display: none; width:fit-content;">
     <div class="welcomeheader" id="appsheader">
       <p>
@@ -877,6 +916,15 @@
   </div>
   <img src="./dogphotos/nuutifloor.jpg" class="appstoreicon">
   <p class="appstoredescription">View photos of my dogs!</p>
+</div>
+
+<div id="installKuuppaAI" class="appstoreitem">
+  <div class="appstoretop">
+    <h3 class="appstoretitle">KuuppaAI</h3>
+    <button class="appstorebutton" onclick="installApp('kai')" id="kaiButton">Install</button>
+  </div>
+  <img src="./icons/kuuppaai.png" class="appstoreicon">
+  <p class="appstoredescription">Chat with the Kuuppaest chatbot ever!</p>
 </div>
 
 <div id="installAbout" class="appstoreitem">

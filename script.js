@@ -1148,7 +1148,7 @@ function getUserWeather() {
       showWeather(position.coords.latitude, position.coords.longitude);
     },
     () => {
-      document.querySelector("#weathericon").style.display = "none"
+      //document.querySelector("#weathericon").style.display = "none"
       document.querySelector("#weathercontent").innerHTML =
         "<p>Location access was denied.</p>";
     }
@@ -1854,6 +1854,8 @@ function addTaskbarApp(windowElement, name) {
       return;
     } else if (windowElement.id === "startmenu"){
       return;
+    } else if (windowElement.id === "weather"){
+      return;
     }
 
       else if(document.querySelector("#task-" + windowElement.id)) {
@@ -1932,12 +1934,12 @@ function openWindow(element, appName) {
 
   if (element.id === "startmenu") {
     element.style.left = "10px";
-    element.style.bottom = "50px";
+    element.style.bottom = "48px";
     element.style.top = "auto";
     element.style.transform = "none";
   } else if (element.id === "weather") {
-    element.style.right = "10px";
-    element.style.bottom = "50px";
+    element.style.right = "200px";
+    element.style.bottom = "48px";
     element.style.top = "auto";
     element.style.transform = "none";
   } else {

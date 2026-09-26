@@ -2435,6 +2435,11 @@ function runCommand(command) {
         addCommand("View pictures of my dogs.")
         addCommand("Select the dog you want to see photos of.")
       }
+      else if (aboutTarget === "kuuppaai") {
+        addCommand("About KuuppaAI", "#7cff8a");
+        addCommand("Chat with a very kuuppa bot.")
+        addCommand("Or maybe just don't because it's not gonna help you with anything.")
+      }
       else if (aboutTarget === "About") {
         addCommand("About About", "#7cff8a");
         addCommand("You can see info about the apps in KuuppaOS!")

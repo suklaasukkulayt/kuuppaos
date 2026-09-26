@@ -169,31 +169,6 @@
 
 
 
-<div class="welcome" id="weather" style="top:60%; left: 70%; display: none;">
-    <div class="welcomeheader" id="weatherheader">
-      <p>
-        Weather
-      </p>
-    </div>
-    
-    <div class="closebutton" id="weatherclose">
-          
-          <p class="closetext"mm>X</p>
-        </div>
-
-        <div class="minimizebutton" id="weatherminimize">
-        <p class="minimizetext">-</p>
-    </div>
-    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(226, 39, 233);">Weather</h1>
-    <div id="weather-icon" aria-label="Weather icon" style="font-size: 64px; line-height: 1; margin: 8px 0;">🌤️</div>
-    
-    
-    <div id="weathercontent">Loading weather...</div>
-    <p>Make sure you have given location permission to see your local weather!</p>
-    </div>
-
-
-
     <div class="welcome" id="clock" style="top:55%; left: 40%; width:325px; height: 350px; display: none;">
     <div class="welcomeheader" id="clockheader"> 
       <p>
@@ -1066,6 +1041,17 @@
  </div>
   </div>
 </div>
+
+
+<div class="welcome" id="weather" style="position: fixed; resize: none; display: none; width: 270px; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px); border-radius: 16px 16px 0 0; z-index: 9999; height: fit-content;">
+
+    <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(226, 39, 233);">Weather</h1>
+    <div id="weather-icon" aria-label="Weather icon" style="font-size: 64px; line-height: 1; margin: 8px 0;">🌤️</div>
+    
+    
+    <div id="weathercontent">Loading weather...</div>
+    <p>Make sure you have given location permission to see your local weather!</p>
+    </div>
 
  <div class="welcome" id="calendar" style="position: fixed; right: 16px; bottom: 45px; left: auto; transform: none; resize: none; display: none; width: min(500px, calc(100vw - 24px)); max-width: calc(100vw - 24px); height: min(450px, calc(100vh - 90px)); max-height: calc(100vh - 90px); padding: 0px; border-radius: 25px; z-index: 9998; box-sizing: border-box; overflow: auto; background-color: rgba(135, 133, 133, 0.5); backdrop-filter: blur(10px);">
     

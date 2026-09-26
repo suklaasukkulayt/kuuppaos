@@ -354,6 +354,16 @@ if (calendarScreenOpen) {
   });
 }
 
+if (weatherScreenOpen) {
+  weatherScreenOpen.addEventListener("click", function() {
+    if (weatherScreen && weatherScreen.style.display === "flex") {
+      closeWindow(weatherScreen);
+    } else if (weatherScreen) {
+      openWindow(weatherScreen);
+    }
+  });
+}
+
 
 var selectedIcon = undefined
 
@@ -583,18 +593,13 @@ if (textpadIcon) {
 }
 
 
-dragElement(document.querySelector("#weather"))
+var settingsScreen = document.querySelector("#settings")
+var settingsIcon = document.querySelector("#settingsicon")
 
-var weatherScreen = document.querySelector("#weather")
-var weatherIcon = document.querySelector("#weathericon")
 
-var weatherScreenClose = document.querySelector("#weatherclose")
-
-weatherScreenClose.addEventListener("click", () => closeWindow(weatherScreen));
-
-if (weatherIcon) {
-  weatherIcon.addEventListener("click", () => {
-    handleIconTap(weatherIcon, weatherScreen, "Weather");
+if (settingsIcon) {
+  settingsIcon.addEventListener("click", () => {
+    handleIconTap(settingsIcon, settingsScreen);
   });
 }
 

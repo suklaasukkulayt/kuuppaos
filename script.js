@@ -921,6 +921,7 @@ function handleWindowTap(element) {
   settingsScreen.style.zIndex = biggestIndex;
   calendarScreen.style.zIndex = biggestIndex;
   startmenuScreen.style.zIndex = biggestIndex;
+  weatherScreen.style.zIndex = biggestIndex;
 }
 
 function addWindowTapHandling(element) {
@@ -934,7 +935,6 @@ function addWindowTapHandling(element) {
 
 addWindowTapHandling(welcomeScreen);
 addWindowTapHandling(textpadScreen);
-addWindowTapHandling(weatherScreen);
 addWindowTapHandling(clockScreen);
 addWindowTapHandling(spotifyScreen);
 addWindowTapHandling(youtubeScreen);
@@ -1115,6 +1115,7 @@ async function showWeather(lat, lon) {
       weatherIcon.textContent = icon;
     }
 
+    document.querySelector("#weathericon").style.display = "flex"
     document.querySelector("#weathericon").textContent =  icon + ` ${temp}°C`;
 
     document.querySelector("#weathercontent").innerHTML = `
@@ -2449,12 +2450,7 @@ function runCommand(command) {
       if (installTarget === "textpad") {
         disableNewCmd();
         installApp('textpad', true);
-            }
-      else if (installTarget === "weather") {
-        disableNewCmd();
-        installApp('weather', true);
-      }
-      else if (installTarget === "clock") {
+      } else if (installTarget === "clock") {
         disableNewCmd();
         installApp('clock', true);
       }
@@ -2493,21 +2489,19 @@ function runCommand(command) {
       else if (installTarget === "ghostgame") {
         disableNewCmd();
         installApp('ghost', true);
-      }
-      else if (installTarget === "recorder") {
+      } else if (installTarget === "recorder") {
         disableNewCmd();
         installApp('recorder', true);
-      }
-      else if (installTarget === "doggallery") {
+      } else if (installTarget === "doggallery") {
         disableNewCmd();
         installApp('dogg', true);
-      }
-
-      else if (installTarget === "about") {
+      } else if (installTarget === "kuuppaai") {
+        disableNewCmd();
+        installApp('kai', true);
+      } else if (installTarget === "about") {
         disableNewCmd();
         installApp('info', true);
-      }
-      else {
+      } else {
         addCommand("No app named '" + installTarget + "' found.");
         addCommand("Maybe use the App Store to find it?");
       }

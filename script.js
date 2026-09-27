@@ -1148,9 +1148,14 @@ function getUserWeather() {
       showWeather(position.coords.latitude, position.coords.longitude);
     },
     () => {
-      //document.querySelector("#weathericon").style.display = "none"
+      function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+      document.querySelector("#weathericon").style.display = "none"
       document.querySelector("#weathercontent").innerHTML =
         "<p>Location access was denied.</p>";
+  sleep(2000).then(() => { getUserWeather(); });
     }
   );
 }

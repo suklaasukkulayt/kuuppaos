@@ -3304,12 +3304,17 @@ const chatBody = document.querySelector('.chat-box-body');
 
 sendBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  sendBtn.disabled = true;
   const text = userInput.value.trim();
-  if (!text) return;
+  if (!text) {
+    return;
+  } else {
+    sendBtn.disabled = true;
+  }
   
   const userMessage = document.createElement('div');
   userMessage.classList.add('message', 'user');
+  userMessage.classList.add('sending');
+
   userMessage.textContent = text;
   chatBody.appendChild(userMessage);
 
@@ -3317,6 +3322,7 @@ sendBtn.addEventListener('click', (e) => {
   
   const botMessage = document.createElement('div');
   botMessage.classList.add('message', 'bot');
+  botMessage.classList.add('sending');
   function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -3365,11 +3371,11 @@ sleep(2000).then(() => {
     } else {
       botMessage.textContent = "I didn't get it sorry. Maybe try again? OR just keep Kuuppaing.";
     }
-    
+    userMessage.classList.add('sending');
+    sendBtn.disabled = false;
 });
 
   chatBody.appendChild(botMessage);
-    sendBtn.disabled = false;
   chatBody.scrollTop = chatBody.scrollHeight;
 
 });

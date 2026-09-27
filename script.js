@@ -3217,6 +3217,31 @@ function showNuutiPhotos() {
   }
 }
 
+function showLukaPhotos() {
+  const container = document.getElementById("lukaPhotos");
+
+  if (container.style.display === "flex") {
+    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
+  } else {
+    container.style.display = "flex";
+    const items = container.querySelectorAll('.doggText, .dogphotos');
+    
+    items.forEach((item, index) => {
+      if (item.classList.contains('dogphotos')) {
+        const realSource = item.getAttribute('data-src');
+        if (realSource && !item.getAttribute('src')) {
+          item.setAttribute('src', realSource);
+        }
+      }
+      
+      setTimeout(() => {
+        item.classList.add('show');
+      }, index * 80);
+    });
+  }
+}
+
 function showMarttaPhotos() {
   const container = document.getElementById("marttaPhotos");
   if (container.style.display === "flex") {

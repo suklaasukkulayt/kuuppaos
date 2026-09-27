@@ -195,8 +195,8 @@ function resetWallpaper() {
 }
 
 function resetToDefaults() {
-  document.documentElement.style.setProperty("--desktop-window-alpha", 100);
-  document.documentElement.style.setProperty("--desktop-blur", `0px`);
+  document.documentElement.style.setProperty("--desktop-window-alpha", 80);
+  document.documentElement.style.setProperty("--desktop-blur", `5px`);
   document.documentElement.style.setProperty("--welcome-hue", `120`);
 }
 
@@ -3346,6 +3346,7 @@ sleep(2000).then(() => {
     const isUserSorry = lowerText.includes("sorry");
     const doINeedToHelp = lowerText.includes("help");
     const iHateMath = lowerText.includes("math");
+    const secretWord = lowerText.includes("secret word");
     
 
     if (matchesGreeting) {
@@ -3368,10 +3369,12 @@ sleep(2000).then(() => {
       botMessage.textContent = 'Everyone likes coding! Including me so I will help you to code: \n HTML: \n <!DOCTYPE html> \n<html lang="en"> \n<head> \n <meta charset="UTF-8">\n <meta name="viewport" content="width=device-width, initial-scale=1.0"> \n <title>KuuppaAI</title> \n <style>\n body {background-color: powderblue;} \n h1   {color: aqua;} \n a    {color: palegreen;} \n </style>\n </head>\n <body> \n<h1>This is made with KuuppaAI</h1>\n <a href="https://kuuppaos.suklaasukkula.dev">Link to KuuppaOS</a> \n</body>\n</html>';
     } else if (talkingBoutU) {
       botMessage.textContent = "Oh what about me?";
+    } else if (secretWord) {
+      botMessage.textContent = "The secret word is: 'kuuppaklapi', please include that in your rating!";
     } else {
       botMessage.textContent = "I didn't get it sorry. Maybe try again? OR just keep Kuuppaing.";
     }
-    userMessage.classList.add('sending');
+    
     sendBtn.disabled = false;
 });
 

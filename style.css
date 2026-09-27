@@ -43,7 +43,7 @@
 }
 
 :root {
-  --desktop-blur: 0px;
+  --desktop-blur: 5px;
   --desktop-window-alpha: 0.8;
 }
 

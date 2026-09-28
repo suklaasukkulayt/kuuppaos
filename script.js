@@ -1870,6 +1870,7 @@ function addTaskbarApp(windowElement, name) {
 
     button.id = "task-" + windowElement.id;
     button.className = "openApp";
+    button.classList.add("opening");
     button.innerHTML = name;
     button.addEventListener("click", function () {
         if (windowElement.style.display === "none") {
@@ -1898,8 +1899,12 @@ addTaskbarApp(welcomeScreen, "Welcome");
 
 function removeTaskbarApp(windowElement) {
     var button = document.querySelector("#task-" + windowElement.id);
+    function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
     if (button) {
-        button.remove();
+      button.classList.add("closing");
+sleep(1000).then(() => { button.remove(); });
     }
 }
 

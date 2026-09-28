@@ -44,7 +44,7 @@
 
 :root {
   --desktop-blur: 5px;
-  --desktop-window-alpha: 0.8;
+  --desktop-window-alpha: 0.65;
 }
 
 body{
@@ -361,10 +361,6 @@ button {
 }
 
 
-
-
-
-
 #clock {
   width: 300px;
   max-width: calc(100vw - 32px);
@@ -378,6 +374,7 @@ button {
 }
 
 .container {
+  font-family: sans-serif;
  position: relative;
  display: flex;
  justify-content: center;
@@ -476,6 +473,7 @@ button {
 }
 .container-2 #month {
  display: flex;
+ margin: 1px;
  justify-content: center;
  align-items: center;
  width: fit-content;

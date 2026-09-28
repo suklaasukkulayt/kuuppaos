@@ -195,9 +195,15 @@ function resetWallpaper() {
 }
 
 function resetToDefaults() {
-  document.documentElement.style.setProperty("--desktop-window-alpha", 80);
+  document.documentElement.style.setProperty("--desktop-window-alpha", 0.65);
   document.documentElement.style.setProperty("--desktop-blur", `5px`);
   document.documentElement.style.setProperty("--welcome-hue", `120`);
+  blurInput.value = "5";
+  blurValue.textContent = "5px";
+  transparentInput.value = "65";
+  transparentValue.textContent = "65%";
+  bgcolorInput.value = "120";
+  bgcolorValue.textContent = "120";
 }
 
 function updateBlurDisplay(value) {

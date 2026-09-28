@@ -50,10 +50,15 @@
 body{
   height: 97.4vh;
   user-select: none; 
-  background-image: url(https://static.vecteezy.com/system/resources/previews/028/217/320/non_2x/contemporary-wallpaper-for-interior-design-with-green-leaves-and-desert-inspired-background-and-texture-free-photo.jpg); 
+  background-image: url(./icons/kuuppaos-bg-vecteezy.jpg); 
   background-size: cover; 
-  font-family:Gill Sans, sans-serif; 
+  font-family: DM Sans; 
   background-color: antiquewhite;
+   /* Background image from Vecteezy */
+}
+
+button {
+  font-family: ADLaM Display;
 }
 
 .closebutton {
@@ -1071,6 +1076,7 @@ border: 2px solid black;
 .openApp {
     height: 36px;
     padding: 0 14px;
+    font-family: Courier New, monospace;
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.485);
     color: white;

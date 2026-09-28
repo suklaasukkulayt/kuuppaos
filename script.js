@@ -3373,7 +3373,7 @@ sleep(2000).then(() => {
   const lowerText = text.toLowerCase(); 
   const greetings = ["hello", "hi", "hey", "howdy", "hola", "greetings", "sup", "yo"];
   const noudont = ["no", "don", "can't", "not", "won't", "never", "aren"];
-  const salutations = ["hipsdaad", "salutatio", "kukkudaa"];
+  const salutations = ["hipsdaad", "salutatio", "kukkudaa", "bad"];
   const codeWords = ["code", "coding", "coded"];
 
     const matchesGreeting = greetings.some(word => new RegExp(`\\b${word}\\b`).test(lowerText));
@@ -3413,7 +3413,7 @@ sleep(2000).then(() => {
     } else if (secretWord) {
       botMessage.textContent = "The secret word is: 'kuuppaklapi', please include that in your rating!";
     } else {
-      botMessage.textContent = "I didn't get it sorry. Maybe try again? OR just keep Kuuppaing.";
+      botMessage.textContent = "I didn't get it sorry. Maybe make your message more Kuuppa? OR just keep Kuuppaing.";
     }
     
     sendBtn.disabled = false;

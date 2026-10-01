@@ -9,6 +9,14 @@ window.addEventListener("load", () => {
   }, 2000);
 });
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('Dogphotos Service Worker intialized'))
+      .catch(err => console.error('Service worker intializing failed:', err));
+  });
+}
+
 var currentTime = "";
       function timeUpdate() {
       currentTime = new Date().toLocaleString();

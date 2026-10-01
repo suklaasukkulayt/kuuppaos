@@ -593,6 +593,7 @@
     </div>
     
     <h1 class="ubuntu-regular" style= "margin: 4px; color: rgb(251, 33, 197);">Dog gallery</h1>
+    <p style="font-size: 12px;">Please wait patiently for the dog photos to load for the first time. There are many photos, so the loading takes a while. Next time they are gonna be cached so it will take much less time.</p>
 
     <button id="doggnuuti" class="doggbutton" onclick="showNuutiPhotos()">Nuuti photos</button>
     <div id="nuutiPhotos" class="dogphotosdiv">
@@ -629,7 +630,9 @@
       <p class="doggText">Nuuti wearing a hairband</p>
       <img data-src="./dogphotos/nuutihairband.jpg" alt="Nuuti" class="dogphotos">
       <p class="doggText">Nuuti on the floor</p>
-      <img src="./dogphotos/nuutifloor.jpg" alt="Nuuti" class="dogphotos">
+      <img data-src="./dogphotos/nuutifloor.jpg" alt="Nuuti" class="dogphotos">
+      <p class="doggText">Nuuti driving a tractor</p>
+      <img data-src="./dogphotos/nuutidrivingtractor.jpg" alt="Nuuti" class="dogphotos">
       <p class="doggText">Nuuti swimming in a lake part 3(probably)</p>
       <img data-src="./dogphotos/nuutiswimming6.jpg" alt="Nuuti" class="dogphotos">
       <p class="doggText">Nuuti swimming in a lake part 4? but he has a wood plank in his mouth</p>
@@ -756,8 +759,8 @@
       <img data-src="./dogphotos/lukalake.jpg" alt="Luka" class="dogphotos">
       <p class="doggText">This is Luka with a toy in his mouth</p> 
       <img data-src="./dogphotos/lukawithatoy.jpg" alt="Luka" class="dogphotos">
-      <p class="doggText">This is Luka with a toy in his mouth, but in a sunrise</p> 
-      <img data-src="./dogphotos/lukawithatoy.jpg" alt="Luka" class="dogphotos">
+      <p class="doggText">This is Luka with a toy in his mouth, but in a sunset</p> 
+      <img data-src="./dogphotos/lukatoysunset.jpg" alt="Luka" class="dogphotos">
       <p class="doggText">This is Luka in a forest (over some wet stuff, that's why the 'duckboards' (if that's even the right term))</p> 
       <img data-src="./dogphotos/lukainaforest.jpg" alt="Luka" class="dogphotos">
       <p class="doggText">This is Luka in a forest part 2</p> 
@@ -780,7 +783,7 @@
       <p class="doggText">Luka and Nuuti racing each other</p>
       <img data-src="./dogphotos/lukanuutiracing.jpg" alt="Luka and Nuuti" class="dogphotos">
       <p class="doggText">This is Luka and Nuuti fighting</p>
-      <img data-src="./dogphotos/lukanuutifighting.jpg" alt="Luka and Nuuti" class="dogphotos">
+      <img data-src="./dogphotos/nuutilukafight.jpg" alt="Luka and Nuuti" class="dogphotos">
       <p class="doggText">Luka and Nuuti looking in a snowy field</p>
       <img data-src="./dogphotos/nuutilukalooking.jpg" alt="Luka and Nuuti" class="dogphotos">
       <p class="doggText">This is Luka and Nuuti fighting over a toy</p>
@@ -1250,6 +1253,8 @@
     </div>
 
     <p style="display: none; font-size: 0px;" id="trackminimize"></p>
+    <img style="display: none; width: 0px; height: 0px;" src="./icons/shutdownn.png">
+    <img style="display: none; width: 0px; height: 0px;" src="./icons/reboot.png">
     <script src="script.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
     	<script src=

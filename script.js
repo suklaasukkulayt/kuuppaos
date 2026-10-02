@@ -322,10 +322,37 @@ function closeWindow(element) {
         element.classList.remove("closing");
         removeTaskbarApp(element);
     }, 350);
+}
+
+
+var elementWidth = "fit-content";
+var elementHeight = "auto";
+function fullscreenWindow(element) {
+  
+  if (!element) return;
+  if(element.style.width != "98%"){
+  elementWidth = element.style.width;
+  elementHeight = element.style.height;
+
+    void element.offsetWidth;
+    element.classList.remove("smallscreening");
+    element.classList.add("fullscreening");
+        element.style.width = "98%";
+        element.style.height = "90%";
+  } else {
+    element.classList.remove("fullscreening");
+    element.classList.add("smallscreening");
+    element.style.width = elementWidth;
+    element.style.height = elementHeight;
+  }
     
 }
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")
+
+var welcomeScreenFullscreen = document.querySelector("#welcomefulls")
+welcomeScreenFullscreen.addEventListener("click", () => fullscreenWindow(welcomeScreen));
+
 var welcomeScreenOpon = document.querySelector("#welcomeOpenBtn")
 var welcomeScreenOpen = document.querySelector("#settingsButton")
 var calendarScreen = document.querySelector("#calendar")
@@ -597,11 +624,12 @@ dragElement(document.querySelector("#textpad"))
 
 var textpadScreen = document.querySelector("#textpad")
 var textpadIcon = document.querySelector("#textpadicon")
+var textpadScreenFullscreen = document.querySelector("#textpadfulls")
+textpadScreenFullscreen.addEventListener("click", () => fullscreenWindow(textpadScreen));
 
 var textpadScreenClose = document.querySelector("#textpadclose")
 
 textpadScreenClose.addEventListener("click", () => closeWindow(textpadScreen));
-
 if (textpadIcon) {
   textpadIcon.addEventListener("click", () => {
     handleIconTap(textpadIcon, textpadScreen, "TeXtpad");
@@ -626,6 +654,8 @@ var clockScreen = document.querySelector("#clock")
 var clockIcon = document.querySelector("#clockicon")
 
 var clockScreenClose = document.querySelector("#clockclose")
+var clockScreenFullscreen = document.querySelector("#clockfulls")
+clockScreenFullscreen.addEventListener("click", () => fullscreenWindow(clockScreen));
 
 clockScreenClose.addEventListener("click", () => closeWindow(clockScreen));
 
@@ -640,6 +670,9 @@ dragElement(document.querySelector("#spotify"))
 var spotifyScreen = document.querySelector("#spotify") 
 var spotifyIcon = document.querySelector("#spotifyicon")
 var spotifyScreenClose = document.querySelector("#spotifyclose")
+var spotifyScreenFullscreen = document.querySelector("#spotifyfulls")
+spotifyScreenFullscreen.addEventListener("click", () => fullscreenWindow(spotifyScreen));
+
 const nowplayBtn = document.getElementById("nowplayPlay");
 let isKuuppaMusicOn = false;
 
@@ -669,6 +702,8 @@ dragElement(document.querySelector("#youtube"))
 var youtubeScreen = document.querySelector("#youtube")
 var youtubeIcon = document.querySelector("#youtubeicon")
 var youtubeScreenClose = document.querySelector("#youtubeclose")
+var youtubeScreenFullscreen = document.querySelector("#youtubefulls")
+youtubeScreenFullscreen.addEventListener("click", () => fullscreenWindow(youtubeScreen));
 
 youtubeScreenClose.addEventListener("click", () => {
   closeWindow(youtubeScreen);
@@ -688,9 +723,10 @@ if (youtubeIcon) {
 
   var cterminalScreen = document.querySelector("#cterminal")
   var cterminalIcon = document.querySelector("#cterminalicon")
-
+  var cterminalScreenFullscreen = document.querySelector("#cterminalfulls")
   var cterminalScreenClose = document.querySelector("#cterminalclose")
 
+  cterminalScreenFullscreen.addEventListener("click", () => fullscreenWindow(cterminalScreen));
   cterminalScreenClose.addEventListener("click", () => closeWindow(cterminalScreen));
 
   if (cterminalIcon) {
@@ -703,9 +739,10 @@ if (youtubeIcon) {
 
   var terminalScreen = document.querySelector("#terminal")
   var terminalIcon = document.querySelector("#terminalicon")
-
+  var terminalScreenFullscreen = document.querySelector("#terminalfulls")
   var terminalScreenClose = document.querySelector("#terminalclose")
 
+  terminalScreenFullscreen.addEventListener("click", () => fullscreenWindow(terminalScreen));
   terminalScreenClose.addEventListener("click", () => closeWindow(terminalScreen));
 
   if (terminalIcon) {
@@ -722,6 +759,8 @@ if (youtubeIcon) {
   var paintIcon = document.querySelector("#painticon")
 
   var paintScreenClose = document.querySelector("#paintclose")
+var paintScreenFullscreen = document.querySelector("#paintfulls")
+paintScreenFullscreen.addEventListener("click", () => fullscreenWindow(paintScreen));
 
   paintScreenClose.addEventListener("click", () => closeWindow(paintScreen));
 
@@ -738,8 +777,9 @@ if (youtubeIcon) {
   var browserIcon = document.querySelector("#browsericon")
 
   var browserScreenClose = document.querySelector("#browserclose")
-
+  var browserScreenFullscreen = document.querySelector("#browserfulls")
   browserScreenClose.addEventListener("click", () => closeWindow(browserScreen));
+  browserScreenFullscreen.addEventListener("click", () => fullscreenWindow(browserScreen));
 
   if (browserIcon) {
     browserIcon.addEventListener("click", () => {
@@ -754,8 +794,9 @@ var calculatorScreen = document.querySelector("#calculator")
 var calculatorIcon = document.querySelector("#calculatoricon")
 
 var calculatorScreenClose = document.querySelector("#calculatorclose")
-
+var calculatorScreenFullscreen = document.querySelector("#calculatorfulls")
 calculatorScreenClose.addEventListener("click", () => closeWindow(calculatorScreen));
+calculatorScreenFullscreen.addEventListener("click", () => fullscreenWindow(calculatorScreen));
 
 if (calculatorIcon) {
   calculatorIcon.addEventListener("click", () => {
@@ -769,8 +810,9 @@ var infoScreen = document.querySelector("#info")
 var infoIcon = document.querySelector("#infoicon")
 
 var infoScreenClose = document.querySelector("#infoclose")
-
+var infoScreenFullscreen = document.querySelector("#infofulls")
 infoScreenClose.addEventListener("click", () => closeWindow(infoScreen));
+infoScreenFullscreen.addEventListener("click", () => fullscreenWindow(infoScreen));
 
 if (infoIcon) {
   infoIcon.addEventListener("click", () => {
@@ -785,8 +827,10 @@ var appsScreen = document.querySelector("#apps")
 var appsIcon = document.querySelector("#appsicon")
 
 var appsScreenClose = document.querySelector("#appsclose")
+var appsScreenFullscreen = document.querySelector("#appsfulls")
 
 appsScreenClose.addEventListener("click", () => closeWindow(appsScreen));
+appsScreenFullscreen.addEventListener("click", () => fullscreenWindow(appsScreen));
 
 if (appsIcon) {
   appsIcon.addEventListener("click", () => {
@@ -800,6 +844,9 @@ var ghostScreen = document.querySelector("#ghost")
 var ghostIcon = document.querySelector("#ghosticon")
 const ghostWindow = document.getElementById('ghostG');
 var ghostScreenClose = document.querySelector("#ghostclose")
+
+var ghostScreenFullscreen = document.querySelector("#ghostfulls")
+ghostScreenFullscreen.addEventListener("click", () => fullscreenWindow(ghostScreen));
 
 ghostScreenClose.addEventListener("click", () => {
   closeWindow(ghostScreen);
@@ -819,7 +866,8 @@ if (ghostIcon) {
 var recorderScreen = document.querySelector("#recorder")
 var recorderIcon = document.querySelector("#recordericon")
 var recorderScreenClose = document.querySelector("#recorderclose")
-
+var recorderScreenFullscreen = document.querySelector("#recorderfulls")
+recorderScreenFullscreen.addEventListener("click", () => fullscreenWindow(recorderScreen));
 recorderScreenClose.addEventListener("click", () => {
   closeWindow(recorderScreen);
   if(typeof audioStream !== 'undefined' && audioStream){
@@ -840,11 +888,16 @@ if (recorderIcon) {
 var doggScreen = document.querySelector("#dogg")
 var doggIcon = document.querySelector("#doggicon")
 var doggScreenClose = document.querySelector("#doggclose")
+var doggScreenFullscreen = document.querySelector("#doggfulls")
 
 doggScreenClose.addEventListener("click", () => {
   closeWindow(doggScreen);
 });
-  
+
+doggScreenFullscreen.addEventListener("click", () => {
+  fullscreenWindow(doggScreen);
+});
+
 if (doggIcon) {
   doggIcon.addEventListener("click", () => {
     handleIconTap(doggIcon, doggScreen, "Dog Gallery");
@@ -859,10 +912,15 @@ var cameraScreen = document.querySelector("#camera")
 var cameraIcon = document.querySelector("#cameraicon")
 
 var cameraScreenClose = document.querySelector("#cameraclose")
+var cameraScreenFullscreen = document.querySelector("#camerafulls")
 
 cameraScreenClose.addEventListener("click", () => {
   closeWindow(cameraScreen);
   stopCamera();
+});
+
+cameraScreenFullscreen.addEventListener("click", () => {
+  fullscreenWindow(cameraScreen);
 });
 
 if (cameraIcon) {
@@ -877,9 +935,13 @@ var kaiScreen = document.querySelector("#kai")
 var kaiIcon = document.querySelector("#kaiicon")
 
 var kaiScreenClose = document.querySelector("#kaiclose")
-
+var kaiScreenFullscreen = document.querySelector("#kaifulls")
 kaiScreenClose.addEventListener("click", () => {
   closeWindow(kaiScreen);
+});
+
+kaiScreenFullscreen.addEventListener("click", () => {
+  fullscreenWindow(kaiScreen);
 });
 
 if (kaiIcon) {
@@ -897,11 +959,16 @@ var pongIcon = document.querySelector("#pongicon")
 
 var pongScreenClose = document.querySelector("#pongclose")
 var pongScreenMinimize = document.querySelector("#pongminimize")
+var pongScreenFullscreen = document.querySelector("#pongfulls")
 
 pongScreenClose.addEventListener("click", () => {
   closeWindow(pongScreen);
   stopPong();
   resetPong();
+});
+
+pongScreenFullscreen.addEventListener("click", () => {
+  fullscreenWindow(pongScreen);
 });
 
 if (pongIcon) {

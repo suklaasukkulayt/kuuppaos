@@ -3253,7 +3253,10 @@ function showLukaPhotos() {
   const container = document.getElementById("lukaPhotos");
 
   if (container.style.display === "flex") {
-    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.add('closing'));
+    setTimeout(() => {
+      container.style.display = "none";
+      }, 600);
     container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
     container.style.display = "flex";
@@ -3277,7 +3280,10 @@ function showLukaPhotos() {
 function showLukaNuutiPhotos() {
   const container = document.getElementById("lukanuutiPhotos");
   if (container.style.display === "flex") {
-    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.add('closing'));
+    setTimeout(() => {
+      container.style.display = "none";
+      }, 600);
     container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
     container.style.display = "flex";
@@ -3300,7 +3306,10 @@ function showLukaNuutiPhotos() {
 function showMarttaPhotos() {
   const container = document.getElementById("marttaPhotos");
   if (container.style.display === "flex") {
-    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.add('closing'));
+    setTimeout(() => {
+      container.style.display = "none";
+      }, 600);
     container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
     container.style.display = "flex";
@@ -3323,7 +3332,10 @@ function showMarttaPhotos() {
 function showOthersPhotos() {
   const container = document.getElementById("othersPhotos");
   if (container.style.display === "flex") {
-    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.add('closing'));
+    setTimeout(() => {
+      container.style.display = "none";
+      }, 600);
     container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
     container.style.display = "flex";

@@ -1854,7 +1854,7 @@ function minimizeWindow(windowElement) {
 }
 
 function changeTrackMinimize() {
-  const taskbarButton = document.querySelector("#task-spotify");
+  const taskbarButton = document.querySelector("#task-spotify:not(.closing)");
   if (!taskbarButton || !trackminimize) {
     return;
   }
@@ -1876,7 +1876,9 @@ function addTaskbarApp(windowElement, name) {
       return;
     }
 
-      else if(document.querySelector("#task-" + windowElement.id)) {
+      else if([...document.querySelectorAll(".openApp")].some(button =>
+        button.id === "task-" + windowElement.id && !button.classList.contains("closing")
+      )) {
         return;
     }
 
@@ -1884,6 +1886,7 @@ function addTaskbarApp(windowElement, name) {
 
     button.id = "task-" + windowElement.id;
     button.className = "openApp";
+    button.classList.remove("closing");
     button.classList.add("opening");
     button.innerHTML = name;
     button.addEventListener("click", function () {
@@ -1900,10 +1903,9 @@ function addTaskbarApp(windowElement, name) {
             if(windowElement.id === "camera"){
               stopCamera();
             }
-            if(windowElement.id === "spotify"){
             if (windowElement.id === "spotify") {
-              changeTrackMinimize();
-}}}
+              changeTrackMinimize();        
+  }}
     });
     openApps.appendChild(button);
 }
@@ -1913,12 +1915,16 @@ addTaskbarApp(welcomeScreen, "Welcome");
 
 function removeTaskbarApp(windowElement) {
     var button = document.querySelector("#task-" + windowElement.id);
-    function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
     if (button) {
       button.classList.add("closing");
-sleep(1000).then(() => { button.remove(); });
+      button.addEventListener("animationend", (event) => {
+        if (event.target === button) {
+          button.remove();
+        }
+      }, { once: true });
+      setTimeout(() => {
+        button.remove();
+      }, 350);
     }
 }
 
@@ -1935,12 +1941,9 @@ function setupMinimize(windowId, buttonId, appName) {
               stopCamera();
             }
         if(windowElement.id === "spotify"){
-          
           if(audio.paused === false){
           changeTrackMinimize();
-          
-          
-            }
+      }
 }});
 }
 
@@ -1978,10 +1981,12 @@ function openWindow(element, appName) {
     if (element.id === "camera") {
       startCamera();
     }
-    if (element.id === "spotify"){
-      removeTaskbarApp(spotifyScreen);
-      addTaskbarApp(spotifyScreen, "KuuppaMusic");
-    }
+    if (element.id === "spotify") {
+  const taskbarButton = document.querySelector("#task-spotify:not(.closing)");
+  if (taskbarButton) {
+    taskbarButton.textContent = "KuuppaMusic";
+  }
+}
   }
 }
 

@@ -3225,7 +3225,10 @@ function showNuutiPhotos() {
   const container = document.getElementById("nuutiPhotos");
 
   if (container.style.display === "flex") {
-    container.style.display = "none";
+    container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.add('closing'));
+    setTimeout(() => {
+      container.style.display = "none";
+      }, 600);
     container.querySelectorAll('.doggText, .dogphotos').forEach(item => item.classList.remove('show'));
   } else {
     container.style.display = "flex";

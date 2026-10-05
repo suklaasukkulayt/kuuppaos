@@ -269,7 +269,7 @@ button {
 }
 
 .welcome {
-    background-color: hsla(var(--welcome-hue, 120), 100%, 50%, var(--desktop-window-alpha));
+    background-color: hsla(var(--welcome-hue, 170), 100%, 30%, var(--desktop-window-alpha));
     max-height: 70%;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -2153,11 +2153,11 @@ border: 2px solid black;
 
 .welcome.fullscreening {
   position: fixed;
-  inset: 0 0 50px 0; /* Adjust 60px if needed to fit the taskbar */
+  inset: 0 0 50px 0;
   top: 0 !important;
   left: 0 !important;
-  width: auto;
-  height: auto;
+  width: auto !important;
+  height: auto !important;
   max-height: none;
   margin: 0;
   box-sizing: border-box;

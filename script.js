@@ -205,13 +205,13 @@ function resetWallpaper() {
 function resetToDefaults() {
   document.documentElement.style.setProperty("--desktop-window-alpha", 0.65);
   document.documentElement.style.setProperty("--desktop-blur", `5px`);
-  document.documentElement.style.setProperty("--welcome-hue", `120`);
+  document.documentElement.style.setProperty("--welcome-hue", `150`);
   blurInput.value = "5";
   blurValue.textContent = "5px";
   transparentInput.value = "65";
   transparentValue.textContent = "65%";
-  bgcolorInput.value = "120";
-  bgcolorValue.textContent = "120";
+  bgcolorInput.value = "150";
+  bgcolorValue.textContent = "150";
 }
 
 function updateBlurDisplay(value) {
@@ -325,30 +325,29 @@ function closeWindow(element) {
 }
 
 
-var elementWidth = "fit-content";
-var elementHeight = "auto";
-var isFullscreened = false;
-function fullscreenWindow(element) {
-  
-  if (!element) return;
-  if(!isFullscreened){
-    isFullscreened = true;
-    elementWidth = element.style.width;
-    elementHeight = element.style.height;
+const fullscreenSizes = new WeakMap();
 
-    void element.offsetWidth;
+function fullscreenWindow(element) {
+  if (!element) return;
+
+  if (!fullscreenSizes.has(element)) {
+    fullscreenSizes.set(element, {
+      width: element.style.width,
+      height: element.style.height
+    });
+
     element.classList.remove("smallscreening");
     element.classList.add("fullscreening");
-    //element.style.width = "calc(100vw - 20px)";
-    //element.style.height = "calc(100vh - 20px)";
   } else {
-    isFullscreened = false;
+    const { width, height } = fullscreenSizes.get(element);
+
     element.classList.remove("fullscreening");
     element.classList.add("smallscreening");
-    element.style.width = elementWidth;
-    element.style.height = elementHeight;
+    element.style.width = width;
+    element.style.height = height;
+
+    fullscreenSizes.delete(element);
   }
-    
 }
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")

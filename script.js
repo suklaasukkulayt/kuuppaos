@@ -327,19 +327,22 @@ function closeWindow(element) {
 
 var elementWidth = "fit-content";
 var elementHeight = "auto";
+var isFullscreened = false;
 function fullscreenWindow(element) {
   
   if (!element) return;
-  if(element.style.width != "98%"){
-  elementWidth = element.style.width;
-  elementHeight = element.style.height;
+  if(!isFullscreened){
+    isFullscreened = true;
+    elementWidth = element.style.width;
+    elementHeight = element.style.height;
 
     void element.offsetWidth;
     element.classList.remove("smallscreening");
     element.classList.add("fullscreening");
-        element.style.width = "98%";
-        element.style.height = "90%";
+    //element.style.width = "calc(100vw - 20px)";
+    //element.style.height = "calc(100vh - 20px)";
   } else {
+    isFullscreened = false;
     element.classList.remove("fullscreening");
     element.classList.add("smallscreening");
     element.style.width = elementWidth;

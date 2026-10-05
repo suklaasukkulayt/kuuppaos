@@ -119,14 +119,16 @@ var STORAGE_BG = "kuuppaos-bg-image";
 var STORAGE_BLUR = "kuuppaos-blur";
 var STORAGE_TRANSPARENT = "kuuppaos-transparent";
 var STORAGE_BGCOLOR = "kuuppaos-bgcolor";
+var STORAGE_RGBMODE = "kuuppaos-rgbmode";
 
-function saveSettings(bgImage, blur, transparent, bgcolor) {
+function saveSettings(bgImage, blur, transparent, bgcolor, rgbmode) {
   if (bgImage) {
     localStorage.setItem(STORAGE_BG, bgImage);
   }
   localStorage.setItem(STORAGE_BLUR, String(blur));
   localStorage.setItem(STORAGE_TRANSPARENT, String(transparent));
   localStorage.setItem(STORAGE_BGCOLOR, String(bgcolor));
+  localStorage.setItem(STORAGE_RGBMODE, String(rgbmode === undefined ? !!(rgbmodeToggle && rgbmodeToggle.checked) : rgbmode));
 }
 
 function loadSettings() {
@@ -134,6 +136,7 @@ function loadSettings() {
   var savedBlur = localStorage.getItem(STORAGE_BLUR);
   var savedTransparent = localStorage.getItem(STORAGE_TRANSPARENT);
   var savedBgcolor = localStorage.getItem(STORAGE_BGCOLOR);
+  var savedRgbmode = localStorage.getItem(STORAGE_RGBMODE);
 
   if (savedBg) {
     applyWallpaper(savedBg);
@@ -153,6 +156,16 @@ function loadSettings() {
     bgcolorInput.value = savedBgcolor;
     updateBgcolorDisplay(Number(savedBgcolor));
   }
+  
+  if (rgbmodeToggle) {
+  const enabled =
+    savedRgbmode === null
+      ? rgbmodeToggle.checked
+      : savedRgbmode === "true";
+
+  rgbmodeToggle.checked = enabled;
+  updateRgbmodeDisplay(enabled);
+}
 }
 
 function clearSavedWallpaper() {
@@ -174,6 +187,7 @@ var transparentInput = document.getElementById("transparentInput");
 var transparentValue = document.getElementById("transparentValue");
 var bgcolorInput = document.getElementById("bgcolorInput");
 var bgcolorValue = document.getElementById("bgcolorValue");
+var rgbmodeToggle = document.getElementById("rgbmodeToggle");
 
 function applyWallpaper(imageDataUrl) {
   if (!body) {
@@ -212,6 +226,7 @@ function resetToDefaults() {
   transparentValue.textContent = "65%";
   bgcolorInput.value = "150";
   bgcolorValue.textContent = "150";
+  rgbmodeToggle.checked = false;
 }
 
 function updateBlurDisplay(value) {
@@ -240,6 +255,46 @@ function updateBgcolorDisplay(value) {
   if (bgcolorValue) {
     bgcolorValue.textContent = `${bgcolorAmount}`;
   }
+}
+
+let rgbAnimationFrame = null;
+function updateRgbmodeDisplay(enabled) {
+
+  if (rgbAnimationFrame !== null) {
+    cancelAnimationFrame(rgbAnimationFrame);
+    rgbAnimationFrame = null;
+  }
+
+  if (!enabled) {
+    updateBgcolorDisplay(Number(bgcolorInput.value));
+    return;
+  }
+
+  let hue = Number(bgcolorInput.value) || 0;
+  let previousTimestamp = null;
+
+  function animate(timestamp) {
+    if (!rgbmodeToggle.checked) {
+      rgbAnimationFrame = null;
+      return;
+    }
+
+    if (previousTimestamp !== null) {
+      hue = (hue + ((timestamp - previousTimestamp) * 45) / 1000) % 360;
+    }
+
+    previousTimestamp = timestamp;
+    document.documentElement.style.setProperty("--welcome-hue", String(hue));
+    rgbAnimationFrame = requestAnimationFrame(animate);
+  }
+  rgbAnimationFrame = requestAnimationFrame(animate);
+}
+
+if (rgbmodeToggle) {
+  rgbmodeToggle.addEventListener("change", () => {
+    localStorage.setItem(STORAGE_RGBMODE, String(rgbmodeToggle.checked));
+    updateRgbmodeDisplay(rgbmodeToggle.checked);
+  });
 }
 
 if (fileInput) {
@@ -2037,6 +2092,11 @@ function openWindow(element, appName) {
     element.style.bottom = "48px";
     element.style.top = "auto";
     element.style.transform = "none";
+  } else if (element.id === "settings") {
+    element.style.left = "47%";
+    element.style.bottom = "51px";
+    element.style.top = "auto";
+    element.style.transform = "translateX(-50%)";
   } else {
     var minTop = element.offsetHeight / 2;
     var minLeft = element.offsetWidth / 2;

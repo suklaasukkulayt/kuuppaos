@@ -1105,8 +1105,14 @@ var content = [
     content: `
         <h1 class="ubuntu-regular" style="margin: 2px; color: rgb(243, 219, 5)">TeXtpad</h1>
         <textarea style="width: 100%; height: 128px; resize: auto;" id="textarea" autofocus spellcheck="true"></textarea>
-        <button onclick="saveTextAsFile()" class="txtDownloadBtn">Export as .txt</button>
-        <p style="margin: 0px; font-family: Outfit; font-size: 16px;">Note saves to your browser's local storage.</p>
+        <button onclick="saveTextAsFile()" class="txtDownloadBtn">Export</button>
+        <select name="filetype" id="filetype" class="txtDownloadBtn">
+        <option value=".txt">Text File</option>
+        <option value=".md">Markdown File</option>
+        <option value=".html">HTML File</option>
+        <option value=".csv">CSV File</option>
+        </select>
+        <p style="margin: 0px; font-family: Outfit; font-size: 15px;">Note also saves to your browser's local storage.</p>
       `
   }
 
@@ -3499,18 +3505,20 @@ function rebootBTN(){
 function saveTextAsFile(){
 
       var textarea = document.getElementById("textarea");
+      var fileTypeSelect = document.getElementById("filetype");
       if (!textarea) {
         return;
       }
       var textToWrite = textarea.value;
+      var fileType = fileTypeSelect.value;
       
       if (textarea.value === "") {
-        alert("TeXtpad is empty!")
+        alert("TeXtpad is empty!");
         return;
       }
 
       var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-      var fileNameToSaveAs = "kuuppaos_textpad_" + currentTime.replace(/[^a-zA-Z0-9.-]/g, "_") + ".txt";
+      var fileNameToSaveAs = "kuuppaos_textpad_" + currentTime.replace(/[^a-zA-Z0-9.-]/g, "_") + fileType;
       var downloadLink = document.createElement("a");
       downloadLink.download = fileNameToSaveAs;
       downloadLink.innerHTML = "Download File";

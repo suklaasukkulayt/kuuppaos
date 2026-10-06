@@ -2163,3 +2163,9 @@ border: 2px solid black;
   box-sizing: border-box;
   transform: none;
 }
+
+#textarea {
+  border-radius: 8px;
+  background-color: #389b7aa1;
+  border: 1px dotted #00c3ff;
+}

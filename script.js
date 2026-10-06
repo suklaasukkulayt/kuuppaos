@@ -1095,6 +1095,7 @@ addWindowTapHandling(ghostScreen);
 addWindowTapHandling(infoScreen);
 addWindowTapHandling(recorderScreen);
 addWindowTapHandling(doggScreen);
+addWindowTapHandling(kaiScreen);
 addWindowTapHandling(appsScreen);
 
 
@@ -2320,7 +2321,7 @@ function runCommand(command) {
         addCommand("clear      Clear terminal");
         addCommand("time       Show current time and date");
         addCommand("apps       Show installed apps");
-        addCommand("about      About KuuppaOS or apps)");
+        addCommand("about      About KuuppaOS or app)");
         addCommand("print      Print text");
         addCommand("usage      How to use commands");
         addCommand("color      Change terminal colors");
@@ -2435,6 +2436,9 @@ function runCommand(command) {
         }
       if  (ainstalledApps.includes("dogg")) {
             addCommand("Dog Gallery");
+        }
+      if  (ainstalledApps.includes("kai")) {
+            addCommand("KuuppaAI");
         }
         addCommand("Terminal");
         addCommand("App Store");
@@ -2762,6 +2766,7 @@ function runCommand(command) {
         var wallpa = localStorage.getItem(STORAGE_BG);
         var transa = localStorage.getItem(STORAGE_TRANSPARENT);
         var bgcolora = localStorage.getItem(STORAGE_BGCOLOR);
+        var rgbmodea = localStorage.getItem(STORAGE_RGBMODE);
         if (blura === null) {
             blura = "0";
         }
@@ -2770,8 +2775,12 @@ function runCommand(command) {
             transa = "0";
         }
 
-        if (bgcolora === null) {
-            bgcolora = "120";
+          if (bgcolora === null) {
+              bgcolora = "150";
+          }
+
+        if (rgbmodea === null) {
+            rgbmodea = "Disabled";
         }
 
         if (wallpa === null) {
@@ -2788,6 +2797,7 @@ addCommand("User: Kuuppa");
 addCommand("Blur: " + blura + "px");
 addCommand("Transparency: " + transa + "%");
 addCommand("App BG Color: " + bgcolora);
+addCommand("RGB Mode: " + rgbmodea);
 addCommand("Wallpaper: " + wallpa);
 addCommand("================================", "#7cff8a");
 addCommand("         About KuuppaOS", "#7cff8a");

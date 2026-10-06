@@ -2768,18 +2768,20 @@ function runCommand(command) {
         var bgcolora = localStorage.getItem(STORAGE_BGCOLOR);
         var rgbmodea = localStorage.getItem(STORAGE_RGBMODE);
         if (blura === null) {
-            blura = "0";
+            blura = "5";
         }
 
         if (transa === null) {
-            transa = "0";
+            transa = "65";
         }
 
-          if (bgcolora === null) {
-              bgcolora = "150";
-          }
+        if (bgcolora === null) {
+            bgcolora = "150";
+        }
 
-        if (rgbmodea === null) {
+        if (rgbmodea === "true") {
+            rgbmodea = "Enabled";
+        } else {
             rgbmodea = "Disabled";
         }
 

@@ -2525,9 +2525,9 @@ function runCommand(command) {
 
       if (aboutTarget === "textpad") {
         addCommand("About TeXtpad", "#7cff8a");
-        addCommand("You can save info to TeXtpad, but it only has one textbox.")
-        addCommand("You can use it for small thoughts that you don't want to forget yet. (it saves locally to your browser!)")
-        addCommand("It's basically like notepad, but with only one note.")
+        addCommand("You can export text as different file types (.txt, .md, .html, .csv)")
+        addCommand("It also saves locally to your browser!")
+        addCommand("It's basically like notepad, but with only one note at a time.")
       }
       else if (aboutTarget === "welcome") {
       addCommand("About Welcome", "#7cff8a");

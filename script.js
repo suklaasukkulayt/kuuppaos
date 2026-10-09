@@ -3245,6 +3245,8 @@ function showAppInfo(windowNamed){
   var appInfo = document.getElementById(appInfoName + 'Info')
   var appInfoTitle = document.getElementById(appInfoName + 'InfoTitle')
     if(appInfo.style.display === 'none'){
+    appInfo.classList.add('sending');
+    appInfoTitle.classList.add('sending');
     appInfo.style.display = 'flex';
     appInfoTitle.style.display = 'flex';
   }else{

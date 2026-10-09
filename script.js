@@ -1935,6 +1935,7 @@ async function fetchNowPlaying() {
 
         trackTitleEl.textContent = titleText + " - XFM";
         trackminimize.textContent = titleText;
+        changeTrackMinimize();
         if(!audio.paused){
           nowplayingTitle.textContent = titleText;
         }
@@ -2321,7 +2322,7 @@ function runCommand(command) {
         addCommand("clear      Clear terminal");
         addCommand("time       Show current time and date");
         addCommand("apps       Show installed apps");
-        addCommand("about      About KuuppaOS or app)");
+        addCommand("about      About KuuppaOS or app");
         addCommand("print      Print text");
         addCommand("usage      How to use commands");
         addCommand("color      Change terminal colors");

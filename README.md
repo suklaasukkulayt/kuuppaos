@@ -10,10 +10,9 @@ Also first commits are meaningless, because I didn't have Live Server installed 
 
 ## Functionality
 Taskbar has a **working clock that opens calendar**, a **start menu** (use that to open the **customization menu**), **weather** that also opens weather. **Open and minimzed apps** also show in the taskbar!  
-Installed apps save to local storage!  
 You can drag, resize (from the bottom right corner), close, minimize and maximize (fullscreen) all the apps!  
 
-**17 apps**:  
+### 17 apps:  
 TeXtpad: Export your text as .txt, .md, .html and .csv and it also saves locally to your browser.  
 Clock: Just a basic analog clock.  
 KuuppaVid: Plays any YouTube video (or playlist) you want. Just type in the name.  
@@ -32,14 +31,14 @@ About: Info about the apps in KuuppaOS.
 Terminal: Run commands. There are 12 different commands!  
 App store: Install all those apps.  
 
-**Start menu**:  
+###Start menu:  
 A shutdown button  
 A reboot button  
 A button to open welcome screen  
 A customization (settings) menu button  
 Now playing with a stop button  
 
-**Customization/settings menu**:  
+### Customization/settings menu:  
 Custom wallpaper  
 App blur
 App transparency  
@@ -48,20 +47,21 @@ Toggle RGB mode
 Save to local storage button  
 Reset to defaults button  
 
-**Calendar and Weather**:  
+### Calendar and Weather:  
 Weather only shows if you have location allowed. (also if it doesn't work with Helium browser it's not my fault)  
 Weather shows you the **current condition (text and emoji)**, **your location** and **temperature**, in the taskbar it only shows the temperature and the emoji.  
 Calendar has the current day marked.
 
-**Other functionality**:
+### Other functionality:
 A **rubber-band selector**, you might not know what it means, but you have used it. It's the funny blue square that comes up when you click and drag on empty space on your desktop.  
 Many **animations**  
 A **custom scrollbar**  
-KuuppaMusic **now playing** shows **in taskbar** when **minimized** 
+KuuppaMusic **now playing** shows **in taskbar** when **minimized**  
+A **loading screen**  
+Installed apps **save to local storage**!  
 
 
-**VIDEO AND SCREENSHOT ARE OUTDATED**
-<img width="1280" height="669" alt="kuuppaos-screenshot" src="https://github.com/user-attachments/assets/580ad953-0419-4865-93eb-47d5f1d05e6a"/>
-Showcase video in github (kuupaos-video.mp4)   
+Original KuuppaOS:
+<img src="./kuuppaos-old.png" style="width: 500px; height: 450px;>
 
 Also, please install KuuppaAI and type "secret word" and press send and include the secret word in your rating. That's how I know that you actually read this. Thanks!

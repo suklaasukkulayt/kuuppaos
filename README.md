@@ -31,7 +31,7 @@ About: Info about the apps in KuuppaOS.
 Terminal: Run commands. There are 12 different commands!  
 App store: Install all those apps.  
 
-###Start menu:  
+### Start menu:  
 A shutdown button  
 A reboot button  
 A button to open welcome screen  
@@ -60,8 +60,17 @@ KuuppaMusic **now playing** shows **in taskbar** when **minimized**
 A **loading screen**  
 Installed apps **save to local storage**!  
 
+## Screenshots  
 
-Original KuuppaOS:
-<img src="./kuuppaos-old.png" style="width: 500px; height: 450px;>
+### KuuppaOS now:  
+<img width="1920" height="720" alt="KuuppaOS Screenshot 1" src="./screenshots/kuuppaos-screenshot1.png" />
+<img width="1920" height="720" alt="KuuppaOS Screenshot 2" src="./screenshots/kuuppaos-screenshot2.png" />
+<img width="1920" height="720" alt="KuuppaOS Screenshot 3" src="./screenshots/kuuppaos-screenshot3.png" />
+<img width="1920" height="720" alt="KuuppaOS Screenshot 4" src="./screenshots/kuuppaos-screenshot4.png" />
+<img width="1920" height="720" alt="KuuppaOS Screenshot 5" src="./screenshots/kuuppaos-screenshot5.png" />
 
-Also, please install KuuppaAI and type "secret word" and press send and include the secret word in your rating. That's how I know that you actually read this. Thanks!
+
+### Old KuuppaOS:  
+<img width="1920" height="720" alt="Old KuuppaOS" src="./screenshots/kuuppaos-old.png" />
+
+#### Also, please install KuuppaAI and type "secret word" and press send and include the secret word in your rating. That's how I know that you actually read this. Thanks!

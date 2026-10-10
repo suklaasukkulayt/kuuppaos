@@ -67,8 +67,10 @@ Installed apps **save to local storage**!
 <img width="1920" height="720" alt="KuuppaOS Screenshot 2" src="./screenshots/kuuppaos-screenshot2.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 3" src="./screenshots/kuuppaos-screenshot3.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 4" src="./screenshots/kuuppaos-screenshot4.png" />
-<img width="1920" height="720" alt="KuuppaOS Screenshot 5" src="./screenshots/kuuppaos-screenshot5.png" />
+<img width="1920" height="720" alt="KuuppaOS Screenshot 5" src="./screenshots/kuuppaos-screenshot5.png" />  
 
+### Watch the showcase video:
+Link: [https://www.youtube.com/watch?v=x7gDrqnFKGY](https://www.youtube.com/watch?v=x7gDrqnFKGY)  
 
 ### Old KuuppaOS:  
 <img width="1920" height="720" alt="Old KuuppaOS" src="./screenshots/kuuppaos-old.png" />

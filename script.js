@@ -426,6 +426,9 @@ welcomeScreenClose.addEventListener("click", function() {
 
 welcomeScreenOpon.addEventListener("click", function(){
   openWindow(welcomeScreen);
+  const taskbarButton = document.querySelector("#task-welcome:not(.closing)");
+  taskbarButton.textContent = "Welcome";
+  addTaskbarApp(welcomeScreen, "Welcome");
 })
 
 welcomeScreenOpen.addEventListener("click", function() {

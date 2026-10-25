@@ -801,6 +801,7 @@ if (youtubeIcon) {
   var terminalIcon = document.querySelector("#terminalicon")
   var terminalScreenFullscreen = document.querySelector("#terminalfulls")
   var terminalScreenClose = document.querySelector("#terminalclose")
+  const terminalInput = document.querySelector("#cmdInput")
 
   terminalScreenFullscreen.addEventListener("click", () => fullscreenWindow(terminalScreen));
   terminalScreenClose.addEventListener("click", () => closeWindow(terminalScreen));
@@ -808,6 +809,7 @@ if (youtubeIcon) {
   if (terminalIcon) {
     terminalIcon.addEventListener("click", () => {
       handleIconTap(terminalIcon, terminalScreen, "Terminal");
+      terminalInput.focus();
     });
   }
 

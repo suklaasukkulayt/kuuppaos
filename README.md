@@ -48,9 +48,11 @@ Save to local storage button
 Reset to defaults button  
 
 ### Calendar and Weather:  
+Weather always shows in the taskbar. When you click it, a bigger weather view opens.  
 Weather only shows if you have location allowed. (also if it doesn't work with Helium browser it's not my fault)  
 Weather shows you the **current condition (text and emoji)**, **your location** and **temperature**, in the taskbar it only shows the temperature and the emoji.  
-Calendar has the current day marked.
+Calendar opens when you click the clock in the taskbar.  
+Calendar has the current day marked. You can also change the month and the year.
 
 ### Other functionality:
 A **rubber-band selector**, you might not know what it means, but you have used it. It's the funny blue square that comes up when you click and drag on empty space on your desktop.  
@@ -59,6 +61,7 @@ A **custom scrollbar**
 KuuppaMusic **now playing** shows **in taskbar** when **minimized**  
 A **loading screen**  
 Installed apps **save to local storage**!  
+Apps **can't** be dragged or resized **out of bounds**!
 
 ## Screenshots  
 

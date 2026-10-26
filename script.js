@@ -3609,8 +3609,8 @@ botMessage.textContent = "Thinking...";
 sleep(2000).then(() => { 
   const lowerText = text.toLowerCase(); 
   const greetings = ["hello", "hi", "hey", "howdy", "hola", "greetings", "sup", "yo"];
-  const noudont = ["no", "don", "can't", "not", "won't", "never", "aren"];
-  const salutations = ["hipsdaad", "salutatio", "kukkudaa", "bad"];
+  const noudont = ["no", "don", "can't", "not", "won't", "never", "aren", "bad", "dumb", "stupid", "hate", "foolish", "wrong", "dislike"];
+  const salutations = ["hipsdaad", "salutatio", "kukkudaa"];
   const codeWords = ["code", "coding", "coded"];
 
     const matchesGreeting = greetings.some(word => new RegExp(`\\b${word}\\b`).test(lowerText));

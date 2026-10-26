@@ -982,6 +982,10 @@ border: 2px solid black;
     animation: windowClose 0.35s ease forwards;
 }
 
+.welcomeheader.inactive {
+    background-color: rgba(27, 27, 27, 0.45);
+}
+
 #startmenu.opening {
   animation: openMenu 0.35s ease forwards;
 }

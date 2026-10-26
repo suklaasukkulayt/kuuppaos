@@ -376,6 +376,7 @@ function closeWindow(element) {
         element.style.display = "none";
         element.classList.remove("closing");
         removeTaskbarApp(element);
+        updateInactiveWindows();
     }, 350);
 }
 
@@ -1072,6 +1073,7 @@ function handleWindowTap(element) {
   calendarScreen.style.zIndex = biggestIndex;
   startmenuScreen.style.zIndex = biggestIndex;
   weatherScreen.style.zIndex = biggestIndex;
+  updateInactiveWindows(element);
 }
 
 function addWindowTapHandling(element) {
@@ -1080,6 +1082,31 @@ function addWindowTapHandling(element) {
   }
 }
 
+function updateInactiveWindows(activeWindow = null) {
+  const visibleHeaders = [...document.querySelectorAll(".welcomeheader")].filter(header => {
+    const windowElement = header.closest(".welcome");
+    return windowElement && getComputedStyle(windowElement).display !== "none";
+  });
+
+  let activeHeader = activeWindow ? (activeWindow.matches(".welcomeheader") ? activeWindow : activeWindow.querySelector(".welcomeheader")) : null;
+
+  if (!visibleHeaders.includes(activeHeader)) {
+    activeHeader = visibleHeaders.reduce((topHeader, currentHeader) => {
+      if (!topHeader) return currentHeader;
+
+      const currentWindow = currentHeader.closest(".welcome");
+      const topWindow = topHeader.closest(".welcome");
+      const currentZ = Number.parseInt(getComputedStyle(currentWindow).zIndex, 10) || 0;
+      const topZ = Number.parseInt(getComputedStyle(topWindow).zIndex, 10) || 0;
+
+      return currentZ >= topZ ? currentHeader : topHeader;
+    }, null);
+  }
+
+  visibleHeaders.forEach(header => {
+    header.classList.toggle("inactive", header !== activeHeader);
+  });
+}
 
 
 
@@ -1987,6 +2014,7 @@ function minimizeWindow(windowElement) {
     setTimeout(function () {
         windowElement.style.display = "none";
         windowElement.classList.remove("closing");
+        updateInactiveWindows();
     }, 250);
 }
 
@@ -2130,6 +2158,7 @@ function openWindow(element, appName) {
   }
 }
   }
+  updateInactiveWindows(element);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

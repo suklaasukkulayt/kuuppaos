@@ -3413,7 +3413,7 @@ document.querySelectorAll(".dogphotosdiv").forEach(gallery => {
 
   gallery.querySelectorAll(":scope > p.doggText").forEach(caption => {
     const photo = caption.nextElementSibling;
-    if (!photo || !photo.matches("img.dogPhotos")){
+    if (!photo || !photo.matches("img.dogphotos")){
       return;
     }  
 

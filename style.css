@@ -1805,7 +1805,7 @@ border: 2px solid black;
 
 #dogg {
   box-sizing: border-box;
-  width: min(1160px, calc(100vw - 48px)) !important;
+  width: min(1160px, calc(100vw - 48px));
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 72px);
   overflow: auto;
@@ -1813,8 +1813,8 @@ border: 2px solid black;
 
 #dogg .dog-photo-card {
   flex: 1 1 175px;
-  max-width: 230px;
-  min-width: 0;
+  max-width: 700px;
+  min-width: 500px;
   margin: 0;
   padding: 8px;
   box-sizing: border-box;

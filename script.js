@@ -3405,6 +3405,43 @@ stopBtn.addEventListener("click", () => {
   }
 });
 
+
+document.querySelectorAll(".dogphotosdiv").forEach(gallery => {
+  gallery.querySelectorAll(":scope > br").forEach(br => {
+    br.remove();
+  });
+
+  gallery.querySelectorAll(":scope > p.doggText").forEach(caption => {
+    const photo = caption.nextElementSibling;
+    if (!photo || !photo.matches("img.dogPhotos")){
+      return;
+    }  
+
+    const card = document.createElement("figure");
+    card.className = "dog-photo-card"
+    const frame = document.createElement("div")
+    frame.className = "dog-photo-frame is-loading"
+    const spinner = document.createElement("span")
+    spinner.className = "dog-photo-loader";
+    spinner.setAttribute("aria-hidden", "true");
+    photo.loading = "lazy";
+    photo.decoding = "async";
+
+    photo.addEventListener("load", () => {
+      frame.classList.remove("is-loading")
+    }, { once: true });
+    photo.addEventListener("error", () => {
+      frame.classList.remove("is-loading");
+      frame.classList.add("load-error");
+    }, { once: true });
+
+    caption.before(card);
+    card.append(caption, frame);
+    frame.append(spinner, photo);
+  })
+})
+
+
 function showNuutiPhotos() {
   const container = document.getElementById("nuutiPhotos");
 

@@ -62,18 +62,20 @@ A **custom scrollbar**
 KuuppaMusic **now playing** shows **in taskbar** when **minimized**  
 A **loading screen**  
 Installed apps **save to local storage**!  
-Apps **can't** be dragged or resized **out of bounds**!
+Apps **can't** be dragged or resized **out of bounds**!  
+Icons can be **moved around** the **desktop**!  
+Apps that **aren’t focused**/active have a **darker header**!  
 
 ## Screenshots  
 
-### KuuppaOS now:  
+### KuuppaOS now (some features are missing):  
 <img width="1920" height="720" alt="KuuppaOS Screenshot 1" src="./screenshots/kuuppaos-screenshot1.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 2" src="./screenshots/kuuppaos-screenshot2.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 3" src="./screenshots/kuuppaos-screenshot3.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 4" src="./screenshots/kuuppaos-screenshot4.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 5" src="./screenshots/kuuppaos-screenshot5.png" />  
 
-### Watch the showcase video:
+### Watch the showcase video (some features are missing):
 Link: [https://www.youtube.com/watch?v=x7gDrqnFKGY](https://www.youtube.com/watch?v=x7gDrqnFKGY)  
 
 ### Old KuuppaOS:  

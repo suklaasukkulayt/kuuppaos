@@ -2161,6 +2161,7 @@ function openWindow(element, appName) {
   updateInactiveWindows(element);
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
   const desktop = document.getElementById("desktop");
   const selectionBox = document.getElementById("selection-box");
@@ -2190,6 +2191,10 @@ document.addEventListener("DOMContentLoaded", () => {
     selectionBox.style.width = '0px';
     selectionBox.style.height = '0px';
     selectionBox.style.display = 'block';
+    closeWindow(settingsScreen);
+    closeWindow(startScreen);
+    closeWindow(weatherScreen);
+    closeWindow(calendarScreen);
 
     document.querySelectorAll(".desktop-icon").forEach(icon => {
       icon.classList.remove("selected");

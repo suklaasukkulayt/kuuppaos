@@ -7,6 +7,7 @@ Made in GitHub Codespaces and VSCode with HTML, CSS and JS.
 Images made with online resources and Pixlr Express.  
 Resources I used: WebOS 1 Jam(Hack Club), online resources(for some apps and help with some stuff) and help from AI (for some javascript).  
 Also first commits are meaningless, because I didn't have Live Server installed in my Codespace so I had to test with GitHub Pages.  
+Icons by [Icons8](https://icons8.com/)
 
 ## Functionality
 Taskbar has a **working clock that opens calendar**, a **start menu** (use that to open the **customization menu**), **weather** that also opens weather. **Open and minimzed apps** also show in the taskbar!  

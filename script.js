@@ -2261,7 +2261,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 const GRID_COLUMN_STEP = 100;
-const GRID_ROW_STEP = 112;
+const GRID_ROW_STEP = 128;
 const gridOrigin = defaultPositions.get(icons[0].id);
 
 function findGridPosition(icon, left, top, occupied) {
@@ -2300,42 +2300,27 @@ function findGridPosition(icon, left, top, occupied) {
 
 function getOccupiedGridCells(exceptIcon) {
   const occupied = new Set();
-
   icons.forEach(other => {
-    if (other === exceptIcon) return;
-    const left = parseFloat(other.style.left);
-    const top = parseFloat(other.style.top);
-
-    if (!Number.isFinite(left) || !Number.isFinite(top)) return;
-
-    const column = Math.round((left - gridOrigin.left) / GRID_COLUMN_STEP);
-    const row = Math.round((top - gridOrigin.top) / GRID_ROW_STEP);
+    if (other === exceptIcon || getComputedStyle(other).display === "none") return;
+    const column = Math.round((parseFloat(other.style.left) - gridOrigin.left) / GRID_COLUMN_STEP);
+    const row = Math.round((parseFloat(other.style.top) - gridOrigin.top) / GRID_ROW_STEP);
     occupied.add(`${column}:${row}`);
   });
-
   return occupied;
 }
 
-  function saveDesktopIconPositions() {
-    const positions = {};
-    const occupiedGridCells = new Set();
+const restoredCells = new Set();
+icons.filter(icon => getComputedStyle(icon).display !== "none").forEach(icon => {
+  const p = findGridPosition(icon, parseFloat(icon.style.left), parseFloat(icon.style.top), restoredCells);
+  icon.style.left = `${p.left}px`; icon.style.top = `${p.top}px`;
+});
 
-    icons.forEach(icon => {
-      const defaults = defaultPositions.get(icon.id);
-      const saved = savedPositions[icon.id];
-      const left = saved && Number.isFinite(saved.left)
-      ? saved.left
-      : defaults.left;
-      const top = saved && Number.isFinite(saved.top)
-      ? saved.top
-      : defaults.top;
-
-      const position = findGridPosition(iconDrag.icon,iconDrag.startLeft + dx, iconDrag.startTop + dy, getOccupiedGridCells(iconDrag.icon));
-      iconDrag.icon.style.left = `${position.left}px`;
-      iconDrag.icon.style.top = `${position.top}px`;
-    });
-    localStorage.setItem(DESKTOP_ICON_POSITIONS_KEY, JSON.stringify(positions));
-  }
+function saveDesktopIconPositions() {
+  const positions = {};
+  icons.forEach(icon => { positions[icon.id] = { left: parseFloat(icon.style.left), top: parseFloat(icon.style.top) }; });
+  savedPositions = positions;
+  localStorage.setItem(DESKTOP_ICON_POSITIONS_KEY, JSON.stringify(positions));
+}
 
   function resetDesktopIconPositions() {
     localStorage.removeItem(DESKTOP_ICON_POSITIONS_KEY);
@@ -2387,17 +2372,20 @@ function getOccupiedGridCells(exceptIcon) {
   });
 
   document.addEventListener("mouseup", () => {
-    if (!iconDrag) return;
-    const dragged = iconDrag;
-    iconDrag = null;
-    dragged.icon.classList.remove("dragging");
-
-    if (dragged.moved) {
-      saveDesktopIconPositions();
-      dragged.icon.dataset.dragged = "true";
-      setTimeout(() => { delete dragged.icon.dataset.dragged; }, 250);
-    }
-  });
+  if (!iconDrag) return;
+  const dragged = iconDrag;
+  iconDrag = null;
+  dragged.icon.classList.remove("dragging");
+  if (dragged.moved) {
+    const rect = dragged.icon.getBoundingClientRect();
+    const p = findGridPosition(dragged.icon, rect.left, rect.top, getOccupiedGridCells(dragged.icon));
+    dragged.icon.style.left = `${p.left}px`; dragged.icon.style.top = `${p.top}px`;
+    dragged.icon.dataset.dragged = "true";
+    dragged.icon.addEventListener("click", e => { e.preventDefault(); e.stopImmediatePropagation(); delete dragged.icon.dataset.dragged; }, { capture: true, once: true });
+    saveDesktopIconPositions();
+    setTimeout(() => delete dragged.icon.dataset.dragged, 350);
+  }
+});
 
   let isSelecting = false;
   let startX = 0;

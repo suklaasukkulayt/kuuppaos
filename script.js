@@ -1151,7 +1151,7 @@ var content = [
     title: "TeXtpad is so good!",
     date: "- nobody",
     content: `
-        <h1 class="ubuntu-regular" style="margin: 2px; color: rgb(171, 179, 71)">TeXtpad</h1>
+        <h1 class="ubuntu-regular" style="margin: 2px; color: rgb(0, 253, 30)">TeXtpad</h1>
         <textarea style="width: 100%; height: 128px; resize: auto;" id="textarea" autofocus spellcheck="true"></textarea>
         <button onclick="saveTextAsFile()" class="txtDownloadBtn">Export</button>
         <select name="filetype" id="filetype" class="txtDownloadBtn">

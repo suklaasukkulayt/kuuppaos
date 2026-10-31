@@ -490,6 +490,11 @@ function handleIconTap(element, windowElement, appName) {
     return;
   }
 
+  if (element.dataset.dragged === "true") {
+    delete element.dataset.dragged;
+    return;
+  }
+
   if (element.classList.contains("selected")) {
     deselectIcon(element);
   } else {
@@ -2181,6 +2186,219 @@ document.addEventListener("DOMContentLoaded", () => {
   const desktop = document.getElementById("desktop");
   const selectionBox = document.getElementById("selection-box");
 
+  const desktopApps = document.getElementById("desktopApps");
+  const icons = [...desktopApps.querySelectorAll(":scope > .desktop-icon")];
+  const DESKTOP_ICON_POSITIONS_KEY = "kuuppaos-desktop-icon-positions";
+  const topBar = document.getElementById("top");
+
+  const originalStyles = icons.map(icon => ({
+    display: icon.style.display,
+    visibility: icon.style.visibility
+  }));
+
+  icons.forEach(icon => {
+    icon.style.display = "flex";
+    icon.style.visibility = "hidden";
+  });
+
+  const defaultPositions = new Map(
+    icons.map(icon => {
+      const rect = icon.getBoundingClientRect();
+      return [icon.id, {
+        left: rect.left,
+        top: rect.top,
+        width: rect.width,
+        height: rect.height
+      }];
+    })
+  );
+
+  icons.forEach((icon, index) => {
+    icon.style.display = originalStyles[index].display;
+    icon.style.visibility = originalStyles[index].visibility;
+  });
+
+  let savedPositions = {};
+
+  try {
+    const stored = JSON.parse(localStorage.getItem(DESKTOP_ICON_POSITIONS_KEY) || "{}");
+
+    if (stored && typeof stored === "object" && !Array.isArray(stored)) {
+      savedPositions = stored;
+    }
+  } catch {
+    savedPositions = {};
+  }
+
+  desktopApps.classList.add("icons-positioned");
+
+  function getIconBounds(width, height) {
+    const bottom = topBar
+      ? topBar.getBoundingClientRect().top
+      : window.innerHeight;
+
+    return {
+      maxLeft: Math.max(8, window.innerWidth - width - 8),
+      maxTop: Math.max(8, bottom - height - 8)
+    };
+  }
+
+  icons.forEach(icon => {
+    const defaults = defaultPositions.get(icon.id);
+    const saved = savedPositions[icon.id];
+
+    const left = saved && Number.isFinite(saved.left)
+      ? saved.left
+      : defaults.left;
+
+    const top = saved && Number.isFinite(saved.top)
+      ? saved.top
+      : defaults.top;
+
+    const bounds = getIconBounds(defaults.width, defaults.height);
+    icon.style.left = `${Math.max(8, Math.min(left, bounds.maxLeft))}px`;
+    icon.style.top = `${Math.max(8, Math.min(top, bounds.maxTop))}px`;
+  });
+
+const GRID_COLUMN_STEP = 100;
+const GRID_ROW_STEP = 112;
+const gridOrigin = defaultPositions.get(icons[0].id);
+
+function findGridPosition(icon, left, top, occupied) {
+  const bounds = getIconBounds(icon.offsetWidth, icon.offsetHeight);
+  const maxColumn = Math.max(0, Math.floor((bounds.maxLeft - gridOrigin.left) / GRID_COLUMN_STEP));
+  const maxRow = Math.max(0, Math.floor((bounds.maxTop - gridOrigin.top) / GRID_ROW_STEP));
+  const targetColumn = Math.max(0, Math.min(maxColumn, Math.round((left - gridOrigin.left) / GRID_COLUMN_STEP)));
+  const targetRow = Math.max(0, Math.min(maxRow, Math.round((top - gridOrigin.top) / GRID_ROW_STEP)));
+  let best = null;
+  let bestDistance = Infinity;
+
+  for (let row = 0; row <= maxRow; row++) {
+    for (let column = 0; column <= maxColumn; column++) {
+      const key = `${column}:${row}`;
+      if (occupied.has(key)) continue;
+      const distance = (column - targetColumn) ** 2 + (row - targetRow) ** 2;
+
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        best = {
+          left: gridOrigin.left + column * GRID_COLUMN_STEP,
+          top: gridOrigin.top + row * GRID_ROW_STEP,
+          key
+        };
+      }
+    }
+  }
+
+  if (!best) {
+    return { left: gridOrigin.left, top: gridOrigin.top };
+  }
+
+  occupied.add(best.key);
+  return best;
+}
+
+function getOccupiedGridCells(exceptIcon) {
+  const occupied = new Set();
+
+  icons.forEach(other => {
+    if (other === exceptIcon) return;
+    const left = parseFloat(other.style.left);
+    const top = parseFloat(other.style.top);
+
+    if (!Number.isFinite(left) || !Number.isFinite(top)) return;
+
+    const column = Math.round((left - gridOrigin.left) / GRID_COLUMN_STEP);
+    const row = Math.round((top - gridOrigin.top) / GRID_ROW_STEP);
+    occupied.add(`${column}:${row}`);
+  });
+
+  return occupied;
+}
+
+  function saveDesktopIconPositions() {
+    const positions = {};
+    const occupiedGridCells = new Set();
+
+    icons.forEach(icon => {
+      const defaults = defaultPositions.get(icon.id);
+      const saved = savedPositions[icon.id];
+      const left = saved && Number.isFinite(saved.left)
+      ? saved.left
+      : defaults.left;
+      const top = saved && Number.isFinite(saved.top)
+      ? saved.top
+      : defaults.top;
+
+      const position = findGridPosition(iconDrag.icon,iconDrag.startLeft + dx, iconDrag.startTop + dy, getOccupiedGridCells(iconDrag.icon));
+      iconDrag.icon.style.left = `${position.left}px`;
+      iconDrag.icon.style.top = `${position.top}px`;
+    });
+    localStorage.setItem(DESKTOP_ICON_POSITIONS_KEY, JSON.stringify(positions));
+  }
+
+  function resetDesktopIconPositions() {
+    localStorage.removeItem(DESKTOP_ICON_POSITIONS_KEY);
+    icons.forEach(icon => {
+      const defaults = defaultPositions.get(icon.id);
+      if (!defaults) return;
+      icon.style.left = `${defaults.left}px`;
+      icon.style.top = `${defaults.top}px`;
+    });
+}
+
+  let iconDrag = null;
+
+  icons.forEach(icon => {
+    icon.addEventListener("mousedown", e => {
+      if (e.button !== 0) return;
+      const rect = icon.getBoundingClientRect();
+
+      iconDrag = {
+        icon,
+        startX: e.clientX,
+        startY: e.clientY,
+        startLeft: rect.left,
+        startTop: rect.top,
+        moved: false
+      };
+
+      e.preventDefault();
+    });
+  });
+
+  document.addEventListener("mousemove", e => {
+    if (!iconDrag) return;
+    const dx = e.clientX - iconDrag.startX;
+    const dy = e.clientY - iconDrag.startY;
+
+    if (!iconDrag.moved && Math.hypot(dx, dy) < 5) return;
+    if (!iconDrag.moved) {
+      iconDrag.moved = true;
+      iconDrag.icon.classList.add("dragging");
+    }
+
+    const rect = iconDrag.icon.getBoundingClientRect();
+    const bounds = getIconBounds(rect.width, rect.height);
+    const left = iconDrag.startLeft + dx;
+    const top = iconDrag.startTop + dy;
+    iconDrag.icon.style.left = `${Math.max(8, Math.min(left, bounds.maxLeft))}px`;
+    iconDrag.icon.style.top = `${Math.max(8, Math.min(top, bounds.maxTop))}px`;
+  });
+
+  document.addEventListener("mouseup", () => {
+    if (!iconDrag) return;
+    const dragged = iconDrag;
+    iconDrag = null;
+    dragged.icon.classList.remove("dragging");
+
+    if (dragged.moved) {
+      saveDesktopIconPositions();
+      dragged.icon.dataset.dragged = "true";
+      setTimeout(() => { delete dragged.icon.dataset.dragged; }, 250);
+    }
+  });
+
   let isSelecting = false;
   let startX = 0;
   let startY = 0;
@@ -2261,6 +2479,11 @@ document.addEventListener("DOMContentLoaded", () => {
       selectionBox.style.display = 'none';
     }
   });
+
+  if (resetWallpaperBtn) {
+  resetWallpaperBtn.addEventListener("click", resetDesktopIconPositions);
+}
+
 });
 
 

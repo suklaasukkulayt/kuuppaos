@@ -322,6 +322,7 @@ button {
   max-width: 100%;
   box-sizing: border-box;
   align-content: start;
+  grid-auto-rows: 112px;
 }
 
 .desktop-icon {
@@ -341,6 +342,19 @@ button {
   height: 64px;
   border-radius: 8px;
   display: block;
+}
+
+#desktopApps.icons-positioned > .desktop-icon {
+  position: absolute;
+}
+
+.desktop-icon.dragging {
+  z-index: 10;
+  cursor: grabbing;
+}
+
+.desktop-icon img {
+  -webkit-user-drag: none;
 }
 
 .icon-label {

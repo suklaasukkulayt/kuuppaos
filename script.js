@@ -622,11 +622,11 @@ function installApp(appName, isTerminal) {
           }
           
           icon.style.display = "none";
-          saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
+          saveInstalledApps(getInstalledApps().filter((installedApp) => installedApp !== appName));
         } else {
         icon.style.display = "none";
         button.textContent = "Install";
-        saveInstalledApps(installedApps.filter((installedApp) => installedApp !== appName));
+        saveInstalledApps(getInstalledApps().filter((installedApp) => installedApp !== appName));
       }
       } else {
         if (isTerminal) {
@@ -648,16 +648,31 @@ function installApp(appName, isTerminal) {
             addCommand(`Installed ${appName} successfully!`, "#ee1408");
           }
           icon.style.display = "flex";
-          saveInstalledApps([...installedApps, appName]);
+          saveInstalledApps([...new Set([...getInstalledApps(), appName])]);
         } else {
         icon.style.display = "flex";
         button.textContent = "Remove";
-        saveInstalledApps([...installedApps, appName]);
+        saveInstalledApps([...new Set([...getInstalledApps(), appName])]);
       }
     }
       button.disabled = false;
     }
   }, 100);
+}
+
+function installAllApps() {
+  const appNames = [
+    "textpad", "clock", "spotify", "youtube", "cterminal",
+    "paint", "browser", "calculator", "pong", "camera",
+    "ghost", "recorder", "dogg", "kai", "info"
+  ];
+  const installedApps = new Set(getInstalledApps());
+
+  appNames.forEach((appName) => {
+    if (!installedApps.has(appName)) {
+      installApp(appName, false);
+    }
+  });
 }
 
 function restoreInstalledApps() {

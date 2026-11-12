@@ -69,13 +69,14 @@ Apps that **aren’t focused**/active have a **darker header**!
 ## Screenshots  
 
 ### KuuppaOS now (some features are missing):  
+<img width="1920" height="720" alt="KuuppaOS Screenshot new icons" src="https://github.com/user-attachments/assets/356feab5-a731-47b8-b09d-5d4fce6dd05c" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 1" src="./screenshots/kuuppaos-screenshot1.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 2" src="./screenshots/kuuppaos-screenshot2.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 3" src="./screenshots/kuuppaos-screenshot3.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 4" src="./screenshots/kuuppaos-screenshot4.png" />
 <img width="1920" height="720" alt="KuuppaOS Screenshot 5" src="./screenshots/kuuppaos-screenshot5.png" />  
 
-### Watch the showcase video (some features are missing):
+### Watch the showcase video (some features are missing + old icons):
 Link: [https://www.youtube.com/watch?v=x7gDrqnFKGY](https://www.youtube.com/watch?v=x7gDrqnFKGY)  
 
 ### Old KuuppaOS:  
